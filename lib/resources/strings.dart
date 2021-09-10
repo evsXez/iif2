@@ -1,0 +1,141 @@
+// ignore_for_file: non_constant_identifier_names
+
+import 'package:iif/include/include.dart';
+
+class Strings {
+  static String get dialog_title_error_message => _dialog_title_error_message;
+  static String get title_accounts => _title_accounts;
+  static String get title_operations => _title_operations;
+  static String get title_analytics => _title_analytics;
+  static String get title_category => _title_category;
+  static String get title_object_collapsed => _title_object_collapsed;
+  static String get title_object => _title_object;
+  static String get title_new_operation => _title_new_operation;
+  static String get category_expense => _category_expense;
+  static String get category_income => _category_income;
+  static String get category_initial_input => _category_initial_input;
+  static String get category_transfer => _category_transfer;
+  static String get category_debts => _category_debts;
+  static String get category_debts_new => _category_debts_new;
+  static String get category_debts_return => _category_debts_return;
+  static String get category_debts_to_me => _category_debts_to_me;
+  static String get category_debts_returned_to_me => _category_debts_returned_to_me;
+  static String get label_stats_income => _label_stats_income;
+  static String get label_stats_spending => _label_stats_spending;
+  static String get label_hide => _label_hide;
+  static String get label_title => _label_title;
+  static String get option_edit => _option_edit;
+  static String get option_archive => _option_archive;
+  static String get option_delete => _option_delete;
+  static String get type_all_money => _type_all_money;
+  static String get type_credit_cards => _type_credit_cards;
+  static String get type_my_debts => _type_my_debts;
+  static String get type_debts_to_me => _type_debts_to_me;
+  static String get type_investments => _type_investments;
+  static String get button_add_account => _button_add_account;
+  static String get cancel => _cancel;
+  static String get ok => _ok;
+  static String get save => _save;
+  static String get hint_no_records => _hint_no_records;
+  static String get title_dialog_archive_location => _title_dialog_archive_location;
+  static String get message_dialog_archive_location_available => _message_dialog_archive_location_available;
+  static String get message_dialog_archive_location_unavailable => _message_dialog_archive_location_unavailable;
+  static String get title_dialog_delete_location => _title_dialog_delete_location;
+  static String get message_dialog_delete_location_unavailable => _message_dialog_delete_location_unavailable;
+  static String get swipe_to_reveal => _swipe_to_reveal;
+  static String get hint_sum => _hint_sum;
+  static String get hint_comment => _hint_comment;
+
+  static late String _dialog_title_error_message;
+  static late String _title_accounts;
+  static late String _title_operations;
+  static late String _title_analytics;
+  static late String _title_category;
+  static late String _title_object_collapsed;
+  static late String _title_object;
+  static late String _title_new_operation;
+  static late String _category_expense;
+  static late String _category_income;
+  static late String _category_initial_input;
+  static late String _category_transfer;
+  static late String _category_debts;
+  static late String _category_debts_new;
+  static late String _category_debts_return;
+  static late String _category_debts_to_me;
+  static late String _category_debts_returned_to_me;
+  static late String _label_stats_income;
+  static late String _label_stats_spending;
+  static late String _label_hide;
+  static late String _label_title;
+  static late String _option_edit;
+  static late String _option_archive;
+  static late String _option_delete;
+  static late String _type_all_money;
+  static late String _type_credit_cards;
+  static late String _type_my_debts;
+  static late String _type_debts_to_me;
+  static late String _type_investments;
+  static late String _button_add_account;
+  static late String _cancel;
+  static late String _ok;
+  static late String _save;
+  static late String _hint_no_records;
+  static late String _title_dialog_archive_location;
+  static late String _message_dialog_archive_location_available;
+  static late String _message_dialog_archive_location_unavailable;
+  static late String _title_dialog_delete_location;
+  static late String _message_dialog_delete_location_unavailable;
+  static late String _swipe_to_reveal;
+  static late String _hint_sum;
+  static late String _hint_comment;
+
+  static void init(BuildContext context) {
+    const notInitialized = "<notInitialied>";
+
+    _dialog_title_error_message = AppLocalizations.of(context)?.dialog_title_error_message ?? notInitialized;
+    _title_accounts = AppLocalizations.of(context)?.title_accounts ?? notInitialized;
+    _title_operations = AppLocalizations.of(context)?.title_operations ?? notInitialized;
+    _title_analytics = AppLocalizations.of(context)?.title_analytics ?? notInitialized;
+    _title_category = AppLocalizations.of(context)?.title_category ?? notInitialized;
+    _title_object_collapsed = AppLocalizations.of(context)?.title_object_collapsed ?? notInitialized;
+    _title_object = AppLocalizations.of(context)?.title_object ?? notInitialized;
+    _title_new_operation = AppLocalizations.of(context)?.title_new_operation ?? notInitialized;
+    _category_expense = AppLocalizations.of(context)?.category_expense ?? notInitialized;
+    _category_income = AppLocalizations.of(context)?.category_income ?? notInitialized;
+    _category_initial_input = AppLocalizations.of(context)?.category_initial_input ?? notInitialized;
+    _category_transfer = AppLocalizations.of(context)?.category_transfer ?? notInitialized;
+    _category_debts = AppLocalizations.of(context)?.category_debts ?? notInitialized;
+    _category_debts_new = AppLocalizations.of(context)?.category_debts_new ?? notInitialized;
+    _category_debts_return = AppLocalizations.of(context)?.category_debts_return ?? notInitialized;
+    _category_debts_to_me = AppLocalizations.of(context)?.category_debts_to_me ?? notInitialized;
+    _category_debts_returned_to_me = AppLocalizations.of(context)?.category_debts_returned_to_me ?? notInitialized;
+    _label_stats_income = AppLocalizations.of(context)?.label_stats_income ?? notInitialized;
+    _label_stats_spending = AppLocalizations.of(context)?.label_stats_spending ?? notInitialized;
+    _label_hide = AppLocalizations.of(context)?.label_hide ?? notInitialized;
+    _label_title = AppLocalizations.of(context)?.label_title ?? notInitialized;
+    _option_edit = AppLocalizations.of(context)?.option_edit ?? notInitialized;
+    _option_archive = AppLocalizations.of(context)?.option_archive ?? notInitialized;
+    _option_delete = AppLocalizations.of(context)?.option_delete ?? notInitialized;
+    _type_all_money = AppLocalizations.of(context)?.type_all_money ?? notInitialized;
+    _type_credit_cards = AppLocalizations.of(context)?.type_credit_cards ?? notInitialized;
+    _type_my_debts = AppLocalizations.of(context)?.type_my_debts ?? notInitialized;
+    _type_debts_to_me = AppLocalizations.of(context)?.type_debts_to_me ?? notInitialized;
+    _type_investments = AppLocalizations.of(context)?.type_investments ?? notInitialized;
+    _button_add_account = AppLocalizations.of(context)?.button_add_account ?? notInitialized;
+    _cancel = AppLocalizations.of(context)?.cancel ?? notInitialized;
+    _ok = AppLocalizations.of(context)?.ok ?? notInitialized;
+    _save = AppLocalizations.of(context)?.save ?? notInitialized;
+    _hint_no_records = AppLocalizations.of(context)?.hint_no_records ?? notInitialized;
+    _title_dialog_archive_location = AppLocalizations.of(context)?.title_dialog_archive_location ?? notInitialized;
+    _message_dialog_archive_location_available =
+        AppLocalizations.of(context)?.message_dialog_archive_location_available ?? notInitialized;
+    _message_dialog_archive_location_unavailable =
+        AppLocalizations.of(context)?.message_dialog_archive_location_unavailable ?? notInitialized;
+    _title_dialog_delete_location = AppLocalizations.of(context)?.title_dialog_delete_location ?? notInitialized;
+    _message_dialog_delete_location_unavailable =
+        AppLocalizations.of(context)?.message_dialog_delete_location_unavailable ?? notInitialized;
+    _swipe_to_reveal = AppLocalizations.of(context)?.swipe_to_reveal ?? notInitialized;
+    _hint_sum = AppLocalizations.of(context)?.hint_sum ?? notInitialized;
+    _hint_comment = AppLocalizations.of(context)?.hint_comment ?? notInitialized;
+  }
+}
