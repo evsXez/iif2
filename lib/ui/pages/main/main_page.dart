@@ -1,4 +1,5 @@
 import 'package:iif/ui/include/ui_include.dart';
+import 'package:iif/ui/pages/main/widgets/funds.dart';
 import 'package:iif/ui/pages/main/widgets/header.dart';
 
 class MainPage extends StatelessWidget {
@@ -8,11 +9,13 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Strings.init(context);
 
-    return const Scaffold(
+    return Scaffold(
+      appBar: Header(),
       backgroundColor: Style.lightGrayColor,
-      body: CustomScrollView(
-        slivers: [
-          SliverHeader(),
+      body: Column(
+        children: [
+          const SizedBox(height: 20),
+          Funds(),
         ],
       ),
     );
