@@ -8,7 +8,6 @@ import 'package:iif/ui/pages/main/widgets/fund_panel_header.dart';
 class Funds extends StatelessWidget {
   Funds({Key? key}) : super(key: key);
 
-  final List<bool> expandedState = List.generate(FundType.values.length, (idx) => false);
   // final List<StreamController> streamCloseLocationInputs = List.generate(5, (idx) => StreamController.broadcast());
 
   final bloc = FundsBloc(FundsRepository());
@@ -22,22 +21,22 @@ class Funds extends StatelessWidget {
         builder: (context, state) => ExpansionPanelList(
           elevation: 1,
           expandedHeaderPadding: EdgeInsets.zero,
-          expansionCallback: (pos, isExpanded) => _changeExpanded(pos),
+          expansionCallback: (index, isExpanded) => _expand(index),
           children: List.generate(
             FundType.values.length,
-            (idx) {
-              final type = FundType.values[idx];
+            (index) {
+              final type = FundType.values[index];
               final Money? money = state.map(
                 loadInProgress: (_) => null,
                 loadSuccess: (state) => state.data[type],
               );
               return ExpansionPanel(
-                isExpanded: expandedState[idx],
+                isExpanded: state.expandedIndex == index,
                 canTapOnHeader: true,
                 headerBuilder: (context, isExpanded) => FundPanelHeader(
                   label: type.name(context),
                   money: money,
-                  onPressed: () => _changeExpanded(idx),
+                  onPressed: () => _expand(index),
                 ),
                 body: const SizedBox(height: 24),
                 // body: LocationsListOfType(type),
@@ -49,14 +48,7 @@ class Funds extends StatelessWidget {
     );
   }
 
-  void _changeExpanded(int pos) {
-    // final value = !expandedState[pos];
-    // setState(() {
-    //   expandedState[pos] = value;
-    // });
-    // if (!value) {
-    //   streamCloseLocationInputs[pos].add(null);
-    //   Streams.locationAddEditInlineOpenedState.add(false);
-    // }
+  void _expand(int index) {
+    bloc.setExpanded(index);
   }
 }
