@@ -14,3 +14,4 @@ export 'package:iif/ui/navigation/navigation.dart';
 
 //common widgets
 export 'package:iif/ui/widgets/money_text.dart';
+export 'package:iif/ui/widgets/menu_item.dart';
