@@ -5,7 +5,7 @@ class Money {
 }
 
 extension MoneyExtension on Money {
-  // static const _badPartSeparator = ',';
+  static const _badPartSeparator = ',';
   static const _okPartSeparator = '.';
   static const _groupsSeparator = ' ';
 
@@ -30,4 +30,17 @@ extension MoneyExtension on Money {
 
     return chars.fold("", (s, tail) => "$s$tail") + _okPartSeparator + p2;
   }
+
+  static Money fromString(String _s) {
+    String s = _s.replaceAll(" ", "");
+    String withCoins = s;
+    withCoins = withCoins.replaceAll(_badPartSeparator, _okPartSeparator);
+
+    double? value = double.tryParse(withCoins);
+    if (value == null) throw ExceptionMoneyNotParsed();
+
+    return Money((value * 100).floor());
+  }
 }
+
+class ExceptionMoneyNotParsed {}

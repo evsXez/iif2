@@ -1,11 +1,11 @@
 import 'package:iif/data/include/data_include.dart';
 import 'package:iif/ui/include/ui_include.dart';
 
-class FundItemPlain extends StatelessWidget {
+class FundPlainItem extends StatelessWidget {
   final Fund fund;
   final Money money;
   final bool isHighlighed;
-  const FundItemPlain({
+  const FundPlainItem({
     required this.fund,
     required this.money,
     required this.isHighlighed,

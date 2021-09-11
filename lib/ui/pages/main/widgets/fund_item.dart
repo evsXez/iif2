@@ -1,21 +1,26 @@
-import 'package:iif/data/include/data_include.dart';
+import 'package:iif/data/models/fund_with_money.dart';
 import 'package:iif/ui/include/ui_include.dart';
-import 'package:iif/ui/pages/main/widgets/fund_item_add_edit.dart';
-import 'package:iif/ui/pages/main/widgets/fund_item_plain.dart';
+import 'package:iif/ui/pages/main/widgets/fund_edit_item.dart';
+import 'package:iif/ui/pages/main/widgets/fund_plain_item.dart';
 
-class FundItem extends StatelessWidget {
-  final Fund fund;
+class FundItem extends StatefulWidget {
+  final FundWithMoney fundWithMoney;
   final bool isEditing;
-  final bool isHighlighted;
-  final bool isArchiveAvailable = true; //fund.hasNoMoney();
-  final bool isDeleteAvailable = true; //fund.hasNoOperationsExceptInitialInput();
 
   const FundItem({
-    required this.fund,
+    required this.fundWithMoney,
     required this.isEditing,
-    required this.isHighlighted,
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<FundItem> createState() => _FundItemState();
+}
+
+class _FundItemState extends State<FundItem> {
+  final bool isArchiveAvailable = true;
+  final bool isDeleteAvailable = true;
+  bool isHighlighted = false;
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +28,14 @@ class FundItem extends StatelessWidget {
       onLongPressStart: (details) {
         _showContextMenu(context, details.globalPosition.dx, details.globalPosition.dy);
       },
-      child: isEditing
-          ? FundItemAddEdit(
-              fund: fund,
-              key: ObjectKey(fund),
-              onEditDone: _onEditDone,
+      child: widget.isEditing
+          ? FundEditItem(
+              fundWithMoneyToEdit: widget.fundWithMoney,
+              key: ObjectKey(widget.fundWithMoney.fund),
             )
-          : FundItemPlain(
-              fund: fund,
-              money: money,
+          : FundPlainItem(
+              fund: widget.fundWithMoney.fund,
+              money: widget.fundWithMoney.money,
               isHighlighed: isHighlighted,
             ),
     );
@@ -50,13 +54,13 @@ class FundItem extends StatelessWidget {
       }, color: _colorOption(isDeleteAvailable)),
     ];
     showMenu(context: context, position: RelativeRect.fromLTRB(x, y, x, y), items: items).then((value) {
-      // setState(() {
-      //   highlightedLocationId = null;
-      // });
+      setState(() {
+        isHighlighted = false;
+      });
     });
-    // setState(() {
-    //   highlightedLocationId = fund.id;
-    // });
+    setState(() {
+      isHighlighted = true;
+    });
   }
 
   void _actionEdit() {

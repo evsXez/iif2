@@ -12,11 +12,13 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       appBar: Header(),
       backgroundColor: Style.lightGrayColor,
-      body: Column(
-        children: [
-          const SizedBox(height: 20),
-          Funds(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            Funds(),
+          ],
+        ),
       ),
     );
   }

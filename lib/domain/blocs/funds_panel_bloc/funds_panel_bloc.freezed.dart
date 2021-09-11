@@ -21,12 +21,12 @@ class _$FundsPanelStateTearOff {
     return const _LoadInProgress();
   }
 
-  _LoadSuccess loadSuccess(List<Fund> funds,
-      {required Fund? highlighted, required Fund? editing}) {
+  _LoadSuccess loadSuccess(List<FundWithMoney> data,
+      {required Fund? editing, required bool isAddingNew}) {
     return _LoadSuccess(
-      funds,
-      highlighted: highlighted,
+      data,
       editing: editing,
+      isAddingNew: isAddingNew,
     );
   }
 }
@@ -40,21 +40,21 @@ mixin _$FundsPanelState {
   TResult when<TResult extends Object?>({
     required TResult Function() loadInProgress,
     required TResult Function(
-            List<Fund> funds, Fund? highlighted, Fund? editing)
+            List<FundWithMoney> data, Fund? editing, bool isAddingNew)
         loadSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(List<Fund> funds, Fund? highlighted, Fund? editing)?
+    TResult Function(List<FundWithMoney> data, Fund? editing, bool isAddingNew)?
         loadSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(List<Fund> funds, Fund? highlighted, Fund? editing)?
+    TResult Function(List<FundWithMoney> data, Fund? editing, bool isAddingNew)?
         loadSuccess,
     required TResult orElse(),
   }) =>
@@ -139,7 +139,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult when<TResult extends Object?>({
     required TResult Function() loadInProgress,
     required TResult Function(
-            List<Fund> funds, Fund? highlighted, Fund? editing)
+            List<FundWithMoney> data, Fund? editing, bool isAddingNew)
         loadSuccess,
   }) {
     return loadInProgress();
@@ -149,7 +149,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(List<Fund> funds, Fund? highlighted, Fund? editing)?
+    TResult Function(List<FundWithMoney> data, Fund? editing, bool isAddingNew)?
         loadSuccess,
   }) {
     return loadInProgress?.call();
@@ -159,7 +159,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(List<Fund> funds, Fund? highlighted, Fund? editing)?
+    TResult Function(List<FundWithMoney> data, Fund? editing, bool isAddingNew)?
         loadSuccess,
     required TResult orElse(),
   }) {
@@ -210,7 +210,7 @@ abstract class _$LoadSuccessCopyWith<$Res> {
   factory _$LoadSuccessCopyWith(
           _LoadSuccess value, $Res Function(_LoadSuccess) then) =
       __$LoadSuccessCopyWithImpl<$Res>;
-  $Res call({List<Fund> funds, Fund? highlighted, Fund? editing});
+  $Res call({List<FundWithMoney> data, Fund? editing, bool isAddingNew});
 }
 
 /// @nodoc
@@ -226,23 +226,23 @@ class __$LoadSuccessCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? funds = freezed,
-    Object? highlighted = freezed,
+    Object? data = freezed,
     Object? editing = freezed,
+    Object? isAddingNew = freezed,
   }) {
     return _then(_LoadSuccess(
-      funds == freezed
-          ? _value.funds
-          : funds // ignore: cast_nullable_to_non_nullable
-              as List<Fund>,
-      highlighted: highlighted == freezed
-          ? _value.highlighted
-          : highlighted // ignore: cast_nullable_to_non_nullable
-              as Fund?,
+      data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<FundWithMoney>,
       editing: editing == freezed
           ? _value.editing
           : editing // ignore: cast_nullable_to_non_nullable
               as Fund?,
+      isAddingNew: isAddingNew == freezed
+          ? _value.isAddingNew
+          : isAddingNew // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -250,40 +250,41 @@ class __$LoadSuccessCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LoadSuccess implements _LoadSuccess {
-  const _$_LoadSuccess(this.funds,
-      {required this.highlighted, required this.editing});
+  const _$_LoadSuccess(this.data,
+      {required this.editing, required this.isAddingNew});
 
   @override
-  final List<Fund> funds;
-  @override
-  final Fund? highlighted;
+  final List<FundWithMoney> data;
   @override
   final Fund? editing;
+  @override
+  final bool isAddingNew;
 
   @override
   String toString() {
-    return 'FundsPanelState.loadSuccess(funds: $funds, highlighted: $highlighted, editing: $editing)';
+    return 'FundsPanelState.loadSuccess(data: $data, editing: $editing, isAddingNew: $isAddingNew)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _LoadSuccess &&
-            (identical(other.funds, funds) ||
-                const DeepCollectionEquality().equals(other.funds, funds)) &&
-            (identical(other.highlighted, highlighted) ||
-                const DeepCollectionEquality()
-                    .equals(other.highlighted, highlighted)) &&
+            (identical(other.data, data) ||
+                const DeepCollectionEquality().equals(other.data, data)) &&
             (identical(other.editing, editing) ||
-                const DeepCollectionEquality().equals(other.editing, editing)));
+                const DeepCollectionEquality()
+                    .equals(other.editing, editing)) &&
+            (identical(other.isAddingNew, isAddingNew) ||
+                const DeepCollectionEquality()
+                    .equals(other.isAddingNew, isAddingNew)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(funds) ^
-      const DeepCollectionEquality().hash(highlighted) ^
-      const DeepCollectionEquality().hash(editing);
+      const DeepCollectionEquality().hash(data) ^
+      const DeepCollectionEquality().hash(editing) ^
+      const DeepCollectionEquality().hash(isAddingNew);
 
   @JsonKey(ignore: true)
   @override
@@ -295,32 +296,32 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() loadInProgress,
     required TResult Function(
-            List<Fund> funds, Fund? highlighted, Fund? editing)
+            List<FundWithMoney> data, Fund? editing, bool isAddingNew)
         loadSuccess,
   }) {
-    return loadSuccess(funds, highlighted, editing);
+    return loadSuccess(data, editing, isAddingNew);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(List<Fund> funds, Fund? highlighted, Fund? editing)?
+    TResult Function(List<FundWithMoney> data, Fund? editing, bool isAddingNew)?
         loadSuccess,
   }) {
-    return loadSuccess?.call(funds, highlighted, editing);
+    return loadSuccess?.call(data, editing, isAddingNew);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(List<Fund> funds, Fund? highlighted, Fund? editing)?
+    TResult Function(List<FundWithMoney> data, Fund? editing, bool isAddingNew)?
         loadSuccess,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
-      return loadSuccess(funds, highlighted, editing);
+      return loadSuccess(data, editing, isAddingNew);
     }
     return orElse();
   }
@@ -358,12 +359,12 @@ class _$_LoadSuccess implements _LoadSuccess {
 }
 
 abstract class _LoadSuccess implements FundsPanelState {
-  const factory _LoadSuccess(List<Fund> funds,
-      {required Fund? highlighted, required Fund? editing}) = _$_LoadSuccess;
+  const factory _LoadSuccess(List<FundWithMoney> data,
+      {required Fund? editing, required bool isAddingNew}) = _$_LoadSuccess;
 
-  List<Fund> get funds => throw _privateConstructorUsedError;
-  Fund? get highlighted => throw _privateConstructorUsedError;
+  List<FundWithMoney> get data => throw _privateConstructorUsedError;
   Fund? get editing => throw _privateConstructorUsedError;
+  bool get isAddingNew => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;

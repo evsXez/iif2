@@ -4,8 +4,8 @@ part of 'funds_panel_bloc.dart';
 abstract class FundsPanelState with _$FundsPanelState {
   const factory FundsPanelState.loadInProgress() = _LoadInProgress;
   const factory FundsPanelState.loadSuccess(
-    List<Fund> funds, {
-    required Fund? highlighted,
+    List<FundWithMoney> data, {
     required Fund? editing,
+    required bool isAddingNew,
   }) = _LoadSuccess;
 }
