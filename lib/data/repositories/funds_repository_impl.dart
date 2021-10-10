@@ -1,5 +1,5 @@
 import 'package:iif/domain/include.dart';
-import 'package:iif/data/repositories/operations_repository.dart';
+import 'package:iif/data/repositories/operations_repository_impl.dart';
 import 'package:iif/domain/repositories/funds_repository.dart';
 
 class FundsRepositoryImpl extends FundsRepository {
@@ -52,7 +52,7 @@ class FundsRepositoryImpl extends FundsRepository {
 
     final Map<FundType, Money> result = {};
     final funds = _data;
-    final operationsRepository = OperationsRepository();
+    final operationsRepository = OperationsRepositoryImpl();
 
     Future.forEach<Fund>(funds, (fund) async {
       addMoney(result, fund.type, await operationsRepository.calculateMoney(fund));
