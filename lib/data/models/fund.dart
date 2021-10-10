@@ -1,4 +1,4 @@
-import 'package:iif/data/include/data_include.dart';
+import 'package:iif/data/include.dart';
 
 class Fund {
   final String name;
