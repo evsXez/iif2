@@ -1,4 +1,4 @@
-import 'package:iif/ui/include/ui_include.dart';
+import 'package:iif/ui/include.dart';
 
 class MenuItem extends PopupMenuEntry<String> {
   final String title;

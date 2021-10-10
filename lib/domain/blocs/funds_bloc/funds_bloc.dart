@@ -13,7 +13,7 @@ class FundsBloc extends Cubit<FundsState> {
   Map<FundType, Money>? _data;
 
   FundsBloc(this.repository) : super(const _LoadInProgress(null)) {
-    repository.getFunds().then((data) {
+    repository.getMoneyForFundTypes().then((data) {
       _data = data;
       _emitData();
     });

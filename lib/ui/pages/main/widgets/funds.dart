@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iif/data/include/data_include.dart';
 import 'package:iif/data/repositories/funds_repository.dart';
 import 'package:iif/domain/blocs/funds_bloc/funds_bloc.dart';
-import 'package:iif/ui/include/ui_include.dart';
+import 'package:iif/ui/include.dart';
 import 'package:iif/ui/pages/main/widgets/fund_panel_body.dart';
 import 'package:iif/ui/pages/main/widgets/fund_panel_header.dart';
 

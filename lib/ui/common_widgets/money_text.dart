@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iif/data/include/data_include.dart';
-import 'package:iif/include/include.dart';
-import 'package:iif/ui/include/ui_include.dart';
+import 'package:iif/ui/include.dart';
 
 class MoneyText extends StatelessWidget {
   final Money money;

@@ -1,4 +1,4 @@
-import 'package:iif/ui/include/ui_include.dart';
+import 'package:iif/ui/include.dart';
 
 class SmallButton extends StatelessWidget {
   final VoidCallback onPressed;

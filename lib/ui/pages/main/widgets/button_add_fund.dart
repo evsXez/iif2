@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iif/domain/blocs/funds_panel_bloc/funds_panel_bloc.dart';
-import 'package:iif/ui/include/ui_include.dart';
+import 'package:iif/ui/include.dart';
 import 'package:iif/ui/pages/main/widgets/label_button.dart';
 
 class ButtonAddFund extends StatelessWidget {

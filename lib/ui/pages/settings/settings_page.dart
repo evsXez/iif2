@@ -1,4 +1,4 @@
-import 'package:iif/ui/include/ui_include.dart';
+import 'package:iif/ui/include.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);

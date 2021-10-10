@@ -1,6 +1,5 @@
-// ignore_for_file: non_constant_identifier_names
-
-import 'package:iif/include/include.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Strings {
   static String get dialog_title_error_message => _dialog_title_error_message;

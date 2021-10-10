@@ -3,7 +3,7 @@ import 'package:iif/data/include/data_include.dart';
 import 'package:iif/data/repositories/funds_repository.dart';
 import 'package:iif/data/repositories/operations_repository.dart';
 import 'package:iif/domain/blocs/funds_panel_bloc/funds_panel_bloc.dart';
-import 'package:iif/ui/include/ui_include.dart';
+import 'package:iif/ui/include.dart';
 import 'package:iif/ui/pages/main/widgets/button_add_fund.dart';
 import 'package:iif/ui/pages/main/widgets/fund_edit_item.dart';
 import 'package:iif/ui/pages/main/widgets/fund_item.dart';

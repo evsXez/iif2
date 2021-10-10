@@ -11,17 +11,17 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  bloc: ^7.1.0
+  bloc: ^7.2.0
   flutter:
     sdk: flutter
-  flutter_bloc: ^7.2.0
+  flutter_bloc: ^7.3.0
+  flutter_hooks: ^0.18.0 #possible
   flutter_localizations:
     sdk: flutter
-  flutter_riverpod: ^0.14.0+3
+  flutter_riverpod: ^0.14.0+3 #instead of provider, to try
   freezed_annotation: ^0.14.3
   intl: ^0.17.0
   json_serializable: ^5.0.0
-  kiwi: ^3.0.0
 
 dev_dependencies:
   bloc_test: ^8.1.0
@@ -29,8 +29,8 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
-  mockito: ^5.0.15
   freezed: ^0.14.5
+  mockito: ^5.0.15
 
 flutter:
   generate: true

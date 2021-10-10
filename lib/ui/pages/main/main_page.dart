@@ -1,4 +1,4 @@
-import 'package:iif/ui/include/ui_include.dart';
+import 'package:iif/ui/include.dart';
 import 'package:iif/ui/pages/main/widgets/funds.dart';
 import 'package:iif/ui/pages/main/widgets/header.dart';
 

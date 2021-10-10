@@ -1,10 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iif/data/include/data_include.dart';
 import 'package:iif/data/models/fund_with_money.dart';
 import 'package:iif/domain/blocs/funds_panel_bloc/funds_panel_bloc.dart';
-import 'package:iif/ui/include/ui_include.dart';
+import 'package:iif/ui/include.dart';
 import 'package:iif/ui/pages/main/widgets/small_button.dart';
-import 'package:iif/ui/widgets/money_field.dart';
+import 'package:iif/ui/common_widgets/money_field.dart';
 
 class FundEditItem extends StatefulWidget {
   final FundWithMoney? fundWithMoneyToEdit;

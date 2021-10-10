@@ -1,5 +1,5 @@
 import 'package:iif/data/models/fund_with_money.dart';
-import 'package:iif/ui/include/ui_include.dart';
+import 'package:iif/ui/include.dart';
 import 'package:iif/ui/pages/main/widgets/fund_edit_item.dart';
 import 'package:iif/ui/pages/main/widgets/fund_plain_item.dart';
 
