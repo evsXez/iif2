@@ -1,14 +1,6 @@
-class Money {
-  final int coins;
+import 'package:iif/domain/entities/money.dart';
 
-  const Money(this.coins);
-
-  static const Money zero = Money(0);
-
-  Money add(Money operand) => Money(coins + operand.coins);
-}
-
-extension MoneyExtension on Money {
+extension MoneyX on Money {
   static const _badPartSeparator = ',';
   static const _okPartSeparator = '.';
   static const _groupsSeparator = ' ';

@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
-import 'package:iif/data/include.dart';
+import 'package:iif/domain/include.dart';
+import 'package:iif/presentation/extensions/money_x.dart';
 import 'package:iif/presentation/include.dart';
 
 class MoneyField extends StatelessWidget {
@@ -16,7 +17,7 @@ class MoneyField extends StatelessWidget {
     _controller.text = initialValue?.toString() ?? "";
   }
 
-  Money get value => MoneyExtension.fromString(_controller.text);
+  Money get value => MoneyX.fromString(_controller.text);
   bool get isValueEntered => _controller.text.isNotEmpty;
 
   @override
@@ -66,7 +67,7 @@ class MoneyFormatter extends TextInputFormatter {
 
     final Money money;
     try {
-      money = MoneyExtension.fromString(s);
+      money = MoneyX.fromString(s);
     } on ExceptionMoneyNotParsed catch (_) {
       return newValue.copyWith(text: "");
     }

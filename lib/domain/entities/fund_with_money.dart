@@ -1,4 +1,4 @@
-import 'package:iif/data/include.dart';
+import 'package:iif/domain/include.dart';
 
 class FundWithMoney {
   final Fund fund;

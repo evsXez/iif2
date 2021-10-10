@@ -1,4 +1,4 @@
-import 'package:iif/data/models/fund_with_money.dart';
+import 'package:iif/domain/entities/fund_with_money.dart';
 import 'package:iif/presentation/include.dart';
 import 'package:iif/presentation/pages/main/widgets/fund_edit_item.dart';
 import 'package:iif/presentation/pages/main/widgets/fund_plain_item.dart';

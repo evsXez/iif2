@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:iif/data/include.dart';
-import 'package:iif/data/models/fund_with_money.dart';
-import 'package:iif/data/repositories/funds_repository.dart';
+import 'package:iif/domain/include.dart';
+import 'package:iif/domain/entities/fund_with_money.dart';
 import 'package:iif/data/repositories/operations_repository.dart';
+import 'package:iif/domain/repositories/funds_repository.dart';
 
 part 'funds_panel_state.dart';
 part 'funds_panel_bloc.freezed.dart';

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:iif/data/include.dart';
-import 'package:iif/data/repositories/funds_repository.dart';
+import 'package:iif/domain/include.dart';
+import 'package:iif/domain/repositories/funds_repository.dart';
 
 part 'funds_state.dart';
 part 'funds_bloc.freezed.dart';

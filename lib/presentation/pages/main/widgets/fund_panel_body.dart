@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iif/data/include.dart';
-import 'package:iif/data/repositories/funds_repository.dart';
+import 'package:iif/domain/include.dart';
+import 'package:iif/data/repositories/funds_repository_impl.dart';
 import 'package:iif/data/repositories/operations_repository.dart';
 import 'package:iif/presentation/blocs/funds_panel_bloc/funds_panel_bloc.dart';
 import 'package:iif/presentation/include.dart';
@@ -12,7 +12,7 @@ import 'package:iif/presentation/pages/main/widgets/top_divider.dart';
 class FundPanelBody extends StatelessWidget {
   final FundType type;
   late final FundsPanelBloc bloc = FundsPanelBloc(
-    fundsRepository: FundsRepository(),
+    fundsRepository: FundsRepositoryImpl(),
     operationsRepository: OperationsRepository(),
     type: type,
   );

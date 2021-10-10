@@ -1,14 +1,8 @@
-import 'package:iif/presentation/include.dart';
+import 'package:flutter/material.dart';
+import 'package:iif/domain/entities/enums/fund_type.dart';
+import 'package:iif/misc/resources/strings.dart';
 
-enum FundType {
-  money,
-  creditCards,
-  myDebts,
-  debtsToMe,
-  investments,
-}
-
-extension FundTypeExt on FundType {
+extension FundTypeX on FundType {
   String name(BuildContext context) {
     switch (this) {
       case FundType.money:

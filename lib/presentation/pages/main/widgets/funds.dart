@@ -1,7 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iif/data/include.dart';
-import 'package:iif/data/repositories/funds_repository.dart';
+import 'package:iif/domain/include.dart';
+import 'package:iif/data/repositories/funds_repository_impl.dart';
 import 'package:iif/presentation/blocs/funds_bloc/funds_bloc.dart';
+import 'package:iif/presentation/extensions/fund_type_x.dart';
 import 'package:iif/presentation/include.dart';
 import 'package:iif/presentation/pages/main/widgets/fund_panel_body.dart';
 import 'package:iif/presentation/pages/main/widgets/fund_panel_header.dart';
@@ -11,7 +12,7 @@ class Funds extends StatelessWidget {
 
   // final List<StreamController> streamCloseLocationInputs = List.generate(5, (idx) => StreamController.broadcast());
 
-  final bloc = FundsBloc(FundsRepository());
+  final bloc = FundsBloc(FundsRepositoryImpl());
 
   @override
   Widget build(BuildContext context) {
