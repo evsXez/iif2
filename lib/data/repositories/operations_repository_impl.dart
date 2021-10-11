@@ -8,7 +8,13 @@ class OperationsRepositoryImpl extends OperationsRepository {
   }
 
   @override
-  void initialInput(Fund fund, Money money) {
+  void addOperationInitialInput(Fund fund, Money money) {
     //TODO
+  }
+
+  @override
+  Future<List<Operation>> getOperations(Fund fund) {
+    // TODO: implement getOperations
+    throw UnimplementedError();
   }
 }

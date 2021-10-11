@@ -4,43 +4,33 @@ import 'package:iif/domain/repositories/funds_repository.dart';
 
 class FundsRepositoryImpl extends FundsRepository {
   final List<Fund> _data = [
-    Fund(
-      name: "My old location",
-      type: FundType.money,
-      currency: const Currency(
-        code: "USD",
-        symbol: "\$",
-      ),
-    ),
-    Fund(
-      name: "Cashhhh...",
-      type: FundType.money,
-      currency: const Currency(
-        code: "USD",
-        symbol: "\$",
-      ),
-    ),
+    // Fund(
+    //   name: "My old location",
+    //   type: FundType.money,
+    //   currency: const Currency(
+    //     code: "USD",
+    //     symbol: "\$",
+    //   ),
+    // ),
+    // Fund(
+    //   name: "Cashhhh...",
+    //   type: FundType.money,
+    //   currency: const Currency(
+    //     code: "USD",
+    //     symbol: "\$",
+    //   ),
+    // ),
   ];
 
   @override
-  Future<List<Fund>> getFundsOfType(FundType type) async {
+  List<Fund> getFundsOfType(FundType type) {
     // await Future.delayed(const Duration(seconds: 1));
     return _data.where((it) => it.type == type).toList();
   }
 
   @override
-  Future<Fund> saveFund(Fund? fundToEdit, String name, FundType type) async {
-    final result = Fund(
-      name: name,
-      type: type,
-      currency: const Currency(
-        code: "USD",
-        symbol: "\$",
-      ),
-    );
-    _data.add(result);
-
-    return result;
+  void saveFund(Fund fund) {
+    _data.add(fund);
   }
 
   @override

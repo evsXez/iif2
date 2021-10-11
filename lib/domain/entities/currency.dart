@@ -6,4 +6,6 @@ class Currency {
     required this.code,
     required this.symbol,
   });
+
+  static const debugDefault = Currency(code: "USD", symbol: "\$");
 }

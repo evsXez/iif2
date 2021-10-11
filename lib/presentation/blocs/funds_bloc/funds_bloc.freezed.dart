@@ -17,16 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$FundsStateTearOff {
   const _$FundsStateTearOff();
 
-  _LoadInProgress loadInProgress(int? expandedIndex) {
-    return _LoadInProgress(
+  _Loaded loaded(int? expandedIndex, List<MapEntry<FundType, Money?>> data) {
+    return _Loaded(
       expandedIndex,
-    );
-  }
-
-  _LoadSuccess loadSuccess(Map<FundType, Money> data, int? expandedIndex) {
-    return _LoadSuccess(
       data,
-      expandedIndex,
     );
   }
 }
@@ -37,45 +31,42 @@ const $FundsState = _$FundsStateTearOff();
 /// @nodoc
 mixin _$FundsState {
   int? get expandedIndex => throw _privateConstructorUsedError;
+  List<MapEntry<FundType, Money?>> get data =>
+      throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int? expandedIndex) loadInProgress,
-    required TResult Function(Map<FundType, Money> data, int? expandedIndex)
-        loadSuccess,
+    required TResult Function(
+            int? expandedIndex, List<MapEntry<FundType, Money?>> data)
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int? expandedIndex)? loadInProgress,
-    TResult Function(Map<FundType, Money> data, int? expandedIndex)?
-        loadSuccess,
+    TResult Function(int? expandedIndex, List<MapEntry<FundType, Money?>> data)?
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? expandedIndex)? loadInProgress,
-    TResult Function(Map<FundType, Money> data, int? expandedIndex)?
-        loadSuccess,
+    TResult Function(int? expandedIndex, List<MapEntry<FundType, Money?>> data)?
+        loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(_Loaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(_Loaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -90,7 +81,7 @@ abstract class $FundsStateCopyWith<$Res> {
   factory $FundsStateCopyWith(
           FundsState value, $Res Function(FundsState) then) =
       _$FundsStateCopyWithImpl<$Res>;
-  $Res call({int? expandedIndex});
+  $Res call({int? expandedIndex, List<MapEntry<FundType, Money?>> data});
 }
 
 /// @nodoc
@@ -104,262 +95,121 @@ class _$FundsStateCopyWithImpl<$Res> implements $FundsStateCopyWith<$Res> {
   @override
   $Res call({
     Object? expandedIndex = freezed,
+    Object? data = freezed,
   }) {
     return _then(_value.copyWith(
       expandedIndex: expandedIndex == freezed
           ? _value.expandedIndex
           : expandedIndex // ignore: cast_nullable_to_non_nullable
               as int?,
+      data: data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<MapEntry<FundType, Money?>>,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$LoadInProgressCopyWith<$Res>
-    implements $FundsStateCopyWith<$Res> {
-  factory _$LoadInProgressCopyWith(
-          _LoadInProgress value, $Res Function(_LoadInProgress) then) =
-      __$LoadInProgressCopyWithImpl<$Res>;
+abstract class _$LoadedCopyWith<$Res> implements $FundsStateCopyWith<$Res> {
+  factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
+      __$LoadedCopyWithImpl<$Res>;
   @override
-  $Res call({int? expandedIndex});
+  $Res call({int? expandedIndex, List<MapEntry<FundType, Money?>> data});
 }
 
 /// @nodoc
-class __$LoadInProgressCopyWithImpl<$Res> extends _$FundsStateCopyWithImpl<$Res>
-    implements _$LoadInProgressCopyWith<$Res> {
-  __$LoadInProgressCopyWithImpl(
-      _LoadInProgress _value, $Res Function(_LoadInProgress) _then)
-      : super(_value, (v) => _then(v as _LoadInProgress));
+class __$LoadedCopyWithImpl<$Res> extends _$FundsStateCopyWithImpl<$Res>
+    implements _$LoadedCopyWith<$Res> {
+  __$LoadedCopyWithImpl(_Loaded _value, $Res Function(_Loaded) _then)
+      : super(_value, (v) => _then(v as _Loaded));
 
   @override
-  _LoadInProgress get _value => super._value as _LoadInProgress;
+  _Loaded get _value => super._value as _Loaded;
 
   @override
   $Res call({
     Object? expandedIndex = freezed,
+    Object? data = freezed,
   }) {
-    return _then(_LoadInProgress(
+    return _then(_Loaded(
       expandedIndex == freezed
           ? _value.expandedIndex
           : expandedIndex // ignore: cast_nullable_to_non_nullable
               as int?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_LoadInProgress implements _LoadInProgress {
-  const _$_LoadInProgress(this.expandedIndex);
-
-  @override
-  final int? expandedIndex;
-
-  @override
-  String toString() {
-    return 'FundsState.loadInProgress(expandedIndex: $expandedIndex)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _LoadInProgress &&
-            (identical(other.expandedIndex, expandedIndex) ||
-                const DeepCollectionEquality()
-                    .equals(other.expandedIndex, expandedIndex)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(expandedIndex);
-
-  @JsonKey(ignore: true)
-  @override
-  _$LoadInProgressCopyWith<_LoadInProgress> get copyWith =>
-      __$LoadInProgressCopyWithImpl<_LoadInProgress>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int? expandedIndex) loadInProgress,
-    required TResult Function(Map<FundType, Money> data, int? expandedIndex)
-        loadSuccess,
-  }) {
-    return loadInProgress(expandedIndex);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int? expandedIndex)? loadInProgress,
-    TResult Function(Map<FundType, Money> data, int? expandedIndex)?
-        loadSuccess,
-  }) {
-    return loadInProgress?.call(expandedIndex);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? expandedIndex)? loadInProgress,
-    TResult Function(Map<FundType, Money> data, int? expandedIndex)?
-        loadSuccess,
-    required TResult orElse(),
-  }) {
-    if (loadInProgress != null) {
-      return loadInProgress(expandedIndex);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadSuccess value) loadSuccess,
-  }) {
-    return loadInProgress(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
-  }) {
-    return loadInProgress?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
-    required TResult orElse(),
-  }) {
-    if (loadInProgress != null) {
-      return loadInProgress(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _LoadInProgress implements FundsState {
-  const factory _LoadInProgress(int? expandedIndex) = _$_LoadInProgress;
-
-  @override
-  int? get expandedIndex => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  _$LoadInProgressCopyWith<_LoadInProgress> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$LoadSuccessCopyWith<$Res>
-    implements $FundsStateCopyWith<$Res> {
-  factory _$LoadSuccessCopyWith(
-          _LoadSuccess value, $Res Function(_LoadSuccess) then) =
-      __$LoadSuccessCopyWithImpl<$Res>;
-  @override
-  $Res call({Map<FundType, Money> data, int? expandedIndex});
-}
-
-/// @nodoc
-class __$LoadSuccessCopyWithImpl<$Res> extends _$FundsStateCopyWithImpl<$Res>
-    implements _$LoadSuccessCopyWith<$Res> {
-  __$LoadSuccessCopyWithImpl(
-      _LoadSuccess _value, $Res Function(_LoadSuccess) _then)
-      : super(_value, (v) => _then(v as _LoadSuccess));
-
-  @override
-  _LoadSuccess get _value => super._value as _LoadSuccess;
-
-  @override
-  $Res call({
-    Object? data = freezed,
-    Object? expandedIndex = freezed,
-  }) {
-    return _then(_LoadSuccess(
       data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Map<FundType, Money>,
-      expandedIndex == freezed
-          ? _value.expandedIndex
-          : expandedIndex // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as List<MapEntry<FundType, Money?>>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_LoadSuccess implements _LoadSuccess {
-  const _$_LoadSuccess(this.data, this.expandedIndex);
+class _$_Loaded implements _Loaded {
+  const _$_Loaded(this.expandedIndex, this.data);
 
   @override
-  final Map<FundType, Money> data;
-  @override
   final int? expandedIndex;
+  @override
+  final List<MapEntry<FundType, Money?>> data;
 
   @override
   String toString() {
-    return 'FundsState.loadSuccess(data: $data, expandedIndex: $expandedIndex)';
+    return 'FundsState.loaded(expandedIndex: $expandedIndex, data: $data)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _LoadSuccess &&
-            (identical(other.data, data) ||
-                const DeepCollectionEquality().equals(other.data, data)) &&
+        (other is _Loaded &&
             (identical(other.expandedIndex, expandedIndex) ||
                 const DeepCollectionEquality()
-                    .equals(other.expandedIndex, expandedIndex)));
+                    .equals(other.expandedIndex, expandedIndex)) &&
+            (identical(other.data, data) ||
+                const DeepCollectionEquality().equals(other.data, data)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(data) ^
-      const DeepCollectionEquality().hash(expandedIndex);
+      const DeepCollectionEquality().hash(expandedIndex) ^
+      const DeepCollectionEquality().hash(data);
 
   @JsonKey(ignore: true)
   @override
-  _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
-      __$LoadSuccessCopyWithImpl<_LoadSuccess>(this, _$identity);
+  _$LoadedCopyWith<_Loaded> get copyWith =>
+      __$LoadedCopyWithImpl<_Loaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int? expandedIndex) loadInProgress,
-    required TResult Function(Map<FundType, Money> data, int? expandedIndex)
-        loadSuccess,
+    required TResult Function(
+            int? expandedIndex, List<MapEntry<FundType, Money?>> data)
+        loaded,
   }) {
-    return loadSuccess(data, expandedIndex);
+    return loaded(expandedIndex, data);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int? expandedIndex)? loadInProgress,
-    TResult Function(Map<FundType, Money> data, int? expandedIndex)?
-        loadSuccess,
+    TResult Function(int? expandedIndex, List<MapEntry<FundType, Money?>> data)?
+        loaded,
   }) {
-    return loadSuccess?.call(data, expandedIndex);
+    return loaded?.call(expandedIndex, data);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? expandedIndex)? loadInProgress,
-    TResult Function(Map<FundType, Money> data, int? expandedIndex)?
-        loadSuccess,
+    TResult Function(int? expandedIndex, List<MapEntry<FundType, Money?>> data)?
+        loaded,
     required TResult orElse(),
   }) {
-    if (loadSuccess != null) {
-      return loadSuccess(data, expandedIndex);
+    if (loaded != null) {
+      return loaded(expandedIndex, data);
     }
     return orElse();
   }
@@ -367,44 +217,42 @@ class _$_LoadSuccess implements _LoadSuccess {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(_Loaded value) loaded,
   }) {
-    return loadSuccess(this);
+    return loaded(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(_Loaded value)? loaded,
   }) {
-    return loadSuccess?.call(this);
+    return loaded?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
-    if (loadSuccess != null) {
-      return loadSuccess(this);
+    if (loaded != null) {
+      return loaded(this);
     }
     return orElse();
   }
 }
 
-abstract class _LoadSuccess implements FundsState {
-  const factory _LoadSuccess(Map<FundType, Money> data, int? expandedIndex) =
-      _$_LoadSuccess;
+abstract class _Loaded implements FundsState {
+  const factory _Loaded(
+      int? expandedIndex, List<MapEntry<FundType, Money?>> data) = _$_Loaded;
 
-  Map<FundType, Money> get data => throw _privateConstructorUsedError;
   @override
   int? get expandedIndex => throw _privateConstructorUsedError;
   @override
-  @JsonKey(ignore: true)
-  _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
+  List<MapEntry<FundType, Money?>> get data =>
       throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
 }

@@ -38,8 +38,13 @@ class FundsPanelBloc extends Cubit<FundsPanelState> {
     required String name,
     required Money money,
   }) async {
-    final fund = await fundsRepository.saveFund(fundToEdit, name, type);
-    operationsRepository.initialInput(fund, money);
+    final fund = Fund(
+      currency: Currency.debugDefault,
+      name: name,
+      type: type,
+    );
+    fundsRepository.saveFund(fund);
+    operationsRepository.addOperationInitialInput(fund, money);
     _updateData();
   }
 
@@ -53,20 +58,19 @@ class FundsPanelBloc extends Cubit<FundsPanelState> {
     );
   }
 
-  void _updateData() {
-    fundsRepository.getFundsOfType(type).then((funds) async {
-      _data.clear();
-      await Future.forEach<Fund>(funds, (fund) async {
-        final money = await operationsRepository.calculateMoney(fund);
-        _data.add(FundWithMoney(fund, money));
-      });
-      emit(
-        _LoadSuccess(
-          _data,
-          editing: null,
-          isAddingNew: false,
-        ),
-      );
+  void _updateData() async {
+    final funds = fundsRepository.getFundsOfType(type);
+    _data.clear();
+    await Future.forEach<Fund>(funds, (fund) async {
+      final money = await operationsRepository.calculateMoney(fund);
+      _data.add(FundWithMoney(fund, money));
     });
+    emit(
+      _LoadSuccess(
+        _data,
+        editing: null,
+        isAddingNew: false,
+      ),
+    );
   }
 }

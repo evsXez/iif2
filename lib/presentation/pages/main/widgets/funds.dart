@@ -28,10 +28,7 @@ class Funds extends StatelessWidget {
             FundType.values.length,
             (index) {
               final type = FundType.values[index];
-              final Money? money = state.map(
-                loadInProgress: (_) => null,
-                loadSuccess: (state) => state.data[type],
-              );
+              final Money? money = state.data[index].value;
               return ExpansionPanel(
                 isExpanded: state.expandedIndex == index,
                 canTapOnHeader: true,
