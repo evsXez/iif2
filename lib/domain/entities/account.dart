@@ -1,15 +1,19 @@
+import 'package:equatable/equatable.dart';
 import 'package:iif/domain/include.dart';
 
-class Fund {
+class Account with EquatableMixin {
   final String name;
-  final FundType type;
+  final AccountType type;
   final Currency currency;
   final bool isArchived;
 
-  Fund({
+  Account({
     required this.name,
     required this.type,
     required this.currency,
     this.isArchived = false,
   });
+
+  @override
+  List<Object?> get props => [name, type, currency];
 }

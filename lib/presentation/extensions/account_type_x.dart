@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:iif/domain/entities/enums/fund_type.dart';
+import 'package:iif/domain/entities/enums/account_type.dart';
 import 'package:iif/misc/resources/strings.dart';
 
-extension FundTypeX on FundType {
+extension AccountTypeX on AccountType {
   String name(BuildContext context) {
     switch (this) {
-      case FundType.money:
+      case AccountType.money:
         return Strings.type_all_money;
-      case FundType.creditCards:
+      case AccountType.creditCards:
         return Strings.type_credit_cards;
-      case FundType.myDebts:
+      case AccountType.myDebts:
         return Strings.type_my_debts;
-      case FundType.debtsToMe:
+      case AccountType.debtsToMe:
         return Strings.type_debts_to_me;
-      case FundType.investments:
+      case AccountType.investments:
         return Strings.type_investments;
     }
   }

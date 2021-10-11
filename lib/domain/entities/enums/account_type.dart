@@ -1,4 +1,4 @@
-enum FundType {
+enum AccountType {
   money,
   creditCards,
   myDebts,

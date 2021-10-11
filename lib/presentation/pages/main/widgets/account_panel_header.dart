@@ -1,12 +1,12 @@
 import 'package:iif/domain/include.dart';
 import 'package:iif/presentation/include.dart';
 
-class FundPanelHeader extends StatelessWidget {
+class AccountPanelHeader extends StatelessWidget {
   final Money? money;
   final String label;
   final VoidCallback onPressed;
 
-  const FundPanelHeader({
+  const AccountPanelHeader({
     required this.label,
     required this.money,
     required this.onPressed,

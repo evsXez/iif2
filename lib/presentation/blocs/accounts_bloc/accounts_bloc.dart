@@ -1,23 +1,19 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:iif/domain/include.dart';
-import 'package:iif/domain/repositories/funds_repository.dart';
-import 'package:iif/domain/use_cases/get_fund_types_on_main_page.dart';
 
-part 'funds_state.dart';
-part 'funds_bloc.freezed.dart';
+part 'accounts_state.dart';
+part 'accounts_bloc.freezed.dart';
 
-class FundsBloc extends Cubit<FundsState> {
-  final FundsRepository repository;
-
+class AccountsBloc extends Cubit<AccountsState> {
   int? _expandedIndex;
-  List<MapEntry<FundType, Money?>> _data = [];
+  List<MapEntry<AccountType, Money?>> _data = [];
 
-  FundsBloc(this.repository) : super(const _Loaded(null, [])) {
-    _data = GetFundTypesOnMainPage().execute().map((it) => MapEntry(it, null)).toList();
+  AccountsBloc() : super(const _Loaded(null, [])) {
+    _data = GetAccountTypesOnMainPageUseCase().execute().map((it) => MapEntry(it, null)).toList();
     emit(_Loaded(null, _data));
 
-    // repository.getMoneyForFundTypes().then((data) {
+    // repository.getMoneyForAccountTypes().then((data) {
     //   _data = data;
     //   _emitData();
     // });

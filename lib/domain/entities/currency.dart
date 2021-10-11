@@ -1,4 +1,6 @@
-class Currency {
+import 'package:equatable/equatable.dart';
+
+class Currency with EquatableMixin {
   final String code;
   final String symbol;
 
@@ -8,4 +10,7 @@ class Currency {
   });
 
   static const debugDefault = Currency(code: "USD", symbol: "\$");
+
+  @override
+  List<Object?> get props => [code, symbol];
 }

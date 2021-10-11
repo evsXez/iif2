@@ -1,23 +1,23 @@
-import 'package:iif/domain/entities/fund_with_money.dart';
+import 'package:iif/domain/include.dart';
 import 'package:iif/presentation/include.dart';
-import 'package:iif/presentation/pages/main/widgets/fund_edit_item.dart';
-import 'package:iif/presentation/pages/main/widgets/fund_plain_item.dart';
+import 'package:iif/presentation/pages/main/widgets/account_edit_item.dart';
+import 'package:iif/presentation/pages/main/widgets/account_plain_item.dart';
 
-class FundItem extends StatefulWidget {
-  final FundWithMoney fundWithMoney;
+class AccountItem extends StatefulWidget {
+  final MapEntry<Account, Money> accountWithMoney;
   final bool isEditing;
 
-  const FundItem({
-    required this.fundWithMoney,
+  const AccountItem({
+    required this.accountWithMoney,
     required this.isEditing,
     Key? key,
   }) : super(key: key);
 
   @override
-  State<FundItem> createState() => _FundItemState();
+  State<AccountItem> createState() => _AccountItemState();
 }
 
-class _FundItemState extends State<FundItem> {
+class _AccountItemState extends State<AccountItem> {
   final bool isArchiveAvailable = true;
   final bool isDeleteAvailable = true;
   bool isHighlighted = false;
@@ -29,13 +29,13 @@ class _FundItemState extends State<FundItem> {
         _showContextMenu(context, details.globalPosition.dx, details.globalPosition.dy);
       },
       child: widget.isEditing
-          ? FundEditItem(
-              fundWithMoneyToEdit: widget.fundWithMoney,
-              key: ObjectKey(widget.fundWithMoney.fund),
+          ? AccountEditItem(
+              // accountWithMoneyToEdit: widget.accountWithMoney,
+              key: ObjectKey(widget.accountWithMoney.key),
             )
-          : FundPlainItem(
-              fund: widget.fundWithMoney.fund,
-              money: widget.fundWithMoney.money,
+          : AccountPlainItem(
+              account: widget.accountWithMoney.key,
+              money: widget.accountWithMoney.value,
               isHighlighed: isHighlighted,
             ),
     );

@@ -3,17 +3,17 @@ import 'package:iif/domain/repositories/operations_repository.dart';
 
 class OperationsRepositoryImpl extends OperationsRepository {
   @override
-  Future<Money> calculateMoney(Fund fund) async {
-    return Money(100 + fund.name.length);
+  Future<Money> calculateMoney(Account account) async {
+    return Money(100 + account.name.length);
   }
 
   @override
-  void addOperationInitialInput(Fund fund, Money money) {
+  void addOperationInitialInput(Account account, Money money) {
     //TODO
   }
 
   @override
-  Future<List<Operation>> getOperations(Fund fund) {
+  Future<List<Operation>> getOperations(Account account) {
     // TODO: implement getOperations
     throw UnimplementedError();
   }

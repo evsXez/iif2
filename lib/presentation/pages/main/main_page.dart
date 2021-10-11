@@ -1,5 +1,5 @@
 import 'package:iif/presentation/include.dart';
-import 'package:iif/presentation/pages/main/widgets/funds.dart';
+import 'package:iif/presentation/pages/main/widgets/accounts.dart';
 import 'package:iif/presentation/pages/main/widgets/header.dart';
 
 class MainPage extends StatelessWidget {
@@ -16,7 +16,7 @@ class MainPage extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            Funds(),
+            Accounts(),
           ],
         ),
       ),

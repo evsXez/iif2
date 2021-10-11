@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'funds_panel_bloc.dart';
+part of 'accounts_panel_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,15 +14,15 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$FundsPanelStateTearOff {
-  const _$FundsPanelStateTearOff();
+class _$AccountsPanelStateTearOff {
+  const _$AccountsPanelStateTearOff();
 
   _LoadInProgress loadInProgress() {
     return const _LoadInProgress();
   }
 
-  _LoadSuccess loadSuccess(List<FundWithMoney> data,
-      {required Fund? editing, required bool isAddingNew}) {
+  _LoadSuccess loadSuccess(List<MapEntry<Account, Money>> data,
+      {required Account? editing, required bool isAddingNew}) {
     return _LoadSuccess(
       data,
       editing: editing,
@@ -32,30 +32,26 @@ class _$FundsPanelStateTearOff {
 }
 
 /// @nodoc
-const $FundsPanelState = _$FundsPanelStateTearOff();
+const $AccountsPanelState = _$AccountsPanelStateTearOff();
 
 /// @nodoc
-mixin _$FundsPanelState {
+mixin _$AccountsPanelState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadInProgress,
-    required TResult Function(
-            List<FundWithMoney> data, Fund? editing, bool isAddingNew)
-        loadSuccess,
+    required TResult Function(List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew) loadSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(List<FundWithMoney> data, Fund? editing, bool isAddingNew)?
-        loadSuccess,
+    TResult Function(List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew)? loadSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(List<FundWithMoney> data, Fund? editing, bool isAddingNew)?
-        loadSuccess,
+    TResult Function(List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew)? loadSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -81,35 +77,30 @@ mixin _$FundsPanelState {
 }
 
 /// @nodoc
-abstract class $FundsPanelStateCopyWith<$Res> {
-  factory $FundsPanelStateCopyWith(
-          FundsPanelState value, $Res Function(FundsPanelState) then) =
-      _$FundsPanelStateCopyWithImpl<$Res>;
+abstract class $AccountsPanelStateCopyWith<$Res> {
+  factory $AccountsPanelStateCopyWith(AccountsPanelState value, $Res Function(AccountsPanelState) then) =
+      _$AccountsPanelStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$FundsPanelStateCopyWithImpl<$Res>
-    implements $FundsPanelStateCopyWith<$Res> {
-  _$FundsPanelStateCopyWithImpl(this._value, this._then);
+class _$AccountsPanelStateCopyWithImpl<$Res> implements $AccountsPanelStateCopyWith<$Res> {
+  _$AccountsPanelStateCopyWithImpl(this._value, this._then);
 
-  final FundsPanelState _value;
+  final AccountsPanelState _value;
   // ignore: unused_field
-  final $Res Function(FundsPanelState) _then;
+  final $Res Function(AccountsPanelState) _then;
 }
 
 /// @nodoc
 abstract class _$LoadInProgressCopyWith<$Res> {
-  factory _$LoadInProgressCopyWith(
-          _LoadInProgress value, $Res Function(_LoadInProgress) then) =
+  factory _$LoadInProgressCopyWith(_LoadInProgress value, $Res Function(_LoadInProgress) then) =
       __$LoadInProgressCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$LoadInProgressCopyWithImpl<$Res>
-    extends _$FundsPanelStateCopyWithImpl<$Res>
+class __$LoadInProgressCopyWithImpl<$Res> extends _$AccountsPanelStateCopyWithImpl<$Res>
     implements _$LoadInProgressCopyWith<$Res> {
-  __$LoadInProgressCopyWithImpl(
-      _LoadInProgress _value, $Res Function(_LoadInProgress) _then)
+  __$LoadInProgressCopyWithImpl(_LoadInProgress _value, $Res Function(_LoadInProgress) _then)
       : super(_value, (v) => _then(v as _LoadInProgress));
 
   @override
@@ -123,7 +114,7 @@ class _$_LoadInProgress implements _LoadInProgress {
 
   @override
   String toString() {
-    return 'FundsPanelState.loadInProgress()';
+    return 'AccountsPanelState.loadInProgress()';
   }
 
   @override
@@ -138,9 +129,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadInProgress,
-    required TResult Function(
-            List<FundWithMoney> data, Fund? editing, bool isAddingNew)
-        loadSuccess,
+    required TResult Function(List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew) loadSuccess,
   }) {
     return loadInProgress();
   }
@@ -149,8 +138,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(List<FundWithMoney> data, Fund? editing, bool isAddingNew)?
-        loadSuccess,
+    TResult Function(List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew)? loadSuccess,
   }) {
     return loadInProgress?.call();
   }
@@ -159,8 +147,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(List<FundWithMoney> data, Fund? editing, bool isAddingNew)?
-        loadSuccess,
+    TResult Function(List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew)? loadSuccess,
     required TResult orElse(),
   }) {
     if (loadInProgress != null) {
@@ -201,24 +188,21 @@ class _$_LoadInProgress implements _LoadInProgress {
   }
 }
 
-abstract class _LoadInProgress implements FundsPanelState {
+abstract class _LoadInProgress implements AccountsPanelState {
   const factory _LoadInProgress() = _$_LoadInProgress;
 }
 
 /// @nodoc
 abstract class _$LoadSuccessCopyWith<$Res> {
-  factory _$LoadSuccessCopyWith(
-          _LoadSuccess value, $Res Function(_LoadSuccess) then) =
+  factory _$LoadSuccessCopyWith(_LoadSuccess value, $Res Function(_LoadSuccess) then) =
       __$LoadSuccessCopyWithImpl<$Res>;
-  $Res call({List<FundWithMoney> data, Fund? editing, bool isAddingNew});
+  $Res call({List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew});
 }
 
 /// @nodoc
-class __$LoadSuccessCopyWithImpl<$Res>
-    extends _$FundsPanelStateCopyWithImpl<$Res>
+class __$LoadSuccessCopyWithImpl<$Res> extends _$AccountsPanelStateCopyWithImpl<$Res>
     implements _$LoadSuccessCopyWith<$Res> {
-  __$LoadSuccessCopyWithImpl(
-      _LoadSuccess _value, $Res Function(_LoadSuccess) _then)
+  __$LoadSuccessCopyWithImpl(_LoadSuccess _value, $Res Function(_LoadSuccess) _then)
       : super(_value, (v) => _then(v as _LoadSuccess));
 
   @override
@@ -234,11 +218,11 @@ class __$LoadSuccessCopyWithImpl<$Res>
       data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<FundWithMoney>,
+              as List<MapEntry<Account, Money>>,
       editing: editing == freezed
           ? _value.editing
           : editing // ignore: cast_nullable_to_non_nullable
-              as Fund?,
+              as Account?,
       isAddingNew: isAddingNew == freezed
           ? _value.isAddingNew
           : isAddingNew // ignore: cast_nullable_to_non_nullable
@@ -250,33 +234,28 @@ class __$LoadSuccessCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LoadSuccess implements _LoadSuccess {
-  const _$_LoadSuccess(this.data,
-      {required this.editing, required this.isAddingNew});
+  const _$_LoadSuccess(this.data, {required this.editing, required this.isAddingNew});
 
   @override
-  final List<FundWithMoney> data;
+  final List<MapEntry<Account, Money>> data;
   @override
-  final Fund? editing;
+  final Account? editing;
   @override
   final bool isAddingNew;
 
   @override
   String toString() {
-    return 'FundsPanelState.loadSuccess(data: $data, editing: $editing, isAddingNew: $isAddingNew)';
+    return 'AccountsPanelState.loadSuccess(data: $data, editing: $editing, isAddingNew: $isAddingNew)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _LoadSuccess &&
-            (identical(other.data, data) ||
-                const DeepCollectionEquality().equals(other.data, data)) &&
-            (identical(other.editing, editing) ||
-                const DeepCollectionEquality()
-                    .equals(other.editing, editing)) &&
+            (identical(other.data, data) || const DeepCollectionEquality().equals(other.data, data)) &&
+            (identical(other.editing, editing) || const DeepCollectionEquality().equals(other.editing, editing)) &&
             (identical(other.isAddingNew, isAddingNew) ||
-                const DeepCollectionEquality()
-                    .equals(other.isAddingNew, isAddingNew)));
+                const DeepCollectionEquality().equals(other.isAddingNew, isAddingNew)));
   }
 
   @override
@@ -288,16 +267,13 @@ class _$_LoadSuccess implements _LoadSuccess {
 
   @JsonKey(ignore: true)
   @override
-  _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
-      __$LoadSuccessCopyWithImpl<_LoadSuccess>(this, _$identity);
+  _$LoadSuccessCopyWith<_LoadSuccess> get copyWith => __$LoadSuccessCopyWithImpl<_LoadSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadInProgress,
-    required TResult Function(
-            List<FundWithMoney> data, Fund? editing, bool isAddingNew)
-        loadSuccess,
+    required TResult Function(List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew) loadSuccess,
   }) {
     return loadSuccess(data, editing, isAddingNew);
   }
@@ -306,8 +282,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(List<FundWithMoney> data, Fund? editing, bool isAddingNew)?
-        loadSuccess,
+    TResult Function(List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew)? loadSuccess,
   }) {
     return loadSuccess?.call(data, editing, isAddingNew);
   }
@@ -316,8 +291,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(List<FundWithMoney> data, Fund? editing, bool isAddingNew)?
-        loadSuccess,
+    TResult Function(List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew)? loadSuccess,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
@@ -358,14 +332,13 @@ class _$_LoadSuccess implements _LoadSuccess {
   }
 }
 
-abstract class _LoadSuccess implements FundsPanelState {
-  const factory _LoadSuccess(List<FundWithMoney> data,
-      {required Fund? editing, required bool isAddingNew}) = _$_LoadSuccess;
+abstract class _LoadSuccess implements AccountsPanelState {
+  const factory _LoadSuccess(List<MapEntry<Account, Money>> data,
+      {required Account? editing, required bool isAddingNew}) = _$_LoadSuccess;
 
-  List<FundWithMoney> get data => throw _privateConstructorUsedError;
-  Fund? get editing => throw _privateConstructorUsedError;
+  List<MapEntry<Account, Money>> get data => throw _privateConstructorUsedError;
+  Account? get editing => throw _privateConstructorUsedError;
   bool get isAddingNew => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$LoadSuccessCopyWith<_LoadSuccess> get copyWith => throw _privateConstructorUsedError;
 }

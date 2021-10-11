@@ -1,12 +1,12 @@
 import 'package:iif/domain/include.dart';
 import 'package:iif/presentation/include.dart';
 
-class FundPlainItem extends StatelessWidget {
-  final Fund fund;
+class AccountPlainItem extends StatelessWidget {
+  final Account account;
   final Money money;
   final bool isHighlighed;
-  const FundPlainItem({
-    required this.fund,
+  const AccountPlainItem({
+    required this.account,
     required this.money,
     required this.isHighlighed,
     Key? key,
@@ -23,12 +23,12 @@ class FundPlainItem extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                fund.name,
+                account.name,
               ),
             ),
             MoneyText(
               money: money,
-              currency: fund.currency,
+              currency: account.currency,
               fontSize: 16,
               fontWeight: FontWeight.w300,
             ),
