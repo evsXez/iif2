@@ -11,7 +11,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
   final AccountType type;
 
   final BuildContext _context;
-  final List<MapEntry<Account, Money>> _data = [];
+  final List<AccountBalance> _data = [];
 
   AccountsPanelBloc(
     this._context, {

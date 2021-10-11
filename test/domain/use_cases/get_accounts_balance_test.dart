@@ -3,15 +3,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/domain/repositories/accounts_repository.dart';
 import 'package:iif/domain/repositories/operations_repository.dart';
-import 'package:iif/domain/use_cases/get_accounts_with_money.dart';
+import 'package:iif/domain/use_cases/get_accounts_balance.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'get_accounts_with_money_test.mocks.dart';
+import 'get_accounts_balance_test.mocks.dart';
 
 @GenerateMocks([AccountsRepository, OperationsRepository])
 void main() {
-  late GetAccountsWithMoneyUseCase getAccountsWithMoneyUseCase;
+  late GetAccountsBalanceUseCase getAccountsWithMoneyUseCase;
   late AccountsRepository mockAccountsRepository;
   late OperationsRepository mockOperationsRepository;
   const AccountType accountType = AccountType.money;
@@ -26,7 +26,7 @@ void main() {
     mockAccountsRepository = MockAccountsRepository();
     mockOperationsRepository = MockOperationsRepository();
 
-    getAccountsWithMoneyUseCase = GetAccountsWithMoneyUseCase(
+    getAccountsWithMoneyUseCase = GetAccountsBalanceUseCase(
       accountsRepository: mockAccountsRepository,
       operationsRepository: mockOperationsRepository,
     );
@@ -38,6 +38,6 @@ void main() {
     when(mockOperationsRepository.calculateMoney(account2)).thenAnswer((_) async => money2);
 
     final data = await getAccountsWithMoneyUseCase.execute(accountType);
-    expect(listEquals(data, [MapEntry(account1, money1), MapEntry(account2, money2)]), true);
+    expect(listEquals(data, [AccountBalance(account1, money1), AccountBalance(account2, money2)]), true);
   });
 }

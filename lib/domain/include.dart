@@ -3,6 +3,7 @@ export 'package:iif/domain/entities/currency.dart';
 export 'package:iif/domain/entities/money.dart';
 export 'package:iif/domain/entities/account.dart';
 export 'package:iif/domain/entities/operation.dart';
+export 'package:iif/domain/entities/account_balance.dart';
 
 //enums
 export 'package:iif/domain/entities/enums/account_type.dart';

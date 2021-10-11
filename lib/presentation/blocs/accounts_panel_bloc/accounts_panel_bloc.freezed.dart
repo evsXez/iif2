@@ -21,8 +21,7 @@ class _$AccountsPanelStateTearOff {
     return const _LoadInProgress();
   }
 
-  _LoadSuccess loadSuccess(List<MapEntry<Account, Money>> data,
-      {required Account? editing, required bool isAddingNew}) {
+  _LoadSuccess loadSuccess(List<AccountBalance> data, {required Account? editing, required bool isAddingNew}) {
     return _LoadSuccess(
       data,
       editing: editing,
@@ -39,19 +38,19 @@ mixin _$AccountsPanelState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadInProgress,
-    required TResult Function(List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew) loadSuccess,
+    required TResult Function(List<AccountBalance> data, Account? editing, bool isAddingNew) loadSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew)? loadSuccess,
+    TResult Function(List<AccountBalance> data, Account? editing, bool isAddingNew)? loadSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew)? loadSuccess,
+    TResult Function(List<AccountBalance> data, Account? editing, bool isAddingNew)? loadSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -129,7 +128,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadInProgress,
-    required TResult Function(List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew) loadSuccess,
+    required TResult Function(List<AccountBalance> data, Account? editing, bool isAddingNew) loadSuccess,
   }) {
     return loadInProgress();
   }
@@ -138,7 +137,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew)? loadSuccess,
+    TResult Function(List<AccountBalance> data, Account? editing, bool isAddingNew)? loadSuccess,
   }) {
     return loadInProgress?.call();
   }
@@ -147,7 +146,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew)? loadSuccess,
+    TResult Function(List<AccountBalance> data, Account? editing, bool isAddingNew)? loadSuccess,
     required TResult orElse(),
   }) {
     if (loadInProgress != null) {
@@ -196,7 +195,7 @@ abstract class _LoadInProgress implements AccountsPanelState {
 abstract class _$LoadSuccessCopyWith<$Res> {
   factory _$LoadSuccessCopyWith(_LoadSuccess value, $Res Function(_LoadSuccess) then) =
       __$LoadSuccessCopyWithImpl<$Res>;
-  $Res call({List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew});
+  $Res call({List<AccountBalance> data, Account? editing, bool isAddingNew});
 }
 
 /// @nodoc
@@ -218,7 +217,7 @@ class __$LoadSuccessCopyWithImpl<$Res> extends _$AccountsPanelStateCopyWithImpl<
       data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<MapEntry<Account, Money>>,
+              as List<AccountBalance>,
       editing: editing == freezed
           ? _value.editing
           : editing // ignore: cast_nullable_to_non_nullable
@@ -237,7 +236,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   const _$_LoadSuccess(this.data, {required this.editing, required this.isAddingNew});
 
   @override
-  final List<MapEntry<Account, Money>> data;
+  final List<AccountBalance> data;
   @override
   final Account? editing;
   @override
@@ -273,7 +272,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadInProgress,
-    required TResult Function(List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew) loadSuccess,
+    required TResult Function(List<AccountBalance> data, Account? editing, bool isAddingNew) loadSuccess,
   }) {
     return loadSuccess(data, editing, isAddingNew);
   }
@@ -282,7 +281,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew)? loadSuccess,
+    TResult Function(List<AccountBalance> data, Account? editing, bool isAddingNew)? loadSuccess,
   }) {
     return loadSuccess?.call(data, editing, isAddingNew);
   }
@@ -291,7 +290,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(List<MapEntry<Account, Money>> data, Account? editing, bool isAddingNew)? loadSuccess,
+    TResult Function(List<AccountBalance> data, Account? editing, bool isAddingNew)? loadSuccess,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
@@ -333,10 +332,10 @@ class _$_LoadSuccess implements _LoadSuccess {
 }
 
 abstract class _LoadSuccess implements AccountsPanelState {
-  const factory _LoadSuccess(List<MapEntry<Account, Money>> data,
-      {required Account? editing, required bool isAddingNew}) = _$_LoadSuccess;
+  const factory _LoadSuccess(List<AccountBalance> data, {required Account? editing, required bool isAddingNew}) =
+      _$_LoadSuccess;
 
-  List<MapEntry<Account, Money>> get data => throw _privateConstructorUsedError;
+  List<AccountBalance> get data => throw _privateConstructorUsedError;
   Account? get editing => throw _privateConstructorUsedError;
   bool get isAddingNew => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)

@@ -49,9 +49,9 @@ class AccountPanelBody extends StatelessWidget {
             final List<Widget> items = state.data.isNotEmpty ? [const TopDivider()] : [];
             items.addAll(state.data
                 .map(
-                  (accountWithMoney) => AccountItem(
-                    accountWithMoney: accountWithMoney,
-                    isEditing: accountWithMoney.key == state.editing,
+                  (balance) => AccountItem(
+                    balance: balance,
+                    isEditing: balance.account == state.editing,
                   ),
                 )
                 .toList());

@@ -4,7 +4,7 @@ part of 'accounts_panel_bloc.dart';
 abstract class AccountsPanelState with _$AccountsPanelState {
   const factory AccountsPanelState.loadInProgress() = _LoadInProgress;
   const factory AccountsPanelState.loadSuccess(
-    List<MapEntry<Account, Money>> data, {
+    List<AccountBalance> data, {
     required Account? editing,
     required bool isAddingNew,
   }) = _LoadSuccess;

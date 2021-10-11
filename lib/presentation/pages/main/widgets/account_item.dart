@@ -4,11 +4,11 @@ import 'package:iif/presentation/pages/main/widgets/account_edit_item.dart';
 import 'package:iif/presentation/pages/main/widgets/account_plain_item.dart';
 
 class AccountItem extends StatefulWidget {
-  final MapEntry<Account, Money> accountWithMoney;
+  final AccountBalance balance;
   final bool isEditing;
 
   const AccountItem({
-    required this.accountWithMoney,
+    required this.balance,
     required this.isEditing,
     Key? key,
   }) : super(key: key);
@@ -31,11 +31,11 @@ class _AccountItemState extends State<AccountItem> {
       child: widget.isEditing
           ? AccountEditItem(
               // accountWithMoneyToEdit: widget.accountWithMoney,
-              key: ObjectKey(widget.accountWithMoney.key),
+              key: ObjectKey(widget.balance.account),
             )
           : AccountPlainItem(
-              account: widget.accountWithMoney.key,
-              money: widget.accountWithMoney.value,
+              account: widget.balance.account,
+              money: widget.balance.money,
               isHighlighed: isHighlighted,
             ),
     );

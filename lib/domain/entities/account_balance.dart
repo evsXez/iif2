@@ -8,5 +8,5 @@ class AccountBalance with EquatableMixin {
   AccountBalance(this.account, this.money);
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [account, money];
 }
