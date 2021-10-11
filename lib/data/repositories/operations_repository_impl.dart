@@ -3,7 +3,7 @@ import 'package:iif/domain/repositories/operations_repository.dart';
 
 class OperationsRepositoryImpl extends OperationsRepository {
   @override
-  Future<Money> calculateMoney(Account account) async {
+  Future<Money> calculateBalance(Account account) async {
     return Money(100 + account.name.length);
   }
 

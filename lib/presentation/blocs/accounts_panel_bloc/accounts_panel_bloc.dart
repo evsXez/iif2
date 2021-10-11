@@ -11,7 +11,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
   final AccountType type;
 
   final BuildContext _context;
-  final List<AccountBalance> _data = [];
+  List<AccountBalance> _data = [];
 
   AccountsPanelBloc(
     this._context, {
@@ -54,18 +54,13 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
   }
 
   void _updateData() async {
-    //   final accounts = accountsRepository.getAccountsOfType(type);
-    //   _data.clear();
-    //   await Future.forEach<Account>(accounts, (account) async {
-    //     final money = await operationsRepository.calculateMoney(account);
-    //     _data.add(AccountWithMoney(account, money));
-    //   });
-    //   emit(
-    //     _LoadSuccess(
-    //       _data,
-    //       editing: null,
-    //       isAddingNew: false,
-    //     ),
-    //   );
+    _data = await getAccountsBalanceUseCase.of(_context).execute(type);
+    emit(
+      _LoadSuccess(
+        _data,
+        editing: null,
+        isAddingNew: false,
+      ),
+    );
   }
 }

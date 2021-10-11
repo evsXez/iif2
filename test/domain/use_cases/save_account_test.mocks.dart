@@ -47,7 +47,7 @@ class MockOperationsRepository extends _i1.Mock implements _i4.OperationsReposit
   }
 
   @override
-  _i5.Future<_i2.Money> calculateMoney(_i2.Account? account) =>
+  _i5.Future<_i2.Money> calculateBalance(_i2.Account? account) =>
       (super.noSuchMethod(Invocation.method(#calculateMoney, [account]),
           returnValue: Future<_i2.Money>.value(_FakeMoney_0())) as _i5.Future<_i2.Money>);
   @override

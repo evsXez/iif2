@@ -11,7 +11,7 @@ import 'get_accounts_balance_test.mocks.dart';
 
 @GenerateMocks([AccountsRepository, OperationsRepository])
 void main() {
-  late GetAccountsBalanceUseCase getAccountsWithMoneyUseCase;
+  late GetAccountsBalanceUseCase getAccountsBalanceUseCase;
   late AccountsRepository mockAccountsRepository;
   late OperationsRepository mockOperationsRepository;
   const AccountType accountType = AccountType.money;
@@ -26,7 +26,7 @@ void main() {
     mockAccountsRepository = MockAccountsRepository();
     mockOperationsRepository = MockOperationsRepository();
 
-    getAccountsWithMoneyUseCase = GetAccountsBalanceUseCase(
+    getAccountsBalanceUseCase = GetAccountsBalanceUseCase(
       accountsRepository: mockAccountsRepository,
       operationsRepository: mockOperationsRepository,
     );
@@ -34,10 +34,10 @@ void main() {
 
   test('repositories have data and use case combines them', () async {
     when(mockAccountsRepository.getAccountsOfType(accountType)).thenReturn([account1, account2]);
-    when(mockOperationsRepository.calculateMoney(account1)).thenAnswer((_) async => money1);
-    when(mockOperationsRepository.calculateMoney(account2)).thenAnswer((_) async => money2);
+    when(mockOperationsRepository.calculateBalance(account1)).thenAnswer((_) async => money1);
+    when(mockOperationsRepository.calculateBalance(account2)).thenAnswer((_) async => money2);
 
-    final data = await getAccountsWithMoneyUseCase.execute(accountType);
-    expect(listEquals(data, [AccountBalance(account1, money1), AccountBalance(account2, money2)]), true);
+    final data = await getAccountsBalanceUseCase.execute(accountType);
+    expect(data, [AccountBalance(account1, money1), AccountBalance(account2, money2)]);
   });
 }

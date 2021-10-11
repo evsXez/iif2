@@ -4,10 +4,10 @@ import 'package:iif/presentation/include.dart';
 import 'package:iif/presentation/pages/main/widgets/small_button.dart';
 
 class AccountEditItem extends StatefulWidget {
-  // final AccountWithMoney? accountWithMoneyToEdit;
+  // final AccountBalance? accountBalanceToEdit;
 
   const AccountEditItem({
-    // required this.accountWithMoneyToEdit,
+    // required this.accountBalanceToEdit,
     Key? key,
   }) : super(key: key);
 
@@ -18,12 +18,12 @@ class AccountEditItem extends StatefulWidget {
 class _AccountEditItemState extends State<AccountEditItem> {
   late StringField nameField = StringField(
     hint: Strings.label_title,
-    initialValue: "", //widget.accountWithMoneyToEdit?.account.name ?? "",
+    initialValue: "", //widget.accountBalanceToEdit?.account.name ?? "",
     onChanged: _onChanged,
   );
 
   late MoneyField moneyField = MoneyField(
-    initialValue: null, //widget.accountWithMoneyToEdit?.money,
+    initialValue: null, //widget.accountBalanceToEdit?.money,
     onChanged: _onChanged,
   );
 
@@ -32,8 +32,8 @@ class _AccountEditItemState extends State<AccountEditItem> {
   void _onChanged(_) {
     setState(() {
       _isInputCompletedAndSmthChanged = (nameField.isValueEntered && moneyField.isValueEntered);
-      // && ((nameField.value != widget.accountWithMoneyToEdit?.account.name) ||
-      //     (moneyField.toString() != widget.accountWithMoneyToEdit?.money.toString()));
+      // && ((nameField.value != widget.accountBalanceToEdit?.account.name) ||
+      //     (moneyField.toString() != widget.accountBalanceToEdit?.money.toString()));
     });
   }
 
@@ -77,7 +77,7 @@ class _AccountEditItemState extends State<AccountEditItem> {
 
   void _onSave(BuildContext context) {
     BlocProvider.of<AccountsPanelBloc>(context).saveAccount(
-      // accountToEdit: widget.accountWithMoneyToEdit?.account,
+      // accountToEdit: widget.accountBalanceToEdit?.account,
       name: nameField.value,
       money: moneyField.value,
     );

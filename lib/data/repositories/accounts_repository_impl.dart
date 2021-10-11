@@ -27,7 +27,7 @@ class AccountsRepositoryImpl extends AccountsRepository {
     final operationsRepository = OperationsRepositoryImpl();
 
     Future.forEach<Account>(accounts, (account) async {
-      addMoney(result, account.type, await operationsRepository.calculateMoney(account));
+      addMoney(result, account.type, await operationsRepository.calculateBalance(account));
     });
 
     return result;

@@ -30,7 +30,7 @@ class _AccountItemState extends State<AccountItem> {
       },
       child: widget.isEditing
           ? AccountEditItem(
-              // accountWithMoneyToEdit: widget.accountWithMoney,
+              // accountBalanceToEdit: widget.accountBalance,
               key: ObjectKey(widget.balance.account),
             )
           : AccountPlainItem(
