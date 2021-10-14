@@ -31,21 +31,28 @@ const $AccountsState = _$AccountsStateTearOff();
 /// @nodoc
 mixin _$AccountsState {
   int? get expandedIndex => throw _privateConstructorUsedError;
-  List<MapEntry<AccountType, Money?>> get data => throw _privateConstructorUsedError;
+  List<MapEntry<AccountType, Money?>> get data =>
+      throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int? expandedIndex, List<MapEntry<AccountType, Money?>> data) loaded,
+    required TResult Function(
+            int? expandedIndex, List<MapEntry<AccountType, Money?>> data)
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int? expandedIndex, List<MapEntry<AccountType, Money?>> data)? loaded,
+    TResult Function(
+            int? expandedIndex, List<MapEntry<AccountType, Money?>> data)?
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? expandedIndex, List<MapEntry<AccountType, Money?>> data)? loaded,
+    TResult Function(
+            int? expandedIndex, List<MapEntry<AccountType, Money?>> data)?
+        loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -67,18 +74,21 @@ mixin _$AccountsState {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $AccountsStateCopyWith<AccountsState> get copyWith => throw _privateConstructorUsedError;
+  $AccountsStateCopyWith<AccountsState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AccountsStateCopyWith<$Res> {
-  factory $AccountsStateCopyWith(AccountsState value, $Res Function(AccountsState) then) =
+  factory $AccountsStateCopyWith(
+          AccountsState value, $Res Function(AccountsState) then) =
       _$AccountsStateCopyWithImpl<$Res>;
   $Res call({int? expandedIndex, List<MapEntry<AccountType, Money?>> data});
 }
 
 /// @nodoc
-class _$AccountsStateCopyWithImpl<$Res> implements $AccountsStateCopyWith<$Res> {
+class _$AccountsStateCopyWithImpl<$Res>
+    implements $AccountsStateCopyWith<$Res> {
   _$AccountsStateCopyWithImpl(this._value, this._then);
 
   final AccountsState _value;
@@ -105,14 +115,17 @@ class _$AccountsStateCopyWithImpl<$Res> implements $AccountsStateCopyWith<$Res> 
 
 /// @nodoc
 abstract class _$LoadedCopyWith<$Res> implements $AccountsStateCopyWith<$Res> {
-  factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) = __$LoadedCopyWithImpl<$Res>;
+  factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
+      __$LoadedCopyWithImpl<$Res>;
   @override
   $Res call({int? expandedIndex, List<MapEntry<AccountType, Money?>> data});
 }
 
 /// @nodoc
-class __$LoadedCopyWithImpl<$Res> extends _$AccountsStateCopyWithImpl<$Res> implements _$LoadedCopyWith<$Res> {
-  __$LoadedCopyWithImpl(_Loaded _value, $Res Function(_Loaded) _then) : super(_value, (v) => _then(v as _Loaded));
+class __$LoadedCopyWithImpl<$Res> extends _$AccountsStateCopyWithImpl<$Res>
+    implements _$LoadedCopyWith<$Res> {
+  __$LoadedCopyWithImpl(_Loaded _value, $Res Function(_Loaded) _then)
+      : super(_value, (v) => _then(v as _Loaded));
 
   @override
   _Loaded get _value => super._value as _Loaded;
@@ -155,8 +168,10 @@ class _$_Loaded implements _Loaded {
     return identical(this, other) ||
         (other is _Loaded &&
             (identical(other.expandedIndex, expandedIndex) ||
-                const DeepCollectionEquality().equals(other.expandedIndex, expandedIndex)) &&
-            (identical(other.data, data) || const DeepCollectionEquality().equals(other.data, data)));
+                const DeepCollectionEquality()
+                    .equals(other.expandedIndex, expandedIndex)) &&
+            (identical(other.data, data) ||
+                const DeepCollectionEquality().equals(other.data, data)));
   }
 
   @override
@@ -167,12 +182,15 @@ class _$_Loaded implements _Loaded {
 
   @JsonKey(ignore: true)
   @override
-  _$LoadedCopyWith<_Loaded> get copyWith => __$LoadedCopyWithImpl<_Loaded>(this, _$identity);
+  _$LoadedCopyWith<_Loaded> get copyWith =>
+      __$LoadedCopyWithImpl<_Loaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int? expandedIndex, List<MapEntry<AccountType, Money?>> data) loaded,
+    required TResult Function(
+            int? expandedIndex, List<MapEntry<AccountType, Money?>> data)
+        loaded,
   }) {
     return loaded(expandedIndex, data);
   }
@@ -180,7 +198,9 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int? expandedIndex, List<MapEntry<AccountType, Money?>> data)? loaded,
+    TResult Function(
+            int? expandedIndex, List<MapEntry<AccountType, Money?>> data)?
+        loaded,
   }) {
     return loaded?.call(expandedIndex, data);
   }
@@ -188,7 +208,9 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? expandedIndex, List<MapEntry<AccountType, Money?>> data)? loaded,
+    TResult Function(
+            int? expandedIndex, List<MapEntry<AccountType, Money?>> data)?
+        loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -227,12 +249,14 @@ class _$_Loaded implements _Loaded {
 }
 
 abstract class _Loaded implements AccountsState {
-  const factory _Loaded(int? expandedIndex, List<MapEntry<AccountType, Money?>> data) = _$_Loaded;
+  const factory _Loaded(
+      int? expandedIndex, List<MapEntry<AccountType, Money?>> data) = _$_Loaded;
 
   @override
   int? get expandedIndex => throw _privateConstructorUsedError;
   @override
-  List<MapEntry<AccountType, Money?>> get data => throw _privateConstructorUsedError;
+  List<MapEntry<AccountType, Money?>> get data =>
+      throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;

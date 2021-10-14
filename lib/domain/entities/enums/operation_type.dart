@@ -1,3 +1,0 @@
-enum OperationType {
-  initialInput,
-}

@@ -2,11 +2,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/domain/repositories/accounts_repository.dart';
 import 'package:iif/domain/repositories/operations_repository.dart';
-import 'package:iif/domain/use_cases/save_account.dart';
+import 'package:iif/domain/use_cases/save_account_use_case.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'save_account_test.mocks.dart';
+import 'save_account_use_case_test.mocks.dart';
 
 @GenerateMocks([AccountsRepository, OperationsRepository])
 void main() {
@@ -15,8 +15,8 @@ void main() {
   late OperationsRepository mockOperationsRepository;
   late Account account;
   late List<Account> listAccounts;
-  late List<Operation> listOperations;
-  final money = Money(100);
+  late List<LogicOperation> listOperations;
+  final money = Money(coins: 100);
 
   setUp(() {
     mockAccountsRepository = MockAccountsRepository();
@@ -26,18 +26,19 @@ void main() {
       accountsRepository: mockAccountsRepository,
       operationsRepository: mockOperationsRepository,
     );
-    account = Account(name: "Test", type: AccountType.money, currency: Currency.debugDefault);
+    account = Account(id: 13, name: "Test", type: AccountType.money, currency: Currency.debugDefault);
     listAccounts = [];
     listOperations = [];
 
     when(mockAccountsRepository.getAccountsOfType(AccountType.money)).thenReturn(listAccounts);
     when(mockAccountsRepository.saveAccount(account)).thenAnswer((realInvocation) {
       listAccounts.add(account);
+      return account;
     });
 
     when(mockOperationsRepository.getOperations(account)).thenAnswer((_) async => listOperations);
     when(mockOperationsRepository.addOperationInitialInput(account, money)).thenAnswer((_) {
-      listOperations.add(Operation(OperationType.initialInput));
+      listOperations.add(LogicOperation.initialInput(account, money));
     });
   });
 
@@ -51,6 +52,6 @@ void main() {
     expect((await mockOperationsRepository.getOperations(account)), isEmpty);
     saveAccountUseCase.execute(account, money);
     expect((await mockOperationsRepository.getOperations(account)).length == 1, true);
-    expect((await mockOperationsRepository.getOperations(account)).first.type, OperationType.initialInput);
+    expect((await mockOperationsRepository.getOperations(account)).first.type, LogicOperationType.initialInput);
   });
 }

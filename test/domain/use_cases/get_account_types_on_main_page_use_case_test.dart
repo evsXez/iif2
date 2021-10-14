@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:iif/domain/include.dart';
-import 'package:iif/domain/use_cases/get_account_types_on_main_page.dart';
+import 'package:iif/domain/use_cases/get_account_types_on_main_page_use_case.dart';
 
 void main() {
   late GetAccountTypesOnMainPageUseCase useCase;

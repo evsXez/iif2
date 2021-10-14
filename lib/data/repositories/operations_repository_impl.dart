@@ -1,20 +1,43 @@
+import 'package:iif/data/include.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/domain/repositories/operations_repository.dart';
 
 class OperationsRepositoryImpl extends OperationsRepository {
+  final DataSource _dataSource;
+
+  OperationsRepositoryImpl(this._dataSource);
+
   @override
   Future<Money> calculateBalance(Account account) async {
-    return Money(100 + account.name.length);
+    int coinsResult = 0;
+    _dataSource.getOperations().forEach((logic) {
+      for (var atomic in logic.atomics) {
+        if (atomic.account.id == account.id) {
+          switch (atomic.type) {
+            case AtomicOperationType.initialInput:
+              coinsResult = atomic.money.coins;
+              break;
+            case AtomicOperationType.income:
+              coinsResult += atomic.money.coins;
+              break;
+            case AtomicOperationType.expense:
+              coinsResult -= atomic.money.coins;
+              break;
+          }
+        }
+      }
+    });
+
+    return Money(coins: coinsResult);
   }
 
   @override
   void addOperationInitialInput(Account account, Money money) {
-    //TODO
+    throw UnimplementedError();
   }
 
   @override
-  Future<List<Operation>> getOperations(Account account) {
-    // TODO: implement getOperations
+  Future<List<LogicOperation>> getOperations(Account account) {
     throw UnimplementedError();
   }
 }

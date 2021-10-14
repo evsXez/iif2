@@ -3,11 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/domain/repositories/accounts_repository.dart';
 import 'package:iif/domain/repositories/operations_repository.dart';
-import 'package:iif/domain/use_cases/get_accounts_balance.dart';
+import 'package:iif/domain/use_cases/get_accounts_balance_use_case.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'get_accounts_balance_test.mocks.dart';
+import 'get_accounts_balance_use_case_test.mocks.dart';
 
 @GenerateMocks([AccountsRepository, OperationsRepository])
 void main() {
@@ -16,11 +16,11 @@ void main() {
   late OperationsRepository mockOperationsRepository;
   const AccountType accountType = AccountType.money;
 
-  final account1 = Account(currency: Currency.debugDefault, name: "name1", type: accountType);
-  final account2 = Account(currency: Currency.debugDefault, name: "name2", type: accountType);
+  final account1 = Account(id: 11, currency: Currency.debugDefault, name: "name1", type: accountType);
+  final account2 = Account(id: 12, currency: Currency.debugDefault, name: "name2", type: accountType);
 
-  const money1 = Money(100);
-  const money2 = Money(200);
+  const money1 = Money(coins: 100);
+  const money2 = Money(coins: 200);
 
   setUp(() {
     mockAccountsRepository = MockAccountsRepository();

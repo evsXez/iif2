@@ -11,8 +11,8 @@ class SaveAccountUseCase {
     required this.operationsRepository,
   });
 
-  void execute(Account account, Money money) {
-    accountsRepository.saveAccount(account);
+  void execute(Account accountTemplate, Money money) {
+    final account = accountsRepository.saveAccount(accountTemplate);
     operationsRepository.addOperationInitialInput(account, money);
   }
 }

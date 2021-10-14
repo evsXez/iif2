@@ -34,12 +34,11 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
     required String name,
     required Money money,
   }) async {
-    final account = Account(
-      currency: Currency.debugDefault,
+    final accountTemplate = Account.template(
       name: name,
       type: type,
     );
-    saveAccountUseCase.of(_context).execute(account, money);
+    saveAccountUseCase.of(_context).execute(accountTemplate, money);
     _updateData();
   }
 
