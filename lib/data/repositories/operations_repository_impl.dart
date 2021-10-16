@@ -33,11 +33,14 @@ class OperationsRepositoryImpl extends OperationsRepository {
 
   @override
   void addOperationInitialInput(Account account, Money money) {
-    throw UnimplementedError();
+    _dataSource.addOperation(LogicOperation.initialInput(account, money));
   }
 
   @override
-  Future<List<LogicOperation>> getOperations(Account account) {
-    throw UnimplementedError();
+  Future<List<LogicOperation>> getOperations(Account account) async {
+    return _dataSource
+        .getOperations()
+        .where((it) => it.atomics.any((atomic) => atomic.account.id == account.id))
+        .toList();
   }
 }

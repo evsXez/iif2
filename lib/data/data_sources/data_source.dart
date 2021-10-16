@@ -7,5 +7,6 @@ abstract class DataSource {
   List<AccountModel> getAcounts();
 
   //operations
+  void addOperation(LogicOperation operation);
   List<LogicOperationModel> getOperations();
 }

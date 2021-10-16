@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/data/repositories/accounts_repository_impl.dart';
 import 'package:iif/data/repositories/operations_repository_impl.dart';
+import 'package:iif/presentation/blocs/accounts_bloc/accounts_bloc.dart';
 import 'package:iif/presentation/blocs/accounts_panel_bloc/accounts_panel_bloc.dart';
 import 'package:iif/presentation/include.dart';
 import 'package:iif/presentation/pages/main/widgets/button_add_account.dart';
@@ -36,6 +37,7 @@ class AccountPanelBody extends StatelessWidget {
       create: (_) => AccountsPanelBloc(
         context,
         type: type,
+        accountsBloc: BlocProvider.of<AccountsBloc>(context),
       ),
       child: BlocBuilder<AccountsPanelBloc, AccountsPanelState>(
         builder: (context, state) => state.map(

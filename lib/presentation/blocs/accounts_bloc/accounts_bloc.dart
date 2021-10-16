@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:iif/domain/include.dart';
+import 'package:iif/misc/di/providers.dart';
+import 'package:iif/presentation/include.dart';
 
 part 'accounts_state.dart';
 part 'accounts_bloc.freezed.dart';
@@ -8,15 +10,12 @@ part 'accounts_bloc.freezed.dart';
 class AccountsBloc extends Cubit<AccountsState> {
   int? _expandedIndex;
   List<MapEntry<AccountType, Money?>> _data = [];
+  final BuildContext _context;
 
-  AccountsBloc() : super(const _Loaded(null, [])) {
-    _data = GetAccountTypesOnMainPageUseCase().execute().map((it) => MapEntry(it, null)).toList();
-    emit(_Loaded(null, _data));
-
-    // repository.getMoneyForAccountTypes().then((data) {
-    //   _data = data;
-    //   _emitData();
-    // });
+  AccountsBloc(this._context) : super(const _Loaded(null, [])) {
+    _data = getAccountTypesOnMainPageUseCase.of(_context).execute().map((it) => MapEntry(it, null)).toList();
+    emit(_Loaded(_expandedIndex, _data));
+    updateData();
   }
 
   void setExpanded(int index) {
@@ -28,11 +27,8 @@ class AccountsBloc extends Cubit<AccountsState> {
     emit(_Loaded(_expandedIndex, _data));
   }
 
-  void _emitData() {
-    // if (_data == null) {
-    //   emit(_LoadInProgress(_expandedIndex));
-    // } else {
-    //   emit(_LoadSuccess(_data!, _expandedIndex));
-    // }
+  void updateData() async {
+    _data = await getAllMoneyForAccountTypesUseCase.of(_context).execute();
+    emit(_Loaded(_expandedIndex, _data));
   }
 }

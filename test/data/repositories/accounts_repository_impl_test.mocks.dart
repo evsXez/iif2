@@ -33,6 +33,10 @@ class MockDataSource extends _i1.Mock implements _i3.DataSource {
       (super.noSuchMethod(Invocation.method(#getAcounts, []),
           returnValue: <_i3.AccountModel>[]) as List<_i3.AccountModel>);
   @override
+  void addOperation(_i2.LogicOperation? operation) =>
+      super.noSuchMethod(Invocation.method(#addOperation, [operation]),
+          returnValueForMissingStub: null);
+  @override
   List<_i3.LogicOperationModel> getOperations() =>
       (super.noSuchMethod(Invocation.method(#getOperations, []),
               returnValue: <_i3.LogicOperationModel>[])

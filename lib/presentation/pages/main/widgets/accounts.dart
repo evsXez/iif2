@@ -7,22 +7,17 @@ import 'package:iif/presentation/pages/main/widgets/account_panel_body.dart';
 import 'package:iif/presentation/pages/main/widgets/account_panel_header.dart';
 
 class Accounts extends StatelessWidget {
-  Accounts({Key? key}) : super(key: key);
-
   // final List<StreamController> streamCloseLocationInputs = List.generate(5, (idx) => StreamController.broadcast());
-
-  final bloc = AccountsBloc();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(left: 8, right: 8, bottom: 16),
       child: BlocBuilder<AccountsBloc, AccountsState>(
-        bloc: bloc,
         builder: (context, state) => ExpansionPanelList(
           elevation: 1,
           expandedHeaderPadding: EdgeInsets.zero,
-          expansionCallback: (index, isExpanded) => _expand(index),
+          expansionCallback: (index, isExpanded) => _expand(context, index),
           children: List.generate(
             state.data.length,
             (index) {
@@ -34,7 +29,7 @@ class Accounts extends StatelessWidget {
                 headerBuilder: (context, isExpanded) => AccountPanelHeader(
                   label: type.name(context),
                   money: money,
-                  onPressed: () => _expand(index),
+                  onPressed: () => _expand(context, index),
                 ),
                 body: AccountPanelBody(type: type),
                 // body: LocationsListOfType(type),
@@ -46,7 +41,7 @@ class Accounts extends StatelessWidget {
     );
   }
 
-  void _expand(int index) {
-    bloc.setExpanded(index);
+  void _expand(BuildContext context, int index) {
+    BlocProvider.of<AccountsBloc>(context).setExpanded(index);
   }
 }

@@ -21,7 +21,7 @@ void main() {
     type: AccountType.creditCards,
     currency: const Currency(code: "RUB", symbol: "₽"),
   );
-  final LogicOperationModel logicOperationModel = LogicOperationModel(
+  final LogicOperationModel logicOperationModel1 = LogicOperationModel(
     id: 112,
     type: LogicOperationType.initialInput,
     created: DateTime.fromMillisecondsSinceEpoch(1634239069458),
@@ -35,14 +35,37 @@ void main() {
       ),
     ],
   );
+  final LogicOperationModel logicOperationModel2 = LogicOperationModel(
+    id: 15,
+    type: LogicOperationType.expense,
+    created: DateTime.fromMillisecondsSinceEpoch(1634239069459),
+    comment: "food",
+    atomicsModel: [
+      AtomicOperationModel(
+        id: 16,
+        moneyModel: MoneyModel(coins: 10),
+        type: AtomicOperationType.expense,
+        accountModel: accountModel,
+      ),
+    ],
+  );
   final String accountModelJson = json.encode(accountModel.toJson());
   final List<AccountModel> accountsPersisted = [accountModel];
-  final List<LogicOperationModel> operationsPersisted = [logicOperationModel];
-  late SharedPreferences prefs;
+  final List<LogicOperationModel> operationsPersisted = [logicOperationModel1];
+  late MockSharedPreferences prefs;
+  final logicOperationModel2Json = json.encode(logicOperationModel2.toJson());
+  int nextGeneratedId = 0;
 
   setUp(() async {
     prefs = MockSharedPreferences();
     dataSource = DataSourceImpl(prefs);
+
+    nextGeneratedId = 15;
+    when(prefs.getInt(Keys.nextId.toString())).thenAnswer((_) => nextGeneratedId);
+    when(prefs.setInt(Keys.nextId.toString(), any)).thenAnswer((_) async {
+      nextGeneratedId = nextGeneratedId + 1;
+      return true;
+    });
   });
 
   test('previously added accounts persisted', () {
@@ -52,15 +75,9 @@ void main() {
 
   test('after adding account we can get it', () {
     final List<String> stringList = [];
-    int nextGeneratedId = 15;
     when(prefs.getStringList(Keys.accounts.toString())).thenReturn(stringList);
     when(prefs.setStringList(Keys.accounts.toString(), [accountModelJson])).thenAnswer((_) async {
       stringList.add(accountModelJson);
-      return true;
-    });
-    when(prefs.getInt(Keys.nextId.toString())).thenReturn(nextGeneratedId);
-    when(prefs.setInt(Keys.nextId.toString(), nextGeneratedId + 1)).thenAnswer((_) async {
-      nextGeneratedId = nextGeneratedId + 1;
       return true;
     });
 
@@ -72,5 +89,17 @@ void main() {
   test('previously added operations persisted', () {
     when(prefs.getStringList(Keys.operations.toString())).thenReturn(persistedOperationsFixture);
     expect(dataSource.getOperations(), operationsPersisted);
+  });
+
+  test('adding new operation', () {
+    List<String> stringList = [];
+    when(prefs.getStringList(Keys.operations.toString())).thenReturn(stringList);
+    when(prefs.setStringList(Keys.operations.toString(), [logicOperationModel2Json])).thenAnswer((invocation) async {
+      stringList = invocation.positionalArguments[1];
+      return true;
+    });
+    expect(dataSource.getOperations().length, 0);
+    dataSource.addOperation(logicOperationModel2);
+    expect(dataSource.getOperations().length, 1);
   });
 }

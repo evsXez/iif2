@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/misc/di/providers.dart';
+import 'package:iif/presentation/blocs/accounts_bloc/accounts_bloc.dart';
 import 'package:iif/presentation/include.dart';
 
 part 'accounts_panel_state.dart';
@@ -11,11 +12,13 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
   final AccountType type;
 
   final BuildContext _context;
+  final AccountsBloc accountsBloc;
   List<AccountBalance> _data = [];
 
   AccountsPanelBloc(
     this._context, {
     required this.type,
+    required this.accountsBloc,
   }) : super(const _LoadInProgress()) {
     _updateData();
   }
@@ -40,6 +43,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
     );
     saveAccountUseCase.of(_context).execute(accountTemplate, money);
     _updateData();
+    accountsBloc.updateData();
   }
 
   void addAccountClicked() {

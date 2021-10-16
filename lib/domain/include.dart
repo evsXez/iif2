@@ -14,3 +14,4 @@ export 'package:iif/domain/entities/enums/atomic_operation_type.dart';
 //use cases
 export 'package:iif/domain/use_cases/get_account_types_on_main_page_use_case.dart';
 export 'package:iif/domain/use_cases/save_account_use_case.dart';
+export 'package:iif/domain/use_cases/get_accounts_balance_use_case.dart';

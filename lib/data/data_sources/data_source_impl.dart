@@ -53,4 +53,33 @@ class DataSourceImpl extends DataSource {
     _prefs.setInt(Keys.nextId.toString(), id + 1);
     return id;
   }
+
+  @override
+  void addOperation(LogicOperation operation) {
+    final operationModel = LogicOperationModel(
+      id: _generateNextId(),
+      type: operation.type,
+      created: operation.created,
+      comment: operation.comment,
+      atomicsModel: operation.atomics
+          .map(
+            (atomic) => AtomicOperationModel(
+              id: _generateNextId(),
+              moneyModel: MoneyModel(coins: atomic.money.coins),
+              type: atomic.type,
+              accountModel: AccountModel(
+                id: atomic.account.id,
+                name: atomic.account.name,
+                type: atomic.account.type,
+                currency: atomic.account.currency,
+              ),
+            ),
+          )
+          .toList(),
+    );
+
+    final List<String> list = _prefs.getStringList(Keys.operations.toString()) ?? [];
+    list.add(json.encode(operationModel.toJson()));
+    _prefs.setStringList(Keys.operations.toString(), list);
+  }
 }

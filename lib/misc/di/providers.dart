@@ -4,6 +4,7 @@ import 'package:iif/data/repositories/accounts_repository_impl.dart';
 import 'package:iif/data/repositories/operations_repository_impl.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/domain/use_cases/get_accounts_balance_use_case.dart';
+import 'package:iif/domain/use_cases/get_all_money_for_account_types_use_case.dart';
 import 'package:iif/main.dart';
 import 'package:iif/presentation/include.dart';
 
@@ -23,6 +24,10 @@ final saveAccountUseCase = Provider((ref) => SaveAccountUseCase(
 final getAccountsBalanceUseCase = Provider((ref) => GetAccountsBalanceUseCase(
       accountsRepository: ref.read(_accountsRepository),
       operationsRepository: ref.read(_operationsRepository),
+    ));
+final getAllMoneyForAccountTypesUseCase = Provider((ref) => GetAllMoneyForAccountTypesUseCase(
+      ref.read(getAccountsBalanceUseCase),
+      ref.read(getAccountTypesOnMainPageUseCase),
     ));
 
 //extension for more readability
