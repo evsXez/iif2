@@ -82,4 +82,20 @@ class DataSourceImpl extends DataSource {
     list.add(json.encode(operationModel.toJson()));
     _prefs.setStringList(Keys.operations.toString(), list);
   }
+
+  @override
+  void updateAcount(Account account) {
+    final List<String>? list = _prefs.getStringList(Keys.accounts.toString());
+    final List<String> result = [];
+    list?.forEach((encoded) {
+      final decoded = AccountModel.fromJson(json.decode(encoded));
+      if (decoded.id == account.id) {
+        result.add(json.encode(AccountModel.fromAccount(account).toJson()));
+      } else {
+        result.add(encoded);
+      }
+    });
+
+    _prefs.setStringList(Keys.accounts.toString(), result);
+  }
 }

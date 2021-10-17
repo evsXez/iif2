@@ -40,4 +40,12 @@ class AccountModel extends Account with EquatableMixin {
 
   @override
   List<Object?> get props => [id, name, type, currency];
+
+  factory AccountModel.fromAccount(Account ref) => AccountModel(
+        id: ref.id,
+        name: ref.name,
+        type: ref.type,
+        currency: ref.currency,
+        isArchived: ref.isArchived,
+      );
 }

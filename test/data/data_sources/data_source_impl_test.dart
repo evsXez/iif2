@@ -9,13 +9,14 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../account_model_fixtures.dart';
 import 'data_source_impl_test.mocks.dart';
 import 'fixtures.dart';
 
 @GenerateMocks([SharedPreferences])
 void main() {
   late DataSource dataSource;
-  final AccountModel accountModel = AccountModel(
+  final AccountModel accountModelFixed = AccountModel(
     id: 15,
     name: "Account Name",
     type: AccountType.creditCards,
@@ -31,7 +32,7 @@ void main() {
         id: 113,
         moneyModel: MoneyModel(coins: 1002),
         type: AtomicOperationType.initialInput,
-        accountModel: accountModel,
+        accountModel: accountModelFixed,
       ),
     ],
   );
@@ -45,12 +46,12 @@ void main() {
         id: 16,
         moneyModel: MoneyModel(coins: 10),
         type: AtomicOperationType.expense,
-        accountModel: accountModel,
+        accountModel: accountModelFixed,
       ),
     ],
   );
-  final String accountModelJson = json.encode(accountModel.toJson());
-  final List<AccountModel> accountsPersisted = [accountModel];
+  final String accountModelJson = json.encode(accountModelFixed.toJson());
+  final List<AccountModel> accountsPersisted = [accountModelFixed];
   final List<LogicOperationModel> operationsPersisted = [logicOperationModel1];
   late MockSharedPreferences prefs;
   final logicOperationModel2Json = json.encode(logicOperationModel2.toJson());
@@ -81,9 +82,9 @@ void main() {
       return true;
     });
 
-    expect(dataSource.getAcounts().contains(accountModel), isFalse);
-    dataSource.addAcount(accountModel);
-    expect(dataSource.getAcounts().contains(accountModel), isTrue);
+    expect(dataSource.getAcounts().contains(accountModelFixed), isFalse);
+    dataSource.addAcount(accountModelFixed);
+    expect(dataSource.getAcounts().contains(accountModelFixed), isTrue);
   });
 
   test('previously added operations persisted', () {
@@ -101,5 +102,29 @@ void main() {
     expect(dataSource.getOperations().length, 0);
     dataSource.addOperation(logicOperationModel2);
     expect(dataSource.getOperations().length, 1);
+  });
+
+  test('after editing account we can get updated version', () {
+    const type = AccountType.money;
+    final accountModelOriginal = accountModel(1, type, name: "original", isArchived: false);
+    final accountModelUpdated = accountModel(1, type, name: "updated", isArchived: true);
+
+    List<String> stringList = [json.encode(accountModelOriginal.toJson())];
+    when(prefs.getStringList(Keys.accounts.toString())).thenAnswer((_) => stringList);
+    when(prefs.setStringList(Keys.accounts.toString(), any)).thenAnswer((realInvocation) async {
+      final List<String> list = realInvocation.positionalArguments[1];
+      stringList = list;
+      return true;
+    });
+
+    final before = dataSource.getAcounts();
+    expect(before.length, 1);
+    expect(before.first, accountModelOriginal);
+
+    dataSource.updateAcount(accountModelUpdated);
+
+    final after = dataSource.getAcounts();
+    expect(after.length, 1);
+    expect(after.first, accountModelUpdated);
   });
 }

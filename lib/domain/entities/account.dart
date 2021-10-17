@@ -28,5 +28,5 @@ class Account with EquatableMixin {
       );
 
   @override
-  List<Object?> get props => [id, name, type, currency];
+  List<Object?> get props => [id, name, type, currency, isArchived];
 }

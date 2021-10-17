@@ -15,6 +15,14 @@ class AccountsRepositoryImpl extends AccountsRepository {
 
   @override
   Account saveAccount(Account accountTemplate) {
+    if (accountTemplate.id >= 0) {
+      final accounts = _dataSource.getAcounts();
+      if (accounts.any((it) => it.id == accountTemplate.id)) {
+        _dataSource.updateAcount(accountTemplate);
+        return accountTemplate;
+      }
+    }
+
     return _dataSource.addAcount(accountTemplate);
   }
 

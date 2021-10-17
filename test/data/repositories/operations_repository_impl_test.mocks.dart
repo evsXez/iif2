@@ -29,6 +29,10 @@ class MockDataSource extends _i1.Mock implements _i3.DataSource {
       (super.noSuchMethod(Invocation.method(#addAcount, [accountTemplate]),
           returnValue: _FakeAccount_0()) as _i2.Account);
   @override
+  void updateAcount(_i2.Account? account) =>
+      super.noSuchMethod(Invocation.method(#updateAcount, [account]),
+          returnValueForMissingStub: null);
+  @override
   List<_i3.AccountModel> getAcounts() =>
       (super.noSuchMethod(Invocation.method(#getAcounts, []),
           returnValue: <_i3.AccountModel>[]) as List<_i3.AccountModel>);

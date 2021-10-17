@@ -68,7 +68,9 @@ class _AccountItemState extends State<AccountItem> {
         Dialogs(context).showArchiveLocationDialog(
           accountName: widget.accountBalance.account.name,
           isArchiveAvailable: options.isArchiveAvailable,
-          onArchivePressed: () {},
+          onArchivePressed: () {
+            BlocProvider.of<AccountOptionsBloc>(context).archive(widget.accountBalance.account);
+          },
         );
       }, color: _colorOption(options.isArchiveAvailable)),
       MenuItem(Strings.option_delete, () {

@@ -14,4 +14,8 @@ class AccountOptionsBloc extends Cubit<AccountOptionsState> {
     final options = await getAccountOptionsUseCase.of(_context).execute(accountBalance);
     emit(Options(options));
   }
+
+  void archive(Account account) {
+    archiveAccountUseCase.of(_context).execute(account);
+  }
 }

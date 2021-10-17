@@ -112,7 +112,10 @@ class _ButtonsOkCancel extends StatelessWidget {
       buttons.add(
         _Button(
           label: buttonOkText,
-          onPressed: buttonOkOnPressed,
+          onPressed: () {
+            Navigation.pop();
+            buttonOkOnPressed();
+          },
         ),
       );
     }

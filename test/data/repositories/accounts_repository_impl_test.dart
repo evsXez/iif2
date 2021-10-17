@@ -7,12 +7,13 @@ import 'package:iif/domain/repositories/accounts_repository.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../account_model_fixtures.dart';
 import 'accounts_repository_impl_test.mocks.dart';
 
 @GenerateMocks([DataSource])
 void main() {
   late AccountsRepository repository;
-  late DataSource dataSource;
+  late MockDataSource mockDataSource;
   const AccountType type1 = AccountType.money;
   const AccountType type2 = AccountType.creditCards;
   final AccountModel account1Type1 =
@@ -42,26 +43,55 @@ void main() {
   final account =
       AccountModel(id: 101, currency: Currency.debugDefault, name: 'account to save', type: AccountType.debtsToMe);
 
+  final type = AccountType.investments;
+
   setUp(() {
-    dataSource = MockDataSource();
-    repository = AccountsRepositoryImpl(dataSource);
+    mockDataSource = MockDataSource();
+    repository = AccountsRepositoryImpl(mockDataSource);
     initiallyEmptyAccounts.clear();
   });
 
   test('data source has data and repository fetches it by type', () async {
-    when(dataSource.getAcounts()).thenReturn(allAccounts);
+    when(mockDataSource.getAcounts()).thenReturn(allAccounts);
     expect(repository.getAccountsOfType(type1), accountsType1);
     expect(repository.getAccountsOfType(type2), accountsType2);
   });
 
   test('data source has no data, then save, then it has data', () async {
-    when(dataSource.getAcounts()).thenReturn(initiallyEmptyAccounts);
-    when(dataSource.addAcount(account)).thenAnswer((_) {
+    when(mockDataSource.getAcounts()).thenReturn(initiallyEmptyAccounts);
+    when(mockDataSource.addAcount(account)).thenAnswer((_) {
       initiallyEmptyAccounts.add(account);
       return account;
     });
     expect(repository.getAccountsOfType(account.type), []);
     repository.saveAccount(account);
     expect(repository.getAccountsOfType(account.type), [account]);
+  });
+  test('data modification', () {
+    const id = 1;
+    const modifiedName = "modified";
+    final account = accountModel(id, type);
+
+    List<AccountModel> accountModels = [account];
+    when(mockDataSource.getAcounts()).thenReturn(accountModels);
+    when(mockDataSource.updateAcount(any)).thenAnswer((realInvocation) {
+      final account = realInvocation.positionalArguments.first;
+      accountModels.clear();
+      accountModels.add(account);
+    });
+
+    final dataBefore = repository.getAccountsOfType(type);
+    expect(dataBefore.length, 1);
+    expect(dataBefore.first.id, id);
+
+    final modifiedAccount = accountModel(id, type, name: modifiedName);
+    repository.saveAccount(modifiedAccount);
+    verify(mockDataSource.updateAcount(modifiedAccount));
+    verifyNever(mockDataSource.addAcount(any));
+
+    final dataAfter = repository.getAccountsOfType(type);
+    expect(dataAfter.length, 1);
+    expect(dataAfter.first.id, id);
+    expect(dataAfter.first.name, modifiedName);
   });
 }
