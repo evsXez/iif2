@@ -29,6 +29,9 @@ final getAllMoneyForAccountTypesUseCase = Provider((ref) => GetAllMoneyForAccoun
       ref.read(getAccountsBalanceUseCase),
       ref.read(getAccountTypesOnMainPageUseCase),
     ));
+final getAccountOptionsUseCase = Provider((ref) => GetAccountOptionsUseCase(
+      operationsRepository: ref.read(_operationsRepository),
+    ));
 
 //extension for more readability
 extension ProviderX<T> on Provider<T> {

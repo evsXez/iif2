@@ -1,14 +1,18 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iif/domain/include.dart';
+import 'package:iif/presentation/blocs/account_options_bloc/account_options_bloc.dart';
+import 'package:iif/presentation/blocs/account_options_bloc/account_options_state.dart';
 import 'package:iif/presentation/include.dart';
 import 'package:iif/presentation/pages/main/widgets/account_edit_item.dart';
 import 'package:iif/presentation/pages/main/widgets/account_plain_item.dart';
+import 'package:iif/presentation/widgets/dialogs.dart';
 
 class AccountItem extends StatefulWidget {
-  final AccountBalance balance;
+  final AccountBalance accountBalance;
   final bool isEditing;
 
   const AccountItem({
-    required this.balance,
+    required this.accountBalance,
     required this.isEditing,
     Key? key,
   }) : super(key: key);
@@ -18,40 +22,58 @@ class AccountItem extends StatefulWidget {
 }
 
 class _AccountItemState extends State<AccountItem> {
-  final bool isArchiveAvailable = true;
-  final bool isDeleteAvailable = true;
   bool isHighlighted = false;
+  LongPressStartDetails? details;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onLongPressStart: (details) {
-        _showContextMenu(context, details.globalPosition.dx, details.globalPosition.dy);
-      },
-      child: widget.isEditing
-          ? AccountEditItem(
-              // accountBalanceToEdit: widget.accountBalance,
-              key: ObjectKey(widget.balance.account),
-            )
-          : AccountPlainItem(
-              account: widget.balance.account,
-              money: widget.balance.money,
-              isHighlighed: isHighlighted,
-            ),
+    return BlocProvider(
+      create: (context) => AccountOptionsBloc(context),
+      child: BlocConsumer<AccountOptionsBloc, AccountOptionsState>(
+        listener: (context, state) {
+          state.maybeMap(
+            options: (state) {
+              _showContextMenu(
+                  context, state.options, details?.globalPosition.dx ?? 0, details?.globalPosition.dy ?? 0);
+            },
+            orElse: () {},
+          );
+        },
+        builder: (context, state) => GestureDetector(
+          onLongPressStart: (details) {
+            this.details = details;
+            BlocProvider.of<AccountOptionsBloc>(context).showMenu(widget.accountBalance);
+          },
+          child: widget.isEditing
+              ? AccountEditItem(
+                  // accountBalanceToEdit: widget.accountBalance,
+                  key: ObjectKey(widget.accountBalance.account),
+                )
+              : AccountPlainItem(
+                  account: widget.accountBalance.account,
+                  money: widget.accountBalance.money,
+                  isHighlighed: isHighlighted,
+                ),
+        ),
+      ),
     );
   }
 
-  void _showContextMenu(BuildContext context, double x, double y) async {
+  void _showContextMenu(BuildContext context, AccountOptions options, double x, double y) async {
     final List<PopupMenuEntry> items = [
       MenuItem(Strings.option_edit, () {
         _actionEdit();
       }),
       MenuItem(Strings.option_archive, () {
-        _actionArchive(isArchiveAvailable);
-      }, color: _colorOption(isArchiveAvailable)),
+        Dialogs(context).showArchiveLocationDialog(
+          accountName: widget.accountBalance.account.name,
+          isArchiveAvailable: options.isArchiveAvailable,
+          onArchivePressed: () {},
+        );
+      }, color: _colorOption(options.isArchiveAvailable)),
       MenuItem(Strings.option_delete, () {
-        _actionDelete(isDeleteAvailable);
-      }, color: _colorOption(isDeleteAvailable)),
+        _actionDelete(options.isDeleteAvailable);
+      }, color: _colorOption(options.isDeleteAvailable)),
     ];
     showMenu(context: context, position: RelativeRect.fromLTRB(x, y, x, y), items: items).then((value) {
       setState(() {
@@ -67,10 +89,6 @@ class _AccountItemState extends State<AccountItem> {
     // setState(() {
     //   editLocationId = location.id;
     // });
-  }
-
-  void _actionArchive(bool isArchiveAvailable) {
-    // Dialogs(context).showArchiveLocationDialog(location, isArchiveAvailable);
   }
 
   void _actionDelete(bool isDeleteAvailable) {

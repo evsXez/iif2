@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/data/repositories/accounts_repository_impl.dart';
 import 'package:iif/data/repositories/operations_repository_impl.dart';
+import 'package:iif/presentation/blocs/account_options_bloc/account_options_bloc.dart';
 import 'package:iif/presentation/blocs/accounts_bloc/accounts_bloc.dart';
 import 'package:iif/presentation/blocs/accounts_panel_bloc/accounts_panel_bloc.dart';
 import 'package:iif/presentation/include.dart';
@@ -33,12 +34,16 @@ class AccountPanelBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AccountsPanelBloc>(
-      create: (_) => AccountsPanelBloc(
-        context,
-        type: type,
-        accountsBloc: BlocProvider.of<AccountsBloc>(context),
-      ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AccountsPanelBloc>(
+          create: (_) => AccountsPanelBloc(
+            context,
+            type: type,
+            accountsBloc: BlocProvider.of<AccountsBloc>(context),
+          ),
+        ),
+      ],
       child: BlocBuilder<AccountsPanelBloc, AccountsPanelState>(
         builder: (context, state) => state.map(
           loadInProgress: (_) => const Center(
@@ -52,7 +57,7 @@ class AccountPanelBody extends StatelessWidget {
             items.addAll(state.data
                 .map(
                   (balance) => AccountItem(
-                    balance: balance,
+                    accountBalance: balance,
                     isEditing: balance.account == state.editing,
                   ),
                 )
