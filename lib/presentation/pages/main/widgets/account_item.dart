@@ -1,16 +1,13 @@
+export 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iif/domain/include.dart';
-import 'package:iif/presentation/blocs/account_options_bloc/account_options_bloc.dart';
-import 'package:iif/presentation/blocs/account_options_bloc/account_options_state.dart';
 import 'package:iif/presentation/include.dart';
 import 'package:iif/presentation/pages/main/widgets/account_edit_item.dart';
 import 'package:iif/presentation/pages/main/widgets/account_plain_item.dart';
-import 'package:iif/presentation/widgets/dialogs.dart';
 
 class AccountItem extends StatefulWidget {
   final AccountBalance accountBalance;
   final bool isEditing;
-
   const AccountItem({
     required this.accountBalance,
     required this.isEditing,
@@ -28,7 +25,7 @@ class _AccountItemState extends State<AccountItem> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AccountOptionsBloc(context),
+      create: (context) => AccountOptionsBloc(context, accountsPanelBloc: BlocProvider.of<AccountsPanelBloc>(context)),
       child: BlocConsumer<AccountOptionsBloc, AccountOptionsState>(
         listener: (context, state) {
           state.maybeMap(

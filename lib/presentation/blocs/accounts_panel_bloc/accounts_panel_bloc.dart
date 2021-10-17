@@ -20,7 +20,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
     required this.type,
     required this.accountsBloc,
   }) : super(const _LoadInProgress()) {
-    _updateData();
+    updateData();
   }
 
   void cancelEdit() {
@@ -42,7 +42,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
       type: type,
     );
     saveAccountUseCase.of(_context).execute(accountTemplate, money);
-    _updateData();
+    updateData();
     accountsBloc.updateData();
   }
 
@@ -56,7 +56,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
     );
   }
 
-  void _updateData() async {
+  void updateData() async {
     _data = await getAccountsBalanceUseCase.of(_context).execute(type);
     emit(
       _LoadSuccess(
