@@ -138,4 +138,9 @@ void main() {
     expect(operations.length, 1);
     expect(operations.first.type, LogicOperationType.initialInput);
   });
+
+  test('we can get all operations from data source', () async {
+    when(dataSource.getOperations()).thenReturn(allLogicOperations);
+    expect(await repository.getAllOperations(), allLogicOperations);
+  });
 }

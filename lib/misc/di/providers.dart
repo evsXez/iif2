@@ -36,6 +36,9 @@ final archiveAccountUseCase = Provider((ref) => ArchiveAccountUseCase(
 final deleteAccountUseCase = Provider((ref) => DeleteAccountUseCase(
       accountsRepository: ref.read(_accountsRepository),
     ));
+final getAllOperationsUseCase = Provider((ref) => GetAllOperationsUseCase(
+      operationsRepository: ref.read(_operationsRepository),
+    ));
 
 //extension for more readability
 extension ProviderX<T> on Provider<T> {

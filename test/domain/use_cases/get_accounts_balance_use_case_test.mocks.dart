@@ -67,5 +67,10 @@ class MockOperationsRepository extends _i1.Mock
           returnValue: Future<List<_i2.LogicOperation>>.value(
               <_i2.LogicOperation>[])) as _i5.Future<List<_i2.LogicOperation>>);
   @override
+  _i5.Future<List<_i2.LogicOperation>> getAllOperations() =>
+      (super.noSuchMethod(Invocation.method(#getAllOperations, []),
+          returnValue: Future<List<_i2.LogicOperation>>.value(
+              <_i2.LogicOperation>[])) as _i5.Future<List<_i2.LogicOperation>>);
+  @override
   String toString() => super.toString();
 }

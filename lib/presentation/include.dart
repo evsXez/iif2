@@ -18,6 +18,7 @@ export 'package:iif/presentation/widgets/menu_item.dart';
 export 'package:iif/presentation/widgets/string_field.dart';
 export 'package:iif/presentation/widgets/money_field.dart';
 export 'package:iif/presentation/widgets/dialogs.dart';
+export 'package:iif/presentation/widgets/transfer_arrow.dart';
 
 //blocs
 export 'package:iif/presentation/blocs/account_options_bloc/account_options_bloc.dart';

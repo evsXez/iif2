@@ -43,4 +43,9 @@ class OperationsRepositoryImpl extends OperationsRepository {
         .where((it) => it.atomics.any((atomic) => atomic.account.id == account.id))
         .toList();
   }
+
+  @override
+  Future<List<LogicOperation>> getAllOperations() async {
+    return _dataSource.getOperations();
+  }
 }
