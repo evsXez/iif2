@@ -46,7 +46,6 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
     );
     saveAccountUseCase.of(_context).execute(accountTemplate, money);
     updateData();
-    accountsBloc.updateData();
   }
 
   void addAccountClicked() {
@@ -68,6 +67,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
         isAddingNew: false,
       ),
     );
+    accountsBloc.updateData();
   }
 
   void editAccount(Account account) {

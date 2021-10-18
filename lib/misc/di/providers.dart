@@ -3,9 +3,6 @@ import 'package:iif/data/data_sources/data_source_impl.dart';
 import 'package:iif/data/repositories/accounts_repository_impl.dart';
 import 'package:iif/data/repositories/operations_repository_impl.dart';
 import 'package:iif/domain/include.dart';
-import 'package:iif/domain/use_cases/archive_account_use_case.dart';
-import 'package:iif/domain/use_cases/get_accounts_balance_use_case.dart';
-import 'package:iif/domain/use_cases/get_all_money_for_account_types_use_case.dart';
 import 'package:iif/main.dart';
 import 'package:iif/presentation/include.dart';
 
@@ -34,6 +31,9 @@ final getAccountOptionsUseCase = Provider((ref) => GetAccountOptionsUseCase(
       operationsRepository: ref.read(_operationsRepository),
     ));
 final archiveAccountUseCase = Provider((ref) => ArchiveAccountUseCase(
+      accountsRepository: ref.read(_accountsRepository),
+    ));
+final deleteAccountUseCase = Provider((ref) => DeleteAccountUseCase(
       accountsRepository: ref.read(_accountsRepository),
     ));
 

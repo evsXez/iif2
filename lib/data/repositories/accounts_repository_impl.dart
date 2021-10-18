@@ -10,7 +10,7 @@ class AccountsRepositoryImpl extends AccountsRepository {
   @override
   List<Account> getAccountsOfType(AccountType type) {
     final data = _dataSource.getAcounts();
-    return data.where((it) => it.type == type).toList();
+    return data.where((it) => it.type == type && !it.isDeleted).toList();
   }
 
   @override

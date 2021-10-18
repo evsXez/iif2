@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iif/domain/include.dart';
 import 'package:iif/presentation/include.dart';
 
 class Dialogs {
@@ -42,32 +43,45 @@ class Dialogs {
     );
   }
 
-  // void showDeleteLocationDialog(Location location, bool isDeleteAvailable) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (context) => AlertDialog(
-  //       contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-  //       title: StyleText(Strings.title_dialog_delete_location.replaceAll("<name>", location.name), fontSize: 16, fontWeight: FontWeight.w500, maxLines: 2,),
-  //       content: Column(
-  //         mainAxisSize: MainAxisSize.min,
-  //         crossAxisAlignment: CrossAxisAlignment.center,
-  //         children: [
-  //           isDeleteAvailable ? SizedBox.shrink() : StyleText(Strings.message_dialog_delete_location_unavailable, fontWeight: FontWeight.w300, maxLines: 20,),
-  //           _buttonsForActionDeleteLocation(location, isDeleteAvailable),
-  //         ],
-  //       ),
-  //     )
-  //   );
-  // }
-
-  // Widget _buttonsForActionDeleteLocation(Location location, bool isDeleteAvailable) {
-  //   final buttons = [_buttonCancel];
-  //   if (isDeleteAvailable) buttons.add(_buttonDelete(location));
-  //   return Row(
-  //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //         children: buttons
-  //       );
-  // }
+  void showDeleteLocationDialog({
+    required Account account,
+    required bool isDeleteAvailable,
+    required VoidCallback onDeletePressed,
+  }) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              title: Text(
+                Strings.title_dialog_delete_location.replaceAll("<name>", account.name),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+                maxLines: 2,
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  isDeleteAvailable
+                      ? const SizedBox.shrink()
+                      : Text(
+                          Strings.message_dialog_delete_location_unavailable,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w300,
+                          ),
+                          maxLines: 20,
+                        ),
+                  _ButtonsOkCancel(
+                    buttonOkText: Strings.option_delete,
+                    isButtonOkVisible: isDeleteAvailable,
+                    buttonOkOnPressed: onDeletePressed,
+                  ),
+                ],
+              ),
+            ));
+  }
 
   // Widget get _buttonCancel => ;
   // Widget _buttonDelete(Location location) => FlatButton(

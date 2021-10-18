@@ -21,4 +21,9 @@ class AccountOptionsBloc extends Cubit<AccountOptionsState> {
     archiveAccountUseCase.of(_context).execute(account);
     accountsPanelBloc.updateData();
   }
+
+  void delete(Account account) {
+    deleteAccountUseCase.of(_context).execute(account);
+    accountsPanelBloc.updateData();
+  }
 }

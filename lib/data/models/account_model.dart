@@ -8,12 +8,14 @@ class AccountModel extends Account with EquatableMixin {
     required AccountType type,
     required Currency currency,
     bool isArchived = false,
+    bool isDeleted = false,
   }) : super(
           id: id,
           name: name,
           type: type,
           currency: currency,
           isArchived: isArchived,
+          isDeleted: isDeleted,
         );
 
   factory AccountModel.fromJson(Map<String, dynamic> json) => AccountModel(
@@ -25,6 +27,7 @@ class AccountModel extends Account with EquatableMixin {
           symbol: json['currency']['symbol'],
         ),
         isArchived: json['isArchived'],
+        isDeleted: json['isDeleted'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -36,6 +39,7 @@ class AccountModel extends Account with EquatableMixin {
           'symbol': currency.symbol,
         },
         'isArchived': isArchived,
+        'isDeleted': isDeleted,
       };
 
   @override
@@ -47,5 +51,6 @@ class AccountModel extends Account with EquatableMixin {
         type: ref.type,
         currency: ref.currency,
         isArchived: ref.isArchived,
+        isDeleted: ref.isDeleted,
       );
 }

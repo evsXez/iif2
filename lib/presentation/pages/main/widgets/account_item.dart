@@ -71,7 +71,13 @@ class _AccountItemState extends State<AccountItem> {
         );
       }, color: _colorOption(options.isArchiveAvailable)),
       MenuItem(Strings.option_delete, () {
-        _actionDelete(options.isDeleteAvailable);
+        Dialogs(context).showDeleteLocationDialog(
+          account: widget.accountBalance.account,
+          isDeleteAvailable: options.isDeleteAvailable,
+          onDeletePressed: () {
+            BlocProvider.of<AccountOptionsBloc>(context).delete(widget.accountBalance.account);
+          },
+        );
       }, color: _colorOption(options.isDeleteAvailable)),
     ];
     showMenu(context: context, position: RelativeRect.fromLTRB(x, y, x, y), items: items).then((value) {
@@ -82,22 +88,6 @@ class _AccountItemState extends State<AccountItem> {
     setState(() {
       isHighlighted = true;
     });
-  }
-
-  void _actionEdit() {
-    // setState(() {
-    //   editLocationId = location.id;
-    // });
-  }
-
-  void _actionDelete(bool isDeleteAvailable) {
-    // Dialogs(context).showDeleteLocationDialog(location, isDeleteAvailable);
-  }
-
-  void _onEditDone() {
-    // setState(() {
-    //   editLocationId = null;
-    // });
   }
 
   Color _colorOption(bool isAvailable) => isAvailable ? Style.blackColor : Style.lightGrayColor;

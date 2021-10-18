@@ -8,7 +8,8 @@ final List<String> persistedAccountsFixture = [
 		"code": "RUB",
 		"symbol": "₽"
 	},
-	"isArchived": false
+	"isArchived": false,
+	"isDeleted": false
 }
 """
 ];
@@ -35,7 +36,8 @@ final List<String> persistedOperationsFixture = [
 					"code": "RUB",
 					"symbol": "₽"
 				},
-				"isArchived": false
+				"isArchived": false,
+      	"isDeleted": false
 			}
 		}
 	]

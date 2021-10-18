@@ -26,6 +26,8 @@ void main() {
       AccountModel(id: 4, currency: Currency.debugDefault, name: 'account1', type: type2);
   final AccountModel account2Type2 =
       AccountModel(id: 5, currency: Currency.debugDefault, name: 'account2', type: type2);
+  final AccountModel accountDeletedType1 =
+      AccountModel(id: 6, currency: Currency.debugDefault, name: 'account2', type: type1, isDeleted: true);
   final List<AccountModel> accountsType1 = [
     account1Type1,
     account2Type1,
@@ -43,6 +45,13 @@ void main() {
   final account =
       AccountModel(id: 101, currency: Currency.debugDefault, name: 'account to save', type: AccountType.debtsToMe);
 
+  final List<AccountModel> accountsWithDeletedType1 = [
+    account1Type1,
+    account2Type1,
+    accountDeletedType1,
+    account3Type1,
+  ];
+
   final type = AccountType.investments;
 
   setUp(() {
@@ -55,6 +64,11 @@ void main() {
     when(mockDataSource.getAcounts()).thenReturn(allAccounts);
     expect(repository.getAccountsOfType(type1), accountsType1);
     expect(repository.getAccountsOfType(type2), accountsType2);
+  });
+
+  test('data source has deleted accounts and repository\'s "getAccounts" ignores them', () async {
+    when(mockDataSource.getAcounts()).thenReturn(accountsWithDeletedType1);
+    expect(repository.getAccountsOfType(type1), everyElement((Account it) => !it.isDeleted));
   });
 
   test('data source has no data, then save, then it has data', () async {

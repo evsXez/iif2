@@ -6,7 +6,9 @@ class Account with EquatableMixin {
   final String name;
   final AccountType type;
   final Currency currency;
+
   final bool isArchived;
+  final bool isDeleted;
 
   Account({
     required this.id,
@@ -14,8 +16,9 @@ class Account with EquatableMixin {
     required this.type,
     required this.currency,
     this.isArchived = false,
+    this.isDeleted = false,
   });
 
   @override
-  List<Object?> get props => [id, name, type, currency, isArchived];
+  List<Object?> get props => [id, name, type, currency, isArchived, isDeleted];
 }
