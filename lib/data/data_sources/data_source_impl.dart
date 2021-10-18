@@ -90,12 +90,47 @@ class DataSourceImpl extends DataSource {
     list?.forEach((encoded) {
       final decoded = AccountModel.fromJson(json.decode(encoded));
       if (decoded.id == account.id) {
-        result.add(json.encode(AccountModel.fromAccount(account).toJson()));
+        final updatedAccount = AccountModel.fromAccount(account);
+        result.add(json.encode(updatedAccount.toJson()));
+        _updateOperations(updatedAccount);
       } else {
         result.add(encoded);
       }
     });
 
     _prefs.setStringList(Keys.accounts.toString(), result);
+  }
+
+  void _updateOperations(AccountModel account) {
+    final allOperations = getOperations();
+    List<String> list = [];
+
+    for (var logicOperation in allOperations) {
+      final List<AtomicOperationModel> atomicsModel = [];
+      for (var atomicOperationModel in logicOperation.atomicsModel) {
+        if (atomicOperationModel.account.id == account.id) {
+          atomicsModel.add(
+            AtomicOperationModel(
+              id: atomicOperationModel.id,
+              moneyModel: atomicOperationModel.moneyModel,
+              type: atomicOperationModel.type,
+              accountModel: account,
+            ),
+          );
+        } else {
+          atomicsModel.add(atomicOperationModel);
+        }
+      }
+      final LogicOperationModel current = LogicOperationModel(
+        id: logicOperation.id,
+        type: logicOperation.type,
+        created: logicOperation.created,
+        comment: logicOperation.comment,
+        atomicsModel: atomicsModel,
+      );
+      list.add(json.encode(current.toJson()));
+    }
+
+    _prefs.setStringList(Keys.operations.toString(), list);
   }
 }

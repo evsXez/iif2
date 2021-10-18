@@ -9,6 +9,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../domain/account_fixtures.dart';
+import '../../domain/operation_fixtures.dart';
 import '../account_model_fixtures.dart';
 import 'data_source_impl_test.mocks.dart';
 import 'fixtures.dart';
@@ -110,6 +112,8 @@ void main() {
     final accountModelUpdated = accountModel(1, type, name: "updated", isArchived: true);
 
     List<String> stringList = [json.encode(accountModelOriginal.toJson())];
+    when(prefs.getStringList(Keys.operations.toString())).thenReturn([]);
+    when(prefs.setStringList(Keys.operations.toString(), any)).thenAnswer((_) async => true);
     when(prefs.getStringList(Keys.accounts.toString())).thenAnswer((_) => stringList);
     when(prefs.setStringList(Keys.accounts.toString(), any)).thenAnswer((realInvocation) async {
       final List<String> list = realInvocation.positionalArguments[1];
@@ -126,5 +130,38 @@ void main() {
     final after = dataSource.getAcounts();
     expect(after.length, 1);
     expect(after.first, accountModelUpdated);
+  });
+
+  test('after updating account, the account from operations updates accordingly', () {
+    const nameOriginal = "original";
+    const nameUpdated = "updated";
+
+    List<String> listOfAccountsJson = [];
+    List<String> listOfOperationsJson = [];
+
+    when(prefs.getStringList(Keys.accounts.toString())).thenAnswer((_) => listOfAccountsJson);
+    when(prefs.setStringList(Keys.accounts.toString(), any)).thenAnswer((realInvocation) async {
+      final List<String> argument = realInvocation.positionalArguments[1];
+      listOfAccountsJson = argument;
+      return true;
+    });
+    when(prefs.getStringList(Keys.operations.toString())).thenAnswer((_) => listOfOperationsJson);
+    when(prefs.setStringList(Keys.operations.toString(), any)).thenAnswer((realInvocation) async {
+      final List<String> argument = realInvocation.positionalArguments[1];
+      listOfOperationsJson = argument;
+      return true;
+    });
+
+    final accountTemplate = getAccount(-1, AccountType.money, name: nameOriginal);
+
+    final accountOriginal = dataSource.addAcount(accountTemplate);
+    dataSource.addOperation(getLogicOperationInitialInput(accountOriginal, money999));
+
+    final accountUpdated = Account(
+        id: accountOriginal.id, name: nameUpdated, type: accountOriginal.type, currency: accountOriginal.currency);
+    dataSource.updateAcount(accountUpdated);
+
+    final accountFromOperation = dataSource.getOperations().first.atomics.first.account;
+    expect(accountFromOperation.name, nameUpdated);
   });
 }

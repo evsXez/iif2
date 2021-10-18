@@ -8,9 +8,9 @@ final accountMoney = Account(
   currency: Currency.debugDefault,
 );
 
-Account getAccount(int id, AccountType type, {bool isArchived = false}) => Account(
+Account getAccount(int id, AccountType type, {bool isArchived = false, String? name}) => Account(
       id: id,
-      name: "account#$id",
+      name: name ?? "account#$id",
       type: type,
       currency: Currency.debugDefault,
       isArchived: isArchived,
