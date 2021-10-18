@@ -12,12 +12,14 @@ class OperationsListBloc extends Cubit<OperationsListState> {
 
   OperationsListBloc(this._context) : super(const _Loading()) {
     operationsRepository.of(_context).addListener(_updateData);
+    accountsRepository.of(_context).addListener(_updateData);
     _updateData();
   }
 
   @override
   Future<void> close() {
     operationsRepository.of(_context).removeListener(_updateData);
+    accountsRepository.of(_context).removeListener(_updateData);
     return super.close();
   }
 

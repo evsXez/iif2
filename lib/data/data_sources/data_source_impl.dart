@@ -133,4 +133,19 @@ class DataSourceImpl extends DataSource {
 
     _prefs.setStringList(Keys.operations.toString(), list);
   }
+
+  @override
+  void deleteAcount(Account account) {
+    final List<String> list = _prefs.getStringList(Keys.accounts.toString()) ?? [];
+    list.removeWhere((it) => AccountModel.fromJson(jsonDecode(it)).id == account.id);
+    _prefs.setStringList(Keys.accounts.toString(), list);
+
+    _deleteOperationsWithAccount(account);
+  }
+
+  void _deleteOperationsWithAccount(Account account) {
+    final List<String> list = _prefs.getStringList(Keys.operations.toString()) ?? [];
+    list.removeWhere((it) => LogicOperationModel.fromJson(jsonDecode(it)).atomicsModel.first.account.id == account.id);
+    _prefs.setStringList(Keys.operations.toString(), list);
+  }
 }

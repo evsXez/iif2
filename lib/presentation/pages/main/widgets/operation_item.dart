@@ -11,71 +11,74 @@ class OperationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-      // color: account1 == null ? Style.whiteColor : (account1.isArchived ? Style.lightGrayColor : Style.whiteColor),
-      color: (account1.isArchived ? Style.lightGrayColor : Style.whiteColor),
-      // elevation: 4,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 80,
-              child: Column(
-                children: [
-                  FittedBox(
-                      alignment: Alignment.centerLeft,
-                      fit: BoxFit.scaleDown,
-                      child: Container(
-                        padding: const EdgeInsets.all(2),
-                        decoration: BoxDecoration(
-                          color: moneyBackColor(),
-                          borderRadius: const BorderRadius.all(Radius.circular(4)),
-                        ),
-                        child: MoneyText(
-                          money: operation.atomics.first.money,
-                          color: moneyFrontColor(),
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                        ),
-                      )),
-                  Text(
-                    operation.atomics.first.account.currency.symbol,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontSize: 16,
+    return Opacity(
+      opacity: account1.isArchived ? 0.4 : 1,
+      child: Card(
+        margin: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+        // color: account1 == null ? Style.whiteColor : (account1.isArchived ? Style.lightGrayColor : Style.whiteColor),
+        color: Style.whiteColor,
+        // elevation: 4,
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 80,
+                child: Column(
+                  children: [
+                    FittedBox(
+                        alignment: Alignment.centerLeft,
+                        fit: BoxFit.scaleDown,
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                            color: moneyBackColor(),
+                            borderRadius: const BorderRadius.all(Radius.circular(4)),
+                          ),
+                          child: MoneyText(
+                            money: operation.atomics.first.money,
+                            color: moneyFrontColor(),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                          ),
+                        )),
+                    Text(
+                      operation.atomics.first.account.currency.symbol,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(width: 8),
-            Expanded(child: _OperationInfo(operation)),
-            const SizedBox(width: 4),
-            // Column(
-            //   // mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //   // mainAxisSize: MainAxisSize.max,
-            //   crossAxisAlignment: CrossAxisAlignment.end,
-            //   children: [
-            //     Text(
-            //       statDateDayMonth(),
-            //       style: const TextStyle(
-            //         color: Colors.grey,
-            //         fontSize: 12,
-            //       ),
-            //     ),
-            //     Text(
-            //       statDateYear(),
-            //       style: const TextStyle(
-            //         color: Colors.grey,
-            //         fontSize: 12,
-            //       ),
-            //     ),
-            //   ],
-            // ),
-          ],
+              const SizedBox(width: 8),
+              Expanded(child: _OperationInfo(operation)),
+              const SizedBox(width: 4),
+              // Column(
+              //   // mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //   // mainAxisSize: MainAxisSize.max,
+              //   crossAxisAlignment: CrossAxisAlignment.end,
+              //   children: [
+              //     Text(
+              //       statDateDayMonth(),
+              //       style: const TextStyle(
+              //         color: Colors.grey,
+              //         fontSize: 12,
+              //       ),
+              //     ),
+              //     Text(
+              //       statDateYear(),
+              //       style: const TextStyle(
+              //         color: Colors.grey,
+              //         fontSize: 12,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+            ],
+          ),
         ),
       ),
     );
@@ -173,7 +176,7 @@ class _MoneyAndAccounts extends StatelessWidget {
         // money,
         // SizedBox(width: 8,),
         Text(
-          account1.name,
+          "${account1.name}${account1.isArchived ? ' (*)' : ''}",
           style: const TextStyle(
             fontSize: 16,
           ),

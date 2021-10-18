@@ -58,6 +58,8 @@ void main() {
   late MockSharedPreferences prefs;
   final logicOperationModel2Json = json.encode(logicOperationModel2.toJson());
   int nextGeneratedId = 0;
+  List<String> listOfAccountsJson = [];
+  List<String> listOfOperationsJson = [];
 
   setUp(() async {
     prefs = MockSharedPreferences();
@@ -67,6 +69,19 @@ void main() {
     when(prefs.getInt(Keys.nextId.toString())).thenAnswer((_) => nextGeneratedId);
     when(prefs.setInt(Keys.nextId.toString(), any)).thenAnswer((_) async {
       nextGeneratedId = nextGeneratedId + 1;
+      return true;
+    });
+
+    when(prefs.getStringList(Keys.accounts.toString())).thenAnswer((_) => listOfAccountsJson);
+    when(prefs.setStringList(Keys.accounts.toString(), any)).thenAnswer((realInvocation) async {
+      final List<String> argument = realInvocation.positionalArguments[1];
+      listOfAccountsJson = argument;
+      return true;
+    });
+    when(prefs.getStringList(Keys.operations.toString())).thenAnswer((_) => listOfOperationsJson);
+    when(prefs.setStringList(Keys.operations.toString(), any)).thenAnswer((realInvocation) async {
+      final List<String> argument = realInvocation.positionalArguments[1];
+      listOfOperationsJson = argument;
       return true;
     });
   });
@@ -136,22 +151,6 @@ void main() {
     const nameOriginal = "original";
     const nameUpdated = "updated";
 
-    List<String> listOfAccountsJson = [];
-    List<String> listOfOperationsJson = [];
-
-    when(prefs.getStringList(Keys.accounts.toString())).thenAnswer((_) => listOfAccountsJson);
-    when(prefs.setStringList(Keys.accounts.toString(), any)).thenAnswer((realInvocation) async {
-      final List<String> argument = realInvocation.positionalArguments[1];
-      listOfAccountsJson = argument;
-      return true;
-    });
-    when(prefs.getStringList(Keys.operations.toString())).thenAnswer((_) => listOfOperationsJson);
-    when(prefs.setStringList(Keys.operations.toString(), any)).thenAnswer((realInvocation) async {
-      final List<String> argument = realInvocation.positionalArguments[1];
-      listOfOperationsJson = argument;
-      return true;
-    });
-
     final accountTemplate = getAccount(-1, AccountType.money, name: nameOriginal);
 
     final accountOriginal = dataSource.addAcount(accountTemplate);
@@ -163,5 +162,23 @@ void main() {
 
     final accountFromOperation = dataSource.getOperations().first.atomics.first.account;
     expect(accountFromOperation.name, nameUpdated);
+  });
+
+  test('after deleting account we can\'t get it', () {
+    listOfAccountsJson = [accountModelJson];
+
+    expect(dataSource.getAcounts().first, accountModelFixed);
+    dataSource.deleteAcount(accountModelFixed);
+    expect(dataSource.getAcounts(), isEmpty);
+  });
+
+  test('after deleting account we delete operations with this account too', () {
+    listOfAccountsJson = [accountModelJson];
+
+    dataSource.addOperation(getLogicOperationInitialInput(accountModelFixed, money999));
+
+    expect(dataSource.getOperations(), isNotEmpty);
+    dataSource.deleteAcount(accountModelFixed);
+    expect(dataSource.getOperations(), isEmpty);
   });
 }

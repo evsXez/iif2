@@ -13,7 +13,8 @@ class AccountsBloc extends Cubit<AccountsState> {
   final BuildContext _context;
 
   AccountsBloc(this._context) : super(const _Loaded(null, [])) {
-    operationsRepository.of(_context).addListener(_updateData);
+    operationsRepository.of(_context).addListener(_updateData); //add operations
+    accountsRepository.of(_context).addListener(_updateData); //delete, archive - don't count
     _data = getAccountTypesOnMainPageUseCase.of(_context).execute().map((it) => MapEntry(it, null)).toList();
     emit(_Loaded(_expandedIndex, _data));
     _updateData();
@@ -22,6 +23,7 @@ class AccountsBloc extends Cubit<AccountsState> {
   @override
   Future<void> close() {
     operationsRepository.of(_context).removeListener(_updateData);
+    accountsRepository.of(_context).removeListener(_updateData);
     return super.close();
   }
 

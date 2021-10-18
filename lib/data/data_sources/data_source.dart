@@ -5,6 +5,7 @@ abstract class DataSource {
   //accounts
   Account addAcount(Account accountTemplate);
   void updateAcount(Account account);
+  void deleteAcount(Account account);
   List<AccountModel> getAcounts();
 
   //operations

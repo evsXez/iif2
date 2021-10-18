@@ -17,6 +17,11 @@ class AccountsRepositoryImpl extends AccountsRepository {
   Account saveAccount(Account accountTemplate) {
     try {
       if (accountTemplate.id >= 0) {
+        if (accountTemplate.isDeleted) {
+          _dataSource.deleteAcount(accountTemplate);
+          return accountTemplate;
+        }
+
         final accounts = _dataSource.getAcounts();
         if (accounts.any((it) => it.id == accountTemplate.id)) {
           _dataSource.updateAcount(accountTemplate);
