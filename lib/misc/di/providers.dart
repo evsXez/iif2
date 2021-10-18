@@ -10,34 +10,34 @@ import 'package:iif/presentation/include.dart';
 final _dataSource = Provider((ref) => DataSourceImpl(sharedPreferences));
 
 //repositories, private, for use cases only
-final _accountsRepository = Provider((ref) => AccountsRepositoryImpl(ref.read(_dataSource)));
-final _operationsRepository = Provider((ref) => OperationsRepositoryImpl(ref.read(_dataSource)));
+final accountsRepository = Provider((ref) => AccountsRepositoryImpl(ref.read(_dataSource)));
+final operationsRepository = Provider((ref) => OperationsRepositoryImpl(ref.read(_dataSource)));
 
 //use cases
 final getAccountTypesOnMainPageUseCase = Provider((ref) => GetAccountTypesOnMainPageUseCase());
 final saveAccountUseCase = Provider((ref) => SaveAccountUseCase(
-      accountsRepository: ref.read(_accountsRepository),
-      operationsRepository: ref.read(_operationsRepository),
+      accountsRepository: ref.read(accountsRepository),
+      operationsRepository: ref.read(operationsRepository),
     ));
 final getAccountsBalanceUseCase = Provider((ref) => GetAccountsBalanceUseCase(
-      accountsRepository: ref.read(_accountsRepository),
-      operationsRepository: ref.read(_operationsRepository),
+      accountsRepository: ref.read(accountsRepository),
+      operationsRepository: ref.read(operationsRepository),
     ));
 final getAllMoneyForAccountTypesUseCase = Provider((ref) => GetAllMoneyForAccountTypesUseCase(
       ref.read(getAccountsBalanceUseCase),
       ref.read(getAccountTypesOnMainPageUseCase),
     ));
 final getAccountOptionsUseCase = Provider((ref) => GetAccountOptionsUseCase(
-      operationsRepository: ref.read(_operationsRepository),
+      operationsRepository: ref.read(operationsRepository),
     ));
 final archiveAccountUseCase = Provider((ref) => ArchiveAccountUseCase(
-      accountsRepository: ref.read(_accountsRepository),
+      accountsRepository: ref.read(accountsRepository),
     ));
 final deleteAccountUseCase = Provider((ref) => DeleteAccountUseCase(
-      accountsRepository: ref.read(_accountsRepository),
+      accountsRepository: ref.read(accountsRepository),
     ));
 final getAllOperationsUseCase = Provider((ref) => GetAllOperationsUseCase(
-      operationsRepository: ref.read(_operationsRepository),
+      operationsRepository: ref.read(operationsRepository),
     ));
 
 //extension for more readability

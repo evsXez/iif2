@@ -25,7 +25,7 @@ class _AccountItemState extends State<AccountItem> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AccountOptionsBloc(context, accountsPanelBloc: BlocProvider.of<AccountsPanelBloc>(context)),
+      create: (context) => AccountOptionsBloc(context),
       child: BlocConsumer<AccountOptionsBloc, AccountOptionsState>(
         listener: (context, state) {
           state.maybeMap(

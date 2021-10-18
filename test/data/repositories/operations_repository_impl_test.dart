@@ -7,6 +7,7 @@ import 'package:iif/domain/repositories/operations_repository.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../domain/operation_fixtures.dart';
 import 'accounts_repository_impl_test.mocks.dart';
 
 @GenerateMocks([DataSource])
@@ -142,5 +143,15 @@ void main() {
   test('we can get all operations from data source', () async {
     when(dataSource.getOperations()).thenReturn(allLogicOperations);
     expect(await repository.getAllOperations(), allLogicOperations);
+  });
+  test('add operation initial input notifies listeners', () async {
+    when(dataSource.addOperation(any)).thenAnswer((_) {});
+
+    int listenerCounter = 0;
+    repository.addListener(() {
+      listenerCounter++;
+    });
+    repository.addOperationInitialInput(accountModel1, money100);
+    expect(listenerCounter, 1);
   });
 }

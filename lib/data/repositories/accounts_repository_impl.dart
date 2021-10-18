@@ -15,31 +15,18 @@ class AccountsRepositoryImpl extends AccountsRepository {
 
   @override
   Account saveAccount(Account accountTemplate) {
-    if (accountTemplate.id >= 0) {
-      final accounts = _dataSource.getAcounts();
-      if (accounts.any((it) => it.id == accountTemplate.id)) {
-        _dataSource.updateAcount(accountTemplate);
-        return accountTemplate;
+    try {
+      if (accountTemplate.id >= 0) {
+        final accounts = _dataSource.getAcounts();
+        if (accounts.any((it) => it.id == accountTemplate.id)) {
+          _dataSource.updateAcount(accountTemplate);
+          return accountTemplate;
+        }
       }
+
+      return _dataSource.addAcount(accountTemplate);
+    } finally {
+      notifyListeners();
     }
-
-    return _dataSource.addAcount(accountTemplate);
   }
-
-  // Future<Map<AccountType, Money>> getMoneyForAccountTypes() async {
-  //   void addMoney(Map<AccountType, Money> data, AccountType type, Money money) {
-  //     Money accumulator = data[type] ?? Money.zero;
-  //     data[type] = accumulator.add(money);
-  //   }
-
-  //   final Map<AccountType, Money> result = {};
-  //   final accounts = _data;
-  //   final operationsRepository = OperationsRepositoryImpl();
-
-  //   Future.forEach<Account>(accounts, (account) async {
-  //     addMoney(result, account.type, await operationsRepository.calculateBalance(account));
-  //   });
-
-  //   return result;
-  // }
 }

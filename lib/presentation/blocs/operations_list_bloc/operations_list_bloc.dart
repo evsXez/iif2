@@ -11,10 +11,17 @@ class OperationsListBloc extends Cubit<OperationsListState> {
   final BuildContext _context;
 
   OperationsListBloc(this._context) : super(const _Loading()) {
-    updateData();
+    operationsRepository.of(_context).addListener(_updateData);
+    _updateData();
   }
 
-  void updateData() async {
+  @override
+  Future<void> close() {
+    operationsRepository.of(_context).removeListener(_updateData);
+    return super.close();
+  }
+
+  void _updateData() async {
     final data = await getAllOperationsUseCase.of(_context).execute();
     data.sort((l1, l2) => -l1.created.compareTo(l2.created));
     emit(_Loaded(data));

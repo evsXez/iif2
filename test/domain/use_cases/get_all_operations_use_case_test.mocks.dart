@@ -3,6 +3,7 @@
 // Do not manually edit this file.
 
 import 'dart:async' as _i4;
+import 'dart:ui' as _i5;
 
 import 'package:iif/domain/include.dart' as _i2;
 import 'package:iif/domain/repositories/operations_repository.dart' as _i3;
@@ -28,6 +29,10 @@ class MockOperationsRepository extends _i1.Mock
   }
 
   @override
+  bool get hasListeners =>
+      (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
+          as bool);
+  @override
   _i4.Future<_i2.Money> calculateBalance(_i2.Account? account) =>
       (super.noSuchMethod(Invocation.method(#calculateBalance, [account]),
               returnValue: Future<_i2.Money>.value(_FakeMoney_0()))
@@ -47,6 +52,21 @@ class MockOperationsRepository extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#getAllOperations, []),
           returnValue: Future<List<_i2.LogicOperation>>.value(
               <_i2.LogicOperation>[])) as _i4.Future<List<_i2.LogicOperation>>);
+  @override
+  void addListener(_i5.VoidCallback? listener) =>
+      super.noSuchMethod(Invocation.method(#addListener, [listener]),
+          returnValueForMissingStub: null);
+  @override
+  void removeListener(_i5.VoidCallback? listener) =>
+      super.noSuchMethod(Invocation.method(#removeListener, [listener]),
+          returnValueForMissingStub: null);
+  @override
+  void dispose() => super.noSuchMethod(Invocation.method(#dispose, []),
+      returnValueForMissingStub: null);
+  @override
+  void notifyListeners() =>
+      super.noSuchMethod(Invocation.method(#notifyListeners, []),
+          returnValueForMissingStub: null);
   @override
   String toString() => super.toString();
 }

@@ -37,11 +37,7 @@ class AccountPanelBody extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AccountsPanelBloc>(
-          create: (_) => AccountsPanelBloc(
-            context,
-            type: type,
-            accountsBloc: BlocProvider.of<AccountsBloc>(context),
-          ),
+          create: (_) => AccountsPanelBloc(context, type: type),
         ),
       ],
       child: BlocBuilder<AccountsPanelBloc, AccountsPanelState>(

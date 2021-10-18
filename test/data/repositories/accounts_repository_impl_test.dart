@@ -108,4 +108,21 @@ void main() {
     expect(dataAfter.first.id, id);
     expect(dataAfter.first.name, modifiedName);
   });
+  test('save/update account calls notifies listeners', () {
+    when(mockDataSource.getAcounts()).thenAnswer((realInvocation) => initiallyEmptyAccounts);
+    when(mockDataSource.addAcount(account)).thenAnswer((_) {
+      initiallyEmptyAccounts.add(account);
+      return account;
+    });
+    int listenerCounter = 0;
+    repository.addListener(() {
+      listenerCounter++;
+    });
+    //save
+    repository.saveAccount(account);
+    expect(listenerCounter, 1);
+    //update
+    repository.saveAccount(account);
+    expect(listenerCounter, 2);
+  });
 }

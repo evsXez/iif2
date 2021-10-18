@@ -2,6 +2,8 @@
 // in iif/test/domain/use_cases/delete_account_use_case_test.dart.
 // Do not manually edit this file.
 
+import 'dart:ui' as _i4;
+
 import 'package:iif/domain/include.dart' as _i2;
 import 'package:iif/domain/repositories/accounts_repository.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
@@ -26,6 +28,10 @@ class MockAccountsRepository extends _i1.Mock
   }
 
   @override
+  bool get hasListeners =>
+      (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
+          as bool);
+  @override
   List<_i2.Account> getAccountsOfType(_i2.AccountType? type) =>
       (super.noSuchMethod(Invocation.method(#getAccountsOfType, [type]),
           returnValue: <_i2.Account>[]) as List<_i2.Account>);
@@ -33,6 +39,21 @@ class MockAccountsRepository extends _i1.Mock
   _i2.Account saveAccount(_i2.Account? accountTemplate) =>
       (super.noSuchMethod(Invocation.method(#saveAccount, [accountTemplate]),
           returnValue: _FakeAccount_0()) as _i2.Account);
+  @override
+  void addListener(_i4.VoidCallback? listener) =>
+      super.noSuchMethod(Invocation.method(#addListener, [listener]),
+          returnValueForMissingStub: null);
+  @override
+  void removeListener(_i4.VoidCallback? listener) =>
+      super.noSuchMethod(Invocation.method(#removeListener, [listener]),
+          returnValueForMissingStub: null);
+  @override
+  void dispose() => super.noSuchMethod(Invocation.method(#dispose, []),
+      returnValueForMissingStub: null);
+  @override
+  void notifyListeners() =>
+      super.noSuchMethod(Invocation.method(#notifyListeners, []),
+          returnValueForMissingStub: null);
   @override
   String toString() => super.toString();
 }

@@ -2,7 +2,8 @@
 // in iif/test/domain/use_cases/archive_account_use_case_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
+import 'dart:ui' as _i5;
 
 import 'package:iif/domain/include.dart' as _i2;
 import 'package:iif/domain/repositories/accounts_repository.dart' as _i3;
@@ -35,6 +36,10 @@ class MockAccountsRepository extends _i1.Mock
   }
 
   @override
+  bool get hasListeners =>
+      (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
+          as bool);
+  @override
   List<_i2.Account> getAccountsOfType(_i2.AccountType? type) =>
       (super.noSuchMethod(Invocation.method(#getAccountsOfType, [type]),
           returnValue: <_i2.Account>[]) as List<_i2.Account>);
@@ -42,6 +47,21 @@ class MockAccountsRepository extends _i1.Mock
   _i2.Account saveAccount(_i2.Account? accountTemplate) =>
       (super.noSuchMethod(Invocation.method(#saveAccount, [accountTemplate]),
           returnValue: _FakeAccount_0()) as _i2.Account);
+  @override
+  void addListener(_i5.VoidCallback? listener) =>
+      super.noSuchMethod(Invocation.method(#addListener, [listener]),
+          returnValueForMissingStub: null);
+  @override
+  void removeListener(_i5.VoidCallback? listener) =>
+      super.noSuchMethod(Invocation.method(#removeListener, [listener]),
+          returnValueForMissingStub: null);
+  @override
+  void dispose() => super.noSuchMethod(Invocation.method(#dispose, []),
+      returnValueForMissingStub: null);
+  @override
+  void notifyListeners() =>
+      super.noSuchMethod(Invocation.method(#notifyListeners, []),
+          returnValueForMissingStub: null);
   @override
   String toString() => super.toString();
 }
@@ -64,10 +84,10 @@ class MockGetAccountsBalanceUseCase extends _i1.Mock
       Invocation.getter(#operationsRepository),
       returnValue: _FakeOperationsRepository_2()) as _i4.OperationsRepository);
   @override
-  _i5.Future<List<_i2.AccountBalance>> execute(_i2.AccountType? type) =>
+  _i6.Future<List<_i2.AccountBalance>> execute(_i2.AccountType? type) =>
       (super.noSuchMethod(Invocation.method(#execute, [type]),
           returnValue: Future<List<_i2.AccountBalance>>.value(
-              <_i2.AccountBalance>[])) as _i5.Future<List<_i2.AccountBalance>>);
+              <_i2.AccountBalance>[])) as _i6.Future<List<_i2.AccountBalance>>);
   @override
   String toString() => super.toString();
 }

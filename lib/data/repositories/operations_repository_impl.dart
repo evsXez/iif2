@@ -33,7 +33,11 @@ class OperationsRepositoryImpl extends OperationsRepository {
 
   @override
   void addOperationInitialInput(Account account, Money money) {
-    _dataSource.addOperation(LogicOperation.initialInput(account, money));
+    try {
+      _dataSource.addOperation(LogicOperation.initialInput(account, money));
+    } finally {
+      notifyListeners();
+    }
   }
 
   @override

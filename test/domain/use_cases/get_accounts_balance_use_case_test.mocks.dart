@@ -2,11 +2,12 @@
 // in iif/test/domain/use_cases/get_accounts_balance_use_case_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
+import 'dart:ui' as _i4;
 
 import 'package:iif/domain/include.dart' as _i2;
 import 'package:iif/domain/repositories/accounts_repository.dart' as _i3;
-import 'package:iif/domain/repositories/operations_repository.dart' as _i4;
+import 'package:iif/domain/repositories/operations_repository.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -31,6 +32,10 @@ class MockAccountsRepository extends _i1.Mock
   }
 
   @override
+  bool get hasListeners =>
+      (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
+          as bool);
+  @override
   List<_i2.Account> getAccountsOfType(_i2.AccountType? type) =>
       (super.noSuchMethod(Invocation.method(#getAccountsOfType, [type]),
           returnValue: <_i2.Account>[]) as List<_i2.Account>);
@@ -39,6 +44,21 @@ class MockAccountsRepository extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#saveAccount, [accountTemplate]),
           returnValue: _FakeAccount_0()) as _i2.Account);
   @override
+  void addListener(_i4.VoidCallback? listener) =>
+      super.noSuchMethod(Invocation.method(#addListener, [listener]),
+          returnValueForMissingStub: null);
+  @override
+  void removeListener(_i4.VoidCallback? listener) =>
+      super.noSuchMethod(Invocation.method(#removeListener, [listener]),
+          returnValueForMissingStub: null);
+  @override
+  void dispose() => super.noSuchMethod(Invocation.method(#dispose, []),
+      returnValueForMissingStub: null);
+  @override
+  void notifyListeners() =>
+      super.noSuchMethod(Invocation.method(#notifyListeners, []),
+          returnValueForMissingStub: null);
+  @override
   String toString() => super.toString();
 }
 
@@ -46,31 +66,50 @@ class MockAccountsRepository extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockOperationsRepository extends _i1.Mock
-    implements _i4.OperationsRepository {
+    implements _i5.OperationsRepository {
   MockOperationsRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.Money> calculateBalance(_i2.Account? account) =>
+  bool get hasListeners =>
+      (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
+          as bool);
+  @override
+  _i6.Future<_i2.Money> calculateBalance(_i2.Account? account) =>
       (super.noSuchMethod(Invocation.method(#calculateBalance, [account]),
               returnValue: Future<_i2.Money>.value(_FakeMoney_1()))
-          as _i5.Future<_i2.Money>);
+          as _i6.Future<_i2.Money>);
   @override
   void addOperationInitialInput(_i2.Account? account, _i2.Money? money) =>
       super.noSuchMethod(
           Invocation.method(#addOperationInitialInput, [account, money]),
           returnValueForMissingStub: null);
   @override
-  _i5.Future<List<_i2.LogicOperation>> getOperations(_i2.Account? account) =>
+  _i6.Future<List<_i2.LogicOperation>> getOperations(_i2.Account? account) =>
       (super.noSuchMethod(Invocation.method(#getOperations, [account]),
           returnValue: Future<List<_i2.LogicOperation>>.value(
-              <_i2.LogicOperation>[])) as _i5.Future<List<_i2.LogicOperation>>);
+              <_i2.LogicOperation>[])) as _i6.Future<List<_i2.LogicOperation>>);
   @override
-  _i5.Future<List<_i2.LogicOperation>> getAllOperations() =>
+  _i6.Future<List<_i2.LogicOperation>> getAllOperations() =>
       (super.noSuchMethod(Invocation.method(#getAllOperations, []),
           returnValue: Future<List<_i2.LogicOperation>>.value(
-              <_i2.LogicOperation>[])) as _i5.Future<List<_i2.LogicOperation>>);
+              <_i2.LogicOperation>[])) as _i6.Future<List<_i2.LogicOperation>>);
+  @override
+  void addListener(_i4.VoidCallback? listener) =>
+      super.noSuchMethod(Invocation.method(#addListener, [listener]),
+          returnValueForMissingStub: null);
+  @override
+  void removeListener(_i4.VoidCallback? listener) =>
+      super.noSuchMethod(Invocation.method(#removeListener, [listener]),
+          returnValueForMissingStub: null);
+  @override
+  void dispose() => super.noSuchMethod(Invocation.method(#dispose, []),
+      returnValueForMissingStub: null);
+  @override
+  void notifyListeners() =>
+      super.noSuchMethod(Invocation.method(#notifyListeners, []),
+          returnValueForMissingStub: null);
   @override
   String toString() => super.toString();
 }
