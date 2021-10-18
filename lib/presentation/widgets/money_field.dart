@@ -14,7 +14,7 @@ class MoneyField extends StatelessWidget {
     key,
     this.fontSize = 14,
   }) : super(key: key) {
-    _controller.text = initialValue?.toString() ?? "";
+    _controller.text = initialValue?.toStringAsPrice() ?? "";
   }
 
   Money get value => MoneyX.fromString(_controller.text);

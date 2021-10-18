@@ -16,17 +16,6 @@ class Account with EquatableMixin {
     this.isArchived = false,
   });
 
-  factory Account.template({
-    required String name,
-    required AccountType type,
-  }) =>
-      Account(
-        id: -1,
-        name: name,
-        type: type,
-        currency: Currency.debugDefault,
-      );
-
   @override
   List<Object?> get props => [id, name, type, currency, isArchived];
 }

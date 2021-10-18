@@ -43,7 +43,7 @@ class _AccountItemState extends State<AccountItem> {
           },
           child: widget.isEditing
               ? AccountEditItem(
-                  // accountBalanceToEdit: widget.accountBalance,
+                  accountBalanceToEdit: widget.accountBalance,
                   key: ObjectKey(widget.accountBalance.account),
                 )
               : AccountPlainItem(
@@ -59,7 +59,7 @@ class _AccountItemState extends State<AccountItem> {
   void _showContextMenu(BuildContext context, AccountOptions options, double x, double y) async {
     final List<PopupMenuEntry> items = [
       MenuItem(Strings.option_edit, () {
-        _actionEdit();
+        BlocProvider.of<AccountsPanelBloc>(context).editAccount(widget.accountBalance.account);
       }),
       MenuItem(Strings.option_archive, () {
         Dialogs(context).showArchiveLocationDialog(

@@ -34,12 +34,15 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
   }
 
   void saveAccount({
+    Account? accountToEdit,
     required String name,
     required Money money,
   }) async {
-    final accountTemplate = Account.template(
+    final accountTemplate = Account(
+      id: accountToEdit?.id ?? -1,
       name: name,
       type: type,
+      currency: Currency.debugDefault,
     );
     saveAccountUseCase.of(_context).execute(accountTemplate, money);
     updateData();
@@ -62,6 +65,16 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
       _LoadSuccess(
         _data,
         editing: null,
+        isAddingNew: false,
+      ),
+    );
+  }
+
+  void editAccount(Account account) {
+    emit(
+      _LoadSuccess(
+        _data,
+        editing: account,
         isAddingNew: false,
       ),
     );

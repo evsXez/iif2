@@ -1,13 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iif/domain/include.dart';
 import 'package:iif/presentation/blocs/accounts_panel_bloc/accounts_panel_bloc.dart';
 import 'package:iif/presentation/include.dart';
 import 'package:iif/presentation/pages/main/widgets/small_button.dart';
 
 class AccountEditItem extends StatefulWidget {
-  // final AccountBalance? accountBalanceToEdit;
+  final AccountBalance? accountBalanceToEdit;
 
   const AccountEditItem({
-    // required this.accountBalanceToEdit,
+    required this.accountBalanceToEdit,
     Key? key,
   }) : super(key: key);
 
@@ -18,12 +19,12 @@ class AccountEditItem extends StatefulWidget {
 class _AccountEditItemState extends State<AccountEditItem> {
   late StringField nameField = StringField(
     hint: Strings.label_title,
-    initialValue: "", //widget.accountBalanceToEdit?.account.name ?? "",
+    initialValue: widget.accountBalanceToEdit?.account.name ?? "",
     onChanged: _onChanged,
   );
 
   late MoneyField moneyField = MoneyField(
-    initialValue: null, //widget.accountBalanceToEdit?.money,
+    initialValue: widget.accountBalanceToEdit?.money,
     onChanged: _onChanged,
   );
 
@@ -31,9 +32,9 @@ class _AccountEditItemState extends State<AccountEditItem> {
 
   void _onChanged(_) {
     setState(() {
-      _isInputCompletedAndSmthChanged = (nameField.isValueEntered && moneyField.isValueEntered);
-      // && ((nameField.value != widget.accountBalanceToEdit?.account.name) ||
-      //     (moneyField.toString() != widget.accountBalanceToEdit?.money.toString()));
+      _isInputCompletedAndSmthChanged = (nameField.isValueEntered && moneyField.isValueEntered) &&
+          ((nameField.value != widget.accountBalanceToEdit?.account.name) ||
+              (moneyField.value != widget.accountBalanceToEdit?.money));
     });
   }
 
@@ -77,7 +78,7 @@ class _AccountEditItemState extends State<AccountEditItem> {
 
   void _onSave(BuildContext context) {
     BlocProvider.of<AccountsPanelBloc>(context).saveAccount(
-      // accountToEdit: widget.accountBalanceToEdit?.account,
+      accountToEdit: widget.accountBalanceToEdit?.account,
       name: nameField.value,
       money: moneyField.value,
     );
