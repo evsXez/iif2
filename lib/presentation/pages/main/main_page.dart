@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iif/presentation/blocs/accounts_bloc/accounts_bloc.dart';
 import 'package:iif/presentation/include.dart';
+import 'package:iif/presentation/pages/add_operation/add_operation_page.dart';
 import 'package:iif/presentation/pages/main/widgets/accounts.dart';
 import 'package:iif/presentation/pages/main/widgets/header.dart';
 import 'package:iif/presentation/pages/main/widgets/operations_bottom_sheet.dart';
@@ -82,7 +83,7 @@ class _MainPageState extends State<MainPage> {
                 shown: (_) => !isBottomSheetOpened
                     ? FloatingActionButton(
                         onPressed: () {
-                          // Navigation.push(AddOperationPage());
+                          Navigation.push(AddOperationPage());
                         },
                         backgroundColor: Style.whiteColor,
                         child: Icon(Icons.add, color: Style.accentColor),
