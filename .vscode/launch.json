@@ -8,12 +8,6 @@
             "name": "iif",
             "request": "launch",
             "type": "dart"
-        },
-        {
-            "name": "iif (profile mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
         }
     ]
 }

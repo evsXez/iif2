@@ -9,7 +9,7 @@ class Currency with EquatableMixin {
     required this.symbol,
   });
 
-  static const debugDefault = Currency(code: "USD", symbol: "\$");
+  static const debugDefault = Currency(code: "RUB", symbol: "₽");
 
   @override
   List<Object?> get props => [code, symbol];

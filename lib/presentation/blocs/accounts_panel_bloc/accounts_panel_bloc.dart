@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:iif/domain/include.dart';
@@ -12,6 +14,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
 
   final BuildContext _context;
   List<AccountBalance> _data = [];
+  late StreamSubscription _uiNotifierSubscription;
 
   AccountsPanelBloc(
     this._context, {
@@ -19,11 +22,25 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
   }) : super(const _LoadInProgress()) {
     accountsRepository.of(_context).addListener(_updateData);
     _updateData();
+
+    _uiNotifierSubscription = stream.listen((event) {
+      event.maybeWhen(
+        loadSuccess: (_, editing, isAddingNew) {
+          if (editing != null || isAddingNew) {
+            uiNotifierAccountEditorOpened.editorOpened();
+          } else {
+            uiNotifierAccountEditorOpened.editorClosed();
+          }
+        },
+        orElse: () {},
+      );
+    });
   }
 
   @override
   Future<void> close() {
     accountsRepository.of(_context).removeListener(_updateData);
+    _uiNotifierSubscription.cancel();
     return super.close();
   }
 

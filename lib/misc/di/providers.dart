@@ -5,6 +5,7 @@ import 'package:iif/data/repositories/operations_repository_impl.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/main.dart';
 import 'package:iif/presentation/include.dart';
+import 'package:iif/presentation/ui_notifiers/ui_notifier_account_editor_opened.dart';
 
 //data sources
 final _dataSource = Provider((ref) => DataSourceImpl(sharedPreferences));
@@ -36,9 +37,15 @@ final archiveAccountUseCase = Provider((ref) => ArchiveAccountUseCase(
 final deleteAccountUseCase = Provider((ref) => DeleteAccountUseCase(
       accountsRepository: ref.read(accountsRepository),
     ));
+final getAccountsCountUseCase = Provider((ref) => GetAccountsCountUseCase(
+      accountsRepository: ref.read(accountsRepository),
+    ));
 final getAllOperationsUseCase = Provider((ref) => GetAllOperationsUseCase(
       operationsRepository: ref.read(operationsRepository),
     ));
+
+//ui notifiers, are used only in presentation layer to make some ui interactions easier
+final UiNotifierAccountEditorOpened uiNotifierAccountEditorOpened = UiNotifierAccountEditorOpened();
 
 //extension for more readability
 extension ProviderX<T> on Provider<T> {

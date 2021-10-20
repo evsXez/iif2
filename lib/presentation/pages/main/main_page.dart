@@ -31,48 +31,67 @@ class _MainPageState extends State<MainPage> {
 
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: Scaffold(
-        appBar: Header(),
-        backgroundColor: Style.lightGrayColor,
-        body: CustomScrollView(
-          slivers: [
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  Column(
-                    children: [
-                      const SizedBox(height: 20),
-                      BlocProvider(
-                        create: (context) => AccountsBloc(context),
-                        child: Accounts(),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height - 565 + 100),
-                  GestureDetector(
-                    onTap: () {
-                      operationsBottomSheet.show();
-                    },
-                    child: Container(
-                      color: Style.lightGrayColor,
-                      padding: const EdgeInsets.all(16),
-                      child: Center(
-                          child: Text(
-                        Strings.swipe_to_reveal,
-                        style: const TextStyle(
-                          color: Style.grayColor,
-                          fontSize: 12,
+      child: BlocProvider<MainPageFabBloc>(
+        create: (context) => MainPageFabBloc(context),
+        child: BlocBuilder<MainPageFabBloc, MainPageFabState>(
+          builder: (context, fabState) {
+            return Scaffold(
+              appBar: Header(),
+              backgroundColor: Style.lightGrayColor,
+              body: CustomScrollView(
+                slivers: [
+                  SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        Column(
+                          children: [
+                            const SizedBox(height: 20),
+                            BlocProvider(
+                              create: (context) => AccountsBloc(context),
+                              child: Accounts(),
+                            ),
+                          ],
                         ),
-                      )),
+                        SizedBox(height: MediaQuery.of(context).size.height - 565 + 100),
+                        GestureDetector(
+                          onTap: () {
+                            operationsBottomSheet.show();
+                          },
+                          child: Container(
+                            color: Style.lightGrayColor,
+                            padding: const EdgeInsets.all(16),
+                            child: Center(
+                                child: Text(
+                              Strings.swipe_to_reveal,
+                              style: const TextStyle(
+                                color: Style.grayColor,
+                                fontSize: 12,
+                              ),
+                            )),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                      ],
                     ),
-                  ),
-                  const SizedBox(height: 24),
+                  )
                 ],
               ),
-            )
-          ],
+              bottomSheet: operationsBottomSheet,
+              floatingActionButton: fabState.map(
+                hidden: (_) => null,
+                shown: (_) => !isBottomSheetOpened
+                    ? FloatingActionButton(
+                        onPressed: () {
+                          // Navigation.push(AddOperationPage());
+                        },
+                        backgroundColor: Style.whiteColor,
+                        child: Icon(Icons.add, color: Style.accentColor),
+                      )
+                    : null,
+              ),
+            );
+          },
         ),
-        bottomSheet: operationsBottomSheet,
       ),
     );
   }

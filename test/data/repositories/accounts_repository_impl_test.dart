@@ -66,9 +66,9 @@ void main() {
     expect(repository.getAccountsOfType(type2), accountsType2);
   });
 
-  test('data source has deleted accounts and repository\'s "getAccounts" ignores them', () async {
+  test('data source has archived accounts and repository\'s "getAccounts" ignores them', () async {
     when(mockDataSource.getAcounts()).thenReturn(accountsWithDeletedType1);
-    expect(repository.getAccountsOfType(type1), everyElement((Account it) => !it.isDeleted));
+    expect(repository.getAccountsOfType(type1), everyElement((Account it) => !it.isArchived));
   });
 
   test('data source has no data, then save, then it has data', () async {
