@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/services.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/presentation/extensions/money_x.dart';
@@ -48,13 +50,13 @@ class MoneyFormatter extends TextInputFormatter {
     debugPrint("old: ${oldValue.text}");
     debugPrint("new: ${newValue.text}");
 
-    int selectionShift = 3;
+    // int selectionShift = 3;
     String s = newValue.text;
     if (s.length >= "100 000 000 0000.00".length) return oldValue;
 
     final isDotEntered = s.contains("..") || s.contains(",.");
     if (isDotEntered) {
-      selectionShift = 2;
+      // selectionShift = 2;
       s = s.replaceAll("..", ".");
       s = s.replaceAll(",.", ".");
     }
@@ -62,7 +64,7 @@ class MoneyFormatter extends TextInputFormatter {
     final isFirstDigitAfterDotEntered = s.indexOf(".") == s.length - 4;
     if (isFirstDigitAfterDotEntered) {
       print("first digit entered!");
-      selectionShift = 1;
+      // selectionShift = 1;
     }
 
     final Money money;
@@ -73,7 +75,15 @@ class MoneyFormatter extends TextInputFormatter {
     }
 
     final newText = money.toStringAsPrice();
-    return oldValue.copyWith(
-        text: newText, selection: TextSelection.collapsed(offset: newText.length - selectionShift));
+    final spacesAdded = _spaceCount(newText) - _spaceCount(oldValue.text);
+
+    return newValue.copyWith(
+      text: newText,
+      // selection: TextSelection.collapsed(offset: newText.length - selectionShift),
+      selection:
+          TextSelection.collapsed(offset: min(newText.length, max(0, newValue.selection.baseOffset + spacesAdded))),
+    );
   }
+
+  int _spaceCount(String s) => s.characters.where((it) => it == " ").length;
 }

@@ -21,7 +21,7 @@ class MoneyText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String full = money.toStringAsPrice();
+    String full = money.toStringAsPrice(fractionalRequired: true);
     String big = full.substring(0, full.length - 3);
     String small = full.substring(full.length - 2);
     return Row(
