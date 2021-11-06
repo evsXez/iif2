@@ -50,38 +50,37 @@ class MoneyFormatter extends TextInputFormatter {
     debugPrint("old: ${oldValue.text}");
     debugPrint("new: ${newValue.text}");
 
-    // int selectionShift = 3;
-    String s = newValue.text;
-    if (s.length >= "100 000 000 0000.00".length) return oldValue;
+    String newValueText = newValue.text.replaceAll(",", ".");
+    if (newValueText.length >= "100 000 000 0000.00".length) return oldValue;
 
-    final isDotEntered = s.contains("..") || s.contains(",.");
-    if (isDotEntered) {
-      // selectionShift = 2;
-      s = s.replaceAll("..", ".");
-      s = s.replaceAll(",.", ".");
-    }
-    debugPrint("s == $s");
-    final isFirstDigitAfterDotEntered = s.indexOf(".") == s.length - 4;
-    if (isFirstDigitAfterDotEntered) {
-      print("first digit entered!");
-      // selectionShift = 1;
-    }
+    if (newValueText.characters.where((it) => it == ".").length > 1) return oldValue;
+
+    // if (oldValue.text.length - oldValue.selection.baseOffset == 2 &&
+    //     oldValue.text.contains(".") &&
+    //     newValueText.contains(".")) {
+    //   //just rewrite first digit after separator
+    //   final digitEntered = newValueText.substring(newValueText.length - 3, newValueText.length - 2);
+    //   newValueText = oldValue.text;
+    //   newValueText = newValueText.replaceRange(newValueText.length - 2, newValueText.length - 1, digitEntered);
+    //   print("DIGIT REPLACEMENT!!!");
+    // }
 
     final Money money;
     try {
-      money = MoneyX.fromString(s);
+      money = MoneyX.fromString("0" + newValueText);
     } on ExceptionMoneyNotParsed catch (_) {
       return newValue.copyWith(text: "");
     }
 
-    final newText = money.toStringAsPrice();
+    final newText = money.toStringAsPrice(fractionalRequired: newValueText.contains("."));
     final spacesAdded = _spaceCount(newText) - _spaceCount(oldValue.text);
 
     return newValue.copyWith(
       text: newText,
       // selection: TextSelection.collapsed(offset: newText.length - selectionShift),
-      selection:
-          TextSelection.collapsed(offset: min(newText.length, max(0, newValue.selection.baseOffset + spacesAdded))),
+      selection: newText == "0.00"
+          ? TextSelection.collapsed(offset: 2)
+          : TextSelection.collapsed(offset: min(newText.length, max(0, newValue.selection.baseOffset + spacesAdded))),
     );
   }
 
