@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iif/domain/include.dart';
+import 'package:iif/presentation/extensions/money_x.dart';
 import 'package:iif/presentation/include.dart';
 
 class OperationMoney extends StatefulWidget {
@@ -28,11 +29,11 @@ class _OperationMoneyState extends State<OperationMoney> {
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(top: 4),
+                padding: const EdgeInsets.only(top: 18),
                 child: MoneyField(
                   initialValue: null,
                   onChanged: save,
-                  fontSize: 18,
+                  fontSize: 28,
                 ),
               ),
             ),
@@ -44,8 +45,6 @@ class _OperationMoneyState extends State<OperationMoney> {
   }
 
   void save(String text) {
-    print("money changed: $text");
-    // widget._sum = moneyField.value;
-    // widget._currency = currencySelector.value;
+    widget.onMoneyChanged(MoneyX.fromString(text));
   }
 }

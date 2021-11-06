@@ -61,4 +61,20 @@ class AddOperationBloc extends Cubit<AddOperationState> {
       orElse: () {},
     );
   }
+
+  void commentChanged(String text) {
+    print("comment: $text");
+  }
+
+  void moneyChanged(Money money) {
+    print("money: $money");
+  }
+
+  void accountFromChanged(Account account) {
+    print("from: $account");
+  }
+
+  void accountToChanged(account) {
+    print("to: $account");
+  }
 }

@@ -28,6 +28,9 @@ class _EditableChipState extends State<EditableChip> {
     controller.text = widget.initialText ?? "";
   }
 
+  final backgroundColor = Style.highlightColor;
+  final textColor = Style.blackColor;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -43,15 +46,15 @@ class _EditableChipState extends State<EditableChip> {
             scrollPadding: EdgeInsets.zero,
             autofocus: true,
             controller: controller,
-            cursorColor: Colors.white,
-            style: const TextStyle(color: Colors.white, fontSize: 14),
+            cursorColor: textColor,
+            style: TextStyle(color: textColor, fontSize: 14),
             textAlign: TextAlign.start,
             textAlignVertical: TextAlignVertical.top,
             onSubmitted: (s) {
               widget.doneEditing(s);
             },
           ),
-          backgroundColor: Style.accentColor,
+          backgroundColor: backgroundColor,
           onDeleted: () {
             // widget.doneEditing(isDeleteModeOnly ? "" : controller.text);
             widget.doneEditing(controller.text);
@@ -60,14 +63,14 @@ class _EditableChipState extends State<EditableChip> {
           deleteIcon: CircleAvatar(
             backgroundColor: Colors.white.withAlpha(80),
             child: isDoneIcon
-                ? const Icon(
+                ? Icon(
                     Icons.done,
-                    color: Colors.white,
+                    color: textColor,
                     size: 16,
                   )
-                : const Icon(
+                : Icon(
                     Icons.clear,
-                    color: Colors.white,
+                    color: textColor,
                     size: 16,
                   ),
           ),

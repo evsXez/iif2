@@ -44,12 +44,12 @@ class CategoryChip extends StatelessWidget {
         label: Text(
           node.category.name,
           style: TextStyle(
-            color: node.isSelected ? Style.whiteColor : Style.blackColor,
+            color: node.isSelected ? Style.blackColor : Style.blackColor,
           ),
         ),
         selected: node.isSelected,
         backgroundColor: Style.grayColor.withAlpha(25),
-        selectedColor: Style.accentColor,
+        selectedColor: Style.highlightColor,
         shadowColor: Style.blackColor,
         onSelected: (_) => onTap(),
       ),

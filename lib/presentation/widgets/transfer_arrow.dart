@@ -24,25 +24,30 @@ class TransferArrow extends StatelessWidget {
           alignment: Alignment.centerRight,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 4),
+              padding: const EdgeInsets.only(
+                bottom: 0,
+                left: 2,
+                right: 2,
+              ),
               child: Text(
-                "➤",
+                "➤➤➤",
                 style: TextStyle(
                   color: color,
-                  fontSize: isSmall ? 14 : 24,
+                  fontSize: isSmall ? 10 : 16,
+                  letterSpacing: -3,
                 ),
               ),
             ),
-            Container(
-              // width: double.infinity,
-              width: isSmall ? 16 : 40,
-              height: isSmall ? 1.3 : 2,
-              decoration: BoxDecoration(
-                color: color,
-              ),
-              margin: EdgeInsets.only(right: 8, left: 0, bottom: isSmall ? 1 : 0),
-            ),
-            // Icon(Icons.arrow_right, size: 48, color: StyleColors.accent),
+            // Container(
+            //   // width: double.infinity,
+            //   width: isSmall ? 16 : 40,
+            //   height: isSmall ? 1.3 : 2,
+            //   decoration: BoxDecoration(
+            //     color: color,
+            //   ),
+            //   margin: EdgeInsets.only(right: 8, left: 0, bottom: isSmall ? 1 : 0),
+            // ),
+            // Icon(Icons.arrow_right, size: 48, color: Style.accentColor),
           ],
         ));
   }

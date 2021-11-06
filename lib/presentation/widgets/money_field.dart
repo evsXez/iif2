@@ -47,8 +47,8 @@ class MoneyField extends StatelessWidget {
 class MoneyFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    debugPrint("old: ${oldValue.text}");
-    debugPrint("new: ${newValue.text}");
+    // debugPrint("old: ${oldValue.text}");
+    // debugPrint("new: ${newValue.text}");
 
     String newValueText = newValue.text.replaceAll(",", ".");
     if (newValueText.length >= "100 000 000 0000.00".length) return oldValue;
