@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:iif/domain/entities/enums/category_type.dart';
+import 'package:iif/presentation/blocs/add_operation_bloc/add_operation_bloc.dart';
 import 'package:iif/presentation/include.dart';
 import 'package:iif/presentation/pages/add_operation/widgets/account_selector.dart';
 import 'package:iif/presentation/pages/add_operation/widgets/category_selector.dart';
 import 'package:iif/presentation/pages/add_operation/widgets/date_selector.dart';
+import 'package:iif/presentation/pages/add_operation/widgets/frame.dart';
 import 'package:iif/presentation/pages/add_operation/widgets/month_selector.dart';
 import 'package:iif/presentation/pages/add_operation/widgets/operation_money.dart';
 import 'package:iif/presentation/pages/add_operation/widgets/year_selector.dart';
+import 'package:iif/presentation/pages/main/widgets/account_item.dart';
 
 class AddOperationPage extends StatefulWidget {
   const AddOperationPage({Key? key}) : super(key: key);
@@ -17,7 +20,6 @@ class AddOperationPage extends StatefulWidget {
 
 class _AddOperationPageState extends State<AddOperationPage> with TickerProviderStateMixin {
   bool isObjectsBlockVisible = false;
-  bool isMoneyBlockVisible = false;
   bool get isLocationsBlockVisible => isLocationFromVisible || isLocationToVisible;
   bool get isLocationsArrowVisible => operationCategory == CategoryType.transfer;
   bool isLocationFromVisible = false;
@@ -27,7 +29,7 @@ class _AddOperationPageState extends State<AddOperationPage> with TickerProvider
   CategoryType? operationCategory;
   AccountSelector? accountSelectorFrom;
   AccountSelector? accountSelectorTo;
-  OperationMoney? opMoney;
+  // OperationMoney? opMoney;
   late CategorySelector categorySelector;
   DateSelector? statsDateSelector;
   MonthSelector? statsMonthSelector;
@@ -39,12 +41,18 @@ class _AddOperationPageState extends State<AddOperationPage> with TickerProvider
   // Animation<double> animationLocations;
   // AnimationController animationControllerLocations;
 
+  late CategorySelectorBloc _categorySelectorBloc;
+  late AddOperationBloc _addOperationBloc;
+
   void initState() {
     super.initState();
     categorySelector = CategorySelector(
         // isObject: false,
         // onCategoryChanged: onCategoryChanged,
         );
+
+    _categorySelectorBloc = CategorySelectorBloc(context);
+    _addOperationBloc = AddOperationBloc(context, categorySelectorBloc: _categorySelectorBloc);
 
     // animationControllerSum = AnimationController(vsync: this, duration: Duration(milliseconds: 200));
     // animationSum = CurvedAnimation(
@@ -57,55 +65,77 @@ class _AddOperationPageState extends State<AddOperationPage> with TickerProvider
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> items = [
-      const SizedBox(height: 8),
-      categorySelector,
-      objectSelector,
-      const SizedBox(height: 16),
-    ];
-
-    if (operationCategory != null) {
-      items.add(Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4),
-          child: Column(children: [
-            /*highlightable(*/ frame(locations, B: false),
-            /* animationLocations),*/
-            Row(children: [
-              Expanded(
-                flex: 5,
-                child: /*highlightable(*/ frame(money, R: false), /*animationSum)*/
-              ),
-              Expanded(flex: 4, child: frame(dates)),
-            ]),
-            frame(commentField, T: false),
-          ])));
-    }
-
     return Scaffold(
-        backgroundColor: Style.lightGrayColor,
-        appBar: AppBar(
-          primary: true,
-          backgroundColor: Style.accentColor,
-          centerTitle: false,
-          leading: null,
-          automaticallyImplyLeading: true,
-          title: Text(Strings.title_new_operation,
-              style: const TextStyle(
-                color: Style.whiteColor,
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              )),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.done),
+      backgroundColor: Style.lightGrayColor,
+      appBar: AppBar(
+        primary: true,
+        backgroundColor: Style.accentColor,
+        centerTitle: false,
+        leading: null,
+        automaticallyImplyLeading: true,
+        title: Text(Strings.title_new_operation,
+            style: const TextStyle(
               color: Style.whiteColor,
-              onPressed: save,
-            )
-          ],
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            )),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.done),
+            color: Style.whiteColor,
+            onPressed: save,
+          )
+        ],
+      ),
+      body: BlocProvider<CategorySelectorBloc>(
+        create: (_) => _categorySelectorBloc,
+        child: BlocBuilder<AddOperationBloc, AddOperationState>(
+          bloc: _addOperationBloc,
+          builder: (context, state) {
+            // items.add(
+            //   Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 4),
+            //     child: Column(
+            //       children: [
+            //         /*highlightable(*/ Frame(child: locations),
+            //         /* animationLocations),*/
+            //         Row(children: [
+            //           Expanded(
+            //             flex: 5,
+            //             child: /*highlightable(*/ Frame(
+            //                 child: Visibility(
+            //                     visible: isMoneyBlockVisible, child: opMoney = OperationMoney())), /*animationSum)*/
+            //           ),
+            //           Expanded(flex: 4, child: Frame(child: dates)),
+            //         ]),
+            //         Frame(child: commentField),
+            //       ],
+            //     ),
+            //   ),
+            // );
+
+            return state.map(
+              visibility: (visibility) => ListView(
+                children: [
+                  const SizedBox(height: 8),
+                  categorySelector,
+                  objectSelector,
+                  const SizedBox(height: 16),
+                  Visibility(
+                    visible: visibility.money,
+                    child: Frame(
+                      child: OperationMoney(
+                        onMoneyChanged: (money) {},
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
-        body: ListView(
-          children: items,
-        ));
+      ),
+    );
   }
 
   Widget highlightable(Widget child, Animation<double> animation) {
@@ -132,7 +162,6 @@ class _AddOperationPageState extends State<AddOperationPage> with TickerProvider
         ),
       ));
 
-  Widget get money => Visibility(visible: isMoneyBlockVisible, child: opMoney = OperationMoney());
   Widget get dates => Column(
         children: [
           statsDateSelector = DateSelector(),
@@ -186,26 +215,6 @@ class _AddOperationPageState extends State<AddOperationPage> with TickerProvider
         ),
       );
 
-  Widget frame(Widget child, {bool L = true, bool T = true, bool R = true, bool B = true}) {
-    const border = BorderSide(color: Style.lightGrayColor, width: 8);
-    return Card(
-      color: Colors.white,
-      child: Container(
-        height: 80,
-        // decoration: BoxDecoration(
-        //   // color: StyleColors.gray,
-        //   border: Border(
-        //     left: L ? border : BorderSide.none,
-        //     top: T ? border : BorderSide.none,
-        //     right: R ? border : BorderSide.none,
-        //     bottom: B ? border : BorderSide.none,
-        //   ),
-        // ),
-        child: child,
-      ),
-    );
-  }
-
   void onCategoryChanged(CategoryType? category) {
     if (operationCategory == category) return;
 
@@ -256,7 +265,7 @@ class _AddOperationPageState extends State<AddOperationPage> with TickerProvider
   void setVisibility(bool objects, bool money, bool locationFrom, bool locationTo, bool comment) {
     setState(() {
       isObjectsBlockVisible = objects;
-      isMoneyBlockVisible = money;
+      // isMoneyBlockVisible = money;
       isLocationFromVisible = locationFrom;
       isLocationToVisible = locationTo;
       isCommentVisible = comment;
@@ -270,7 +279,7 @@ class _AddOperationPageState extends State<AddOperationPage> with TickerProvider
     final bool transferLocationsAreDifferent =
         (operationCategory == CategoryType.transfer && accountSelectorFrom?.value != accountSelectorTo?.value) ||
             operationCategory != CategoryType.transfer;
-    final bool sumIsEmpty = opMoney?.sum == null;
+    final bool sumIsEmpty = true; //opMoney?.sum == null;
 
     if (!transferLocationsAreDifferent) {
       // highlightLocations();

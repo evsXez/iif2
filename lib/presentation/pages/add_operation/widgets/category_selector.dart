@@ -11,20 +11,16 @@ class CategorySelector extends StatefulWidget {
 }
 
 class _CategorySelectorState extends State<CategorySelector> {
-  late CategorySelectorBloc _bloc;
-
   @override
   void initState() {
     super.initState();
-
-    _bloc = CategorySelectorBloc(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CategorySelectorBloc, CategorySelectorState>(
-      bloc: _bloc,
       builder: (context, state) {
+        final bloc = BlocProvider.of<CategorySelectorBloc>(context);
         return state.map(
           loading: (_) => const Center(child: CircularProgressIndicator()),
           loaded: (state) => Wrap(
@@ -35,16 +31,16 @@ class _CategorySelectorState extends State<CategorySelector> {
                     child: CategoryChip(
                         node: ref.node,
                         onTap: () {
-                          _bloc.tap(ref.node);
+                          bloc.tap(ref.node);
                         },
                         onSave: (text) {
-                          _bloc.save(ref.node, text);
+                          bloc.save(ref.node, text);
                         },
                         onDelete: () {
-                          _bloc.delete(ref.node);
+                          bloc.delete(ref.node);
                         },
                         onLongPress: () {
-                          _bloc.edit(ref.node);
+                          bloc.edit(ref.node);
                         }),
                   ),
                 )
