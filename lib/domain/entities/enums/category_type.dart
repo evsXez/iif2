@@ -1,4 +1,4 @@
-enum OperationCategory {
+enum CategoryType {
   expense,
   income,
   transfer,

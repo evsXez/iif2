@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iif/domain/entities/enums/operation_category.dart';
+import 'package:iif/domain/entities/enums/category_type.dart';
 import 'package:iif/presentation/include.dart';
 import 'package:iif/presentation/pages/add_operation/widgets/account_selector.dart';
 import 'package:iif/presentation/pages/add_operation/widgets/category_selector.dart';
@@ -19,12 +19,12 @@ class _AddOperationPageState extends State<AddOperationPage> with TickerProvider
   bool isObjectsBlockVisible = false;
   bool isMoneyBlockVisible = false;
   bool get isLocationsBlockVisible => isLocationFromVisible || isLocationToVisible;
-  bool get isLocationsArrowVisible => operationCategory == OperationCategory.transfer;
+  bool get isLocationsArrowVisible => operationCategory == CategoryType.transfer;
   bool isLocationFromVisible = false;
   bool isLocationToVisible = false;
   bool isCommentVisible = false;
 
-  OperationCategory? operationCategory;
+  CategoryType? operationCategory;
   AccountSelector? accountSelectorFrom;
   AccountSelector? accountSelectorTo;
   OperationMoney? opMoney;
@@ -42,8 +42,9 @@ class _AddOperationPageState extends State<AddOperationPage> with TickerProvider
   void initState() {
     super.initState();
     categorySelector = CategorySelector(
-      onCategoryChanged: onCategoryChanged,
-    );
+        // isObject: false,
+        // onCategoryChanged: onCategoryChanged,
+        );
 
     // animationControllerSum = AnimationController(vsync: this, duration: Duration(milliseconds: 200));
     // animationSum = CurvedAnimation(
@@ -117,8 +118,9 @@ class _AddOperationPageState extends State<AddOperationPage> with TickerProvider
   Widget get objectSelector => Visibility(
       visible: isObjectsBlockVisible,
       child: CategorySelector(
-        isObject: true,
-      ));
+          // isObject: true,
+          // onCategoryChanged: (_) {},
+          ));
   Widget get commentField => Visibility(
       visible: isCommentVisible,
       child: Padding(
@@ -151,7 +153,7 @@ class _AddOperationPageState extends State<AddOperationPage> with TickerProvider
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Visibility(
-                visible: isLocationFromVisible && operationCategory != OperationCategory.transfer,
+                visible: isLocationFromVisible && operationCategory != CategoryType.transfer,
                 child: const TransferArrow(
                   right: false,
                   isSmall: false,
@@ -162,7 +164,7 @@ class _AddOperationPageState extends State<AddOperationPage> with TickerProvider
                 child: Expanded(
                   child: accountSelectorFrom = AccountSelector(
                     alignment:
-                        operationCategory == OperationCategory.transfer ? Alignment.centerRight : Alignment.centerLeft,
+                        operationCategory == CategoryType.transfer ? Alignment.centerRight : Alignment.centerLeft,
                   ),
                 ),
               ),
@@ -204,7 +206,7 @@ class _AddOperationPageState extends State<AddOperationPage> with TickerProvider
     );
   }
 
-  void onCategoryChanged(OperationCategory category) {
+  void onCategoryChanged(CategoryType? category) {
     if (operationCategory == category) return;
 
     operationCategory = category;
@@ -213,37 +215,37 @@ class _AddOperationPageState extends State<AddOperationPage> with TickerProvider
       return;
     }
     switch (category) {
-      case OperationCategory.expense:
+      case CategoryType.expense:
         {
           setVisibility(false, true, true, false, true);
           break;
         }
-      case OperationCategory.income:
+      case CategoryType.income:
         {
           setVisibility(false, true, false, true, true);
           break;
         }
-      case OperationCategory.transfer:
+      case CategoryType.transfer:
         {
           setVisibility(false, true, true, true, true);
           break;
         }
-      case OperationCategory.debtNew:
+      case CategoryType.debtNew:
         {
           setVisibility(true, true, false, true, true);
           break;
         }
-      case OperationCategory.debtReturn:
+      case CategoryType.debtReturn:
         {
           setVisibility(true, true, true, false, true);
           break;
         }
-      case OperationCategory.debtToMe:
+      case CategoryType.debtToMe:
         {
           setVisibility(true, true, true, false, true);
           break;
         }
-      case OperationCategory.debtReturnedToMe:
+      case CategoryType.debtReturnedToMe:
         {
           setVisibility(true, true, false, true, true);
           break;
@@ -266,8 +268,8 @@ class _AddOperationPageState extends State<AddOperationPage> with TickerProvider
         (isLocationFromVisible && accountSelectorFrom?.value != null) || !isLocationFromVisible;
     final bool toSelectedOrSkipped = (isLocationToVisible && accountSelectorTo?.value != null) || !isLocationToVisible;
     final bool transferLocationsAreDifferent =
-        (operationCategory == OperationCategory.transfer && accountSelectorFrom?.value != accountSelectorTo?.value) ||
-            operationCategory != OperationCategory.transfer;
+        (operationCategory == CategoryType.transfer && accountSelectorFrom?.value != accountSelectorTo?.value) ||
+            operationCategory != CategoryType.transfer;
     final bool sumIsEmpty = opMoney?.sum == null;
 
     if (!transferLocationsAreDifferent) {
