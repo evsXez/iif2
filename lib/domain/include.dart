@@ -7,6 +7,7 @@ export 'package:iif/domain/entities/account_balance.dart';
 export 'package:iif/domain/entities/atomic_operation.dart';
 export 'package:iif/domain/entities/account_options.dart';
 export 'package:iif/domain/entities/category.dart';
+export 'package:iif/domain/entities/category_node.dart';
 
 //enums
 export 'package:iif/domain/entities/enums/account_type.dart';
