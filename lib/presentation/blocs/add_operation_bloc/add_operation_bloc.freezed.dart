@@ -17,18 +17,24 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$AddOperationStateTearOff {
   const _$AddOperationStateTearOff();
 
+  _Idle idle() {
+    return const _Idle();
+  }
+
   _Visibility visibility(
       {required bool objects,
       required bool locationFrom,
       required bool locationTo,
       required bool money,
-      required bool comment}) {
+      required bool comment,
+      required List<AccountBalance> accountsBalance}) {
     return _Visibility(
       objects: objects,
       locationFrom: locationFrom,
       locationTo: locationTo,
       money: money,
       comment: comment,
+      accountsBalance: accountsBalance,
     );
   }
 }
@@ -38,53 +44,49 @@ const $AddOperationState = _$AddOperationStateTearOff();
 
 /// @nodoc
 mixin _$AddOperationState {
-  bool get objects => throw _privateConstructorUsedError;
-  bool get locationFrom => throw _privateConstructorUsedError;
-  bool get locationTo => throw _privateConstructorUsedError;
-  bool get money => throw _privateConstructorUsedError;
-  bool get comment => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() idle,
     required TResult Function(bool objects, bool locationFrom, bool locationTo,
-            bool money, bool comment)
+            bool money, bool comment, List<AccountBalance> accountsBalance)
         visibility,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? idle,
     TResult Function(bool objects, bool locationFrom, bool locationTo,
-            bool money, bool comment)?
+            bool money, bool comment, List<AccountBalance> accountsBalance)?
         visibility,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? idle,
     TResult Function(bool objects, bool locationFrom, bool locationTo,
-            bool money, bool comment)?
+            bool money, bool comment, List<AccountBalance> accountsBalance)?
         visibility,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Idle value) idle,
     required TResult Function(_Visibility value) visibility,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Idle value)? idle,
     TResult Function(_Visibility value)? visibility,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Idle value)? idle,
     TResult Function(_Visibility value)? visibility,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $AddOperationStateCopyWith<AddOperationState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -93,12 +95,6 @@ abstract class $AddOperationStateCopyWith<$Res> {
   factory $AddOperationStateCopyWith(
           AddOperationState value, $Res Function(AddOperationState) then) =
       _$AddOperationStateCopyWithImpl<$Res>;
-  $Res call(
-      {bool objects,
-      bool locationFrom,
-      bool locationTo,
-      bool money,
-      bool comment});
 }
 
 /// @nodoc
@@ -109,53 +105,127 @@ class _$AddOperationStateCopyWithImpl<$Res>
   final AddOperationState _value;
   // ignore: unused_field
   final $Res Function(AddOperationState) _then;
-
-  @override
-  $Res call({
-    Object? objects = freezed,
-    Object? locationFrom = freezed,
-    Object? locationTo = freezed,
-    Object? money = freezed,
-    Object? comment = freezed,
-  }) {
-    return _then(_value.copyWith(
-      objects: objects == freezed
-          ? _value.objects
-          : objects // ignore: cast_nullable_to_non_nullable
-              as bool,
-      locationFrom: locationFrom == freezed
-          ? _value.locationFrom
-          : locationFrom // ignore: cast_nullable_to_non_nullable
-              as bool,
-      locationTo: locationTo == freezed
-          ? _value.locationTo
-          : locationTo // ignore: cast_nullable_to_non_nullable
-              as bool,
-      money: money == freezed
-          ? _value.money
-          : money // ignore: cast_nullable_to_non_nullable
-              as bool,
-      comment: comment == freezed
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class _$VisibilityCopyWith<$Res>
-    implements $AddOperationStateCopyWith<$Res> {
+abstract class _$IdleCopyWith<$Res> {
+  factory _$IdleCopyWith(_Idle value, $Res Function(_Idle) then) =
+      __$IdleCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$IdleCopyWithImpl<$Res> extends _$AddOperationStateCopyWithImpl<$Res>
+    implements _$IdleCopyWith<$Res> {
+  __$IdleCopyWithImpl(_Idle _value, $Res Function(_Idle) _then)
+      : super(_value, (v) => _then(v as _Idle));
+
+  @override
+  _Idle get _value => super._value as _Idle;
+}
+
+/// @nodoc
+
+class _$_Idle implements _Idle {
+  const _$_Idle();
+
+  @override
+  String toString() {
+    return 'AddOperationState.idle()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _Idle);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() idle,
+    required TResult Function(bool objects, bool locationFrom, bool locationTo,
+            bool money, bool comment, List<AccountBalance> accountsBalance)
+        visibility,
+  }) {
+    return idle();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? idle,
+    TResult Function(bool objects, bool locationFrom, bool locationTo,
+            bool money, bool comment, List<AccountBalance> accountsBalance)?
+        visibility,
+  }) {
+    return idle?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? idle,
+    TResult Function(bool objects, bool locationFrom, bool locationTo,
+            bool money, bool comment, List<AccountBalance> accountsBalance)?
+        visibility,
+    required TResult orElse(),
+  }) {
+    if (idle != null) {
+      return idle();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Idle value) idle,
+    required TResult Function(_Visibility value) visibility,
+  }) {
+    return idle(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Idle value)? idle,
+    TResult Function(_Visibility value)? visibility,
+  }) {
+    return idle?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Idle value)? idle,
+    TResult Function(_Visibility value)? visibility,
+    required TResult orElse(),
+  }) {
+    if (idle != null) {
+      return idle(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Idle implements AddOperationState {
+  const factory _Idle() = _$_Idle;
+}
+
+/// @nodoc
+abstract class _$VisibilityCopyWith<$Res> {
   factory _$VisibilityCopyWith(
           _Visibility value, $Res Function(_Visibility) then) =
       __$VisibilityCopyWithImpl<$Res>;
-  @override
   $Res call(
       {bool objects,
       bool locationFrom,
       bool locationTo,
       bool money,
-      bool comment});
+      bool comment,
+      List<AccountBalance> accountsBalance});
 }
 
 /// @nodoc
@@ -176,6 +246,7 @@ class __$VisibilityCopyWithImpl<$Res>
     Object? locationTo = freezed,
     Object? money = freezed,
     Object? comment = freezed,
+    Object? accountsBalance = freezed,
   }) {
     return _then(_Visibility(
       objects: objects == freezed
@@ -198,6 +269,10 @@ class __$VisibilityCopyWithImpl<$Res>
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
               as bool,
+      accountsBalance: accountsBalance == freezed
+          ? _value.accountsBalance
+          : accountsBalance // ignore: cast_nullable_to_non_nullable
+              as List<AccountBalance>,
     ));
   }
 }
@@ -210,7 +285,8 @@ class _$_Visibility implements _Visibility {
       required this.locationFrom,
       required this.locationTo,
       required this.money,
-      required this.comment});
+      required this.comment,
+      required this.accountsBalance});
 
   @override
   final bool objects;
@@ -222,10 +298,12 @@ class _$_Visibility implements _Visibility {
   final bool money;
   @override
   final bool comment;
+  @override
+  final List<AccountBalance> accountsBalance;
 
   @override
   String toString() {
-    return 'AddOperationState.visibility(objects: $objects, locationFrom: $locationFrom, locationTo: $locationTo, money: $money, comment: $comment)';
+    return 'AddOperationState.visibility(objects: $objects, locationFrom: $locationFrom, locationTo: $locationTo, money: $money, comment: $comment, accountsBalance: $accountsBalance)';
   }
 
   @override
@@ -244,7 +322,11 @@ class _$_Visibility implements _Visibility {
             (identical(other.money, money) ||
                 const DeepCollectionEquality().equals(other.money, money)) &&
             (identical(other.comment, comment) ||
-                const DeepCollectionEquality().equals(other.comment, comment)));
+                const DeepCollectionEquality()
+                    .equals(other.comment, comment)) &&
+            (identical(other.accountsBalance, accountsBalance) ||
+                const DeepCollectionEquality()
+                    .equals(other.accountsBalance, accountsBalance)));
   }
 
   @override
@@ -254,7 +336,8 @@ class _$_Visibility implements _Visibility {
       const DeepCollectionEquality().hash(locationFrom) ^
       const DeepCollectionEquality().hash(locationTo) ^
       const DeepCollectionEquality().hash(money) ^
-      const DeepCollectionEquality().hash(comment);
+      const DeepCollectionEquality().hash(comment) ^
+      const DeepCollectionEquality().hash(accountsBalance);
 
   @JsonKey(ignore: true)
   @override
@@ -264,33 +347,39 @@ class _$_Visibility implements _Visibility {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() idle,
     required TResult Function(bool objects, bool locationFrom, bool locationTo,
-            bool money, bool comment)
+            bool money, bool comment, List<AccountBalance> accountsBalance)
         visibility,
   }) {
-    return visibility(objects, locationFrom, locationTo, money, comment);
+    return visibility(
+        objects, locationFrom, locationTo, money, comment, accountsBalance);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? idle,
     TResult Function(bool objects, bool locationFrom, bool locationTo,
-            bool money, bool comment)?
+            bool money, bool comment, List<AccountBalance> accountsBalance)?
         visibility,
   }) {
-    return visibility?.call(objects, locationFrom, locationTo, money, comment);
+    return visibility?.call(
+        objects, locationFrom, locationTo, money, comment, accountsBalance);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? idle,
     TResult Function(bool objects, bool locationFrom, bool locationTo,
-            bool money, bool comment)?
+            bool money, bool comment, List<AccountBalance> accountsBalance)?
         visibility,
     required TResult orElse(),
   }) {
     if (visibility != null) {
-      return visibility(objects, locationFrom, locationTo, money, comment);
+      return visibility(
+          objects, locationFrom, locationTo, money, comment, accountsBalance);
     }
     return orElse();
   }
@@ -298,6 +387,7 @@ class _$_Visibility implements _Visibility {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Idle value) idle,
     required TResult Function(_Visibility value) visibility,
   }) {
     return visibility(this);
@@ -306,6 +396,7 @@ class _$_Visibility implements _Visibility {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Idle value)? idle,
     TResult Function(_Visibility value)? visibility,
   }) {
     return visibility?.call(this);
@@ -314,6 +405,7 @@ class _$_Visibility implements _Visibility {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Idle value)? idle,
     TResult Function(_Visibility value)? visibility,
     required TResult orElse(),
   }) {
@@ -330,19 +422,16 @@ abstract class _Visibility implements AddOperationState {
       required bool locationFrom,
       required bool locationTo,
       required bool money,
-      required bool comment}) = _$_Visibility;
+      required bool comment,
+      required List<AccountBalance> accountsBalance}) = _$_Visibility;
 
-  @override
   bool get objects => throw _privateConstructorUsedError;
-  @override
   bool get locationFrom => throw _privateConstructorUsedError;
-  @override
   bool get locationTo => throw _privateConstructorUsedError;
-  @override
   bool get money => throw _privateConstructorUsedError;
-  @override
   bool get comment => throw _privateConstructorUsedError;
-  @override
+  List<AccountBalance> get accountsBalance =>
+      throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$VisibilityCopyWith<_Visibility> get copyWith =>
       throw _privateConstructorUsedError;

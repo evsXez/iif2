@@ -6,16 +6,18 @@ import 'package:iif/presentation/include.dart';
 class TransferArrow extends StatelessWidget {
   final bool right;
   final bool isSmall;
+  final Color? color;
 
   const TransferArrow({
     Key? key,
     required this.right,
     required this.isSmall,
+    this.color,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final color = isSmall ? Style.grayColor : Style.accentColor;
+    final color = this.color ?? (isSmall ? Style.grayColor : Style.accentColor);
     return Transform.rotate(
         angle: right ? 0 : pi,
         child: Stack(

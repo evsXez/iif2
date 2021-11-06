@@ -20,13 +20,10 @@ class AddOperationPage extends StatefulWidget {
 
 class _AddOperationPageState extends State<AddOperationPage> with TickerProviderStateMixin {
   bool isObjectsBlockVisible = false;
-  bool get isLocationsBlockVisible => isLocationFromVisible || isLocationToVisible;
-  bool get isLocationsArrowVisible => operationCategory == CategoryType.transfer;
-  bool isLocationFromVisible = false;
-  bool isLocationToVisible = false;
+  // bool get isLocationsArrowVisible => operationCategory == CategoryType.transfer;
   bool isCommentVisible = false;
 
-  CategoryType? operationCategory;
+  // CategoryType? operationCategory;
   AccountSelector? accountSelectorFrom;
   AccountSelector? accountSelectorTo;
   // OperationMoney? opMoney;
@@ -97,17 +94,8 @@ class _AddOperationPageState extends State<AddOperationPage> with TickerProvider
             //     padding: const EdgeInsets.symmetric(horizontal: 4),
             //     child: Column(
             //       children: [
-            //         /*highlightable(*/ Frame(child: locations),
+            //         /*highlightable(*/ ,
             //         /* animationLocations),*/
-            //         Row(children: [
-            //           Expanded(
-            //             flex: 5,
-            //             child: /*highlightable(*/ Frame(
-            //                 child: Visibility(
-            //                     visible: isMoneyBlockVisible, child: opMoney = OperationMoney())), /*animationSum)*/
-            //           ),
-            //           Expanded(flex: 4, child: Frame(child: dates)),
-            //         ]),
             //         Frame(child: commentField),
             //       ],
             //     ),
@@ -115,18 +103,90 @@ class _AddOperationPageState extends State<AddOperationPage> with TickerProvider
             // );
 
             return state.map(
+              idle: (_) => Center(child: categorySelector),
               visibility: (visibility) => ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
                 children: [
                   const SizedBox(height: 8),
                   categorySelector,
                   objectSelector,
                   const SizedBox(height: 16),
                   Visibility(
-                    visible: visibility.money,
+                    visible: visibility.locationFrom || visibility.locationTo,
                     child: Frame(
-                      child: OperationMoney(
-                        onMoneyChanged: (money) {},
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          // SizedBox(width: 24),
+                          Visibility(
+                            visible: visibility.locationFrom,
+                            child: Expanded(
+                              child: accountSelectorFrom = AccountSelector(
+                                alignment: visibility.locationFrom && visibility.locationTo
+                                    ? Alignment.centerRight
+                                    : Alignment.centerLeft,
+                                initialAccount: visibility.accountsBalance.first.account,
+                                onAccountChanged: (_) {},
+                                accountsBalance: visibility.accountsBalance,
+                              ),
+                            ),
+                          ),
+                          Visibility(
+                              visible: visibility.locationTo,
+                              child: Container(
+                                height: double.infinity,
+                                color: Style.highlightColor,
+                                child: const TransferArrow(
+                                  right: true,
+                                  isSmall: false,
+                                  color: Style.whiteColor,
+                                ),
+                              )),
+                          Visibility(
+                            visible: visibility.locationTo,
+                            child: Expanded(
+                              child: accountSelectorTo = AccountSelector(
+                                alignment: Alignment.centerLeft,
+                                initialAccount: visibility.accountsBalance.first.account,
+                                onAccountChanged: (_) {},
+                                accountsBalance: visibility.accountsBalance,
+                              ),
+                            ),
+                          ),
+                          // selectedCategory == OperationCategory.transfer ? SizedBox.shrink() : Expanded(flex: 1, child: SizedBox.shrink()),
+                          Visibility(
+                            visible: visibility.locationFrom && !visibility.locationTo,
+                            child: Container(
+                              height: double.infinity,
+                              color: Style.highlightColor,
+                              child: const TransferArrow(
+                                right: true,
+                                isSmall: false,
+                                color: Style.whiteColor,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: visibility.money,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: Frame(
+                            child: OperationMoney(
+                              onMoneyChanged: (money) {},
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 4,
+                          child: Frame(child: dates),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -164,133 +224,114 @@ class _AddOperationPageState extends State<AddOperationPage> with TickerProvider
 
   Widget get dates => Column(
         children: [
-          statsDateSelector = DateSelector(),
+          statsDateSelector = DateSelector(
+            initialDate: DateTime.now(),
+            onDateChanged: (_) {},
+          ),
           Expanded(
               child: Row(
             children: [
-              Expanded(child: statsMonthSelector = MonthSelector()),
-              Expanded(child: statsYearSelector = YearSelector())
+              Expanded(
+                child: statsMonthSelector = MonthSelector(
+                  initialMonth: DateTime.now().month,
+                  onMonthChanged: (_) {},
+                ),
+              ),
+              Expanded(
+                child: statsYearSelector = YearSelector(
+                  initialYear: DateTime.now().year,
+                  onYearChanged: (_) {},
+                ),
+              )
             ],
           ))
         ],
       );
-  Widget get locations => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Visibility(
-          visible: isLocationsBlockVisible,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Visibility(
-                visible: isLocationFromVisible && operationCategory != CategoryType.transfer,
-                child: const TransferArrow(
-                  right: false,
-                  isSmall: false,
-                ),
-              ),
-              Visibility(
-                visible: isLocationFromVisible,
-                child: Expanded(
-                  child: accountSelectorFrom = AccountSelector(
-                    alignment:
-                        operationCategory == CategoryType.transfer ? Alignment.centerRight : Alignment.centerLeft,
-                  ),
-                ),
-              ),
-              Visibility(
-                  visible: isLocationToVisible,
-                  child: const TransferArrow(
-                    right: true,
-                    isSmall: false,
-                  )),
-              Visibility(
-                visible: isLocationToVisible,
-                child: Expanded(
-                  child: accountSelectorTo = const AccountSelector(alignment: Alignment.centerLeft),
-                ),
-              ),
-              // selectedCategory == OperationCategory.transfer ? SizedBox.shrink() : Expanded(flex: 1, child: SizedBox.shrink()),
-            ],
-          ),
-        ),
-      );
+  // Widget get locations => Padding(
+  //       padding: const EdgeInsets.symmetric(horizontal: 8),
+  //       child: Visibility(
+  //         visible: isLocationsBlockVisible,
+  //         child: ,
+  //       ),
+  //     );
 
-  void onCategoryChanged(CategoryType? category) {
-    if (operationCategory == category) return;
+  // void onCategoryChanged(CategoryType? category) {
+  //   if (operationCategory == category) return;
 
-    operationCategory = category;
-    if (category == null) {
-      setVisibility(false, false, false, false, false);
-      return;
-    }
-    switch (category) {
-      case CategoryType.expense:
-        {
-          setVisibility(false, true, true, false, true);
-          break;
-        }
-      case CategoryType.income:
-        {
-          setVisibility(false, true, false, true, true);
-          break;
-        }
-      case CategoryType.transfer:
-        {
-          setVisibility(false, true, true, true, true);
-          break;
-        }
-      case CategoryType.debtNew:
-        {
-          setVisibility(true, true, false, true, true);
-          break;
-        }
-      case CategoryType.debtReturn:
-        {
-          setVisibility(true, true, true, false, true);
-          break;
-        }
-      case CategoryType.debtToMe:
-        {
-          setVisibility(true, true, true, false, true);
-          break;
-        }
-      case CategoryType.debtReturnedToMe:
-        {
-          setVisibility(true, true, false, true, true);
-          break;
-        }
-    }
-  }
+  //   operationCategory = category;
+  //   if (category == null) {
+  //     setVisibility(false, false, false, false, false);
+  //     return;
+  //   }
+  //   switch (category) {
+  //     case CategoryType.expense:
+  //       {
+  //         setVisibility(false, true, true, false, true);
+  //         break;
+  //       }
+  //     case CategoryType.income:
+  //       {
+  //         setVisibility(false, true, false, true, true);
+  //         break;
+  //       }
+  //     case CategoryType.transfer:
+  //       {
+  //         setVisibility(false, true, true, true, true);
+  //         break;
+  //       }
+  //     case CategoryType.debtNew:
+  //       {
+  //         setVisibility(true, true, false, true, true);
+  //         break;
+  //       }
+  //     case CategoryType.debtReturn:
+  //       {
+  //         setVisibility(true, true, true, false, true);
+  //         break;
+  //       }
+  //     case CategoryType.debtToMe:
+  //       {
+  //         setVisibility(true, true, true, false, true);
+  //         break;
+  //       }
+  //     case CategoryType.debtReturnedToMe:
+  //       {
+  //         setVisibility(true, true, false, true, true);
+  //         break;
+  //       }
+  //   }
+  // }
 
   void setVisibility(bool objects, bool money, bool locationFrom, bool locationTo, bool comment) {
-    setState(() {
-      isObjectsBlockVisible = objects;
-      // isMoneyBlockVisible = money;
-      isLocationFromVisible = locationFrom;
-      isLocationToVisible = locationTo;
-      isCommentVisible = comment;
-    });
+    // setState(() {
+    //   isObjectsBlockVisible = objects;
+    //   // isMoneyBlockVisible = money;
+    //   isLocationFromVisible = locationFrom;
+    //   isLocationToVisible = locationTo;
+    //   isCommentVisible = comment;
+    // });
   }
 
   bool get isAllDataEntered {
-    final bool fromSelectedOrSkipped =
-        (isLocationFromVisible && accountSelectorFrom?.value != null) || !isLocationFromVisible;
-    final bool toSelectedOrSkipped = (isLocationToVisible && accountSelectorTo?.value != null) || !isLocationToVisible;
-    final bool transferLocationsAreDifferent =
-        (operationCategory == CategoryType.transfer && accountSelectorFrom?.value != accountSelectorTo?.value) ||
-            operationCategory != CategoryType.transfer;
-    final bool sumIsEmpty = true; //opMoney?.sum == null;
+    // final bool fromSelectedOrSkipped =
+    //     (isLocationFromVisible && accountSelectorFrom?.value != null) || !isLocationFromVisible;
+    // final bool toSelectedOrSkipped = (isLocationToVisible && accountSelectorTo?.value != null) || !isLocationToVisible;
+    // final bool transferLocationsAreDifferent =
+    //     (operationCategory == CategoryType.transfer && accountSelectorFrom?.value != accountSelectorTo?.value) ||
+    //         operationCategory != CategoryType.transfer;
+    // final bool sumIsEmpty = true; //opMoney?.sum == null;
 
-    if (!transferLocationsAreDifferent) {
-      // highlightLocations();
-      return false;
-    }
-    if (sumIsEmpty) {
-      // highlightSum();
-      return false;
-    }
+    // if (!transferLocationsAreDifferent) {
+    //   // highlightLocations();
+    //   return false;
+    // }
+    // if (sumIsEmpty) {
+    //   // highlightSum();
+    //   return false;
+    // }
 
-    return !sumIsEmpty && fromSelectedOrSkipped && toSelectedOrSkipped && transferLocationsAreDifferent;
+    // return !sumIsEmpty && fromSelectedOrSkipped && toSelectedOrSkipped && transferLocationsAreDifferent;
+    return true;
   }
 
   // void highlightSum() {

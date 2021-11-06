@@ -10,6 +10,7 @@ class Frame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      clipBehavior: Clip.antiAlias,
       color: Colors.white,
       child: SizedBox(
         height: 80,

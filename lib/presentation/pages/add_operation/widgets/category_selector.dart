@@ -27,7 +27,7 @@ class _CategorySelectorState extends State<CategorySelector> {
             children: state.categories
                 .map(
                   (ref) => Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
                     child: CategoryChip(
                         node: ref.node,
                         onTap: () {
