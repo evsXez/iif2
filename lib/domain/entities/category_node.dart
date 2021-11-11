@@ -8,8 +8,6 @@ class Node<T> with EquatableMixin {
   bool isEditing;
   final bool isLocked;
 
-  ///disabled for editing, unable to remove
-
   Node({
     required this.value,
     required this.children,
@@ -21,12 +19,4 @@ class Node<T> with EquatableMixin {
 
   @override
   List<Object?> get props => [value, isSelected, isEditing];
-
-  // factory Node.clone(Node of, T value) => Node(
-  //       value: value, // Category(of.value.name)
-  //       children: of.children.map((it) => Node.clone(it)).toList(),
-  //       canHaveMoreChildren: of.canHaveMoreChildren,
-  //       isSelected: of.isSelected,
-  //       isEditing: of.isEditing,
-  //     );
 }

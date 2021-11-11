@@ -60,8 +60,16 @@ class _AddOperationPageState extends State<AddOperationPage> {
       ),
       body: BlocProvider<CategorySelectorBloc>(
         create: (_) => _categorySelectorBloc,
-        child: BlocBuilder<AddOperationBloc, AddOperationState>(
+        child: BlocConsumer<AddOperationBloc, AddOperationState>(
           bloc: _addOperationBloc,
+          listener: (context, state) {
+            state.maybeMap(
+              saved: (_) {
+                Navigation.pop();
+              },
+              orElse: () {},
+            );
+          },
           builder: (context, state) {
             return state.map(
               idle: (_) => Container(
@@ -177,6 +185,7 @@ class _AddOperationPageState extends State<AddOperationPage> {
                   ),
                 ],
               ),
+              saved: (_) => const SizedBox.shrink(),
             );
           },
         ),
@@ -217,5 +226,7 @@ class _AddOperationPageState extends State<AddOperationPage> {
         ],
       );
 
-  void save() {}
+  void save() {
+    _addOperationBloc.trySave();
+  }
 }

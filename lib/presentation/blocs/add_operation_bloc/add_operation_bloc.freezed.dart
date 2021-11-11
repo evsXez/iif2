@@ -37,6 +37,10 @@ class _$AddOperationStateTearOff {
       accountsBalance: accountsBalance,
     );
   }
+
+  _Saved saved() {
+    return const _Saved();
+  }
 }
 
 /// @nodoc
@@ -50,6 +54,7 @@ mixin _$AddOperationState {
     required TResult Function(bool objects, bool locationFrom, bool locationTo,
             bool money, bool comment, List<AccountBalance> accountsBalance)
         visibility,
+    required TResult Function() saved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,6 +63,7 @@ mixin _$AddOperationState {
     TResult Function(bool objects, bool locationFrom, bool locationTo,
             bool money, bool comment, List<AccountBalance> accountsBalance)?
         visibility,
+    TResult Function()? saved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,6 +72,7 @@ mixin _$AddOperationState {
     TResult Function(bool objects, bool locationFrom, bool locationTo,
             bool money, bool comment, List<AccountBalance> accountsBalance)?
         visibility,
+    TResult Function()? saved,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -73,18 +80,21 @@ mixin _$AddOperationState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Idle value) idle,
     required TResult Function(_Visibility value) visibility,
+    required TResult Function(_Saved value) saved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Idle value)? idle,
     TResult Function(_Visibility value)? visibility,
+    TResult Function(_Saved value)? saved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Idle value)? idle,
     TResult Function(_Visibility value)? visibility,
+    TResult Function(_Saved value)? saved,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -148,6 +158,7 @@ class _$_Idle implements _Idle {
     required TResult Function(bool objects, bool locationFrom, bool locationTo,
             bool money, bool comment, List<AccountBalance> accountsBalance)
         visibility,
+    required TResult Function() saved,
   }) {
     return idle();
   }
@@ -159,6 +170,7 @@ class _$_Idle implements _Idle {
     TResult Function(bool objects, bool locationFrom, bool locationTo,
             bool money, bool comment, List<AccountBalance> accountsBalance)?
         visibility,
+    TResult Function()? saved,
   }) {
     return idle?.call();
   }
@@ -170,6 +182,7 @@ class _$_Idle implements _Idle {
     TResult Function(bool objects, bool locationFrom, bool locationTo,
             bool money, bool comment, List<AccountBalance> accountsBalance)?
         visibility,
+    TResult Function()? saved,
     required TResult orElse(),
   }) {
     if (idle != null) {
@@ -183,6 +196,7 @@ class _$_Idle implements _Idle {
   TResult map<TResult extends Object?>({
     required TResult Function(_Idle value) idle,
     required TResult Function(_Visibility value) visibility,
+    required TResult Function(_Saved value) saved,
   }) {
     return idle(this);
   }
@@ -192,6 +206,7 @@ class _$_Idle implements _Idle {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Idle value)? idle,
     TResult Function(_Visibility value)? visibility,
+    TResult Function(_Saved value)? saved,
   }) {
     return idle?.call(this);
   }
@@ -201,6 +216,7 @@ class _$_Idle implements _Idle {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Idle value)? idle,
     TResult Function(_Visibility value)? visibility,
+    TResult Function(_Saved value)? saved,
     required TResult orElse(),
   }) {
     if (idle != null) {
@@ -351,6 +367,7 @@ class _$_Visibility implements _Visibility {
     required TResult Function(bool objects, bool locationFrom, bool locationTo,
             bool money, bool comment, List<AccountBalance> accountsBalance)
         visibility,
+    required TResult Function() saved,
   }) {
     return visibility(
         objects, locationFrom, locationTo, money, comment, accountsBalance);
@@ -363,6 +380,7 @@ class _$_Visibility implements _Visibility {
     TResult Function(bool objects, bool locationFrom, bool locationTo,
             bool money, bool comment, List<AccountBalance> accountsBalance)?
         visibility,
+    TResult Function()? saved,
   }) {
     return visibility?.call(
         objects, locationFrom, locationTo, money, comment, accountsBalance);
@@ -375,6 +393,7 @@ class _$_Visibility implements _Visibility {
     TResult Function(bool objects, bool locationFrom, bool locationTo,
             bool money, bool comment, List<AccountBalance> accountsBalance)?
         visibility,
+    TResult Function()? saved,
     required TResult orElse(),
   }) {
     if (visibility != null) {
@@ -389,6 +408,7 @@ class _$_Visibility implements _Visibility {
   TResult map<TResult extends Object?>({
     required TResult Function(_Idle value) idle,
     required TResult Function(_Visibility value) visibility,
+    required TResult Function(_Saved value) saved,
   }) {
     return visibility(this);
   }
@@ -398,6 +418,7 @@ class _$_Visibility implements _Visibility {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Idle value)? idle,
     TResult Function(_Visibility value)? visibility,
+    TResult Function(_Saved value)? saved,
   }) {
     return visibility?.call(this);
   }
@@ -407,6 +428,7 @@ class _$_Visibility implements _Visibility {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Idle value)? idle,
     TResult Function(_Visibility value)? visibility,
+    TResult Function(_Saved value)? saved,
     required TResult orElse(),
   }) {
     if (visibility != null) {
@@ -435,4 +457,117 @@ abstract class _Visibility implements AddOperationState {
   @JsonKey(ignore: true)
   _$VisibilityCopyWith<_Visibility> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$SavedCopyWith<$Res> {
+  factory _$SavedCopyWith(_Saved value, $Res Function(_Saved) then) =
+      __$SavedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$SavedCopyWithImpl<$Res> extends _$AddOperationStateCopyWithImpl<$Res>
+    implements _$SavedCopyWith<$Res> {
+  __$SavedCopyWithImpl(_Saved _value, $Res Function(_Saved) _then)
+      : super(_value, (v) => _then(v as _Saved));
+
+  @override
+  _Saved get _value => super._value as _Saved;
+}
+
+/// @nodoc
+
+class _$_Saved implements _Saved {
+  const _$_Saved();
+
+  @override
+  String toString() {
+    return 'AddOperationState.saved()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _Saved);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() idle,
+    required TResult Function(bool objects, bool locationFrom, bool locationTo,
+            bool money, bool comment, List<AccountBalance> accountsBalance)
+        visibility,
+    required TResult Function() saved,
+  }) {
+    return saved();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? idle,
+    TResult Function(bool objects, bool locationFrom, bool locationTo,
+            bool money, bool comment, List<AccountBalance> accountsBalance)?
+        visibility,
+    TResult Function()? saved,
+  }) {
+    return saved?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? idle,
+    TResult Function(bool objects, bool locationFrom, bool locationTo,
+            bool money, bool comment, List<AccountBalance> accountsBalance)?
+        visibility,
+    TResult Function()? saved,
+    required TResult orElse(),
+  }) {
+    if (saved != null) {
+      return saved();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Idle value) idle,
+    required TResult Function(_Visibility value) visibility,
+    required TResult Function(_Saved value) saved,
+  }) {
+    return saved(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Idle value)? idle,
+    TResult Function(_Visibility value)? visibility,
+    TResult Function(_Saved value)? saved,
+  }) {
+    return saved?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Idle value)? idle,
+    TResult Function(_Visibility value)? visibility,
+    TResult Function(_Saved value)? saved,
+    required TResult orElse(),
+  }) {
+    if (saved != null) {
+      return saved(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Saved implements AddOperationState {
+  const factory _Saved() = _$_Saved;
 }

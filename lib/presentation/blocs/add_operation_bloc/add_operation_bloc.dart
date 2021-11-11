@@ -17,6 +17,8 @@ class AddOperationBloc extends Cubit<AddOperationState> {
   List<StreamSubscription> _obs = [];
   List<AccountBalance> _accountsBalance = [];
 
+  final _fields = _SelectedFields();
+
   AddOperationBloc(
     this._context, {
     required this.categorySelectorBloc,
@@ -26,6 +28,9 @@ class AddOperationBloc extends Cubit<AddOperationState> {
     //TODO: think what types allowed
     getAccountsBalanceUseCase.of(_context).execute(AccountType.money).then((value) {
       _accountsBalance = value;
+      final defaultAccount = _accountsBalance.first.account;
+      _fields.accountFrom = defaultAccount;
+      _fields.accountTo = defaultAccount;
     });
   }
 
@@ -40,12 +45,13 @@ class AddOperationBloc extends Cubit<AddOperationState> {
   void _onCategoriesChanged(CategorySelectorState state) {
     state.maybeMap(
       loaded: (data) {
-        final baseCategoryName = data.categories.where((ref) => ref.node.isSelected).firstOrNull?.node.value.name;
-        print("Base category: $baseCategoryName, accounts count: ${_accountsBalance.length}");
+        final baseCategory = data.categories.where((ref) => ref.node.isSelected).firstOrNull?.node.value;
+        _fields.baseCategory = baseCategory;
+        print("Base category: $baseCategory, accounts count: ${_accountsBalance.length}");
 
-        final isIncome = baseCategoryName == Strings.category_income;
-        final isExpense = baseCategoryName == Strings.category_expense;
-        final isTransfer = baseCategoryName == Strings.category_transfer;
+        final isIncome = baseCategory?.type == CategoryType.income;
+        final isExpense = baseCategory?.type == CategoryType.expense;
+        final isTransfer = baseCategory?.type == CategoryType.transfer;
 
         emit(
           _Visibility(
@@ -63,18 +69,69 @@ class AddOperationBloc extends Cubit<AddOperationState> {
   }
 
   void commentChanged(String text) {
-    print("comment: $text");
+    _fields.comment = text;
   }
 
   void moneyChanged(Money money) {
-    print("money: $money");
+    _fields.money = money;
   }
 
   void accountFromChanged(Account account) {
-    print("from: $account");
+    _fields.accountFrom = account;
   }
 
   void accountToChanged(account) {
-    print("to: $account");
+    _fields.accountTo = account;
+  }
+
+  void trySave() {
+    try {
+      _fields.validate();
+      addExpenseUseCase.of(_context).execute(_fields.accountFrom, _fields.money);
+      emit(const _Saved());
+    } on _BaseCategoryNotSelectedException catch (e) {
+      //TODO: emit validation error
+      print(e);
+    } catch (e) {
+      print(e);
+    }
   }
 }
+
+class _SelectedFields {
+  Category? baseCategory;
+  Account? accountFrom;
+  Account? accountTo;
+  Money? money;
+  String? comment;
+
+  void validate() {
+    if (baseCategory == null) {
+      throw _BaseCategoryNotSelectedException();
+    }
+    if (baseCategory == Strings.category_income && accountTo == null) {
+      throw _AccountToNotSelectedException();
+    }
+    if (baseCategory == Strings.category_expense && accountFrom == null) {
+      throw _AccountFromNotSelectedException();
+    }
+    if (baseCategory == Strings.category_transfer && (accountFrom == accountTo)) {
+      throw _TransferAccountsMustBeDifferentException();
+    }
+    if (money == null) {
+      throw _MoneyNotSelectedException();
+    }
+  }
+}
+
+class _BaseCategoryNotSelectedException {}
+
+class _MoneyNotSelectedException {}
+
+class _AccountFromNotSelectedException {}
+
+class _AccountToNotSelectedException {}
+
+class _TransferAccountsMustBeDifferentException {}
+
+class _UndefinedOperationException {}

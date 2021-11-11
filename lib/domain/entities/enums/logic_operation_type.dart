@@ -3,4 +3,5 @@ enum LogicOperationType {
   income,
   expense,
   transfer,
+  debts,
 }

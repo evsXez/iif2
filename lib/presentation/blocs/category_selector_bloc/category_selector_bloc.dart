@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:iif/domain/entities/category.dart';
-import 'package:iif/domain/entities/category_node.dart';
-import 'package:iif/domain/entities/category_node.dart';
+import 'package:iif/domain/include.dart';
 import 'package:iif/misc/di/providers.dart';
 import 'package:iif/presentation/include.dart';
 
@@ -10,42 +8,64 @@ part 'category_selector_state.dart';
 part 'category_selector_bloc.freezed.dart';
 
 final Node<Category> _categoriesPredefined = Node(
-    value: Category("[[ROOT]]"),
-    children: [
-      Node(value: Category(Strings.category_expense), children: [], isLocked: true),
-      Node(value: Category(Strings.category_income), children: [], isLocked: true),
-      Node(value: Category(Strings.category_transfer), children: [], canHaveMoreChildren: false, isLocked: true),
-      Node(
-          value: Category(Strings.category_debts),
-          children: [
-            Node(value: Category(Strings.category_debts_new), children: [], canHaveMoreChildren: false, isLocked: true),
-            Node(
-                value: Category(Strings.category_debts_return),
-                children: [],
-                canHaveMoreChildren: false,
-                isLocked: true),
-            Node(
-                value: Category(Strings.category_debts_to_me),
-                children: [],
-                canHaveMoreChildren: false,
-                isLocked: true),
-            Node(
-                value: Category(Strings.category_debts_returned_to_me),
-                children: [],
-                canHaveMoreChildren: false,
-                isLocked: true),
-          ],
+  value: Category("", CategoryType.special),
+  children: [
+    Node(
+      value: Category(Strings.category_expense, CategoryType.expense),
+      children: [],
+      isLocked: true,
+    ),
+    Node(
+      value: Category(Strings.category_income, CategoryType.income),
+      children: [],
+      isLocked: true,
+    ),
+    Node(
+      value: Category(Strings.category_transfer, CategoryType.transfer),
+      children: [],
+      canHaveMoreChildren: false,
+      isLocked: true,
+    ),
+    Node(
+      value: Category(Strings.category_debts, CategoryType.debts),
+      children: [
+        Node(
+          value: Category(Strings.category_debts_new, CategoryType.debtNew),
+          children: [],
           canHaveMoreChildren: false,
-          isLocked: true),
-    ],
-    canHaveMoreChildren: false,
-    isLocked: true);
+          isLocked: true,
+        ),
+        Node(
+          value: Category(Strings.category_debts_return, CategoryType.debtReturn),
+          children: [],
+          canHaveMoreChildren: false,
+          isLocked: true,
+        ),
+        Node(
+          value: Category(Strings.category_debts_to_me, CategoryType.debtToMe),
+          children: [],
+          canHaveMoreChildren: false,
+          isLocked: true,
+        ),
+        Node(
+          value: Category(Strings.category_debts_returned_to_me, CategoryType.debtReturnedToMe),
+          children: [],
+          canHaveMoreChildren: false,
+          isLocked: true,
+        ),
+      ],
+      canHaveMoreChildren: false,
+      isLocked: true,
+    ),
+  ],
+  canHaveMoreChildren: false,
+);
 
 class CategorySelectorBloc extends Cubit<CategorySelectorState> {
   final BuildContext _context;
 
   final Node<Category> _root = _categoriesPredefined;
-  final Node<Category> _addNode = Node(value: Category("+"), children: []);
+  final Node<Category> _addNode = Node(value: Category("+", CategoryType.special), children: []);
 
   CategorySelectorBloc(this._context) : super(const _Loading()) {
     // Future.delayed(Duration(seconds: 1)).then((_) {
@@ -90,10 +110,10 @@ class CategorySelectorBloc extends Cubit<CategorySelectorState> {
 
   void save(Node<Category> node, String text) {
     if (node == _addNode) {
-      final Node deepSelected = _firstDeepSelectedNode();
-      deepSelected.children.add(Node(value: Category(text), children: [], isSelected: true));
+      final Node<Category> deepSelected = _firstDeepSelectedNode();
+      deepSelected.children.add(Node(value: Category(text, deepSelected.value.type), children: [], isSelected: true));
     } else {
-      node.value = Category(text);
+      node.value = Category(text, node.value.type);
     }
     node.isEditing = false;
     _showData();
