@@ -52,4 +52,9 @@ class OperationsRepositoryImpl extends OperationsRepository {
   Future<List<LogicOperation>> getAllOperations() async {
     return _dataSource.getOperations();
   }
+
+  @override
+  void addOperationExpense(Account account, Money money) {
+    throw UnimplementedError();
+  }
 }

@@ -25,4 +25,17 @@ class LogicOperation {
           )
         ],
       );
+
+  factory LogicOperation.expense(Account account, Money money, {DateTime? created, String? comment}) => LogicOperation(
+        type: LogicOperationType.expense,
+        created: created ?? DateTime.now(),
+        comment: comment ?? "",
+        atomics: [
+          AtomicOperation(
+            money: money,
+            type: AtomicOperationType.expense,
+            account: account,
+          )
+        ],
+      );
 }

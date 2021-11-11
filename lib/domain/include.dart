@@ -28,3 +28,4 @@ export 'package:iif/domain/use_cases/get_accounts_balance_use_case.dart';
 export 'package:iif/domain/use_cases/get_all_money_for_account_types_use_case.dart';
 export 'package:iif/domain/use_cases/get_all_operations_use_case.dart';
 export 'package:iif/domain/use_cases/get_accounts_count_use_case.dart';
+export 'package:iif/domain/use_cases/add_expense_use_case.dart';

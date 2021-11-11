@@ -8,6 +8,7 @@ class Money with EquatableMixin {
   static const Money zero = Money(coins: 0);
 
   Money add(Money operand) => Money(coins: coins + operand.coins);
+  Money substract(Money operand) => Money(coins: coins - operand.coins);
 
   @override
   List<Object?> get props => [coins];

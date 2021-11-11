@@ -87,7 +87,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
   void trySave() {
     try {
       _fields.validate();
-      addExpenseUseCase.of(_context).execute(_fields.accountFrom, _fields.money);
+      addExpenseUseCase.of(_context).execute(_fields.accountFrom!, _fields.money!);
       emit(const _Saved());
     } on _BaseCategoryNotSelectedException catch (e) {
       //TODO: emit validation error
