@@ -46,6 +46,9 @@ final getAllOperationsUseCase = Provider((ref) => GetAllOperationsUseCase(
 final addExpenseUseCase = Provider((ref) => AddExpenseUseCase(
       operationsRepository: ref.read(operationsRepository),
     ));
+final addIncomeUseCase = Provider((ref) => AddIncomeUseCase(
+      operationsRepository: ref.read(operationsRepository),
+    ));
 
 //ui notifiers, are used only in presentation layer to make some ui interactions easier
 final UiNotifierAccountEditorOpened uiNotifierAccountEditorOpened = UiNotifierAccountEditorOpened();

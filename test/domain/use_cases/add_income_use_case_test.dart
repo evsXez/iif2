@@ -36,15 +36,11 @@ void main() {
         final Money onlyFirstMoney = operation.atomics.first.money;
         switch (operation.type) {
           case LogicOperationType.initialInput:
-            {
-              sum = onlyFirstMoney;
-              break;
-            }
+            sum = onlyFirstMoney;
+            break;
           case LogicOperationType.income:
-            {
-              sum = sum.add(onlyFirstMoney);
-              break;
-            }
+            sum = sum.add(onlyFirstMoney);
+            break;
           default:
         }
       }
