@@ -21,6 +21,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
     required this.type,
   }) : super(const _LoadInProgress()) {
     accountsRepository.of(_context).addListener(_updateData);
+    operationsRepository.of(_context).addListener(_updateData); //add operations
     _updateData();
 
     _uiNotifierSubscription = stream.listen((event) {
@@ -40,6 +41,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
   @override
   Future<void> close() {
     accountsRepository.of(_context).removeListener(_updateData);
+    operationsRepository.of(_context).removeListener(_updateData);
     _uiNotifierSubscription.cancel();
     return super.close();
   }
