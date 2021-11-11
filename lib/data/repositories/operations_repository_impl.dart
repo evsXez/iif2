@@ -55,6 +55,10 @@ class OperationsRepositoryImpl extends OperationsRepository {
 
   @override
   void addOperationExpense(Account account, Money money) {
-    throw UnimplementedError();
+    try {
+      _dataSource.addOperation(LogicOperation.expense(account, money));
+    } finally {
+      notifyListeners();
+    }
   }
 }

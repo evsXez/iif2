@@ -154,4 +154,34 @@ void main() {
     repository.addOperationInitialInput(accountModel1, money100);
     expect(listenerCounter, 1);
   });
+
+  test('adds operation expense', () async {
+    final List<LogicOperationModel> allOperations = [];
+    when(dataSource.getOperations()).thenAnswer((_) => allOperations);
+    when(dataSource.addOperation(any)).thenAnswer((realInvocation) {
+      final LogicOperation operation = realInvocation.positionalArguments.first;
+      final AtomicOperation atomic = operation.atomics.first;
+      allOperations.add(
+        LogicOperationModel(
+          id: -1,
+          type: operation.type,
+          created: operation.created,
+          comment: operation.comment,
+          atomicsModel: [
+            AtomicOperationModel(
+              id: -1,
+              moneyModel: MoneyModel(coins: atomic.money.coins),
+              type: atomic.type,
+              accountModel: accountModel1,
+            )
+          ],
+        ),
+      );
+    });
+
+    repository.addOperationExpense(accountModel1, money100);
+    final operations = await repository.getOperations(accountModel1);
+    expect(operations.length, 1);
+    expect(operations.first.type, LogicOperationType.expense);
+  });
 }
