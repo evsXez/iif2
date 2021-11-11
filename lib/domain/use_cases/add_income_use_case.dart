@@ -2,13 +2,13 @@ import 'package:iif/domain/entities/account.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/domain/repositories/operations_repository.dart';
 
-class AddExpenseUseCase {
+class AddIncomeUseCase {
   final OperationsRepository operationsRepository;
-  AddExpenseUseCase({
+  AddIncomeUseCase({
     required this.operationsRepository,
   });
 
   void execute(Account account, Money money) {
-    operationsRepository.addOperationExpense(account, money);
+    operationsRepository.addOperationIncome(account, money);
   }
 }

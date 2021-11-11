@@ -9,4 +9,5 @@ abstract class OperationsRepository extends ChangeNotifier {
 
   void addOperationInitialInput(Account account, Money money);
   void addOperationExpense(Account account, Money money);
+  void addOperationIncome(Account account, Money money);
 }

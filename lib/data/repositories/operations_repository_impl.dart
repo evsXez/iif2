@@ -61,4 +61,13 @@ class OperationsRepositoryImpl extends OperationsRepository {
       notifyListeners();
     }
   }
+
+  @override
+  void addOperationIncome(Account account, Money money) {
+    try {
+      _dataSource.addOperation(LogicOperation.income(account, money));
+    } finally {
+      notifyListeners();
+    }
+  }
 }
