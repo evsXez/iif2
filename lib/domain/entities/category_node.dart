@@ -1,9 +1,8 @@
 import 'package:equatable/equatable.dart';
-import 'package:iif/domain/include.dart';
 
-class CategoryNode with EquatableMixin {
-  Category category;
-  final List<CategoryNode> children;
+class Node<T> with EquatableMixin {
+  T value;
+  final List<Node<T>> children;
   final bool canHaveMoreChildren;
   bool isSelected;
   bool isEditing;
@@ -11,8 +10,8 @@ class CategoryNode with EquatableMixin {
 
   ///disabled for editing, unable to remove
 
-  CategoryNode({
-    required this.category,
+  Node({
+    required this.value,
     required this.children,
     this.canHaveMoreChildren = true,
     this.isSelected = false,
@@ -21,13 +20,13 @@ class CategoryNode with EquatableMixin {
   });
 
   @override
-  List<Object?> get props => [category, isSelected, isEditing];
+  List<Object?> get props => [value, isSelected, isEditing];
 
-  factory CategoryNode.clone(CategoryNode of) => CategoryNode(
-        category: Category(of.category.name),
-        children: of.children.map((it) => CategoryNode.clone(it)).toList(),
-        canHaveMoreChildren: of.canHaveMoreChildren,
-        isSelected: of.isSelected,
-        isEditing: of.isEditing,
-      );
+  // factory Node.clone(Node of, T value) => Node(
+  //       value: value, // Category(of.value.name)
+  //       children: of.children.map((it) => Node.clone(it)).toList(),
+  //       canHaveMoreChildren: of.canHaveMoreChildren,
+  //       isSelected: of.isSelected,
+  //       isEditing: of.isEditing,
+  //     );
 }

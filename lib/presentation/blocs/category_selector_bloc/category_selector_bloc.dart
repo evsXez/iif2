@@ -9,33 +9,28 @@ import 'package:iif/presentation/include.dart';
 part 'category_selector_state.dart';
 part 'category_selector_bloc.freezed.dart';
 
-final CategoryNode _categoriesPredefined = CategoryNode(
-    category: Category("[[ROOT]]"),
+final Node<Category> _categoriesPredefined = Node(
+    value: Category("[[ROOT]]"),
     children: [
-      CategoryNode(category: Category(Strings.category_expense), children: [], isLocked: true),
-      CategoryNode(category: Category(Strings.category_income), children: [], isLocked: true),
-      CategoryNode(
-          category: Category(Strings.category_transfer), children: [], canHaveMoreChildren: false, isLocked: true),
-      CategoryNode(
-          category: Category(Strings.category_debts),
+      Node(value: Category(Strings.category_expense), children: [], isLocked: true),
+      Node(value: Category(Strings.category_income), children: [], isLocked: true),
+      Node(value: Category(Strings.category_transfer), children: [], canHaveMoreChildren: false, isLocked: true),
+      Node(
+          value: Category(Strings.category_debts),
           children: [
-            CategoryNode(
-                category: Category(Strings.category_debts_new),
+            Node(value: Category(Strings.category_debts_new), children: [], canHaveMoreChildren: false, isLocked: true),
+            Node(
+                value: Category(Strings.category_debts_return),
                 children: [],
                 canHaveMoreChildren: false,
                 isLocked: true),
-            CategoryNode(
-                category: Category(Strings.category_debts_return),
+            Node(
+                value: Category(Strings.category_debts_to_me),
                 children: [],
                 canHaveMoreChildren: false,
                 isLocked: true),
-            CategoryNode(
-                category: Category(Strings.category_debts_to_me),
-                children: [],
-                canHaveMoreChildren: false,
-                isLocked: true),
-            CategoryNode(
-                category: Category(Strings.category_debts_returned_to_me),
+            Node(
+                value: Category(Strings.category_debts_returned_to_me),
                 children: [],
                 canHaveMoreChildren: false,
                 isLocked: true),
@@ -49,8 +44,8 @@ final CategoryNode _categoriesPredefined = CategoryNode(
 class CategorySelectorBloc extends Cubit<CategorySelectorState> {
   final BuildContext _context;
 
-  final CategoryNode _root = _categoriesPredefined;
-  final CategoryNode _addNode = CategoryNode(category: Category("+"), children: []);
+  final Node<Category> _root = _categoriesPredefined;
+  final Node<Category> _addNode = Node(value: Category("+"), children: []);
 
   CategorySelectorBloc(this._context) : super(const _Loading()) {
     // Future.delayed(Duration(seconds: 1)).then((_) {
@@ -61,7 +56,7 @@ class CategorySelectorBloc extends Cubit<CategorySelectorState> {
   void _showData() {
     List<CategoryNodeRef> view = [];
 
-    CategoryNode? root = _root;
+    Node<Category>? root = _root;
 
     while (root != null) {
       view.add(CategoryNodeRef(root));
@@ -81,7 +76,7 @@ class CategorySelectorBloc extends Cubit<CategorySelectorState> {
     emit(_Loaded(view));
   }
 
-  void tap(CategoryNode node) {
+  void tap(Node<Category> node) {
     if (node == _addNode) {
       _addNode.isEditing = !_addNode.isEditing;
     } else {
@@ -93,18 +88,18 @@ class CategorySelectorBloc extends Cubit<CategorySelectorState> {
     _showData();
   }
 
-  void save(CategoryNode node, String text) {
+  void save(Node<Category> node, String text) {
     if (node == _addNode) {
-      final CategoryNode deepSelected = _firstDeepSelectedNode();
-      deepSelected.children.add(CategoryNode(category: Category(text), children: [], isSelected: true));
+      final Node deepSelected = _firstDeepSelectedNode();
+      deepSelected.children.add(Node(value: Category(text), children: [], isSelected: true));
     } else {
-      node.category = Category(text);
+      node.value = Category(text);
     }
     node.isEditing = false;
     _showData();
   }
 
-  void delete(CategoryNode node) {
+  void delete(Node<Category> node) {
     if (node == _addNode) {
       _addNode.isEditing = false;
     } else {
@@ -113,12 +108,12 @@ class CategorySelectorBloc extends Cubit<CategorySelectorState> {
     _showData();
   }
 
-  void edit(CategoryNode node) {
+  void edit(Node<Category> node) {
     node.isEditing = true;
     _showData();
   }
 
-  CategoryNode? _parentOf(CategoryNode root, CategoryNode child) {
+  Node? _parentOf(Node<Category> root, Node<Category> child) {
     if (root.children.contains(child)) {
       return root;
     }
@@ -131,8 +126,8 @@ class CategorySelectorBloc extends Cubit<CategorySelectorState> {
     return null;
   }
 
-  CategoryNode _firstDeepSelectedNode() {
-    CategoryNode root = _root;
+  Node<Category> _firstDeepSelectedNode() {
+    Node<Category> root = _root;
 
     while (root.children.isNotEmpty) {
       try {

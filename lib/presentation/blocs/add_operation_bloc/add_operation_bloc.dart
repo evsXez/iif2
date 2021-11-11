@@ -40,7 +40,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
   void _onCategoriesChanged(CategorySelectorState state) {
     state.maybeMap(
       loaded: (data) {
-        final baseCategoryName = data.categories.where((ref) => ref.node.isSelected).firstOrNull?.node.category.name;
+        final baseCategoryName = data.categories.where((ref) => ref.node.isSelected).firstOrNull?.node.value.name;
         print("Base category: $baseCategoryName, accounts count: ${_accountsBalance.length}");
 
         final isIncome = baseCategoryName == Strings.category_income;

@@ -7,6 +7,6 @@ abstract class CategorySelectorState with _$CategorySelectorState {
 }
 
 class CategoryNodeRef {
-  final CategoryNode node;
+  final Node<Category> node;
   CategoryNodeRef(this.node);
 }

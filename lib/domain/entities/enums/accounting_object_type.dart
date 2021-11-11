@@ -1,0 +1,4 @@
+enum AccountingObjectType {
+  debts,
+  investments,
+}

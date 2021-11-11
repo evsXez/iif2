@@ -3,7 +3,7 @@ import 'package:iif/presentation/include.dart';
 import 'package:iif/presentation/pages/add_operation/widgets/editable_chip.dart';
 
 class CategoryChip extends StatelessWidget {
-  final CategoryNode node;
+  final Node node;
   final VoidCallback onTap;
   final Function(String text) onSave;
   final VoidCallback onDelete;
@@ -21,7 +21,7 @@ class CategoryChip extends StatelessWidget {
   Widget build(BuildContext context) {
     if (node.isEditing) {
       return EditableChip(
-        initialText: node.category.name == "+" ? null : node.category.name,
+        initialText: node.value.name == "+" ? null : node.value.name,
         doneEditing: (text) {
           if (text.isEmpty) {
             onDelete();
@@ -42,7 +42,7 @@ class CategoryChip extends StatelessWidget {
       },
       child: ChoiceChip(
         label: Text(
-          node.category.name,
+          node.value.name,
           style: TextStyle(
             color: node.isSelected ? Style.blackColor : Style.blackColor,
           ),
