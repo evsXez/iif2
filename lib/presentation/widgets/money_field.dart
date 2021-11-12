@@ -78,7 +78,7 @@ class MoneyFormatter extends TextInputFormatter {
     return newValue.copyWith(
       text: newText,
       // selection: TextSelection.collapsed(offset: newText.length - selectionShift),
-      selection: newText == "0.00"
+      selection: (newText == "0.00" && !(oldValue.selection.baseOffset == 2 && newValue.selection.baseOffset == 3))
           ? TextSelection.collapsed(offset: 2)
           : TextSelection.collapsed(offset: min(newText.length, max(0, newValue.selection.baseOffset + spacesAdded))),
     );
