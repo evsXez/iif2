@@ -1,16 +1,21 @@
-import 'package:iif/presentation/blocs/category_selector_bloc/category_selector_bloc.dart';
+import 'package:iif/domain/include.dart';
+import 'package:iif/presentation/blocs/node_selector_bloc/node_selector_bloc.dart';
 import 'package:iif/presentation/include.dart';
 import 'package:iif/presentation/pages/add_operation/widgets/category_chip.dart';
 import 'package:iif/presentation/pages/main/widgets/account_item.dart';
 
-class CategorySelector extends StatefulWidget {
-  const CategorySelector({Key? key}) : super(key: key);
+class NodeSelector<T extends NodeValue> extends StatefulWidget {
+  final T Function(String text, Node<T> parent) valueBuilder;
+  const NodeSelector({
+    Key? key,
+    required this.valueBuilder,
+  }) : super(key: key);
 
   @override
-  _CategorySelectorState createState() => _CategorySelectorState();
+  _NodeSelectorState createState() => _NodeSelectorState<T>();
 }
 
-class _CategorySelectorState extends State<CategorySelector> {
+class _NodeSelectorState<T extends NodeValue> extends State<NodeSelector> {
   @override
   void initState() {
     super.initState();
@@ -18,23 +23,23 @@ class _CategorySelectorState extends State<CategorySelector> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CategorySelectorBloc, CategorySelectorState>(
+    return BlocBuilder<NodeSelectorBloc<T>, NodeSelectorState<T>>(
       builder: (context, state) {
-        final bloc = BlocProvider.of<CategorySelectorBloc>(context);
+        final bloc = BlocProvider.of<NodeSelectorBloc<T>>(context);
         return state.map(
           loading: (_) => const Center(child: CircularProgressIndicator()),
           loaded: (state) => Wrap(
-            children: state.categories
+            children: state.refs
                 .map(
                   (ref) => Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: CategoryChip(
+                    child: NodeChip(
                         node: ref.node,
                         onTap: () {
                           bloc.tap(ref.node);
                         },
                         onSave: (text) {
-                          bloc.save(ref.node, text);
+                          bloc.save(ref.node, widget.valueBuilder, text);
                         },
                         onDelete: () {
                           bloc.delete(ref.node);

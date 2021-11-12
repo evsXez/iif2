@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iif/domain/entities/enums/category_type.dart';
+import 'package:iif/domain/include.dart';
+import 'package:iif/domain/predefined.dart';
 import 'package:iif/presentation/blocs/add_operation_bloc/add_operation_bloc.dart';
 import 'package:iif/presentation/include.dart';
 import 'package:iif/presentation/pages/add_operation/widgets/account_selector.dart';
-import 'package:iif/presentation/pages/add_operation/widgets/category_selector.dart';
+import 'package:iif/presentation/pages/add_operation/widgets/node_selector.dart';
 import 'package:iif/presentation/pages/add_operation/widgets/date_selector.dart';
 import 'package:iif/presentation/pages/add_operation/widgets/frame.dart';
 import 'package:iif/presentation/pages/add_operation/widgets/month_selector.dart';
@@ -19,17 +21,31 @@ class AddOperationPage extends StatefulWidget {
 }
 
 class _AddOperationPageState extends State<AddOperationPage> {
-  late CategorySelector categorySelector;
+  late NodeSelector<Category> _categorySelector;
+  late NodeSelector<Subject> _subjectSelector;
 
-  late CategorySelectorBloc _categorySelectorBloc;
+  late NodeSelectorBloc<Category> _categorySelectorBloc;
+  late NodeSelectorBloc<Subject> _subjectSelectorBloc;
   late AddOperationBloc _addOperationBloc;
 
   void initState() {
     super.initState();
-    categorySelector = const CategorySelector();
+    _categorySelector = NodeSelector(
+      valueBuilder: (text, parent) => Category(
+        text,
+        parent.value?.type ?? CategoryType.undefined,
+      ),
+    );
+    _subjectSelector = NodeSelector(
+      valueBuilder: (text, parent) => Subject(
+        text,
+        parent.value?.type ?? SubjectType.undefined,
+      ),
+    );
 
-    _categorySelectorBloc = CategorySelectorBloc(context);
-    _addOperationBloc = AddOperationBloc(context, categorySelectorBloc: _categorySelectorBloc);
+    _categorySelectorBloc = NodeSelectorBloc(context, root: predefinedCategoriesNode);
+    _subjectSelectorBloc = NodeSelectorBloc(context, root: Node.root());
+    _addOperationBloc = AddOperationBloc(context, nodeSelectorBloc: _categorySelectorBloc);
   }
 
   final transferArrowColor = Style.whiteColor;
@@ -58,8 +74,11 @@ class _AddOperationPageState extends State<AddOperationPage> {
           )
         ],
       ),
-      body: BlocProvider<CategorySelectorBloc>(
-        create: (_) => _categorySelectorBloc,
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider<NodeSelectorBloc<Category>>(create: (_) => _categorySelectorBloc),
+          BlocProvider<NodeSelectorBloc<Subject>>(create: (_) => _subjectSelectorBloc),
+        ],
         child: BlocConsumer<AddOperationBloc, AddOperationState>(
           bloc: _addOperationBloc,
           listener: (context, state) {
@@ -80,16 +99,16 @@ class _AddOperationPageState extends State<AddOperationPage> {
               idle: (_) => Container(
                 // color: Style.accentColor,
                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-                child: categorySelector,
+                child: _categorySelector,
               ),
               visibility: (visibility) => ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 children: [
                   const SizedBox(height: 8),
-                  categorySelector,
+                  _categorySelector,
                   Visibility(
-                    visibile: visibility.objects,
-                    child: objectSelector,
+                    visible: visibility.subject,
+                    child: _subjectSelector,
                   ),
                   const SizedBox(height: 16),
                   Visibility(

@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/presentation/blocs/accounts_panel_bloc/accounts_panel_bloc.dart';
 import 'package:iif/presentation/include.dart';
-import 'package:iif/presentation/pages/add_operation/widgets/category_selector.dart';
+import 'package:iif/presentation/pages/add_operation/widgets/node_selector.dart';
 import 'package:iif/presentation/pages/main/widgets/small_button.dart';
 
 class AccountEditItem extends StatefulWidget {
@@ -41,19 +41,19 @@ class _AccountEditItemState extends State<AccountEditItem> {
 
   @override
   Widget build(BuildContext context) {
-    if (false) {
-      //TODO: refactor to object(debts for now) editor
-      return BlocProvider<CategorySelectorBloc>(
-        create: (context) => CategorySelectorBloc(context),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: CategorySelector(),
-          ),
-        ),
-      );
-    }
+    // if (false) {
+    //   //TODO: refactor to object(debts for now) editor
+    //   return BlocProvider<CategorySelectorBloc>(
+    //     create: (context) => CategorySelectorBloc(context),
+    //     child: Padding(
+    //       padding: const EdgeInsets.all(8.0),
+    //       child: Align(
+    //         alignment: Alignment.centerLeft,
+    //         child: CategorySelector(),
+    //       ),
+    //     ),
+    //   );
+    // }
 
     return Container(
       height: 86,

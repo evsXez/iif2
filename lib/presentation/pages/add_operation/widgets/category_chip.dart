@@ -2,13 +2,13 @@ import 'package:iif/domain/include.dart';
 import 'package:iif/presentation/include.dart';
 import 'package:iif/presentation/pages/add_operation/widgets/editable_chip.dart';
 
-class CategoryChip extends StatelessWidget {
+class NodeChip extends StatelessWidget {
   final Node node;
   final VoidCallback onTap;
   final Function(String text) onSave;
   final VoidCallback onDelete;
   final VoidCallback onLongPress;
-  const CategoryChip({
+  const NodeChip({
     Key? key,
     required this.node,
     required this.onTap,
@@ -21,7 +21,7 @@ class CategoryChip extends StatelessWidget {
   Widget build(BuildContext context) {
     if (node.isEditing) {
       return EditableChip(
-        initialText: node.value.name == "+" ? null : node.value.name,
+        initialText: node.type == NodeType.value ? node.value.name : null,
         doneEditing: (text) {
           if (text.isEmpty) {
             onDelete();
@@ -30,6 +30,10 @@ class CategoryChip extends StatelessWidget {
           }
         },
       );
+    }
+
+    if (node.type != NodeType.value) {
+      return const SizedBox.shrink();
     }
 
     return GestureDetector(

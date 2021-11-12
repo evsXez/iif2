@@ -22,7 +22,7 @@ class _$AddOperationStateTearOff {
   }
 
   _Visibility visibility(
-      {required bool objects,
+      {required bool subject,
       required bool locationFrom,
       required bool locationTo,
       required bool money,
@@ -30,7 +30,7 @@ class _$AddOperationStateTearOff {
       required List<AccountBalance> accountsBalance,
       String? errorMessage}) {
     return _Visibility(
-      objects: objects,
+      subject: subject,
       locationFrom: locationFrom,
       locationTo: locationTo,
       money: money,
@@ -54,7 +54,7 @@ mixin _$AddOperationState {
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
     required TResult Function(
-            bool objects,
+            bool subject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -69,7 +69,7 @@ mixin _$AddOperationState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
     TResult Function(
-            bool objects,
+            bool subject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -84,7 +84,7 @@ mixin _$AddOperationState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
     TResult Function(
-            bool objects,
+            bool subject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -176,7 +176,7 @@ class _$_Idle implements _Idle {
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
     required TResult Function(
-            bool objects,
+            bool subject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -194,7 +194,7 @@ class _$_Idle implements _Idle {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
     TResult Function(
-            bool objects,
+            bool subject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -212,7 +212,7 @@ class _$_Idle implements _Idle {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
     TResult Function(
-            bool objects,
+            bool subject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -274,7 +274,7 @@ abstract class _$VisibilityCopyWith<$Res> {
           _Visibility value, $Res Function(_Visibility) then) =
       __$VisibilityCopyWithImpl<$Res>;
   $Res call(
-      {bool objects,
+      {bool subject,
       bool locationFrom,
       bool locationTo,
       bool money,
@@ -296,7 +296,7 @@ class __$VisibilityCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? objects = freezed,
+    Object? subject = freezed,
     Object? locationFrom = freezed,
     Object? locationTo = freezed,
     Object? money = freezed,
@@ -305,9 +305,9 @@ class __$VisibilityCopyWithImpl<$Res>
     Object? errorMessage = freezed,
   }) {
     return _then(_Visibility(
-      objects: objects == freezed
-          ? _value.objects
-          : objects // ignore: cast_nullable_to_non_nullable
+      subject: subject == freezed
+          ? _value.subject
+          : subject // ignore: cast_nullable_to_non_nullable
               as bool,
       locationFrom: locationFrom == freezed
           ? _value.locationFrom
@@ -341,7 +341,7 @@ class __$VisibilityCopyWithImpl<$Res>
 
 class _$_Visibility implements _Visibility {
   const _$_Visibility(
-      {required this.objects,
+      {required this.subject,
       required this.locationFrom,
       required this.locationTo,
       required this.money,
@@ -350,7 +350,7 @@ class _$_Visibility implements _Visibility {
       this.errorMessage});
 
   @override
-  final bool objects;
+  final bool subject;
   @override
   final bool locationFrom;
   @override
@@ -366,16 +366,16 @@ class _$_Visibility implements _Visibility {
 
   @override
   String toString() {
-    return 'AddOperationState.visibility(objects: $objects, locationFrom: $locationFrom, locationTo: $locationTo, money: $money, comment: $comment, accountsBalance: $accountsBalance, errorMessage: $errorMessage)';
+    return 'AddOperationState.visibility(subject: $subject, locationFrom: $locationFrom, locationTo: $locationTo, money: $money, comment: $comment, accountsBalance: $accountsBalance, errorMessage: $errorMessage)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Visibility &&
-            (identical(other.objects, objects) ||
+            (identical(other.subject, subject) ||
                 const DeepCollectionEquality()
-                    .equals(other.objects, objects)) &&
+                    .equals(other.subject, subject)) &&
             (identical(other.locationFrom, locationFrom) ||
                 const DeepCollectionEquality()
                     .equals(other.locationFrom, locationFrom)) &&
@@ -398,7 +398,7 @@ class _$_Visibility implements _Visibility {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(objects) ^
+      const DeepCollectionEquality().hash(subject) ^
       const DeepCollectionEquality().hash(locationFrom) ^
       const DeepCollectionEquality().hash(locationTo) ^
       const DeepCollectionEquality().hash(money) ^
@@ -416,7 +416,7 @@ class _$_Visibility implements _Visibility {
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
     required TResult Function(
-            bool objects,
+            bool subject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -426,7 +426,7 @@ class _$_Visibility implements _Visibility {
         visibility,
     required TResult Function() saved,
   }) {
-    return visibility(objects, locationFrom, locationTo, money, comment,
+    return visibility(subject, locationFrom, locationTo, money, comment,
         accountsBalance, errorMessage);
   }
 
@@ -435,7 +435,7 @@ class _$_Visibility implements _Visibility {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
     TResult Function(
-            bool objects,
+            bool subject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -445,7 +445,7 @@ class _$_Visibility implements _Visibility {
         visibility,
     TResult Function()? saved,
   }) {
-    return visibility?.call(objects, locationFrom, locationTo, money, comment,
+    return visibility?.call(subject, locationFrom, locationTo, money, comment,
         accountsBalance, errorMessage);
   }
 
@@ -454,7 +454,7 @@ class _$_Visibility implements _Visibility {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
     TResult Function(
-            bool objects,
+            bool subject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -466,7 +466,7 @@ class _$_Visibility implements _Visibility {
     required TResult orElse(),
   }) {
     if (visibility != null) {
-      return visibility(objects, locationFrom, locationTo, money, comment,
+      return visibility(subject, locationFrom, locationTo, money, comment,
           accountsBalance, errorMessage);
     }
     return orElse();
@@ -509,7 +509,7 @@ class _$_Visibility implements _Visibility {
 
 abstract class _Visibility implements AddOperationState {
   const factory _Visibility(
-      {required bool objects,
+      {required bool subject,
       required bool locationFrom,
       required bool locationTo,
       required bool money,
@@ -517,7 +517,7 @@ abstract class _Visibility implements AddOperationState {
       required List<AccountBalance> accountsBalance,
       String? errorMessage}) = _$_Visibility;
 
-  bool get objects => throw _privateConstructorUsedError;
+  bool get subject => throw _privateConstructorUsedError;
   bool get locationFrom => throw _privateConstructorUsedError;
   bool get locationTo => throw _privateConstructorUsedError;
   bool get money => throw _privateConstructorUsedError;
@@ -569,7 +569,7 @@ class _$_Saved implements _Saved {
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
     required TResult Function(
-            bool objects,
+            bool subject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -587,7 +587,7 @@ class _$_Saved implements _Saved {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
     TResult Function(
-            bool objects,
+            bool subject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -605,7 +605,7 @@ class _$_Saved implements _Saved {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
     TResult Function(
-            bool objects,
+            bool subject,
             bool locationFrom,
             bool locationTo,
             bool money,

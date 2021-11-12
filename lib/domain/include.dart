@@ -7,8 +7,10 @@ export 'package:iif/domain/entities/account_balance.dart';
 export 'package:iif/domain/entities/atomic_operation.dart';
 export 'package:iif/domain/entities/account_options.dart';
 export 'package:iif/domain/entities/category.dart';
+export 'package:iif/domain/entities/subject.dart';
 export 'package:iif/domain/entities/node.dart';
 export 'package:iif/domain/entities/accounting_object.dart';
+export 'package:iif/domain/entities/node_value.dart';
 
 //enums
 export 'package:iif/domain/entities/enums/account_type.dart';
@@ -17,6 +19,7 @@ export 'package:iif/domain/entities/enums/atomic_operation_type.dart';
 export 'package:iif/domain/entities/enums/category_type.dart';
 export 'package:iif/domain/entities/enums/subject_type.dart';
 export 'package:iif/domain/entities/enums/accounting_object_type.dart';
+export 'package:iif/domain/entities/enums/node_type.dart';
 
 //use cases
 export 'package:iif/domain/use_cases/get_account_types_on_main_page_use_case.dart';

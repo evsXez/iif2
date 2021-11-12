@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:iif/domain/include.dart';
 
-class Category with EquatableMixin {
+class Category extends NodeValue with EquatableMixin {
   final String name;
   final CategoryType type;
   Category(this.name, this.type);

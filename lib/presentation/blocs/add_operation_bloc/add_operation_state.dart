@@ -4,7 +4,7 @@ part of 'add_operation_bloc.dart';
 abstract class AddOperationState with _$AddOperationState {
   const factory AddOperationState.idle() = _Idle;
   const factory AddOperationState.visibility({
-    required bool objects,
+    required bool subject,
     required bool locationFrom,
     required bool locationTo,
     required bool money,
