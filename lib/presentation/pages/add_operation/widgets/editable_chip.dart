@@ -3,10 +3,12 @@ import 'package:iif/presentation/include.dart';
 class EditableChip extends StatefulWidget {
   final Function(String text) doneEditing;
   final String? initialText;
+  final StyleNodeColorSheme colorScheme;
 
   const EditableChip({
     key,
     required this.doneEditing,
+    required this.colorScheme,
     this.initialText,
   }) : super(key: key);
 
@@ -28,9 +30,6 @@ class _EditableChipState extends State<EditableChip> {
     controller.text = widget.initialText ?? "";
   }
 
-  final backgroundColor = Style.highlightColor;
-  final textColor = Style.blackColor;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -46,15 +45,15 @@ class _EditableChipState extends State<EditableChip> {
             scrollPadding: EdgeInsets.zero,
             autofocus: true,
             controller: controller,
-            cursorColor: textColor,
-            style: TextStyle(color: textColor, fontSize: 14),
+            cursorColor: widget.colorScheme.textColor,
+            style: TextStyle(color: widget.colorScheme.textColor, fontSize: 14),
             textAlign: TextAlign.start,
             textAlignVertical: TextAlignVertical.top,
             onSubmitted: (s) {
               widget.doneEditing(s);
             },
           ),
-          backgroundColor: backgroundColor,
+          backgroundColor: widget.colorScheme.backgroundColor,
           onDeleted: () {
             // widget.doneEditing(isDeleteModeOnly ? "" : controller.text);
             widget.doneEditing(controller.text);
@@ -65,12 +64,12 @@ class _EditableChipState extends State<EditableChip> {
             child: isDoneIcon
                 ? Icon(
                     Icons.done,
-                    color: textColor,
+                    color: widget.colorScheme.textColor,
                     size: 16,
                   )
                 : Icon(
                     Icons.clear,
-                    color: textColor,
+                    color: widget.colorScheme.textColor,
                     size: 16,
                   ),
           ),

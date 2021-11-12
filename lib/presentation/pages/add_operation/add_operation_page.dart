@@ -31,12 +31,14 @@ class _AddOperationPageState extends State<AddOperationPage> {
   void initState() {
     super.initState();
     _categorySelector = NodeSelector(
+      colorScheme: StyleNodeColorSheme.categories(),
       valueBuilder: (text, parent) {
         final value = parent.value;
         return (value is Category) ? Category(text, value.type) : Category(text, CategoryType.undefined);
       },
     );
     _subjectSelector = NodeSelector(
+      colorScheme: StyleNodeColorSheme.subjects(),
       valueBuilder: (text, parent) {
         final value = parent.value;
         return (value is Subject) ? Subject(text, value.type) : Subject(text, SubjectType.undefined);
@@ -100,6 +102,7 @@ class _AddOperationPageState extends State<AddOperationPage> {
                 // color: Style.accentColor,
                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
                 child: _categorySelector,
+                // child: _subjectSelector,
               ),
               visibility: (visibility) => ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 4),

@@ -11,3 +11,31 @@ class Style {
   static const grayColor = Color(0x89000000);
   static const lightGrayColor = Color(0xFFEBEBEB);
 }
+
+class StyleNodeColorSheme {
+  final Color selectedTextColor;
+  final Color textColor;
+  final Color backgroundColor;
+  final Color selectedBackgroundColor;
+
+  StyleNodeColorSheme({
+    required this.selectedTextColor,
+    required this.textColor,
+    required this.backgroundColor,
+    required this.selectedBackgroundColor,
+  });
+
+  factory StyleNodeColorSheme.categories() => StyleNodeColorSheme(
+        selectedTextColor: Style.blackColor,
+        textColor: Style.blackColor,
+        backgroundColor: Style.grayColor.withAlpha(25),
+        selectedBackgroundColor: Style.highlightColor,
+      );
+
+  factory StyleNodeColorSheme.subjects() => StyleNodeColorSheme(
+        selectedBackgroundColor: Style.accentColor,
+        selectedTextColor: Style.whiteColor,
+        backgroundColor: Style.highlightColor,
+        textColor: Style.blackColor,
+      );
+}

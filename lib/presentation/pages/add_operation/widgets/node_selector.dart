@@ -1,14 +1,17 @@
 import 'package:iif/domain/include.dart';
 import 'package:iif/presentation/blocs/node_selector_bloc/node_selector_bloc.dart';
 import 'package:iif/presentation/include.dart';
-import 'package:iif/presentation/pages/add_operation/widgets/category_chip.dart';
+import 'package:iif/presentation/pages/add_operation/widgets/node_chip.dart';
 import 'package:iif/presentation/pages/main/widgets/account_item.dart';
 
 class NodeSelector<T extends NodeValue> extends StatefulWidget {
   final dynamic Function(String text, Node<NodeValue> parent) valueBuilder;
+  final StyleNodeColorSheme colorScheme;
+
   const NodeSelector({
     Key? key,
     required this.valueBuilder,
+    required this.colorScheme,
   }) : super(key: key);
 
   @override
@@ -35,6 +38,7 @@ class _NodeSelectorState<T extends NodeValue> extends State<NodeSelector> {
                     padding: const EdgeInsets.symmetric(horizontal: 4.0),
                     child: NodeChip(
                         node: ref.node,
+                        colorScheme: widget.colorScheme,
                         onTap: () {
                           bloc.tap(ref.node);
                         },

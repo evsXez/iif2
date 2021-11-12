@@ -1,6 +1,7 @@
 import 'package:iif/domain/include.dart';
 import 'package:iif/presentation/include.dart';
 import 'package:iif/presentation/pages/add_operation/widgets/editable_chip.dart';
+import 'package:iif/presentation/pages/add_operation/widgets/node_selector.dart';
 
 class NodeChip extends StatelessWidget {
   final Node node;
@@ -8,6 +9,7 @@ class NodeChip extends StatelessWidget {
   final Function(String text) onSave;
   final VoidCallback onDelete;
   final VoidCallback onLongPress;
+  final StyleNodeColorSheme colorScheme;
   const NodeChip({
     Key? key,
     required this.node,
@@ -15,6 +17,7 @@ class NodeChip extends StatelessWidget {
     required this.onSave,
     required this.onDelete,
     required this.onLongPress,
+    required this.colorScheme,
   }) : super(key: key);
 
   @override
@@ -22,6 +25,7 @@ class NodeChip extends StatelessWidget {
     if (node.isEditing) {
       return EditableChip(
         initialText: node.type == NodeType.value ? node.value.name : null,
+        colorScheme: colorScheme,
         doneEditing: (text) {
           if (text.isEmpty) {
             onDelete();
@@ -32,9 +36,9 @@ class NodeChip extends StatelessWidget {
       );
     }
 
-    if (node.type != NodeType.value) {
-      return const SizedBox.shrink();
-    }
+    // if (node.type == NodeType.root) {
+    //   return const SizedBox.shrink();
+    // }
 
     return GestureDetector(
       onLongPress: () {
@@ -46,15 +50,19 @@ class NodeChip extends StatelessWidget {
       },
       child: ChoiceChip(
         label: Text(
-          node.value.name,
+          node.type == NodeType.value
+              ? node.value.name
+              : node.type == NodeType.composer
+                  ? "+"
+                  : "",
           style: TextStyle(
-            color: node.isSelected ? Style.blackColor : Style.blackColor,
+            color: node.isSelected ? colorScheme.selectedTextColor : colorScheme.textColor,
           ),
         ),
         selected: node.isSelected,
-        backgroundColor: Style.grayColor.withAlpha(25),
-        selectedColor: Style.highlightColor,
-        shadowColor: Style.blackColor,
+        backgroundColor: colorScheme.backgroundColor,
+        selectedColor: colorScheme.selectedBackgroundColor,
+        // shadowColor: Style.blackColor,
         onSelected: (_) => onTap(),
       ),
     );

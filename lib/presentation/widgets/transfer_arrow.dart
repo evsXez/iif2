@@ -25,16 +25,17 @@ class TransferArrow extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(
-                bottom: 0,
+                bottom: 20,
                 left: 2,
                 right: 2,
               ),
               child: Text(
-                "➤➤➤",
+                "⇢", //"⇨", //⤍➟
                 style: TextStyle(
                   color: color,
-                  fontSize: isSmall ? 10 : 16,
-                  letterSpacing: -3,
+                  fontSize: isSmall ? 10 : 46,
+                  // fontWeight: FontWeight.bold,
+                  letterSpacing: -14,
                 ),
               ),
             ),
