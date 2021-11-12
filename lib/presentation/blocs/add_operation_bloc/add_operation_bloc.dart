@@ -53,22 +53,26 @@ class AddOperationBloc extends Cubit<AddOperationState> {
 
         print("Base category: $baseCategory, accounts count: ${_accountsBalance.length}");
 
-        final isIncome = baseCategory?.type == CategoryType.income;
-        final isExpense = baseCategory?.type == CategoryType.expense;
-        final isTransfer = baseCategory?.type == CategoryType.transfer;
-
-        emit(
-          _Visibility(
-            objects: false,
-            locationFrom: isExpense || isTransfer,
-            locationTo: isIncome || isTransfer,
-            money: isIncome || isExpense || isTransfer,
-            comment: isIncome || isExpense || isTransfer,
-            accountsBalance: _accountsBalance,
-          ),
-        );
+        _emitVisibility();
       },
       orElse: () {},
+    );
+  }
+
+  void _emitVisibility({String? errorMessage}) {
+    final isIncome = _fields.baseCategory?.type == CategoryType.income;
+    final isExpense = _fields.baseCategory?.type == CategoryType.expense;
+    final isTransfer = _fields.baseCategory?.type == CategoryType.transfer;
+    emit(
+      _Visibility(
+        objects: false,
+        locationFrom: isExpense || isTransfer,
+        locationTo: isIncome || isTransfer,
+        money: isIncome || isExpense || isTransfer,
+        comment: isIncome || isExpense || isTransfer,
+        accountsBalance: _accountsBalance,
+        errorMessage: errorMessage,
+      ),
     );
   }
 
@@ -112,11 +116,12 @@ class AddOperationBloc extends Cubit<AddOperationState> {
           throw _UndefinedOperationException();
       }
       emit(const _Saved());
-    } on _BaseCategoryNotSelectedException catch (e) {
-      //TODO: emit validation error
-      print(e);
+      // } on _BaseCategoryNotSelectedException catch (e) {
+      //   //TODO: emit validation error
+      //   print(e);
     } catch (e) {
       print(e);
+      _emitVisibility(errorMessage: e.toString());
     }
   }
 }

@@ -1,12 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/domain/use_cases/get_all_money_for_account_types_use_case.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import '../mocks.mocks.dart';
 
-import 'get_all_money_for_account_types_use_case_test.mocks.dart';
-
-@GenerateMocks([GetAccountsBalanceUseCase, GetAccountTypesOnMainPageUseCase])
 void main() {
   late GetAllMoneyForAccountTypesUseCase getAllMoneyForAccountTypesUseCase;
   late MockGetAccountsBalanceUseCase getAccountsBalanceUseCase;

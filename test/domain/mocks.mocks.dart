@@ -3,11 +3,11 @@
 // Do not manually edit this file.
 
 import 'dart:async' as _i6;
-import 'dart:ui' as _i4;
+import 'dart:ui' as _i5;
 
 import 'package:iif/domain/include.dart' as _i2;
 import 'package:iif/domain/repositories/accounts_repository.dart' as _i3;
-import 'package:iif/domain/repositories/operations_repository.dart' as _i5;
+import 'package:iif/domain/repositories/operations_repository.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -21,6 +21,12 @@ import 'package:mockito/mockito.dart' as _i1;
 class _FakeAccount_0 extends _i1.Fake implements _i2.Account {}
 
 class _FakeMoney_1 extends _i1.Fake implements _i2.Money {}
+
+class _FakeAccountsRepository_2 extends _i1.Fake
+    implements _i3.AccountsRepository {}
+
+class _FakeOperationsRepository_3 extends _i1.Fake
+    implements _i4.OperationsRepository {}
 
 /// A class which mocks [AccountsRepository].
 ///
@@ -44,11 +50,11 @@ class MockAccountsRepository extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#saveAccount, [accountTemplate]),
           returnValue: _FakeAccount_0()) as _i2.Account);
   @override
-  void addListener(_i4.VoidCallback? listener) =>
+  void addListener(_i5.VoidCallback? listener) =>
       super.noSuchMethod(Invocation.method(#addListener, [listener]),
           returnValueForMissingStub: null);
   @override
-  void removeListener(_i4.VoidCallback? listener) =>
+  void removeListener(_i5.VoidCallback? listener) =>
       super.noSuchMethod(Invocation.method(#removeListener, [listener]),
           returnValueForMissingStub: null);
   @override
@@ -66,7 +72,7 @@ class MockAccountsRepository extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockOperationsRepository extends _i1.Mock
-    implements _i5.OperationsRepository {
+    implements _i4.OperationsRepository {
   MockOperationsRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -81,11 +87,6 @@ class MockOperationsRepository extends _i1.Mock
               returnValue: Future<_i2.Money>.value(_FakeMoney_1()))
           as _i6.Future<_i2.Money>);
   @override
-  void addOperationInitialInput(_i2.Account? account, _i2.Money? money) =>
-      super.noSuchMethod(
-          Invocation.method(#addOperationInitialInput, [account, money]),
-          returnValueForMissingStub: null);
-  @override
   _i6.Future<List<_i2.LogicOperation>> getOperations(_i2.Account? account) =>
       (super.noSuchMethod(Invocation.method(#getOperations, [account]),
           returnValue: Future<List<_i2.LogicOperation>>.value(
@@ -96,11 +97,30 @@ class MockOperationsRepository extends _i1.Mock
           returnValue: Future<List<_i2.LogicOperation>>.value(
               <_i2.LogicOperation>[])) as _i6.Future<List<_i2.LogicOperation>>);
   @override
-  void addListener(_i4.VoidCallback? listener) =>
+  void addOperationInitialInput(_i2.Account? account, _i2.Money? money) =>
+      super.noSuchMethod(
+          Invocation.method(#addOperationInitialInput, [account, money]),
+          returnValueForMissingStub: null);
+  @override
+  void addOperationExpense(_i2.Account? account, _i2.Money? money,
+          {String? comment, String? categoriesStamp}) =>
+      super.noSuchMethod(
+          Invocation.method(#addOperationExpense, [account, money],
+              {#comment: comment, #categoriesStamp: categoriesStamp}),
+          returnValueForMissingStub: null);
+  @override
+  void addOperationIncome(_i2.Account? account, _i2.Money? money,
+          {String? comment, String? categoriesStamp}) =>
+      super.noSuchMethod(
+          Invocation.method(#addOperationIncome, [account, money],
+              {#comment: comment, #categoriesStamp: categoriesStamp}),
+          returnValueForMissingStub: null);
+  @override
+  void addListener(_i5.VoidCallback? listener) =>
       super.noSuchMethod(Invocation.method(#addListener, [listener]),
           returnValueForMissingStub: null);
   @override
-  void removeListener(_i4.VoidCallback? listener) =>
+  void removeListener(_i5.VoidCallback? listener) =>
       super.noSuchMethod(Invocation.method(#removeListener, [listener]),
           returnValueForMissingStub: null);
   @override
@@ -110,6 +130,49 @@ class MockOperationsRepository extends _i1.Mock
   void notifyListeners() =>
       super.noSuchMethod(Invocation.method(#notifyListeners, []),
           returnValueForMissingStub: null);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [GetAccountsBalanceUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetAccountsBalanceUseCase extends _i1.Mock
+    implements _i2.GetAccountsBalanceUseCase {
+  MockGetAccountsBalanceUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i3.AccountsRepository get accountsRepository =>
+      (super.noSuchMethod(Invocation.getter(#accountsRepository),
+          returnValue: _FakeAccountsRepository_2()) as _i3.AccountsRepository);
+  @override
+  _i4.OperationsRepository get operationsRepository => (super.noSuchMethod(
+      Invocation.getter(#operationsRepository),
+      returnValue: _FakeOperationsRepository_3()) as _i4.OperationsRepository);
+  @override
+  _i6.Future<List<_i2.AccountBalance>> execute(_i2.AccountType? type) =>
+      (super.noSuchMethod(Invocation.method(#execute, [type]),
+          returnValue: Future<List<_i2.AccountBalance>>.value(
+              <_i2.AccountBalance>[])) as _i6.Future<List<_i2.AccountBalance>>);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [GetAccountTypesOnMainPageUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetAccountTypesOnMainPageUseCase extends _i1.Mock
+    implements _i2.GetAccountTypesOnMainPageUseCase {
+  MockGetAccountTypesOnMainPageUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  List<_i2.AccountType> execute() =>
+      (super.noSuchMethod(Invocation.method(#execute, []),
+          returnValue: <_i2.AccountType>[]) as List<_i2.AccountType>);
   @override
   String toString() => super.toString();
 }

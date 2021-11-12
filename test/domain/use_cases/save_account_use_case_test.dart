@@ -3,12 +3,10 @@ import 'package:iif/domain/include.dart';
 import 'package:iif/domain/repositories/accounts_repository.dart';
 import 'package:iif/domain/repositories/operations_repository.dart';
 import 'package:iif/domain/use_cases/save_account_use_case.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'save_account_use_case_test.mocks.dart';
+import '../mocks.mocks.dart';
 
-@GenerateMocks([AccountsRepository, OperationsRepository])
 void main() {
   late SaveAccountUseCase saveAccountUseCase;
   late AccountsRepository mockAccountsRepository;

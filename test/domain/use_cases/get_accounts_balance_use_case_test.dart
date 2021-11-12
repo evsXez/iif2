@@ -1,16 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/domain/repositories/accounts_repository.dart';
-import 'package:iif/domain/repositories/operations_repository.dart';
 import 'package:iif/domain/use_cases/get_accounts_balance_use_case.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../account_fixtures.dart';
-import 'get_accounts_balance_use_case_test.mocks.dart';
+import '../mocks.mocks.dart';
 
-@GenerateMocks([AccountsRepository, OperationsRepository])
 void main() {
   late GetAccountsBalanceUseCase getAccountsBalanceUseCase;
   late AccountsRepository mockAccountsRepository;

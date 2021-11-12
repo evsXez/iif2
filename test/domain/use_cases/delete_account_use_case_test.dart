@@ -6,9 +6,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../account_fixtures.dart';
-import 'delete_account_use_case_test.mocks.dart';
+import '../mocks.mocks.dart';
 
-@GenerateMocks([AccountsRepository])
 void main() {
   late DeleteAccountUseCase deleteAccountUseCase;
   late MockAccountsRepository mockAccountsRepository;

@@ -1,14 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:iif/domain/include.dart';
-import 'package:iif/domain/repositories/accounts_repository.dart';
 import 'package:iif/domain/use_cases/archive_account_use_case.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../account_fixtures.dart';
-import 'archive_account_use_case_test.mocks.dart';
+import '../mocks.mocks.dart';
 
-@GenerateMocks([AccountsRepository, GetAccountsBalanceUseCase])
 void main() {
   late ArchiveAccountUseCase archiveAccountUseCase;
   late Account account;

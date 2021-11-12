@@ -1,12 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:iif/domain/include.dart';
-import 'package:iif/domain/repositories/operations_repository.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'get_account_options_use_case_test.mocks.dart';
+import '../mocks.mocks.dart';
 
-@GenerateMocks([OperationsRepository])
 void main() {
   late GetAccountOptionsUseCase getAccountOptionsUseCase;
   final operationsRepository = MockOperationsRepository();

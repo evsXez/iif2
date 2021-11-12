@@ -27,7 +27,8 @@ class _$AddOperationStateTearOff {
       required bool locationTo,
       required bool money,
       required bool comment,
-      required List<AccountBalance> accountsBalance}) {
+      required List<AccountBalance> accountsBalance,
+      String? errorMessage}) {
     return _Visibility(
       objects: objects,
       locationFrom: locationFrom,
@@ -35,6 +36,7 @@ class _$AddOperationStateTearOff {
       money: money,
       comment: comment,
       accountsBalance: accountsBalance,
+      errorMessage: errorMessage,
     );
   }
 
@@ -51,8 +53,14 @@ mixin _$AddOperationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function(bool objects, bool locationFrom, bool locationTo,
-            bool money, bool comment, List<AccountBalance> accountsBalance)
+    required TResult Function(
+            bool objects,
+            bool locationFrom,
+            bool locationTo,
+            bool money,
+            bool comment,
+            List<AccountBalance> accountsBalance,
+            String? errorMessage)
         visibility,
     required TResult Function() saved,
   }) =>
@@ -60,8 +68,14 @@ mixin _$AddOperationState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(bool objects, bool locationFrom, bool locationTo,
-            bool money, bool comment, List<AccountBalance> accountsBalance)?
+    TResult Function(
+            bool objects,
+            bool locationFrom,
+            bool locationTo,
+            bool money,
+            bool comment,
+            List<AccountBalance> accountsBalance,
+            String? errorMessage)?
         visibility,
     TResult Function()? saved,
   }) =>
@@ -69,8 +83,14 @@ mixin _$AddOperationState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(bool objects, bool locationFrom, bool locationTo,
-            bool money, bool comment, List<AccountBalance> accountsBalance)?
+    TResult Function(
+            bool objects,
+            bool locationFrom,
+            bool locationTo,
+            bool money,
+            bool comment,
+            List<AccountBalance> accountsBalance,
+            String? errorMessage)?
         visibility,
     TResult Function()? saved,
     required TResult orElse(),
@@ -155,8 +175,14 @@ class _$_Idle implements _Idle {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function(bool objects, bool locationFrom, bool locationTo,
-            bool money, bool comment, List<AccountBalance> accountsBalance)
+    required TResult Function(
+            bool objects,
+            bool locationFrom,
+            bool locationTo,
+            bool money,
+            bool comment,
+            List<AccountBalance> accountsBalance,
+            String? errorMessage)
         visibility,
     required TResult Function() saved,
   }) {
@@ -167,8 +193,14 @@ class _$_Idle implements _Idle {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(bool objects, bool locationFrom, bool locationTo,
-            bool money, bool comment, List<AccountBalance> accountsBalance)?
+    TResult Function(
+            bool objects,
+            bool locationFrom,
+            bool locationTo,
+            bool money,
+            bool comment,
+            List<AccountBalance> accountsBalance,
+            String? errorMessage)?
         visibility,
     TResult Function()? saved,
   }) {
@@ -179,8 +211,14 @@ class _$_Idle implements _Idle {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(bool objects, bool locationFrom, bool locationTo,
-            bool money, bool comment, List<AccountBalance> accountsBalance)?
+    TResult Function(
+            bool objects,
+            bool locationFrom,
+            bool locationTo,
+            bool money,
+            bool comment,
+            List<AccountBalance> accountsBalance,
+            String? errorMessage)?
         visibility,
     TResult Function()? saved,
     required TResult orElse(),
@@ -241,7 +279,8 @@ abstract class _$VisibilityCopyWith<$Res> {
       bool locationTo,
       bool money,
       bool comment,
-      List<AccountBalance> accountsBalance});
+      List<AccountBalance> accountsBalance,
+      String? errorMessage});
 }
 
 /// @nodoc
@@ -263,6 +302,7 @@ class __$VisibilityCopyWithImpl<$Res>
     Object? money = freezed,
     Object? comment = freezed,
     Object? accountsBalance = freezed,
+    Object? errorMessage = freezed,
   }) {
     return _then(_Visibility(
       objects: objects == freezed
@@ -289,6 +329,10 @@ class __$VisibilityCopyWithImpl<$Res>
           ? _value.accountsBalance
           : accountsBalance // ignore: cast_nullable_to_non_nullable
               as List<AccountBalance>,
+      errorMessage: errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -302,7 +346,8 @@ class _$_Visibility implements _Visibility {
       required this.locationTo,
       required this.money,
       required this.comment,
-      required this.accountsBalance});
+      required this.accountsBalance,
+      this.errorMessage});
 
   @override
   final bool objects;
@@ -316,10 +361,12 @@ class _$_Visibility implements _Visibility {
   final bool comment;
   @override
   final List<AccountBalance> accountsBalance;
+  @override
+  final String? errorMessage;
 
   @override
   String toString() {
-    return 'AddOperationState.visibility(objects: $objects, locationFrom: $locationFrom, locationTo: $locationTo, money: $money, comment: $comment, accountsBalance: $accountsBalance)';
+    return 'AddOperationState.visibility(objects: $objects, locationFrom: $locationFrom, locationTo: $locationTo, money: $money, comment: $comment, accountsBalance: $accountsBalance, errorMessage: $errorMessage)';
   }
 
   @override
@@ -342,7 +389,10 @@ class _$_Visibility implements _Visibility {
                     .equals(other.comment, comment)) &&
             (identical(other.accountsBalance, accountsBalance) ||
                 const DeepCollectionEquality()
-                    .equals(other.accountsBalance, accountsBalance)));
+                    .equals(other.accountsBalance, accountsBalance)) &&
+            (identical(other.errorMessage, errorMessage) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorMessage, errorMessage)));
   }
 
   @override
@@ -353,7 +403,8 @@ class _$_Visibility implements _Visibility {
       const DeepCollectionEquality().hash(locationTo) ^
       const DeepCollectionEquality().hash(money) ^
       const DeepCollectionEquality().hash(comment) ^
-      const DeepCollectionEquality().hash(accountsBalance);
+      const DeepCollectionEquality().hash(accountsBalance) ^
+      const DeepCollectionEquality().hash(errorMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -364,41 +415,59 @@ class _$_Visibility implements _Visibility {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function(bool objects, bool locationFrom, bool locationTo,
-            bool money, bool comment, List<AccountBalance> accountsBalance)
+    required TResult Function(
+            bool objects,
+            bool locationFrom,
+            bool locationTo,
+            bool money,
+            bool comment,
+            List<AccountBalance> accountsBalance,
+            String? errorMessage)
         visibility,
     required TResult Function() saved,
   }) {
-    return visibility(
-        objects, locationFrom, locationTo, money, comment, accountsBalance);
+    return visibility(objects, locationFrom, locationTo, money, comment,
+        accountsBalance, errorMessage);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(bool objects, bool locationFrom, bool locationTo,
-            bool money, bool comment, List<AccountBalance> accountsBalance)?
+    TResult Function(
+            bool objects,
+            bool locationFrom,
+            bool locationTo,
+            bool money,
+            bool comment,
+            List<AccountBalance> accountsBalance,
+            String? errorMessage)?
         visibility,
     TResult Function()? saved,
   }) {
-    return visibility?.call(
-        objects, locationFrom, locationTo, money, comment, accountsBalance);
+    return visibility?.call(objects, locationFrom, locationTo, money, comment,
+        accountsBalance, errorMessage);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(bool objects, bool locationFrom, bool locationTo,
-            bool money, bool comment, List<AccountBalance> accountsBalance)?
+    TResult Function(
+            bool objects,
+            bool locationFrom,
+            bool locationTo,
+            bool money,
+            bool comment,
+            List<AccountBalance> accountsBalance,
+            String? errorMessage)?
         visibility,
     TResult Function()? saved,
     required TResult orElse(),
   }) {
     if (visibility != null) {
-      return visibility(
-          objects, locationFrom, locationTo, money, comment, accountsBalance);
+      return visibility(objects, locationFrom, locationTo, money, comment,
+          accountsBalance, errorMessage);
     }
     return orElse();
   }
@@ -445,7 +514,8 @@ abstract class _Visibility implements AddOperationState {
       required bool locationTo,
       required bool money,
       required bool comment,
-      required List<AccountBalance> accountsBalance}) = _$_Visibility;
+      required List<AccountBalance> accountsBalance,
+      String? errorMessage}) = _$_Visibility;
 
   bool get objects => throw _privateConstructorUsedError;
   bool get locationFrom => throw _privateConstructorUsedError;
@@ -454,6 +524,7 @@ abstract class _Visibility implements AddOperationState {
   bool get comment => throw _privateConstructorUsedError;
   List<AccountBalance> get accountsBalance =>
       throw _privateConstructorUsedError;
+  String? get errorMessage => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$VisibilityCopyWith<_Visibility> get copyWith =>
       throw _privateConstructorUsedError;
@@ -497,8 +568,14 @@ class _$_Saved implements _Saved {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function(bool objects, bool locationFrom, bool locationTo,
-            bool money, bool comment, List<AccountBalance> accountsBalance)
+    required TResult Function(
+            bool objects,
+            bool locationFrom,
+            bool locationTo,
+            bool money,
+            bool comment,
+            List<AccountBalance> accountsBalance,
+            String? errorMessage)
         visibility,
     required TResult Function() saved,
   }) {
@@ -509,8 +586,14 @@ class _$_Saved implements _Saved {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(bool objects, bool locationFrom, bool locationTo,
-            bool money, bool comment, List<AccountBalance> accountsBalance)?
+    TResult Function(
+            bool objects,
+            bool locationFrom,
+            bool locationTo,
+            bool money,
+            bool comment,
+            List<AccountBalance> accountsBalance,
+            String? errorMessage)?
         visibility,
     TResult Function()? saved,
   }) {
@@ -521,8 +604,14 @@ class _$_Saved implements _Saved {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(bool objects, bool locationFrom, bool locationTo,
-            bool money, bool comment, List<AccountBalance> accountsBalance)?
+    TResult Function(
+            bool objects,
+            bool locationFrom,
+            bool locationTo,
+            bool money,
+            bool comment,
+            List<AccountBalance> accountsBalance,
+            String? errorMessage)?
         visibility,
     TResult Function()? saved,
     required TResult orElse(),

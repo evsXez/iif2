@@ -10,6 +10,7 @@ abstract class AddOperationState with _$AddOperationState {
     required bool money,
     required bool comment,
     required List<AccountBalance> accountsBalance,
+    String? errorMessage,
   }) = _Visibility;
   const factory AddOperationState.saved() = _Saved;
 }

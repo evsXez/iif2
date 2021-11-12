@@ -64,6 +64,11 @@ class _AddOperationPageState extends State<AddOperationPage> {
           bloc: _addOperationBloc,
           listener: (context, state) {
             state.maybeMap(
+              visibility: (state) {
+                if (state.errorMessage != null) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.errorMessage!)));
+                }
+              },
               saved: (_) {
                 Navigation.pop();
               },
