@@ -45,10 +45,13 @@ class AddOperationBloc extends Cubit<AddOperationState> {
   void _onCategoriesChanged(CategorySelectorState state) {
     state.maybeMap(
       loaded: (data) {
-        final selectedCategories = data.categories.where((ref) => ref.node.isSelected);
+        final selectedCategories = data.categories.where((ref) => ref.node.isSelected).toList();
         final baseCategory = selectedCategories.firstOrNull?.node.value;
 
         _fields.baseCategory = baseCategory;
+        if (baseCategory?.type == CategoryType.debts && selectedCategories.length > 1) {
+          _fields.baseCategory = selectedCategories[1].node.value;
+        }
         _fields.categoriesStamp = selectedCategories.map((it) => it.node.value.name).join("/");
 
         print("Base category: $baseCategory, accounts count: ${_accountsBalance.length}");
@@ -63,13 +66,14 @@ class AddOperationBloc extends Cubit<AddOperationState> {
     final isIncome = _fields.baseCategory?.type == CategoryType.income;
     final isExpense = _fields.baseCategory?.type == CategoryType.expense;
     final isTransfer = _fields.baseCategory?.type == CategoryType.transfer;
+    final isDebtNew = _fields.baseCategory?.type == CategoryType.debtNew;
     emit(
       _Visibility(
-        objects: false,
+        objects: isDebtNew,
         locationFrom: isExpense || isTransfer,
-        locationTo: isIncome || isTransfer,
-        money: isIncome || isExpense || isTransfer,
-        comment: isIncome || isExpense || isTransfer,
+        locationTo: isIncome || isTransfer || isDebtNew,
+        money: isIncome || isExpense || isTransfer || isDebtNew,
+        comment: isIncome || isExpense || isTransfer || isDebtNew,
         accountsBalance: _accountsBalance,
         errorMessage: errorMessage,
       ),

@@ -87,7 +87,10 @@ class _AddOperationPageState extends State<AddOperationPage> {
                 children: [
                   const SizedBox(height: 8),
                   categorySelector,
-                  // objectSelector,
+                  Visibility(
+                    visibile: visibility.objects,
+                    child: objectSelector,
+                  ),
                   const SizedBox(height: 16),
                   Visibility(
                     visible: visibility.locationFrom || visibility.locationTo,
