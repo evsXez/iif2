@@ -32,9 +32,17 @@ class OperationsRepositoryImpl extends OperationsRepository {
   }
 
   @override
-  void addOperationInitialInput(Account account, Money money) {
+  void addOperationInitialInput(
+    Account account,
+    Money money,
+  ) {
     try {
-      _dataSource.addOperation(LogicOperation.initialInput(account, money));
+      _dataSource.addOperation(
+        LogicOperation.initialInput(
+          account: account,
+          money: money,
+        ),
+      );
     } finally {
       notifyListeners();
     }
@@ -54,18 +62,42 @@ class OperationsRepositoryImpl extends OperationsRepository {
   }
 
   @override
-  void addOperationExpense(Account account, Money money) {
+  void addOperationExpense(
+    Account account,
+    Money money, {
+    String? comment,
+    String? categoriesStamp,
+  }) {
     try {
-      _dataSource.addOperation(LogicOperation.expense(account, money));
+      _dataSource.addOperation(
+        LogicOperation.expense(
+          account,
+          money,
+          comment: comment,
+          categoriesStamp: categoriesStamp,
+        ),
+      );
     } finally {
       notifyListeners();
     }
   }
 
   @override
-  void addOperationIncome(Account account, Money money) {
+  void addOperationIncome(
+    Account account,
+    Money money, {
+    String? comment,
+    String? categoriesStamp,
+  }) {
     try {
-      _dataSource.addOperation(LogicOperation.income(account, money));
+      _dataSource.addOperation(
+        LogicOperation.income(
+          account,
+          money,
+          comment: comment,
+          categoriesStamp: categoriesStamp,
+        ),
+      );
     } finally {
       notifyListeners();
     }

@@ -40,7 +40,7 @@ extension MoneyX on Money {
     double? value = double.tryParse(withCoins);
     if (value == null) throw ExceptionMoneyNotParsed();
 
-    return Money(coins: (value * 100).floor());
+    return Money(coins: (value * 100).round());
   }
 }
 

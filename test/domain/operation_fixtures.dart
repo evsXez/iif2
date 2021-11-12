@@ -7,6 +7,7 @@ LogicOperation getLogicOperationInitialInput(Account account, Money money) => Lo
       type: LogicOperationType.initialInput,
       created: DateTime.now(),
       comment: "comment for initial",
+      categoriesStamp: "categories/Stamp",
       atomics: [
         AtomicOperation(
           money: money,

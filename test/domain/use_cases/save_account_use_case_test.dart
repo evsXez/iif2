@@ -38,7 +38,10 @@ void main() {
 
     when(mockOperationsRepository.getOperations(account)).thenAnswer((_) async => listOperations);
     when(mockOperationsRepository.addOperationInitialInput(account, money)).thenAnswer((_) {
-      listOperations.add(LogicOperation.initialInput(account, money));
+      listOperations.add(LogicOperation.initialInput(
+        account: account,
+        money: money,
+      ));
     });
   });
 

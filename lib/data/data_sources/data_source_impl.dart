@@ -61,6 +61,7 @@ class DataSourceImpl extends DataSource {
       type: operation.type,
       created: operation.created,
       comment: operation.comment,
+      categoriesStamp: operation.categoriesStamp,
       atomicsModel: operation.atomics
           .map(
             (atomic) => AtomicOperationModel(
@@ -126,6 +127,7 @@ class DataSourceImpl extends DataSource {
         type: logicOperation.type,
         created: logicOperation.created,
         comment: logicOperation.comment,
+        categoriesStamp: logicOperation.categoriesStamp,
         atomicsModel: atomicsModel,
       );
       list.add(json.encode(current.toJson()));

@@ -8,7 +8,17 @@ class AddIncomeUseCase {
     required this.operationsRepository,
   });
 
-  void execute(Account account, Money money) {
-    operationsRepository.addOperationIncome(account, money);
+  void execute(
+    Account account,
+    Money money, {
+    String? comment,
+    String? categoriesStamp,
+  }) {
+    operationsRepository.addOperationIncome(
+      account,
+      money,
+      comment: comment,
+      categoriesStamp: categoriesStamp,
+    );
   }
 }

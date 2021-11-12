@@ -8,7 +8,17 @@ class AddExpenseUseCase {
     required this.operationsRepository,
   });
 
-  void execute(Account account, Money money) {
-    operationsRepository.addOperationExpense(account, money);
+  void execute(
+    Account account,
+    Money money, {
+    String? comment,
+    String? categoriesStamp,
+  }) {
+    operationsRepository.addOperationExpense(
+      account,
+      money,
+      comment: comment,
+      categoriesStamp: categoriesStamp,
+    );
   }
 }

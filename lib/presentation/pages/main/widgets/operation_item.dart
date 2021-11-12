@@ -126,32 +126,36 @@ class _OperationInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         _MoneyAndAccounts(operation),
-        const SizedBox(height: 4),
-        Text(
-          _categories(),
-          style: const TextStyle(
-            fontSize: 12,
-          ),
-          maxLines: 5,
-        ),
-        const SizedBox(height: 4),
-        Visibility(
-          visible: (operation.comment.isNotEmpty),
-          child: Text(
-            "(${operation.comment})",
-            style: const TextStyle(
-              color: Colors.grey,
-              fontSize: 12,
+        if (operation.categoriesStamp.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Text(
+              operation.categoriesStamp,
+              style: const TextStyle(
+                fontSize: 12,
+              ),
+              maxLines: 5,
             ),
-            maxLines: 3,
           ),
-        )
+        const SizedBox(height: 4),
+        if (operation.comment.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Text(
+              "(${operation.comment})",
+              style: const TextStyle(
+                color: Colors.grey,
+                fontSize: 12,
+              ),
+              maxLines: 3,
+            ),
+          ),
       ],
     );
   }
 
   String _categories() {
-    return "categories/here";
+    return operation.categoriesStamp;
     // List<String> itemCategories = decodeJsonArray(operation.categories);
     // List<String> itemObjects = decodeJsonArray(operation.objects);
     // if (operation.categories == null || operation.categories.isEmpty) return "<no data?>";

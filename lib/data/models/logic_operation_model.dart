@@ -12,11 +12,13 @@ class LogicOperationModel extends LogicOperation with EquatableMixin {
     required DateTime created,
     required String comment,
     required this.atomicsModel,
+    String categoriesStamp = "",
   }) : super(
           type: type,
           created: created,
           comment: comment,
           atomics: atomicsModel,
+          categoriesStamp: categoriesStamp,
         );
 
   factory LogicOperationModel.fromJson(Map<String, dynamic> json) => LogicOperationModel(
@@ -24,6 +26,7 @@ class LogicOperationModel extends LogicOperation with EquatableMixin {
         type: LogicOperationType.values[json['type']],
         created: DateTime.fromMillisecondsSinceEpoch(json['createdTs']),
         comment: json['comment'],
+        categoriesStamp: json['categoriesStamp'],
         atomicsModel: (json['atomics'] as List<dynamic>).map((it) => AtomicOperationModel.fromJson(it)).toList(),
       );
 
@@ -32,6 +35,7 @@ class LogicOperationModel extends LogicOperation with EquatableMixin {
         'type': type.index,
         'createdTs': created.millisecondsSinceEpoch,
         'comment': comment,
+        'categoriesStamp': categoriesStamp,
         'atomics': atomicsModel.map((it) => it.toJson()).toList(),
       };
 

@@ -45,8 +45,12 @@ class AddOperationBloc extends Cubit<AddOperationState> {
   void _onCategoriesChanged(CategorySelectorState state) {
     state.maybeMap(
       loaded: (data) {
-        final baseCategory = data.categories.where((ref) => ref.node.isSelected).firstOrNull?.node.value;
+        final selectedCategories = data.categories.where((ref) => ref.node.isSelected);
+        final baseCategory = selectedCategories.firstOrNull?.node.value;
+
         _fields.baseCategory = baseCategory;
+        _fields.categoriesStamp = selectedCategories.map((it) => it.node.value.name).join("/");
+
         print("Base category: $baseCategory, accounts count: ${_accountsBalance.length}");
 
         final isIncome = baseCategory?.type == CategoryType.income;
@@ -89,10 +93,20 @@ class AddOperationBloc extends Cubit<AddOperationState> {
       _fields.validate();
       switch (_fields.baseCategory!.type) {
         case CategoryType.expense:
-          addExpenseUseCase.of(_context).execute(_fields.accountFrom!, _fields.money!);
+          addExpenseUseCase.of(_context).execute(
+                _fields.accountFrom!,
+                _fields.money!,
+                comment: _fields.comment,
+                categoriesStamp: _fields.categoriesStamp,
+              );
           break;
         case CategoryType.income:
-          addIncomeUseCase.of(_context).execute(_fields.accountFrom!, _fields.money!);
+          addIncomeUseCase.of(_context).execute(
+                _fields.accountFrom!,
+                _fields.money!,
+                comment: _fields.comment,
+                categoriesStamp: _fields.categoriesStamp,
+              );
           break;
         default:
           throw _UndefinedOperationException();
@@ -113,6 +127,7 @@ class _SelectedFields {
   Account? accountTo;
   Money? money;
   String? comment;
+  String? categoriesStamp;
 
   void validate() {
     if (baseCategory == null) {

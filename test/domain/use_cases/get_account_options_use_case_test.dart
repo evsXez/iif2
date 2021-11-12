@@ -55,6 +55,7 @@ void main() {
         type: LogicOperationType.initialInput,
         created: DateTime.now(),
         comment: "",
+        categoriesStamp: "",
         atomics: [
           AtomicOperation(
             money: Money(coins: coins),
@@ -68,6 +69,7 @@ void main() {
         type: LogicOperationType.expense,
         created: DateTime.now(),
         comment: "",
+        categoriesStamp: "",
         atomics: [
           AtomicOperation(
             money: Money(coins: coins),

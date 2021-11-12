@@ -7,7 +7,20 @@ abstract class OperationsRepository extends ChangeNotifier {
   Future<List<LogicOperation>> getOperations(Account account);
   Future<List<LogicOperation>> getAllOperations();
 
-  void addOperationInitialInput(Account account, Money money);
-  void addOperationExpense(Account account, Money money);
-  void addOperationIncome(Account account, Money money);
+  void addOperationInitialInput(
+    Account account,
+    Money money,
+  );
+  void addOperationExpense(
+    Account account,
+    Money money, {
+    String? comment,
+    String? categoriesStamp,
+  });
+  void addOperationIncome(
+    Account account,
+    Money money, {
+    String? comment,
+    String? categoriesStamp,
+  });
 }
