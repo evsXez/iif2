@@ -5,7 +5,7 @@ import 'package:iif/presentation/pages/add_operation/widgets/category_chip.dart'
 import 'package:iif/presentation/pages/main/widgets/account_item.dart';
 
 class NodeSelector<T extends NodeValue> extends StatefulWidget {
-  final T Function(String text, Node<T> parent) valueBuilder;
+  final dynamic Function(String text, Node<NodeValue> parent) valueBuilder;
   const NodeSelector({
     Key? key,
     required this.valueBuilder,

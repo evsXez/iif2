@@ -31,16 +31,16 @@ class _AddOperationPageState extends State<AddOperationPage> {
   void initState() {
     super.initState();
     _categorySelector = NodeSelector(
-      valueBuilder: (text, parent) => Category(
-        text,
-        parent.value?.type ?? CategoryType.undefined,
-      ),
+      valueBuilder: (text, parent) {
+        final value = parent.value;
+        return (value is Category) ? Category(text, value.type) : Category(text, CategoryType.undefined);
+      },
     );
     _subjectSelector = NodeSelector(
-      valueBuilder: (text, parent) => Subject(
-        text,
-        parent.value?.type ?? SubjectType.undefined,
-      ),
+      valueBuilder: (text, parent) {
+        final value = parent.value;
+        return (value is Subject) ? Subject(text, value.type) : Subject(text, SubjectType.undefined);
+      },
     );
 
     _categorySelectorBloc = NodeSelectorBloc(context, root: predefinedCategoriesNode);

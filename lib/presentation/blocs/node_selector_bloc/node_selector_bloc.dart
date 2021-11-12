@@ -60,7 +60,7 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
     _showData();
   }
 
-  void save(Node<T> node, T Function(String text, Node<T> parent) valueBuilder, String text) {
+  void save(Node<T> node, dynamic Function(String text, Node<NodeValue> parent) valueBuilder, String text) {
     if (node == _addNode) {
       final Node<T> parent = _firstDeepSelectedNode();
       parent.children.add(
