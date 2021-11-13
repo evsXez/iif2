@@ -7,7 +7,8 @@ import '../mocks.mocks.dart';
 
 void main() {
   late CreateNodeValueUseCase createNodeValueUseCase;
-  final account = getAccount(12, AccountType.debts);
+  final accountType = AccountType.debts;
+  final account = getAccount(12, accountType);
   late MockAccountsRepository accountsRepository;
   late List<Account> accountsData;
   const name = "node value name";
@@ -22,7 +23,7 @@ void main() {
 
     accountsData = [];
 
-    // when(accountsRepository.getAccountsOfType(type)).thenReturn(accountsData);
+    when(accountsRepository.getAccountsOfType(accountType)).thenReturn(accountsData);
     when(accountsRepository.saveAccount(any)).thenAnswer((realInvocation) {
       final Account accountToSave = realInvocation.positionalArguments.first;
       accountsData.add(accountToSave);
@@ -50,6 +51,7 @@ void main() {
       expect(subject.type, subjectReference.type);
       expect(subject.account.name, name);
       expect(subject.account.type, subjectReference.account.type);
+      expect(accountsRepository.getAccountsOfType(subjectReference.account.type), contains(subject.account));
     });
     test('can create Subject from node', () {
       assert(name != subjectNodeValue.name);
@@ -59,6 +61,7 @@ void main() {
       expect(subject.account.id, subjectNodeValue.account.id);
       expect(subject.account.name, name);
       expect(subject.account.type, subjectNodeValue.account.type);
+      expect(accountsRepository.getAccountsOfType(subjectNodeValue.account.type), contains(subject.account));
     });
   });
 }
