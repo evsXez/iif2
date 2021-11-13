@@ -45,15 +45,15 @@ class _EditableChipState extends State<EditableChip> {
             scrollPadding: EdgeInsets.zero,
             autofocus: true,
             controller: controller,
-            cursorColor: widget.colorScheme.textColor,
-            style: TextStyle(color: widget.colorScheme.textColor, fontSize: 14),
+            cursorColor: widget.colorScheme.editTextColor,
+            style: TextStyle(color: widget.colorScheme.editTextColor, fontSize: 14),
             textAlign: TextAlign.start,
             textAlignVertical: TextAlignVertical.top,
             onSubmitted: (s) {
               widget.doneEditing(s);
             },
           ),
-          backgroundColor: widget.colorScheme.backgroundColor,
+          backgroundColor: widget.colorScheme.editBackgroundColor,
           onDeleted: () {
             // widget.doneEditing(isDeleteModeOnly ? "" : controller.text);
             widget.doneEditing(controller.text);

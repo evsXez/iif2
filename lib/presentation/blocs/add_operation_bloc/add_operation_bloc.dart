@@ -84,14 +84,18 @@ class AddOperationBloc extends Cubit<AddOperationState> {
     final isIncome = _fields.baseCategory?.type == CategoryType.income;
     final isExpense = _fields.baseCategory?.type == CategoryType.expense;
     final isTransfer = _fields.baseCategory?.type == CategoryType.transfer;
-    final isDebtNew = _fields.baseCategory?.type == CategoryType.debtIncrease;
+    final isDebtIncrease = _fields.baseCategory?.type == CategoryType.debtIncrease;
+    final isDebtDecrease = _fields.baseCategory?.type == CategoryType.debtDecrease;
+    final isLoanIncrease = _fields.baseCategory?.type == CategoryType.loanIncrease;
+    final isLoanDecrease = _fields.baseCategory?.type == CategoryType.loanDecrease;
+    final isDebts = isDebtIncrease || isDebtDecrease || isLoanIncrease || isLoanDecrease;
     emit(
       _Visibility(
-        subject: isDebtNew,
-        locationFrom: isExpense || isTransfer,
-        locationTo: isIncome || isTransfer || isDebtNew,
-        money: isIncome || isExpense || isTransfer || isDebtNew,
-        comment: isIncome || isExpense || isTransfer || isDebtNew,
+        subject: isDebts,
+        locationFrom: isExpense || isTransfer || isDebtDecrease || isLoanIncrease,
+        locationTo: isIncome || isTransfer || isDebtIncrease || isLoanDecrease,
+        money: isIncome || isExpense || isTransfer || isDebts,
+        comment: isIncome || isExpense || isTransfer || isDebts,
         accountsBalance: _accountsBalance,
         errorMessage: errorMessage,
       ),
@@ -136,6 +140,36 @@ class AddOperationBloc extends Cubit<AddOperationState> {
           break;
         case CategoryType.debtIncrease:
           debtIncreaseUseCase.of(_context).execute(
+                _fields.accountTo!,
+                _fields.money!,
+                comment: _fields.comment,
+                categoriesStamp: _fields.categoriesStamp,
+                subjectsStamp: _fields.subjectsStamp,
+                subject: _fields.subject!,
+              );
+          break;
+        case CategoryType.debtDecrease:
+          debtDecreaseUseCase.of(_context).execute(
+                _fields.accountTo!,
+                _fields.money!,
+                comment: _fields.comment,
+                categoriesStamp: _fields.categoriesStamp,
+                subjectsStamp: _fields.subjectsStamp,
+                subject: _fields.subject!,
+              );
+          break;
+        case CategoryType.loanIncrease:
+          loanIncreaseUseCase.of(_context).execute(
+                _fields.accountTo!,
+                _fields.money!,
+                comment: _fields.comment,
+                categoriesStamp: _fields.categoriesStamp,
+                subjectsStamp: _fields.subjectsStamp,
+                subject: _fields.subject!,
+              );
+          break;
+        case CategoryType.loanDecrease:
+          loanDecreaseUseCase.of(_context).execute(
                 _fields.accountTo!,
                 _fields.money!,
                 comment: _fields.comment,

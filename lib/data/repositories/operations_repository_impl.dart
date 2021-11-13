@@ -127,4 +127,22 @@ class OperationsRepositoryImpl extends OperationsRepository {
       notifyListeners();
     }
   }
+
+  @override
+  void addOperationDebtDecrease(Account account, Money money, Subject subject,
+      {String? comment, String? categoriesStamp, String? subjectsStamp}) {
+    throw UnimplementedError();
+  }
+
+  @override
+  void addOperationLoanDecrease(Account account, Money money, Subject subject,
+      {String? comment, String? categoriesStamp, String? subjectsStamp}) {
+    throw UnimplementedError();
+  }
+
+  @override
+  void addOperationLoanIncrease(Account account, Money money, Subject subject,
+      {String? comment, String? categoriesStamp, String? subjectsStamp}) {
+    throw UnimplementedError();
+  }
 }

@@ -14,7 +14,7 @@ void main() {
   test('after adding debt increase operation we can get it', () async {
     await testAfterAddingDebtOperationWeCanGetIt(
       () {
-        debtIncreaseUseCase.execute(account, money, subject: subject);
+        debtDecreaseUseCase.execute(account, money, subject: subject);
       },
       mockOperationsRepository,
       account,
@@ -26,13 +26,13 @@ void main() {
   test('after adding debt increase operation the balances changes right', () async {
     await testAfterAddingDebtOperationTheBalanceChangesRight(
       () {
-        debtIncreaseUseCase.execute(account, money, subject: subject);
+        debtDecreaseUseCase.execute(account, money, subject: subject);
       },
       mockOperationsRepository,
       account,
       money,
       subject,
-      accountBalanceShouldIncrease: true,
+      accountBalanceShouldIncrease: false,
     );
   });
 }

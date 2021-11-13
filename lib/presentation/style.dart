@@ -15,27 +15,35 @@ class Style {
 class StyleNodeColorSheme {
   final Color selectedTextColor;
   final Color textColor;
+  final Color editTextColor;
   final Color backgroundColor;
   final Color selectedBackgroundColor;
+  final Color editBackgroundColor;
 
   StyleNodeColorSheme({
     required this.selectedTextColor,
     required this.textColor,
+    required this.editTextColor,
     required this.backgroundColor,
     required this.selectedBackgroundColor,
+    required this.editBackgroundColor,
   });
 
   factory StyleNodeColorSheme.categories() => StyleNodeColorSheme(
         selectedTextColor: Style.blackColor,
         textColor: Style.blackColor,
+        editTextColor: Style.blackColor,
         backgroundColor: Style.grayColor.withAlpha(25),
         selectedBackgroundColor: Style.highlightColor,
+        editBackgroundColor: Style.highlightColor,
       );
 
   factory StyleNodeColorSheme.subjects() => StyleNodeColorSheme(
         selectedBackgroundColor: Style.accentColor,
         selectedTextColor: Style.whiteColor,
+        editTextColor: Style.blackColor,
         backgroundColor: Style.highlightColor,
         textColor: Style.blackColor,
+        editBackgroundColor: Style.whiteColor,
       );
 }

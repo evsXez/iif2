@@ -13,8 +13,16 @@ class LoanIncreaseUseCase {
     Money money, {
     String? comment,
     String? categoriesStamp,
+    String? subjectsStamp,
     required Subject subject,
   }) {
-    throw UnimplementedError();
+    operationsRepository.addOperationLoanIncrease(
+      account,
+      money,
+      subject,
+      comment: comment,
+      categoriesStamp: categoriesStamp,
+      subjectsStamp: subjectsStamp,
+    );
   }
 }

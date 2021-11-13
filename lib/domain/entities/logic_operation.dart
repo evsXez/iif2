@@ -116,4 +116,90 @@ class LogicOperation {
         categoriesStamp: categoriesStamp ?? "",
         subjectsStamp: subjectsStamp ?? "",
       );
+
+  factory LogicOperation.debtDecrease(
+    Account account,
+    Money money,
+    Subject subject, {
+    String? categoriesStamp,
+    String? subjectsStamp,
+    DateTime? created,
+    String? comment,
+  }) =>
+      LogicOperation(
+        type: LogicOperationType.debts,
+        created: created ?? DateTime.now(),
+        comment: comment ?? "",
+        atomics: [
+          AtomicOperation(
+            money: money,
+            type: AtomicOperationType.expense,
+            account: account,
+          ),
+          AtomicOperation(
+            money: money,
+            type: AtomicOperationType.income,
+            account: subject.account,
+          ),
+        ],
+        categoriesStamp: categoriesStamp ?? "",
+        subjectsStamp: subjectsStamp ?? "",
+      );
+  factory LogicOperation.loanIncrease(
+    Account account,
+    Money money,
+    Subject subject, {
+    String? categoriesStamp,
+    String? subjectsStamp,
+    DateTime? created,
+    String? comment,
+  }) =>
+      LogicOperation(
+        type: LogicOperationType.debts,
+        created: created ?? DateTime.now(),
+        comment: comment ?? "",
+        atomics: [
+          AtomicOperation(
+            money: money,
+            type: AtomicOperationType.expense,
+            account: account,
+          ),
+          AtomicOperation(
+            money: money,
+            type: AtomicOperationType.income,
+            account: subject.account,
+          ),
+        ],
+        categoriesStamp: categoriesStamp ?? "",
+        subjectsStamp: subjectsStamp ?? "",
+      );
+
+  factory LogicOperation.loanDecrease(
+    Account account,
+    Money money,
+    Subject subject, {
+    String? categoriesStamp,
+    String? subjectsStamp,
+    DateTime? created,
+    String? comment,
+  }) =>
+      LogicOperation(
+        type: LogicOperationType.debts,
+        created: created ?? DateTime.now(),
+        comment: comment ?? "",
+        atomics: [
+          AtomicOperation(
+            money: money,
+            type: AtomicOperationType.income,
+            account: account,
+          ),
+          AtomicOperation(
+            money: money,
+            type: AtomicOperationType.expense,
+            account: subject.account,
+          ),
+        ],
+        categoriesStamp: categoriesStamp ?? "",
+        subjectsStamp: subjectsStamp ?? "",
+      );
 }
