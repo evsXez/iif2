@@ -12,7 +12,8 @@ part 'add_operation_bloc.freezed.dart';
 
 class AddOperationBloc extends Cubit<AddOperationState> {
   final BuildContext _context;
-  final NodeSelectorBloc<Category> nodeSelectorBloc;
+  final NodeSelectorBloc<Category> categorySelectorBloc;
+  final NodeSelectorBloc<Subject> subjectSelectorBloc;
 
   List<StreamSubscription> _obs = [];
   List<AccountBalance> _accountsBalance = [];
@@ -21,17 +22,23 @@ class AddOperationBloc extends Cubit<AddOperationState> {
 
   AddOperationBloc(
     this._context, {
-    required this.nodeSelectorBloc,
+    required this.categorySelectorBloc,
+    required this.subjectSelectorBloc,
   }) : super(const _Idle()) {
-    _obs.add(nodeSelectorBloc.stream.listen(_onCategoriesChanged));
+    _obs.add(categorySelectorBloc.stream.listen(_onCategoriesChanged));
+    _obs.add(subjectSelectorBloc.stream.listen(_onSubjectsChanged));
 
-    //TODO: think what types allowed
-    getAccountsBalanceUseCase.of(_context).execute(AccountType.money).then((value) {
-      _accountsBalance = value;
-      final defaultAccount = _accountsBalance.first.account;
-      _fields.accountFrom = defaultAccount;
-      _fields.accountTo = defaultAccount;
-    });
+    _getAccounts();
+  }
+
+  void _getAccounts() async {
+    final moneyAccountsBalance = await getAccountsBalanceUseCase.of(_context).execute(AccountType.money);
+    final creditCardsAccountsBalance = await getAccountsBalanceUseCase.of(_context).execute(AccountType.creditCards);
+
+    _accountsBalance = [...moneyAccountsBalance, ...creditCardsAccountsBalance];
+    final defaultAccount = _accountsBalance.first.account;
+    _fields.accountFrom = defaultAccount;
+    _fields.accountTo = defaultAccount;
   }
 
   @override
@@ -45,18 +52,29 @@ class AddOperationBloc extends Cubit<AddOperationState> {
   void _onCategoriesChanged(NodeSelectorState<Category> state) {
     state.maybeMap(
       loaded: (data) {
-        final selectedCategories = data.refs.where((ref) => ref.node.isSelected).toList();
-        final baseCategory = selectedCategories.firstOrNull?.node.value;
+        final refs = data.refs.where((ref) => ref.node.isSelected).toList();
+        final baseCategory = refs.firstOrNull?.node.value;
 
         _fields.baseCategory = baseCategory;
-        if (baseCategory?.type == CategoryType.debts && selectedCategories.length > 1) {
-          _fields.baseCategory = selectedCategories[1].node.value;
+        if (baseCategory?.type == CategoryType.debtsAndLoans && refs.length > 1) {
+          _fields.baseCategory = refs[1].node.value;
         }
-        _fields.categoriesStamp = selectedCategories.map((it) => (it.node.value?.name) ?? "").join("/");
-
-        print("Base category: $baseCategory, accounts count: ${_accountsBalance.length}");
+        _fields.categoriesStamp = refs.map((it) => (it.node.value?.name) ?? "").join("/");
 
         _emitVisibility();
+      },
+      orElse: () {},
+    );
+  }
+
+  void _onSubjectsChanged(NodeSelectorState<Subject> state) {
+    state.maybeMap(
+      loaded: (data) {
+        final selectedRefs = data.refs.where((ref) => ref.node.isSelected).toList();
+        final selectedSubject = selectedRefs.last.node.value;
+
+        _fields.subject = selectedSubject;
+        _fields.subjectsStamp = selectedRefs.map((it) => (it.node.value?.name) ?? "").join("/");
       },
       orElse: () {},
     );
@@ -66,7 +84,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
     final isIncome = _fields.baseCategory?.type == CategoryType.income;
     final isExpense = _fields.baseCategory?.type == CategoryType.expense;
     final isTransfer = _fields.baseCategory?.type == CategoryType.transfer;
-    final isDebtNew = _fields.baseCategory?.type == CategoryType.debtNew;
+    final isDebtNew = _fields.baseCategory?.type == CategoryType.debtIncrease;
     emit(
       _Visibility(
         subject: isDebtNew,
@@ -116,6 +134,15 @@ class AddOperationBloc extends Cubit<AddOperationState> {
                 categoriesStamp: _fields.categoriesStamp,
               );
           break;
+        case CategoryType.debtIncrease:
+          debtIncreaseUseCase.of(_context).execute(
+                _fields.accountTo!,
+                _fields.money!,
+                comment: _fields.comment,
+                categoriesStamp: _fields.categoriesStamp,
+                subject: _fields.subject!,
+              );
+          break;
         default:
           throw _UndefinedOperationException();
       }
@@ -125,7 +152,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
       //   print(e);
     } catch (e) {
       print(e);
-      _emitVisibility(errorMessage: e.toString());
+      _emitVisibility(errorMessage: e.runtimeType.toString());
     }
   }
 }
@@ -137,27 +164,38 @@ class _SelectedFields {
   Money? money;
   String? comment;
   String? categoriesStamp;
+  String? subjectsStamp;
+  Subject? subject;
 
   void validate() {
     if (baseCategory == null) {
       throw _BaseCategoryNotSelectedException();
     }
-    if (baseCategory == Strings.category_income && accountTo == null) {
+    if (baseCategory?.type == CategoryType.income && accountTo == null) {
       throw _AccountToNotSelectedException();
     }
-    if (baseCategory == Strings.category_expense && accountFrom == null) {
+    if (baseCategory?.type == CategoryType.expense && accountFrom == null) {
       throw _AccountFromNotSelectedException();
     }
-    if (baseCategory == Strings.category_transfer && (accountFrom == accountTo)) {
+    if (baseCategory?.type == CategoryType.transfer && (accountFrom == accountTo)) {
       throw _TransferAccountsMustBeDifferentException();
     }
     if (money == null) {
       throw _MoneyNotSelectedException();
     }
+    if (subject == null &&
+        (baseCategory?.type == CategoryType.debtIncrease ||
+            baseCategory?.type == CategoryType.debtDecrease ||
+            baseCategory?.type == CategoryType.loanIncrease ||
+            baseCategory?.type == CategoryType.loanDecrease)) {
+      throw _SubjectNotSelectedException();
+    }
   }
 }
 
 class _BaseCategoryNotSelectedException {}
+
+class _SubjectNotSelectedException {}
 
 class _MoneyNotSelectedException {}
 

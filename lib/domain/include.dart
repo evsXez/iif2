@@ -34,3 +34,7 @@ export 'package:iif/domain/use_cases/get_all_operations_use_case.dart';
 export 'package:iif/domain/use_cases/get_accounts_count_use_case.dart';
 export 'package:iif/domain/use_cases/add_expense_use_case.dart';
 export 'package:iif/domain/use_cases/add_income_use_case.dart';
+export 'package:iif/domain/use_cases/debt_increase_use_case.dart';
+export 'package:iif/domain/use_cases/debt_decrease_use_case.dart';
+export 'package:iif/domain/use_cases/loan_increase_use_case.dart';
+export 'package:iif/domain/use_cases/loan_decrease_use_case.dart';

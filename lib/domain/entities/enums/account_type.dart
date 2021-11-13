@@ -1,7 +1,7 @@
 enum AccountType {
   money,
   creditCards,
-  myDebts,
-  debtsToMe,
+  debts,
+  loans,
   investments,
 }

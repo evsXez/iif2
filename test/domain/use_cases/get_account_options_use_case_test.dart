@@ -53,6 +53,7 @@ void main() {
         created: DateTime.now(),
         comment: "",
         categoriesStamp: "",
+        subjectsStamp: "",
         atomics: [
           AtomicOperation(
             money: Money(coins: coins),
@@ -67,6 +68,7 @@ void main() {
         created: DateTime.now(),
         comment: "",
         categoriesStamp: "",
+        subjectsStamp: "",
         atomics: [
           AtomicOperation(
             money: Money(coins: coins),

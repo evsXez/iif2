@@ -49,6 +49,18 @@ final addExpenseUseCase = Provider((ref) => AddExpenseUseCase(
 final addIncomeUseCase = Provider((ref) => AddIncomeUseCase(
       operationsRepository: ref.read(operationsRepository),
     ));
+final debtIncreaseUseCase = Provider((ref) => DebtIncreaseUseCase(
+      operationsRepository: ref.read(operationsRepository),
+    ));
+final debtDecreaseUseCase = Provider((ref) => DebtDecreaseUseCase(
+      operationsRepository: ref.read(operationsRepository),
+    ));
+final loanIncreaseUseCase = Provider((ref) => LoanIncreaseUseCase(
+      operationsRepository: ref.read(operationsRepository),
+    ));
+final loanDecreaseUseCase = Provider((ref) => LoanDecreaseUseCase(
+      operationsRepository: ref.read(operationsRepository),
+    ));
 
 //ui notifiers, are used only in presentation layer to make some ui interactions easier
 final UiNotifierAccountEditorOpened uiNotifierAccountEditorOpened = UiNotifierAccountEditorOpened();

@@ -62,7 +62,7 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
 
   void save(Node<T> node, dynamic Function(String text, Node<NodeValue> parent) valueBuilder, String text) {
     if (node == _addNode) {
-      final Node<T> parent = _firstDeepSelectedNode();
+      final Node<T> parent = _root.deepSelected();
       parent.children.add(
         Node(
           value: valueBuilder(text, parent), //Category(text, deepSelected.value.type)
@@ -102,20 +102,5 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
       }
     }
     return null;
-  }
-
-  Node<T> _firstDeepSelectedNode() {
-    Node<T> root = _root;
-
-    while (root.children.isNotEmpty) {
-      try {
-        final node = root.children.firstWhere((it) => it.isSelected);
-        root = node;
-      } catch (_) {
-        break;
-      }
-    }
-
-    return root;
   }
 }

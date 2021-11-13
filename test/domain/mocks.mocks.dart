@@ -116,6 +116,21 @@ class MockOperationsRepository extends _i1.Mock
               {#comment: comment, #categoriesStamp: categoriesStamp}),
           returnValueForMissingStub: null);
   @override
+  void addOperationDebtIncrease(
+          _i2.Account? account, _i2.Money? money, _i2.Subject? subject,
+          {String? comment, String? categoriesStamp, String? subjectsStamp}) =>
+      super.noSuchMethod(
+          Invocation.method(#addOperationDebtIncrease, [
+            account,
+            money,
+            subject
+          ], {
+            #comment: comment,
+            #categoriesStamp: categoriesStamp,
+            #subjectsStamp: subjectsStamp
+          }),
+          returnValueForMissingStub: null);
+  @override
   void addListener(_i5.VoidCallback? listener) =>
       super.noSuchMethod(Invocation.method(#addListener, [listener]),
           returnValueForMissingStub: null);

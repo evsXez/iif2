@@ -21,28 +21,28 @@ final Node<Category> predefinedCategoriesNode = Node(
       isLocked: true,
     ),
     Node(
-      value: Category(Strings.category_debts, CategoryType.debts),
+      value: Category(Strings.category_debts, CategoryType.debtsAndLoans),
       children: [
         Node(
-          value: Category(Strings.category_debts_new, CategoryType.debtNew),
+          value: Category(Strings.category_debts_new, CategoryType.debtIncrease),
           children: [],
           canHaveMoreChildren: false,
           isLocked: true,
         ),
         Node(
-          value: Category(Strings.category_debts_return, CategoryType.debtReturn),
+          value: Category(Strings.category_debts_return, CategoryType.debtDecrease),
           children: [],
           canHaveMoreChildren: false,
           isLocked: true,
         ),
         Node(
-          value: Category(Strings.category_debts_to_me, CategoryType.debtToMe),
+          value: Category(Strings.category_debts_to_me, CategoryType.loanIncrease),
           children: [],
           canHaveMoreChildren: false,
           isLocked: true,
         ),
         Node(
-          value: Category(Strings.category_debts_returned_to_me, CategoryType.debtReturnedToMe),
+          value: Category(Strings.category_debts_returned_to_me, CategoryType.loanDecrease),
           children: [],
           canHaveMoreChildren: false,
           isLocked: true,

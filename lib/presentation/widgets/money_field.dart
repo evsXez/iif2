@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/services.dart';
 import 'package:iif/domain/include.dart';
-import 'package:iif/presentation/extensions/money_x.dart';
 import 'package:iif/presentation/include.dart';
 
 class MoneyField extends StatelessWidget {

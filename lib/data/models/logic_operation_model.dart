@@ -13,12 +13,14 @@ class LogicOperationModel extends LogicOperation with EquatableMixin {
     required String comment,
     required this.atomicsModel,
     String categoriesStamp = "",
+    String subjectsStamp = "",
   }) : super(
           type: type,
           created: created,
           comment: comment,
           atomics: atomicsModel,
           categoriesStamp: categoriesStamp,
+          subjectsStamp: subjectsStamp,
         );
 
   factory LogicOperationModel.fromJson(Map<String, dynamic> json) => LogicOperationModel(

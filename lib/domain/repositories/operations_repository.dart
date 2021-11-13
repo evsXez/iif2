@@ -23,4 +23,12 @@ abstract class OperationsRepository extends ChangeNotifier {
     String? comment,
     String? categoriesStamp,
   });
+  void addOperationDebtIncrease(
+    Account account,
+    Money money,
+    Subject subject, {
+    String? comment,
+    String? categoriesStamp,
+    String? subjectsStamp,
+  });
 }
