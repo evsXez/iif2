@@ -21,5 +21,5 @@ class Category extends NodeValue with EquatableMixin {
   List<Object?> get props => [id, name, type];
 
   @override
-  String toString() => name;
+  String toString() => "id:$id name:$name";
 }

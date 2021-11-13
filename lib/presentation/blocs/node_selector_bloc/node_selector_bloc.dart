@@ -10,11 +10,13 @@ part 'node_selector_bloc.freezed.dart';
 class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> {
   final BuildContext _context;
 
-  late final Node<T> _root;
+  late final Node<NodeValue> _root;
   final Node<T> _addNode = Node.composer();
 
   NodeSelectorBloc(this._context) : super(const _Loading()) {
-    _root = GetRootNodeUseCase<T>().execute();
+    _root = getRootNodeUseCase.of(_context).execute(T.runtimeType);
+    // _root = GetRootNodeUseCase<T>().execute();
+
     // Future.delayed(Duration(seconds: 1)).then((_) {
     _showData();
     // });
@@ -23,17 +25,17 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
   void _showData() {
     List<NodeRef<T>> view = [];
 
-    Node<T>? root = _root;
+    Node<NodeValue>? root = _root;
 
     while (root != null) {
-      view.add(NodeRef<T>(root));
+      view.add(NodeRef<T>(root as Node<T>));
       try {
         root = root.children.firstWhere((it) => it.isSelected);
       } catch (e) {
         break;
       }
     }
-    view.addAll((root?.children ?? []).map((e) => NodeRef<T>(e)).toList());
+    view.addAll((root?.children ?? []).map((e) => NodeRef<T>(e as Node<T>)).toList());
     if (root?.canHaveMoreChildren ?? false) {
       view.add(NodeRef<T>(_addNode));
     }
@@ -57,7 +59,7 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
 
   void save(Node<T> node, String text, NodeValue reference) {
     if (node == _addNode) {
-      final Node<T> parent = _root.deepSelected();
+      final Node<NodeValue> parent = _root.deepSelected();
       parent.children.add(
         Node(
           value: createNodeValueUseCase.of(_context).execute<T>(text, parent.value, reference),
@@ -86,7 +88,7 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
     _showData();
   }
 
-  Node? _parentOf(Node<T> root, Node<T> child) {
+  Node? _parentOf(Node<NodeValue> root, Node<T> child) {
     if (root.children.contains(child)) {
       return root;
     }

@@ -7,3 +7,4 @@ export 'package:iif/data/models/currency_model.dart';
 export 'package:iif/data/models/money_model.dart';
 export 'package:iif/data/models/atomic_operation_model.dart';
 export 'package:iif/data/models/logic_operation_model.dart';
+export 'package:iif/data/models/category_model.dart';

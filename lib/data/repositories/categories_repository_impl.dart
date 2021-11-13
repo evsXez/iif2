@@ -2,25 +2,52 @@ import 'package:iif/data/include.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/domain/repositories/categories_repository.dart';
 import 'package:iif/misc/resources/strings.dart';
+import 'package:intl/date_time_patterns.dart';
 
 class CategoriesRepositoryImpl extends CategoriesRepository {
   final DataSource _dataSource;
 
   CategoriesRepositoryImpl(this._dataSource);
 
+  Node<Category> withChildren(List<CategoryModel> list, Node<Category> parent) {
+    final nodes = list.where((model) => model.id != model.parentId && model.parentId == parent.value?.id).map(
+          (it) => withChildren(
+            list,
+            Node<Category>(value: it, children: []),
+          ),
+        );
+    if (nodes.isNotEmpty) {
+      parent.children.addAll(nodes);
+    }
+    return parent;
+  }
+
   @override
   Node<Category> getCategories() {
-    throw UnimplementedError();
+    final List<CategoryModel> list = _dataSource.getCategories();
+
+    final rootModel = list.firstWhere((it) => it.id == it.parentId);
+    final result = withChildren(
+      list,
+      Node<Category>(
+        value: rootModel,
+        children: [],
+        type: NodeType.root,
+        canHaveMoreChildren: false,
+      ),
+    );
+
+    return result;
   }
 
   @override
   Category saveCategory(Category categoryTemplate, Category parent) {
-    throw UnimplementedError();
+    return _dataSource.addCategory(categoryTemplate, parent);
   }
 }
-
+/*
 final Node<Category> predefinedCategoriesNode = Node(
-  value: null,
+  value: null, 
   children: [
     Node(
       value: Category(Strings.category_expense, CategoryType.expense),
@@ -72,3 +99,4 @@ final Node<Category> predefinedCategoriesNode = Node(
   ],
   canHaveMoreChildren: false,
 );
+*/

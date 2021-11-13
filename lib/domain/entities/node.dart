@@ -21,7 +21,12 @@ class Node<T> with EquatableMixin {
   });
 
   factory Node.composer() => Node(value: null, children: [], type: NodeType.composer);
-  factory Node.root() => Node(value: null, children: [], type: NodeType.root);
+  factory Node.root({required bool canHaveMoreChildren}) => Node(
+        value: null,
+        children: [],
+        type: NodeType.root,
+        canHaveMoreChildren: canHaveMoreChildren,
+      );
 
   @override
   List<Object?> get props => [value, isSelected, isEditing];

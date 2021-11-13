@@ -16,6 +16,8 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeAccount_0 extends _i1.Fake implements _i2.Account {}
 
+class _FakeCategoryModel_1 extends _i1.Fake implements _i3.CategoryModel {}
+
 /// A class which mocks [DataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -50,13 +52,13 @@ class MockDataSource extends _i1.Mock implements _i3.DataSource {
               returnValue: <_i3.LogicOperationModel>[])
           as List<_i3.LogicOperationModel>);
   @override
-  void addCategory(_i2.Category? category, _i2.Category? parent) =>
-      super.noSuchMethod(Invocation.method(#addCategory, [category, parent]),
-          returnValueForMissingStub: null);
+  _i3.CategoryModel addCategory(_i2.Category? category, _i2.Category? parent) =>
+      (super.noSuchMethod(Invocation.method(#addCategory, [category, parent]),
+          returnValue: _FakeCategoryModel_1()) as _i3.CategoryModel);
   @override
-  List<_i2.Category> getCategories() =>
+  List<_i3.CategoryModel> getCategories() =>
       (super.noSuchMethod(Invocation.method(#getCategories, []),
-          returnValue: <_i2.Category>[]) as List<_i2.Category>);
+          returnValue: <_i3.CategoryModel>[]) as List<_i3.CategoryModel>);
   @override
   String toString() => super.toString();
 }

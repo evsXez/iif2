@@ -153,12 +153,12 @@ class DataSourceImpl extends DataSource {
   }
 
   @override
-  void addCategory(Category category, Category? parent) {
+  CategoryModel addCategory(Category category, Category parent) {
     throw UnimplementedError();
   }
 
   @override
-  List<Category> getCategories() {
+  List<CategoryModel> getCategories() {
     throw UnimplementedError();
   }
 }

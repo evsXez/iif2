@@ -15,7 +15,9 @@ class CreateNodeValueUseCase {
       case Category:
         final categoryTemplate =
             Category.template(name: text, type: value is Category ? value.type : (reference as Category).type);
-        return categoriesRepository.saveCategory(categoryTemplate, parent) as T;
+
+        throw UnimplementedError();
+      // return categoriesRepository.saveCategory(categoryTemplate, parent) as T;
       // return Category(text, value is Category ? value.type : (reference as Category).type) as T;
       case Subject:
         final referenceSubject = reference as Subject;
