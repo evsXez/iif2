@@ -29,6 +29,7 @@ class LogicOperationModel extends LogicOperation with EquatableMixin {
         created: DateTime.fromMillisecondsSinceEpoch(json['createdTs']),
         comment: json['comment'],
         categoriesStamp: json['categoriesStamp'],
+        subjectsStamp: json['subjectsStamp'],
         atomicsModel: (json['atomics'] as List<dynamic>).map((it) => AtomicOperationModel.fromJson(it)).toList(),
       );
 
@@ -38,6 +39,7 @@ class LogicOperationModel extends LogicOperation with EquatableMixin {
         'createdTs': created.millisecondsSinceEpoch,
         'comment': comment,
         'categoriesStamp': categoriesStamp,
+        'subjectsStamp': subjectsStamp,
         'atomics': atomicsModel.map((it) => it.toJson()).toList(),
       };
 

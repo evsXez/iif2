@@ -61,6 +61,9 @@ final loanIncreaseUseCase = Provider((ref) => LoanIncreaseUseCase(
 final loanDecreaseUseCase = Provider((ref) => LoanDecreaseUseCase(
       operationsRepository: ref.read(operationsRepository),
     ));
+final createNodeValueUseCase = Provider((ref) => CreateNodeValueUseCase(
+      accountsRepository: ref.read(accountsRepository),
+    ));
 
 //ui notifiers, are used only in presentation layer to make some ui interactions easier
 final UiNotifierAccountEditorOpened uiNotifierAccountEditorOpened = UiNotifierAccountEditorOpened();

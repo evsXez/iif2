@@ -140,6 +140,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
                 _fields.money!,
                 comment: _fields.comment,
                 categoriesStamp: _fields.categoriesStamp,
+                subjectsStamp: _fields.subjectsStamp,
                 subject: _fields.subject!,
               );
           break;

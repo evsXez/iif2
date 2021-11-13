@@ -110,8 +110,7 @@ class LogicOperation {
           AtomicOperation(
             money: money,
             type: AtomicOperationType.expense,
-            account: Account(id: 0, name: "0", type: AccountType.money, currency: Currency.debugDefault), //TODO
-            // account: subject.account,
+            account: subject.account,
           ),
         ],
         categoriesStamp: categoriesStamp ?? "",

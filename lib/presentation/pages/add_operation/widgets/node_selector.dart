@@ -5,12 +5,14 @@ import 'package:iif/presentation/pages/add_operation/widgets/node_chip.dart';
 import 'package:iif/presentation/pages/main/widgets/account_item.dart';
 
 class NodeSelector<T extends NodeValue> extends StatefulWidget {
-  final dynamic Function(String text, Node<NodeValue> parent) valueBuilder;
+  // final dynamic Function(String text, Node<NodeValue> parent) valueBuilder;
   final StyleNodeColorSheme colorScheme;
+  final T reference;
 
   const NodeSelector({
     Key? key,
-    required this.valueBuilder,
+    // required this.valueBuilder,
+    required this.reference,
     required this.colorScheme,
   }) : super(key: key);
 
@@ -43,7 +45,8 @@ class _NodeSelectorState<T extends NodeValue> extends State<NodeSelector> {
                           bloc.tap(ref.node);
                         },
                         onSave: (text) {
-                          bloc.save(ref.node, widget.valueBuilder, text);
+                          bloc.save(ref.node, text, widget.reference);
+                          // bloc.save(ref.node, widget.valueBuilder, text);
                         },
                         onDelete: () {
                           bloc.delete(ref.node);

@@ -32,17 +32,19 @@ class _AddOperationPageState extends State<AddOperationPage> {
     super.initState();
     _categorySelector = NodeSelector(
       colorScheme: StyleNodeColorSheme.categories(),
-      valueBuilder: (text, parent) {
-        final value = parent.value;
-        return (value is Category) ? Category(text, value.type) : Category(text, CategoryType.undefined);
-      },
+      reference: Category("", CategoryType.undefined),
+      // valueBuilder: (text, parent) {
+      //   final value = parent.value;
+      //   return (value is Category) ? Category(text, value.type) : Category(text, CategoryType.undefined);
+      // },
     );
     _subjectSelector = NodeSelector(
       colorScheme: StyleNodeColorSheme.subjects(),
-      valueBuilder: (text, parent) {
-        final value = parent.value;
-        return (value is Subject) ? Subject(text, value.type) : Subject(text, SubjectType.undefined);
-      },
+      reference: Subject("", SubjectType.debts, Account.template(type: AccountType.debts, name: "")),
+      // valueBuilder: (text, parent) {
+      //   final value = parent.value;
+      //   return (value is Subject) ? Subject(text, value.type) : Subject(text, SubjectType.undefined);
+      // },
     );
 
     _categorySelectorBloc = NodeSelectorBloc(context, root: predefinedCategoriesNode);
@@ -53,8 +55,6 @@ class _AddOperationPageState extends State<AddOperationPage> {
       subjectSelectorBloc: _subjectSelectorBloc,
     );
   }
-
-  final transferArrowColor = Style.whiteColor;
 
   @override
   Widget build(BuildContext context) {
@@ -112,6 +112,10 @@ class _AddOperationPageState extends State<AddOperationPage> {
                 final transferBackgroundColor = visibility.subject
                     ? StyleNodeColorSheme.subjects().selectedBackgroundColor
                     : StyleNodeColorSheme.categories().selectedBackgroundColor;
+                final transferArrowColor = Style.whiteColor;
+                // visibility.subject
+                //     ? StyleNodeColorSheme.subjects().selectedTextColor
+                //     : StyleNodeColorSheme.categories().selectedTextColor;
 
                 return ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 4),

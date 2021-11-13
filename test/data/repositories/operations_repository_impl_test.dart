@@ -8,10 +8,12 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../domain/operation_fixtures.dart';
+import '../account_model_fixtures.dart';
 import 'accounts_repository_impl_test.mocks.dart';
 
 @GenerateMocks([DataSource])
 void main() {
+  final money = money100;
   late MockDataSource dataSource;
   final AccountModel accountModel1 = AccountModel(
     id: 244,
@@ -85,9 +87,37 @@ void main() {
     ),
   ];
   late OperationsRepository repository;
+  final Subject subject = Subject("subject", SubjectType.debts, accountModel(333, AccountType.debts));
+  late List<LogicOperationModel> defaultAllOperations;
+
   setUp(() {
     dataSource = MockDataSource();
     repository = OperationsRepositoryImpl(dataSource);
+
+    defaultAllOperations = [];
+
+    when(dataSource.getOperations()).thenAnswer((_) => defaultAllOperations);
+    when(dataSource.addOperation(any)).thenAnswer((realInvocation) {
+      final LogicOperation operation = realInvocation.positionalArguments.first;
+      final AtomicOperation atomic1 = operation.atomics.first;
+      final AtomicOperation atomic2 = operation.atomics.last;
+      defaultAllOperations.add(
+        LogicOperationModel(
+          id: -1,
+          type: operation.type,
+          created: operation.created,
+          comment: operation.comment,
+          categoriesStamp: operation.categoriesStamp,
+          subjectsStamp: operation.subjectsStamp,
+          atomicsModel: [
+            atomicOperationModel(
+                -1, atomic1.type, atomic1.money, accountModel(atomic1.account.id, atomic1.account.type)),
+            atomicOperationModel(
+                -1, atomic2.type, atomic2.money, accountModel(atomic2.account.id, atomic2.account.type)),
+          ],
+        ),
+      );
+    });
   });
 
   // void addOperationInitialInput(Account account, Money money);
@@ -109,14 +139,13 @@ void main() {
   });
 
   test('adds operation initial input', () async {
-    final List<LogicOperationModel> allOperations = [];
     final initialInput = allLogicOperations.firstWhere((it) => it.type == LogicOperationType.initialInput);
 
-    when(dataSource.getOperations()).thenReturn(allOperations);
+    when(dataSource.getOperations()).thenReturn(defaultAllOperations);
     when(dataSource.addOperation(any)).thenAnswer((realInvocation) {
       final LogicOperation operation = realInvocation.positionalArguments.first;
       final AtomicOperation atomic = operation.atomics.first;
-      allOperations.add(
+      defaultAllOperations.add(
         LogicOperationModel(
           id: -1,
           type: operation.type,
@@ -213,5 +242,19 @@ void main() {
     final operations = await repository.getOperations(accountModel1);
     expect(operations.length, 1);
     expect(operations.first.type, LogicOperationType.income);
+  });
+
+  test('adds operation debt increase', () async {
+    repository.addOperationDebtIncrease(accountModel1, money, subject);
+    final operations = await repository.getOperations(accountModel1);
+
+    expect(operations.length, 1);
+    final operation = operations.first;
+    expect(operation.type, LogicOperationType.debts);
+    expect(operation.atomics.length, 2);
+    final atomicAccount = operation.atomics.firstWhere((it) => it.type == AtomicOperationType.income);
+    final atomicSubject = operation.atomics.firstWhere((it) => it.type == AtomicOperationType.expense);
+    expect(atomicAccount.money.coins, money.coins);
+    expect(atomicSubject.money.coins, money.coins);
   });
 }

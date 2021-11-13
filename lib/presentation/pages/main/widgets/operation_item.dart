@@ -85,20 +85,31 @@ class OperationItem extends StatelessWidget {
   }
 
   Color moneyBackColor() {
-    if (account2 != null) return Style.lightGrayColor;
-
-    switch (operation.atomics.first.type) {
-      case AtomicOperationType.initialInput:
+    switch (operation.type) {
+      case LogicOperationType.transfer:
+      case LogicOperationType.initialInput:
         return Style.lightGrayColor;
-      case AtomicOperationType.income:
+      case LogicOperationType.income:
         return Style.greenColor;
-      case AtomicOperationType.expense:
+      case LogicOperationType.expense:
         return Style.grayColor;
+      case LogicOperationType.debts:
+        final atomicForAccount = operation.atomics.firstWhere((it) => it.account.type != AccountType.debts);
+        switch (atomicForAccount.type) {
+          case AtomicOperationType.initialInput:
+            return Style.lightGrayColor;
+          case AtomicOperationType.income:
+            return Style.accentColor;
+          // return Style.greenColor;
+          case AtomicOperationType.expense:
+            return Style.highlightColor;
+          // return Style.grayColor;
+        }
     }
   }
 
   Color moneyFrontColor() {
-    if (account2 != null || operation.atomics.first.type == AtomicOperationType.initialInput) {
+    if (account2 == null && operation.atomics.first.type == AtomicOperationType.initialInput) {
       return Style.grayColor;
     }
     return Colors.white;
@@ -130,7 +141,7 @@ class _OperationInfo extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 4),
             child: Text(
-              operation.categoriesStamp,
+              operation.categoriesStamp + (operation.subjectsStamp.isNotEmpty ? "/" : "") + operation.subjectsStamp,
               style: const TextStyle(
                 fontSize: 12,
               ),
@@ -153,16 +164,6 @@ class _OperationInfo extends StatelessWidget {
       ],
     );
   }
-
-  String _categories() {
-    return operation.categoriesStamp;
-    // List<String> itemCategories = decodeJsonArray(operation.categories);
-    // List<String> itemObjects = decodeJsonArray(operation.objects);
-    // if (operation.categories == null || operation.categories.isEmpty) return "<no data?>";
-
-    // itemCategories.addAll(itemObjects);
-    // return itemCategories.join("/");
-  }
 }
 
 class _MoneyAndAccounts extends StatelessWidget {
@@ -174,7 +175,7 @@ class _MoneyAndAccounts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isTransfer = account2 != null;
+    final isTransfer = operation.type == LogicOperationType.transfer;
     return Wrap(
       children: [
         // money,

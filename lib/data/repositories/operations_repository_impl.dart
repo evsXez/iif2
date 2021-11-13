@@ -112,6 +112,19 @@ class OperationsRepositoryImpl extends OperationsRepository {
     String? categoriesStamp,
     String? subjectsStamp,
   }) {
-    throw UnimplementedError();
+    try {
+      _dataSource.addOperation(
+        LogicOperation.debtIncrease(
+          account,
+          money,
+          subject,
+          comment: comment,
+          categoriesStamp: categoriesStamp,
+          subjectsStamp: subjectsStamp,
+        ),
+      );
+    } finally {
+      notifyListeners();
+    }
   }
 }

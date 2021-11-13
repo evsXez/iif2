@@ -62,6 +62,7 @@ class DataSourceImpl extends DataSource {
       created: operation.created,
       comment: operation.comment,
       categoriesStamp: operation.categoriesStamp,
+      subjectsStamp: operation.subjectsStamp,
       atomicsModel: operation.atomics
           .map(
             (atomic) => AtomicOperationModel(

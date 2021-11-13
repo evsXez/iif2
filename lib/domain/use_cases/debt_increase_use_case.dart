@@ -13,14 +13,16 @@ class DebtIncreaseUseCase {
     Money money, {
     String? comment,
     String? categoriesStamp,
+    String? subjectsStamp,
     required Subject subject,
   }) {
-    throw UnimplementedError();
-    // operationsRepository.addOperationIncome(
-    //   account,
-    //   money,
-    //   comment: comment,
-    //   categoriesStamp: categoriesStamp,
-    // );
+    operationsRepository.addOperationDebtIncrease(
+      account,
+      money,
+      subject,
+      comment: comment,
+      categoriesStamp: categoriesStamp,
+      subjectsStamp: subjectsStamp,
+    );
   }
 }

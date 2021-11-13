@@ -43,7 +43,7 @@ void main() {
   ];
   final List<AccountModel> initiallyEmptyAccounts = [];
   final account =
-      AccountModel(id: 101, currency: Currency.debugDefault, name: 'account to save', type: AccountType.loans);
+      AccountModel(id: 101, currency: Currency.debugDefault, name: 'account to save', type: AccountType.debts);
 
   final List<AccountModel> accountsWithDeletedType1 = [
     account1Type1,
