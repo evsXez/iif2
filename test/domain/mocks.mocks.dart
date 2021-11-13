@@ -23,12 +23,14 @@ class _FakeAccount_0 extends _i1.Fake implements _i2.Account {}
 
 class _FakeMoney_1 extends _i1.Fake implements _i2.Money {}
 
-class _FakeCategory_2 extends _i1.Fake implements _i2.Category {}
+class _FakeNode_2<T> extends _i1.Fake implements _i2.Node<T> {}
 
-class _FakeAccountsRepository_3 extends _i1.Fake
+class _FakeCategory_3 extends _i1.Fake implements _i2.Category {}
+
+class _FakeAccountsRepository_4 extends _i1.Fake
     implements _i3.AccountsRepository {}
 
-class _FakeOperationsRepository_4 extends _i1.Fake
+class _FakeOperationsRepository_5 extends _i1.Fake
     implements _i4.OperationsRepository {}
 
 /// A class which mocks [AccountsRepository].
@@ -207,15 +209,15 @@ class MockCategoriesRepository extends _i1.Mock
   }
 
   @override
-  List<_i2.Category> getCategoriesOfType(_i2.CategoryType? type) =>
-      (super.noSuchMethod(Invocation.method(#getCategoriesOfType, [type]),
-          returnValue: <_i2.Category>[]) as List<_i2.Category>);
+  _i2.Node<_i2.Category> getCategories() =>
+      (super.noSuchMethod(Invocation.method(#getCategories, []),
+          returnValue: _FakeNode_2<_i2.Category>()) as _i2.Node<_i2.Category>);
   @override
   _i2.Category saveCategory(
           _i2.Category? categoryTemplate, _i2.Category? parent) =>
       (super.noSuchMethod(
           Invocation.method(#saveCategory, [categoryTemplate, parent]),
-          returnValue: _FakeCategory_2()) as _i2.Category);
+          returnValue: _FakeCategory_3()) as _i2.Category);
   @override
   String toString() => super.toString();
 }
@@ -232,11 +234,11 @@ class MockGetAccountsBalanceUseCase extends _i1.Mock
   @override
   _i3.AccountsRepository get accountsRepository =>
       (super.noSuchMethod(Invocation.getter(#accountsRepository),
-          returnValue: _FakeAccountsRepository_3()) as _i3.AccountsRepository);
+          returnValue: _FakeAccountsRepository_4()) as _i3.AccountsRepository);
   @override
   _i4.OperationsRepository get operationsRepository => (super.noSuchMethod(
       Invocation.getter(#operationsRepository),
-      returnValue: _FakeOperationsRepository_4()) as _i4.OperationsRepository);
+      returnValue: _FakeOperationsRepository_5()) as _i4.OperationsRepository);
   @override
   _i6.Future<List<_i2.AccountBalance>> execute(_i2.AccountType? type) =>
       (super.noSuchMethod(Invocation.method(#execute, [type]),

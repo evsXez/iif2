@@ -47,8 +47,8 @@ class _AddOperationPageState extends State<AddOperationPage> {
       // },
     );
 
-    _categorySelectorBloc = NodeSelectorBloc(context, root: predefinedCategoriesNode);
-    _subjectSelectorBloc = NodeSelectorBloc(context, root: Node.root());
+    _categorySelectorBloc = NodeSelectorBloc(context);
+    _subjectSelectorBloc = NodeSelectorBloc(context);
     _addOperationBloc = AddOperationBloc(
       context,
       categorySelectorBloc: _categorySelectorBloc,

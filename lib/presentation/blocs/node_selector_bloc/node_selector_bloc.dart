@@ -10,16 +10,11 @@ part 'node_selector_bloc.freezed.dart';
 class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> {
   final BuildContext _context;
 
-  final Node<T> _root;
+  late final Node<T> _root;
   final Node<T> _addNode = Node.composer();
 
-  NodeSelectorBloc(
-    this._context, {
-    required Node<T> root,
-    // required Node<T> addNode,
-  })  : _root = root,
-        // _addNode = addNode,
-        super(const _Loading()) {
+  NodeSelectorBloc(this._context) : super(const _Loading()) {
+    _root = GetRootNodeUseCase<T>().execute();
     // Future.delayed(Duration(seconds: 1)).then((_) {
     _showData();
     // });

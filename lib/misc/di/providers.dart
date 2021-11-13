@@ -67,6 +67,7 @@ final createNodeValueUseCase = Provider((ref) => CreateNodeValueUseCase(
       accountsRepository: ref.read(accountsRepository),
       categoriesRepository: ref.read(categoriesRepository),
     ));
+final getRootNodeUseCase = Provider((ref) => GetRootNodeUseCase());
 
 //ui notifiers, are used only in presentation layer to make some ui interactions easier
 final UiNotifierAccountEditorOpened uiNotifierAccountEditorOpened = UiNotifierAccountEditorOpened();

@@ -151,4 +151,14 @@ class DataSourceImpl extends DataSource {
     list.removeWhere((it) => LogicOperationModel.fromJson(jsonDecode(it)).atomicsModel.first.account.id == account.id);
     _prefs.setStringList(Keys.operations.toString(), list);
   }
+
+  @override
+  void addCategory(Category category, Category? parent) {
+    throw UnimplementedError();
+  }
+
+  @override
+  List<Category> getCategories() {
+    throw UnimplementedError();
+  }
 }

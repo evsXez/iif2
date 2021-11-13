@@ -39,3 +39,4 @@ export 'package:iif/domain/use_cases/debt_decrease_use_case.dart';
 export 'package:iif/domain/use_cases/loan_increase_use_case.dart';
 export 'package:iif/domain/use_cases/loan_decrease_use_case.dart';
 export 'package:iif/domain/use_cases/create_node_value_use_case.dart';
+export 'package:iif/domain/use_cases/get_root_node_use_case.dart';

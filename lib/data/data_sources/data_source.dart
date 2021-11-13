@@ -11,4 +11,8 @@ abstract class DataSource {
   //operations
   void addOperation(LogicOperation operation);
   List<LogicOperationModel> getOperations();
+
+  //categories
+  void addCategory(Category category, Category? parent);
+  List<Category> getCategories();
 }
