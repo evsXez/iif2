@@ -120,6 +120,19 @@ void main() {
     });
   });
 
+  Future testOperationDebtsAdded() async {
+    final operations = await repository.getOperations(accountModel1);
+
+    expect(operations.length, 1);
+    final operation = operations.first;
+    expect(operation.type, LogicOperationType.debts);
+    expect(operation.atomics.length, 2);
+    final atomicAccount = operation.atomics.firstWhere((it) => it.type == AtomicOperationType.income);
+    final atomicSubject = operation.atomics.firstWhere((it) => it.type == AtomicOperationType.expense);
+    expect(atomicAccount.money.coins, money.coins);
+    expect(atomicSubject.money.coins, money.coins);
+  }
+
   // void addOperationInitialInput(Account account, Money money);
 
   test('calculate balance', () async {
@@ -246,15 +259,18 @@ void main() {
 
   test('adds operation debt increase', () async {
     repository.addOperationDebtIncrease(accountModel1, money, subject);
-    final operations = await repository.getOperations(accountModel1);
-
-    expect(operations.length, 1);
-    final operation = operations.first;
-    expect(operation.type, LogicOperationType.debts);
-    expect(operation.atomics.length, 2);
-    final atomicAccount = operation.atomics.firstWhere((it) => it.type == AtomicOperationType.income);
-    final atomicSubject = operation.atomics.firstWhere((it) => it.type == AtomicOperationType.expense);
-    expect(atomicAccount.money.coins, money.coins);
-    expect(atomicSubject.money.coins, money.coins);
+    await testOperationDebtsAdded();
+  });
+  test('adds operation debt decrease', () async {
+    repository.addOperationDebtDecrease(accountModel1, money, subject);
+    await testOperationDebtsAdded();
+  });
+  test('adds operation loan increase', () async {
+    repository.addOperationLoanIncrease(accountModel1, money, subject);
+    await testOperationDebtsAdded();
+  });
+  test('adds operation loan decrease', () async {
+    repository.addOperationLoanDecrease(accountModel1, money, subject);
+    await testOperationDebtsAdded();
   });
 }

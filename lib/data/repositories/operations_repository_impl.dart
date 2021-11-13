@@ -131,18 +131,57 @@ class OperationsRepositoryImpl extends OperationsRepository {
   @override
   void addOperationDebtDecrease(Account account, Money money, Subject subject,
       {String? comment, String? categoriesStamp, String? subjectsStamp}) {
-    throw UnimplementedError();
+    try {
+      _dataSource.addOperation(
+        LogicOperation.debtDecrease(
+          account,
+          money,
+          subject,
+          comment: comment,
+          categoriesStamp: categoriesStamp,
+          subjectsStamp: subjectsStamp,
+        ),
+      );
+    } finally {
+      notifyListeners();
+    }
   }
 
   @override
   void addOperationLoanDecrease(Account account, Money money, Subject subject,
       {String? comment, String? categoriesStamp, String? subjectsStamp}) {
-    throw UnimplementedError();
+    try {
+      _dataSource.addOperation(
+        LogicOperation.loanDecrease(
+          account,
+          money,
+          subject,
+          comment: comment,
+          categoriesStamp: categoriesStamp,
+          subjectsStamp: subjectsStamp,
+        ),
+      );
+    } finally {
+      notifyListeners();
+    }
   }
 
   @override
   void addOperationLoanIncrease(Account account, Money money, Subject subject,
       {String? comment, String? categoriesStamp, String? subjectsStamp}) {
-    throw UnimplementedError();
+    try {
+      _dataSource.addOperation(
+        LogicOperation.loanIncrease(
+          account,
+          money,
+          subject,
+          comment: comment,
+          categoriesStamp: categoriesStamp,
+          subjectsStamp: subjectsStamp,
+        ),
+      );
+    } finally {
+      notifyListeners();
+    }
   }
 }
