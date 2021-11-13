@@ -22,6 +22,7 @@ final List<String> persistedOperationsFixture = [
 	"createdTs": 1634239069458,
 	"comment": "salary",
 	"categoriesStamp": "categories/stamp",
+	"subjectsStamp": "subjects/stamp",
 	"atomics": [
 		{
 			"id": 113,
