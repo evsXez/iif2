@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iif/data/data_sources/data_source_impl.dart';
 import 'package:iif/data/repositories/accounts_repository_impl.dart';
+import 'package:iif/data/repositories/categories_repository_impl.dart';
 import 'package:iif/data/repositories/operations_repository_impl.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/main.dart';
@@ -13,6 +14,7 @@ final _dataSource = Provider((ref) => DataSourceImpl(sharedPreferences));
 //repositories, private, for use cases only
 final accountsRepository = Provider((ref) => AccountsRepositoryImpl(ref.read(_dataSource)));
 final operationsRepository = Provider((ref) => OperationsRepositoryImpl(ref.read(_dataSource)));
+final categoriesRepository = Provider((ref) => CategoriesRepositoryImpl(ref.read(_dataSource)));
 
 //use cases
 final getAccountTypesOnMainPageUseCase = Provider((ref) => GetAccountTypesOnMainPageUseCase());
@@ -63,6 +65,7 @@ final loanDecreaseUseCase = Provider((ref) => LoanDecreaseUseCase(
     ));
 final createNodeValueUseCase = Provider((ref) => CreateNodeValueUseCase(
       accountsRepository: ref.read(accountsRepository),
+      categoriesRepository: ref.read(categoriesRepository),
     ));
 
 //ui notifiers, are used only in presentation layer to make some ui interactions easier

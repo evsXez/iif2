@@ -10,16 +10,21 @@ void main() {
   final accountType = AccountType.debts;
   final account = getAccount(12, accountType);
   late MockAccountsRepository accountsRepository;
+  late MockCategoriesRepository categoriesRepository;
   late List<Account> accountsData;
   const name = "node value name";
-  final categoryNodeValue = Category("category", CategoryType.debtDecrease);
+  final categoryNodeValue = Category(-1, "category", CategoryType.debtDecrease);
   final categoryReference = categoryNodeValue;
   final subjectNodeValue = Subject("subject", SubjectType.debts, account);
   final subjectReference = subjectNodeValue;
 
   setUp(() {
     accountsRepository = MockAccountsRepository();
-    createNodeValueUseCase = CreateNodeValueUseCase(accountsRepository: accountsRepository);
+    categoriesRepository = MockCategoriesRepository();
+    createNodeValueUseCase = CreateNodeValueUseCase(
+      accountsRepository: accountsRepository,
+      categoriesRepository: categoriesRepository,
+    );
 
     accountsData = [];
 

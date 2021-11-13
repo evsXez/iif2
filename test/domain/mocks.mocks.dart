@@ -7,6 +7,7 @@ import 'dart:ui' as _i5;
 
 import 'package:iif/domain/include.dart' as _i2;
 import 'package:iif/domain/repositories/accounts_repository.dart' as _i3;
+import 'package:iif/domain/repositories/categories_repository.dart' as _i7;
 import 'package:iif/domain/repositories/operations_repository.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -22,10 +23,12 @@ class _FakeAccount_0 extends _i1.Fake implements _i2.Account {}
 
 class _FakeMoney_1 extends _i1.Fake implements _i2.Money {}
 
-class _FakeAccountsRepository_2 extends _i1.Fake
+class _FakeCategory_2 extends _i1.Fake implements _i2.Category {}
+
+class _FakeAccountsRepository_3 extends _i1.Fake
     implements _i3.AccountsRepository {}
 
-class _FakeOperationsRepository_3 extends _i1.Fake
+class _FakeOperationsRepository_4 extends _i1.Fake
     implements _i4.OperationsRepository {}
 
 /// A class which mocks [AccountsRepository].
@@ -194,6 +197,29 @@ class MockOperationsRepository extends _i1.Mock
   String toString() => super.toString();
 }
 
+/// A class which mocks [CategoriesRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockCategoriesRepository extends _i1.Mock
+    implements _i7.CategoriesRepository {
+  MockCategoriesRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  List<_i2.Category> getCategoriesOfType(_i2.CategoryType? type) =>
+      (super.noSuchMethod(Invocation.method(#getCategoriesOfType, [type]),
+          returnValue: <_i2.Category>[]) as List<_i2.Category>);
+  @override
+  _i2.Category saveCategory(
+          _i2.Category? categoryTemplate, _i2.Category? parent) =>
+      (super.noSuchMethod(
+          Invocation.method(#saveCategory, [categoryTemplate, parent]),
+          returnValue: _FakeCategory_2()) as _i2.Category);
+  @override
+  String toString() => super.toString();
+}
+
 /// A class which mocks [GetAccountsBalanceUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -206,11 +232,11 @@ class MockGetAccountsBalanceUseCase extends _i1.Mock
   @override
   _i3.AccountsRepository get accountsRepository =>
       (super.noSuchMethod(Invocation.getter(#accountsRepository),
-          returnValue: _FakeAccountsRepository_2()) as _i3.AccountsRepository);
+          returnValue: _FakeAccountsRepository_3()) as _i3.AccountsRepository);
   @override
   _i4.OperationsRepository get operationsRepository => (super.noSuchMethod(
       Invocation.getter(#operationsRepository),
-      returnValue: _FakeOperationsRepository_3()) as _i4.OperationsRepository);
+      returnValue: _FakeOperationsRepository_4()) as _i4.OperationsRepository);
   @override
   _i6.Future<List<_i2.AccountBalance>> execute(_i2.AccountType? type) =>
       (super.noSuchMethod(Invocation.method(#execute, [type]),

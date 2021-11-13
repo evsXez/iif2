@@ -32,7 +32,7 @@ class _AddOperationPageState extends State<AddOperationPage> {
     super.initState();
     _categorySelector = NodeSelector(
       colorScheme: StyleNodeColorSheme.categories(),
-      reference: Category("", CategoryType.undefined),
+      reference: Category.undefined(),
       // valueBuilder: (text, parent) {
       //   final value = parent.value;
       //   return (value is Category) ? Category(text, value.type) : Category(text, CategoryType.undefined);
