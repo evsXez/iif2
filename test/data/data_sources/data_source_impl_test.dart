@@ -60,6 +60,7 @@ void main() {
   int nextGeneratedId = 0;
   List<String> listOfAccountsJson = [];
   List<String> listOfOperationsJson = [];
+  late List<CategoryModel> listOfCategories;
 
   setUp(() async {
     prefs = MockSharedPreferences();
@@ -82,6 +83,18 @@ void main() {
     when(prefs.setStringList(Keys.operations.toString(), any)).thenAnswer((realInvocation) async {
       final List<String> argument = realInvocation.positionalArguments[1];
       listOfOperationsJson = argument;
+      return true;
+    });
+
+    listOfCategories = [
+      CategoryModel(parentId: 0, id: 0, name: "root", type: CategoryType.undefined),
+      CategoryModel(parentId: 0, id: 1, name: "expense", type: CategoryType.expense),
+    ];
+    when(prefs.getStringList(Keys.categories.toString()))
+        .thenAnswer((_) => listOfCategories.map((it) => json.encode(it.toJson())).toList());
+    when(prefs.setStringList(Keys.categories.toString(), any)).thenAnswer((realInvocation) async {
+      final List<String> argument = realInvocation.positionalArguments[1];
+      listOfCategories = argument.map((e) => CategoryModel.fromJson(jsonDecode(e))).toList();
       return true;
     });
   });
@@ -180,5 +193,31 @@ void main() {
     expect(dataSource.getOperations(), isNotEmpty);
     dataSource.deleteAcount(accountModelFixed);
     expect(dataSource.getOperations(), isEmpty);
+  });
+
+  test('get categories returns list', () {
+    final result = dataSource.getCategories();
+    expect(result, listOfCategories);
+  });
+
+  test('add category adds to the list', () {
+    expect(dataSource.getCategories().length, 2);
+    final categoryModel = dataSource.addCategory(
+      Category.template(name: "name category added", type: CategoryType.income),
+      Category(0, "", CategoryType.undefined),
+    );
+    expect(dataSource.getCategories().length, 3);
+  });
+
+  test('update category updates it', () {
+    final newName = "name category updated";
+    final newType = CategoryType.transfer;
+    expect(dataSource.getCategories().length, 2);
+    final categoryModel = dataSource.updateCategory(Category(1, newName, newType));
+    final categories = dataSource.getCategories();
+    expect(categories.length, 2);
+    final updated = categories.firstWhere((it) => it.id == 1);
+    expect(updated.name, newName);
+    expect(updated.type, newType);
   });
 }

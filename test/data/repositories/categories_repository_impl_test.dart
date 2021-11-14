@@ -50,10 +50,22 @@ void main() {
         type: categoryToAdd.type,
         parentId: categoryParent.id,
       );
-      categoryModelsList.removeWhere((it) => it.id == categoryToAdd.id);
       categoryModelsList.add(result);
 
       return result;
+    });
+    when(mockDataSource.updateCategory(any)).thenAnswer((realInvocation) {
+      final Category category = realInvocation.positionalArguments[0];
+
+      final model = categoryModelsList.firstWhere((it) => it.id == category.id);
+      final result = CategoryModel(
+        id: category.id,
+        name: category.name,
+        type: category.type,
+        parentId: model.parentId,
+      );
+      categoryModelsList.remove(model);
+      categoryModelsList.add(result);
     });
   });
 
@@ -82,12 +94,13 @@ void main() {
   });
 
   test('update category', () {
-    final name = "new category name";
+    final name = "updated category name";
     final type = CategoryType.debtDecrease;
-    categoriesRepository.saveCategory(Category(1, name, type), model0);
+    final idToUpdate = 1;
+    categoriesRepository.saveCategory(Category(idToUpdate, name, type), model0);
     final root = categoriesRepository.getCategories();
 
-    final node1 = root.children.firstWhere((it) => it.value?.id == 1);
+    final node1 = root.children.firstWhere((it) => it.value?.id == idToUpdate);
     expect(node1.value?.name, name);
     expect(node1.value?.type, type);
   });

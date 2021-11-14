@@ -42,6 +42,14 @@ class CategoriesRepositoryImpl extends CategoriesRepository {
 
   @override
   Category saveCategory(Category categoryTemplate, Category parent) {
+    if (categoryTemplate.id >= 0) {
+      final categories = _dataSource.getCategories();
+      if (categories.any((it) => it.id == categoryTemplate.id)) {
+        _dataSource.updateCategory(categoryTemplate);
+        return categoryTemplate;
+      }
+    }
+
     return _dataSource.addCategory(categoryTemplate, parent);
   }
 }

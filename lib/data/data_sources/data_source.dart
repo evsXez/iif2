@@ -13,6 +13,7 @@ abstract class DataSource {
   List<LogicOperationModel> getOperations();
 
   //categories
-  CategoryModel addCategory(Category category, Category parent);
+  CategoryModel addCategory(Category categoryTemplate, Category parent);
+  void updateCategory(Category category);
   List<CategoryModel> getCategories();
 }

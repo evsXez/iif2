@@ -153,12 +153,50 @@ class DataSourceImpl extends DataSource {
   }
 
   @override
-  CategoryModel addCategory(Category category, Category parent) {
-    throw UnimplementedError();
+  CategoryModel addCategory(Category categoryTemplate, Category parent) {
+    final CategoryModel category = CategoryModel(
+      id: _generateNextId(),
+      parentId: parent.id,
+      name: categoryTemplate.name,
+      type: categoryTemplate.type,
+    );
+
+    final List<String> list = _prefs.getStringList(Keys.categories.toString()) ?? [];
+    list.add(json.encode(category.toJson()));
+    _prefs.setStringList(Keys.categories.toString(), list);
+    return category;
   }
 
   @override
   List<CategoryModel> getCategories() {
-    throw UnimplementedError();
+    final List<String>? list = _prefs.getStringList(Keys.categories.toString());
+    final List<CategoryModel> result = [];
+    list?.forEach((it) {
+      result.add(CategoryModel.fromJson(json.decode(it)));
+    });
+
+    return result;
+  }
+
+  @override
+  void updateCategory(Category category) {
+    final List<String>? list = _prefs.getStringList(Keys.categories.toString());
+    final List<String> result = [];
+    list?.forEach((encoded) {
+      final decoded = CategoryModel.fromJson(json.decode(encoded));
+      if (decoded.id == category.id) {
+        final updatedCategory = CategoryModel(
+          id: category.id,
+          name: category.name,
+          type: category.type,
+          parentId: decoded.parentId,
+        );
+        result.add(json.encode(updatedCategory.toJson()));
+      } else {
+        result.add(encoded);
+      }
+    });
+
+    _prefs.setStringList(Keys.categories.toString(), result);
   }
 }

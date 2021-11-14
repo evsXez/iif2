@@ -52,9 +52,15 @@ class MockDataSource extends _i1.Mock implements _i3.DataSource {
               returnValue: <_i3.LogicOperationModel>[])
           as List<_i3.LogicOperationModel>);
   @override
-  _i3.CategoryModel addCategory(_i2.Category? category, _i2.Category? parent) =>
-      (super.noSuchMethod(Invocation.method(#addCategory, [category, parent]),
+  _i3.CategoryModel addCategory(
+          _i2.Category? categoryTemplate, _i2.Category? parent) =>
+      (super.noSuchMethod(
+          Invocation.method(#addCategory, [categoryTemplate, parent]),
           returnValue: _FakeCategoryModel_1()) as _i3.CategoryModel);
+  @override
+  void updateCategory(_i2.Category? category) =>
+      super.noSuchMethod(Invocation.method(#updateCategory, [category]),
+          returnValueForMissingStub: null);
   @override
   List<_i3.CategoryModel> getCategories() =>
       (super.noSuchMethod(Invocation.method(#getCategories, []),
