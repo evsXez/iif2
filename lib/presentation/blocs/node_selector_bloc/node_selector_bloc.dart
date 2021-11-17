@@ -26,9 +26,11 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
     List<NodeRef<T>> view = [];
 
     Node<NodeValue>? root = _root;
+    Node<T> parent = root as Node<T>;
 
     while (root != null) {
-      view.add(NodeRef<T>(node: root as Node<T>, parent: root));
+      view.add(NodeRef<T>(node: root as Node<T>, parent: parent));
+      parent = root;
       try {
         root = root.children.firstWhere((it) => it.isSelected);
       } catch (e) {
@@ -70,7 +72,7 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
         Node<T>(
           value: createNodeValueUseCase.of(_context).execute<T>(
                 text,
-                parent.value,
+                null,
                 reference,
                 parent: nodeRef.parent.value as NodeValue,
               ),

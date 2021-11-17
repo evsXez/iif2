@@ -3,6 +3,7 @@ import 'package:iif/data/data_sources/data_source_impl.dart';
 import 'package:iif/data/repositories/accounts_repository_impl.dart';
 import 'package:iif/data/repositories/categories_repository_impl.dart';
 import 'package:iif/data/repositories/operations_repository_impl.dart';
+import 'package:iif/data/repositories/subjects_repository_impl.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/main.dart';
 import 'package:iif/presentation/include.dart';
@@ -15,6 +16,7 @@ final _dataSource = Provider((ref) => DataSourceImpl(sharedPreferences));
 final accountsRepository = Provider((ref) => AccountsRepositoryImpl(ref.read(_dataSource)));
 final operationsRepository = Provider((ref) => OperationsRepositoryImpl(ref.read(_dataSource)));
 final categoriesRepository = Provider((ref) => CategoriesRepositoryImpl(ref.read(_dataSource)));
+final subjectsRepository = Provider((ref) => SubjectsRepositoryImpl(ref.read(_dataSource)));
 
 //use cases
 final getAccountTypesOnMainPageUseCase = Provider((ref) => GetAccountTypesOnMainPageUseCase());
@@ -52,23 +54,29 @@ final addIncomeUseCase = Provider((ref) => AddIncomeUseCase(
       operationsRepository: ref.read(operationsRepository),
     ));
 final debtIncreaseUseCase = Provider((ref) => DebtIncreaseUseCase(
+      accountsRepository: ref.read(accountsRepository),
       operationsRepository: ref.read(operationsRepository),
     ));
 final debtDecreaseUseCase = Provider((ref) => DebtDecreaseUseCase(
+      accountsRepository: ref.read(accountsRepository),
       operationsRepository: ref.read(operationsRepository),
     ));
 final loanIncreaseUseCase = Provider((ref) => LoanIncreaseUseCase(
+      accountsRepository: ref.read(accountsRepository),
       operationsRepository: ref.read(operationsRepository),
     ));
 final loanDecreaseUseCase = Provider((ref) => LoanDecreaseUseCase(
+      accountsRepository: ref.read(accountsRepository),
       operationsRepository: ref.read(operationsRepository),
     ));
 final createNodeValueUseCase = Provider((ref) => CreateNodeValueUseCase(
       accountsRepository: ref.read(accountsRepository),
       categoriesRepository: ref.read(categoriesRepository),
+      subjectsRepository: ref.read(subjectsRepository),
     ));
 final getRootNodeUseCase = Provider((ref) => GetRootNodeUseCase(
       categoriesRepository: ref.read(categoriesRepository),
+      subjectsRepository: ref.read(subjectsRepository),
     ));
 
 //ui notifiers, are used only in presentation layer to make some ui interactions easier

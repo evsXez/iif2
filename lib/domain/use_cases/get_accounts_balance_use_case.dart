@@ -19,6 +19,9 @@ class GetAccountsBalanceUseCase {
         result.add(AccountBalance(account, money));
       }
     });
+    if (type == AccountType.debts) {
+      result.removeWhere((it) => it.money == Money.zero);
+    }
     return result;
   }
 }

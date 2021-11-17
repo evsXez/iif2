@@ -22,11 +22,14 @@ class _$AccountsPanelStateTearOff {
   }
 
   _LoadSuccess loadSuccess(List<AccountBalance> data,
-      {required Account? editing, required bool isAddingNew}) {
+      {required Account? editing,
+      required bool isAddingNew,
+      required bool isButtonAddVisible}) {
     return _LoadSuccess(
       data,
       editing: editing,
       isAddingNew: isAddingNew,
+      isButtonAddVisible: isButtonAddVisible,
     );
   }
 }
@@ -39,24 +42,24 @@ mixin _$AccountsPanelState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadInProgress,
-    required TResult Function(
-            List<AccountBalance> data, Account? editing, bool isAddingNew)
+    required TResult Function(List<AccountBalance> data, Account? editing,
+            bool isAddingNew, bool isButtonAddVisible)
         loadSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(
-            List<AccountBalance> data, Account? editing, bool isAddingNew)?
+    TResult Function(List<AccountBalance> data, Account? editing,
+            bool isAddingNew, bool isButtonAddVisible)?
         loadSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(
-            List<AccountBalance> data, Account? editing, bool isAddingNew)?
+    TResult Function(List<AccountBalance> data, Account? editing,
+            bool isAddingNew, bool isButtonAddVisible)?
         loadSuccess,
     required TResult orElse(),
   }) =>
@@ -140,8 +143,8 @@ class _$_LoadInProgress implements _LoadInProgress {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadInProgress,
-    required TResult Function(
-            List<AccountBalance> data, Account? editing, bool isAddingNew)
+    required TResult Function(List<AccountBalance> data, Account? editing,
+            bool isAddingNew, bool isButtonAddVisible)
         loadSuccess,
   }) {
     return loadInProgress();
@@ -151,8 +154,8 @@ class _$_LoadInProgress implements _LoadInProgress {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(
-            List<AccountBalance> data, Account? editing, bool isAddingNew)?
+    TResult Function(List<AccountBalance> data, Account? editing,
+            bool isAddingNew, bool isButtonAddVisible)?
         loadSuccess,
   }) {
     return loadInProgress?.call();
@@ -162,8 +165,8 @@ class _$_LoadInProgress implements _LoadInProgress {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(
-            List<AccountBalance> data, Account? editing, bool isAddingNew)?
+    TResult Function(List<AccountBalance> data, Account? editing,
+            bool isAddingNew, bool isButtonAddVisible)?
         loadSuccess,
     required TResult orElse(),
   }) {
@@ -214,7 +217,11 @@ abstract class _$LoadSuccessCopyWith<$Res> {
   factory _$LoadSuccessCopyWith(
           _LoadSuccess value, $Res Function(_LoadSuccess) then) =
       __$LoadSuccessCopyWithImpl<$Res>;
-  $Res call({List<AccountBalance> data, Account? editing, bool isAddingNew});
+  $Res call(
+      {List<AccountBalance> data,
+      Account? editing,
+      bool isAddingNew,
+      bool isButtonAddVisible});
 }
 
 /// @nodoc
@@ -233,6 +240,7 @@ class __$LoadSuccessCopyWithImpl<$Res>
     Object? data = freezed,
     Object? editing = freezed,
     Object? isAddingNew = freezed,
+    Object? isButtonAddVisible = freezed,
   }) {
     return _then(_LoadSuccess(
       data == freezed
@@ -247,6 +255,10 @@ class __$LoadSuccessCopyWithImpl<$Res>
           ? _value.isAddingNew
           : isAddingNew // ignore: cast_nullable_to_non_nullable
               as bool,
+      isButtonAddVisible: isButtonAddVisible == freezed
+          ? _value.isButtonAddVisible
+          : isButtonAddVisible // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -255,7 +267,9 @@ class __$LoadSuccessCopyWithImpl<$Res>
 
 class _$_LoadSuccess implements _LoadSuccess {
   const _$_LoadSuccess(this.data,
-      {required this.editing, required this.isAddingNew});
+      {required this.editing,
+      required this.isAddingNew,
+      required this.isButtonAddVisible});
 
   @override
   final List<AccountBalance> data;
@@ -263,10 +277,12 @@ class _$_LoadSuccess implements _LoadSuccess {
   final Account? editing;
   @override
   final bool isAddingNew;
+  @override
+  final bool isButtonAddVisible;
 
   @override
   String toString() {
-    return 'AccountsPanelState.loadSuccess(data: $data, editing: $editing, isAddingNew: $isAddingNew)';
+    return 'AccountsPanelState.loadSuccess(data: $data, editing: $editing, isAddingNew: $isAddingNew, isButtonAddVisible: $isButtonAddVisible)';
   }
 
   @override
@@ -280,7 +296,10 @@ class _$_LoadSuccess implements _LoadSuccess {
                     .equals(other.editing, editing)) &&
             (identical(other.isAddingNew, isAddingNew) ||
                 const DeepCollectionEquality()
-                    .equals(other.isAddingNew, isAddingNew)));
+                    .equals(other.isAddingNew, isAddingNew)) &&
+            (identical(other.isButtonAddVisible, isButtonAddVisible) ||
+                const DeepCollectionEquality()
+                    .equals(other.isButtonAddVisible, isButtonAddVisible)));
   }
 
   @override
@@ -288,7 +307,8 @@ class _$_LoadSuccess implements _LoadSuccess {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(data) ^
       const DeepCollectionEquality().hash(editing) ^
-      const DeepCollectionEquality().hash(isAddingNew);
+      const DeepCollectionEquality().hash(isAddingNew) ^
+      const DeepCollectionEquality().hash(isButtonAddVisible);
 
   @JsonKey(ignore: true)
   @override
@@ -299,35 +319,35 @@ class _$_LoadSuccess implements _LoadSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadInProgress,
-    required TResult Function(
-            List<AccountBalance> data, Account? editing, bool isAddingNew)
+    required TResult Function(List<AccountBalance> data, Account? editing,
+            bool isAddingNew, bool isButtonAddVisible)
         loadSuccess,
   }) {
-    return loadSuccess(data, editing, isAddingNew);
+    return loadSuccess(data, editing, isAddingNew, isButtonAddVisible);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(
-            List<AccountBalance> data, Account? editing, bool isAddingNew)?
+    TResult Function(List<AccountBalance> data, Account? editing,
+            bool isAddingNew, bool isButtonAddVisible)?
         loadSuccess,
   }) {
-    return loadSuccess?.call(data, editing, isAddingNew);
+    return loadSuccess?.call(data, editing, isAddingNew, isButtonAddVisible);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadInProgress,
-    TResult Function(
-            List<AccountBalance> data, Account? editing, bool isAddingNew)?
+    TResult Function(List<AccountBalance> data, Account? editing,
+            bool isAddingNew, bool isButtonAddVisible)?
         loadSuccess,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
-      return loadSuccess(data, editing, isAddingNew);
+      return loadSuccess(data, editing, isAddingNew, isButtonAddVisible);
     }
     return orElse();
   }
@@ -366,11 +386,14 @@ class _$_LoadSuccess implements _LoadSuccess {
 
 abstract class _LoadSuccess implements AccountsPanelState {
   const factory _LoadSuccess(List<AccountBalance> data,
-      {required Account? editing, required bool isAddingNew}) = _$_LoadSuccess;
+      {required Account? editing,
+      required bool isAddingNew,
+      required bool isButtonAddVisible}) = _$_LoadSuccess;
 
   List<AccountBalance> get data => throw _privateConstructorUsedError;
   Account? get editing => throw _privateConstructorUsedError;
   bool get isAddingNew => throw _privateConstructorUsedError;
+  bool get isButtonAddVisible => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;

@@ -107,7 +107,7 @@ class OperationsRepositoryImpl extends OperationsRepository {
   void addOperationDebtIncrease(
     Account account,
     Money money,
-    Subject subject, {
+    Account debtAccount, {
     String? comment,
     String? categoriesStamp,
     String? subjectsStamp,
@@ -117,7 +117,7 @@ class OperationsRepositoryImpl extends OperationsRepository {
         LogicOperation.debtIncrease(
           account,
           money,
-          subject,
+          debtAccount,
           comment: comment,
           categoriesStamp: categoriesStamp,
           subjectsStamp: subjectsStamp,
@@ -129,14 +129,20 @@ class OperationsRepositoryImpl extends OperationsRepository {
   }
 
   @override
-  void addOperationDebtDecrease(Account account, Money money, Subject subject,
-      {String? comment, String? categoriesStamp, String? subjectsStamp}) {
+  void addOperationDebtDecrease(
+    Account account,
+    Money money,
+    Account debtAccount, {
+    String? comment,
+    String? categoriesStamp,
+    String? subjectsStamp,
+  }) {
     try {
       _dataSource.addOperation(
         LogicOperation.debtDecrease(
           account,
           money,
-          subject,
+          debtAccount,
           comment: comment,
           categoriesStamp: categoriesStamp,
           subjectsStamp: subjectsStamp,
@@ -148,14 +154,20 @@ class OperationsRepositoryImpl extends OperationsRepository {
   }
 
   @override
-  void addOperationLoanDecrease(Account account, Money money, Subject subject,
-      {String? comment, String? categoriesStamp, String? subjectsStamp}) {
+  void addOperationLoanDecrease(
+    Account account,
+    Money money,
+    Account debtAccount, {
+    String? comment,
+    String? categoriesStamp,
+    String? subjectsStamp,
+  }) {
     try {
       _dataSource.addOperation(
         LogicOperation.loanDecrease(
           account,
           money,
-          subject,
+          debtAccount,
           comment: comment,
           categoriesStamp: categoriesStamp,
           subjectsStamp: subjectsStamp,
@@ -167,14 +179,20 @@ class OperationsRepositoryImpl extends OperationsRepository {
   }
 
   @override
-  void addOperationLoanIncrease(Account account, Money money, Subject subject,
-      {String? comment, String? categoriesStamp, String? subjectsStamp}) {
+  void addOperationLoanIncrease(
+    Account account,
+    Money money,
+    Account debtAccount, {
+    String? comment,
+    String? categoriesStamp,
+    String? subjectsStamp,
+  }) {
     try {
       _dataSource.addOperation(
         LogicOperation.loanIncrease(
           account,
           money,
-          subject,
+          debtAccount,
           comment: comment,
           categoriesStamp: categoriesStamp,
           subjectsStamp: subjectsStamp,

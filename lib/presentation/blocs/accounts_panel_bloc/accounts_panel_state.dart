@@ -7,5 +7,6 @@ abstract class AccountsPanelState with _$AccountsPanelState {
     List<AccountBalance> data, {
     required Account? editing,
     required bool isAddingNew,
+    required bool isButtonAddVisible,
   }) = _LoadSuccess;
 }

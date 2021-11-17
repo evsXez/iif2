@@ -18,6 +18,8 @@ class _FakeAccount_0 extends _i1.Fake implements _i2.Account {}
 
 class _FakeCategoryModel_1 extends _i1.Fake implements _i3.CategoryModel {}
 
+class _FakeSubjectModel_2 extends _i1.Fake implements _i3.SubjectModel {}
+
 /// A class which mocks [DataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -27,20 +29,21 @@ class MockDataSource extends _i1.Mock implements _i3.DataSource {
   }
 
   @override
-  _i2.Account addAcount(_i2.Account? accountTemplate) =>
-      (super.noSuchMethod(Invocation.method(#addAcount, [accountTemplate]),
+  _i2.Account addAcount(_i2.Account? accountTemplate, _i2.Subject? subject) =>
+      (super.noSuchMethod(
+          Invocation.method(#addAcount, [accountTemplate, subject]),
           returnValue: _FakeAccount_0()) as _i2.Account);
   @override
-  void updateAcount(_i2.Account? account) =>
-      super.noSuchMethod(Invocation.method(#updateAcount, [account]),
+  void updateAcount(_i2.Account? account, _i2.Subject? subject) =>
+      super.noSuchMethod(Invocation.method(#updateAcount, [account, subject]),
           returnValueForMissingStub: null);
   @override
   void deleteAcount(_i2.Account? account) =>
       super.noSuchMethod(Invocation.method(#deleteAcount, [account]),
           returnValueForMissingStub: null);
   @override
-  List<_i3.AccountModel> getAcounts() =>
-      (super.noSuchMethod(Invocation.method(#getAcounts, []),
+  List<_i3.AccountModel> getAccounts() =>
+      (super.noSuchMethod(Invocation.method(#getAccounts, []),
           returnValue: <_i3.AccountModel>[]) as List<_i3.AccountModel>);
   @override
   void addOperation(_i2.LogicOperation? operation) =>
@@ -52,10 +55,8 @@ class MockDataSource extends _i1.Mock implements _i3.DataSource {
               returnValue: <_i3.LogicOperationModel>[])
           as List<_i3.LogicOperationModel>);
   @override
-  _i3.CategoryModel addCategory(
-          _i2.Category? categoryTemplate, _i2.Category? parent) =>
-      (super.noSuchMethod(
-          Invocation.method(#addCategory, [categoryTemplate, parent]),
+  _i3.CategoryModel addCategory(_i2.Category? template, _i2.Category? parent) =>
+      (super.noSuchMethod(Invocation.method(#addCategory, [template, parent]),
           returnValue: _FakeCategoryModel_1()) as _i3.CategoryModel);
   @override
   void updateCategory(_i2.Category? category) =>
@@ -65,6 +66,18 @@ class MockDataSource extends _i1.Mock implements _i3.DataSource {
   List<_i3.CategoryModel> getCategories() =>
       (super.noSuchMethod(Invocation.method(#getCategories, []),
           returnValue: <_i3.CategoryModel>[]) as List<_i3.CategoryModel>);
+  @override
+  _i3.SubjectModel addSubject(_i2.Subject? template, _i2.Subject? parent) =>
+      (super.noSuchMethod(Invocation.method(#addSubject, [template, parent]),
+          returnValue: _FakeSubjectModel_2()) as _i3.SubjectModel);
+  @override
+  void updateSubject(_i2.Subject? subject) =>
+      super.noSuchMethod(Invocation.method(#updateSubject, [subject]),
+          returnValueForMissingStub: null);
+  @override
+  List<_i3.SubjectModel> getSubjects() =>
+      (super.noSuchMethod(Invocation.method(#getSubjects, []),
+          returnValue: <_i3.SubjectModel>[]) as List<_i3.SubjectModel>);
   @override
   String toString() => super.toString();
 }

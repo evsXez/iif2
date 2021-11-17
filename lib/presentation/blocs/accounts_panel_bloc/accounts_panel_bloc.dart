@@ -16,6 +16,8 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
   List<AccountBalance> _data = [];
   late StreamSubscription _uiNotifierSubscription;
 
+  bool get _isButtonAddVisible => type == AccountType.money || type == AccountType.creditCards;
+
   AccountsPanelBloc(
     this._context, {
     required this.type,
@@ -26,7 +28,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
 
     _uiNotifierSubscription = stream.listen((event) {
       event.maybeWhen(
-        loadSuccess: (_, editing, isAddingNew) {
+        loadSuccess: (_, editing, isAddingNew, __) {
           if (editing != null || isAddingNew) {
             uiNotifierAccountEditorOpened.editorOpened();
           } else {
@@ -52,6 +54,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
         _data,
         editing: null,
         isAddingNew: false,
+        isButtonAddVisible: _isButtonAddVisible,
       ),
     );
   }
@@ -77,6 +80,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
         _data,
         editing: null,
         isAddingNew: true,
+        isButtonAddVisible: _isButtonAddVisible,
       ),
     );
   }
@@ -88,6 +92,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
         _data,
         editing: null,
         isAddingNew: false,
+        isButtonAddVisible: _isButtonAddVisible,
       ),
     );
   }
@@ -98,6 +103,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
         _data,
         editing: account,
         isAddingNew: false,
+        isButtonAddVisible: _isButtonAddVisible,
       ),
     );
   }

@@ -6,5 +6,5 @@ part 'account_options_state.freezed.dart';
 @freezed
 class AccountOptionsState with _$AccountOptionsState {
   const factory AccountOptionsState.idle() = Idle;
-  const factory AccountOptionsState.options(AccountOptions options) = Options;
+  const factory AccountOptionsState.options(AccountOptions? options) = Options;
 }

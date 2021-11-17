@@ -71,7 +71,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
     state.maybeMap(
       loaded: (data) {
         final selectedRefs = data.refs.where((ref) => ref.node.isSelected).toList();
-        final selectedSubject = selectedRefs.last.node.value;
+        final selectedSubject = selectedRefs.lastOrNull?.node.value;
 
         _fields.subject = selectedSubject;
         _fields.subjectsStamp = selectedRefs.map((it) => (it.node.value?.name) ?? "").join("/");
@@ -187,7 +187,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
       //   print(e);
     } catch (e) {
       print(e);
-      _emitVisibility(errorMessage: e.runtimeType.toString());
+      _emitVisibility(errorMessage: e.runtimeType.toString() + "${DateTime.now().millisecond}");
     }
   }
 }

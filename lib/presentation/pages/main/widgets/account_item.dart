@@ -30,8 +30,10 @@ class _AccountItemState extends State<AccountItem> {
         listener: (context, state) {
           state.maybeMap(
             options: (state) {
-              _showContextMenu(
-                  context, state.options, details?.globalPosition.dx ?? 0, details?.globalPosition.dy ?? 0);
+              final options = state.options;
+              if (options != null) {
+                _showContextMenu(context, options, details?.globalPosition.dx ?? 0, details?.globalPosition.dy ?? 0);
+              }
             },
             orElse: () {},
           );

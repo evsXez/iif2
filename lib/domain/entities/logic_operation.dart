@@ -93,7 +93,7 @@ class LogicOperation {
   factory LogicOperation.debtIncrease(
     Account account,
     Money money,
-    Subject subject, {
+    Account debtAccount, {
     String? categoriesStamp,
     String? subjectsStamp,
     DateTime? created,
@@ -112,7 +112,7 @@ class LogicOperation {
           AtomicOperation(
             money: money,
             type: AtomicOperationType.expense,
-            account: subject.account,
+            account: debtAccount,
           ),
         ],
         categoriesStamp: categoriesStamp ?? "",
@@ -122,7 +122,7 @@ class LogicOperation {
   factory LogicOperation.debtDecrease(
     Account account,
     Money money,
-    Subject subject, {
+    Account debtAccount, {
     String? categoriesStamp,
     String? subjectsStamp,
     DateTime? created,
@@ -141,7 +141,7 @@ class LogicOperation {
           AtomicOperation(
             money: money,
             type: AtomicOperationType.income,
-            account: subject.account,
+            account: debtAccount,
           ),
         ],
         categoriesStamp: categoriesStamp ?? "",
@@ -150,7 +150,7 @@ class LogicOperation {
   factory LogicOperation.loanIncrease(
     Account account,
     Money money,
-    Subject subject, {
+    Account debtAccount, {
     String? categoriesStamp,
     String? subjectsStamp,
     DateTime? created,
@@ -169,7 +169,7 @@ class LogicOperation {
           AtomicOperation(
             money: money,
             type: AtomicOperationType.income,
-            account: subject.account,
+            account: debtAccount,
           ),
         ],
         categoriesStamp: categoriesStamp ?? "",
@@ -179,7 +179,7 @@ class LogicOperation {
   factory LogicOperation.loanDecrease(
     Account account,
     Money money,
-    Subject subject, {
+    Account debtAccount, {
     String? categoriesStamp,
     String? subjectsStamp,
     DateTime? created,
@@ -198,7 +198,7 @@ class LogicOperation {
           AtomicOperation(
             money: money,
             type: AtomicOperationType.expense,
-            account: subject.account,
+            account: debtAccount,
           ),
         ],
         categoriesStamp: categoriesStamp ?? "",

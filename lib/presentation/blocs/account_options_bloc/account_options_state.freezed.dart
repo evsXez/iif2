@@ -21,7 +21,7 @@ class _$AccountOptionsStateTearOff {
     return const Idle();
   }
 
-  Options options(AccountOptions options) {
+  Options options(AccountOptions? options) {
     return Options(
       options,
     );
@@ -36,19 +36,19 @@ mixin _$AccountOptionsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function(AccountOptions options) options,
+    required TResult Function(AccountOptions? options) options,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(AccountOptions options)? options,
+    TResult Function(AccountOptions? options)? options,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(AccountOptions options)? options,
+    TResult Function(AccountOptions? options)? options,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -128,7 +128,7 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function(AccountOptions options) options,
+    required TResult Function(AccountOptions? options) options,
   }) {
     return idle();
   }
@@ -137,7 +137,7 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(AccountOptions options)? options,
+    TResult Function(AccountOptions? options)? options,
   }) {
     return idle?.call();
   }
@@ -146,7 +146,7 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(AccountOptions options)? options,
+    TResult Function(AccountOptions? options)? options,
     required TResult orElse(),
   }) {
     if (idle != null) {
@@ -195,7 +195,7 @@ abstract class Idle implements AccountOptionsState {
 abstract class $OptionsCopyWith<$Res> {
   factory $OptionsCopyWith(Options value, $Res Function(Options) then) =
       _$OptionsCopyWithImpl<$Res>;
-  $Res call({AccountOptions options});
+  $Res call({AccountOptions? options});
 }
 
 /// @nodoc
@@ -216,7 +216,7 @@ class _$OptionsCopyWithImpl<$Res>
       options == freezed
           ? _value.options
           : options // ignore: cast_nullable_to_non_nullable
-              as AccountOptions,
+              as AccountOptions?,
     ));
   }
 }
@@ -227,7 +227,7 @@ class _$Options implements Options {
   const _$Options(this.options);
 
   @override
-  final AccountOptions options;
+  final AccountOptions? options;
 
   @override
   String toString() {
@@ -255,7 +255,7 @@ class _$Options implements Options {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function(AccountOptions options) options,
+    required TResult Function(AccountOptions? options) options,
   }) {
     return options(this.options);
   }
@@ -264,7 +264,7 @@ class _$Options implements Options {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(AccountOptions options)? options,
+    TResult Function(AccountOptions? options)? options,
   }) {
     return options?.call(this.options);
   }
@@ -273,7 +273,7 @@ class _$Options implements Options {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(AccountOptions options)? options,
+    TResult Function(AccountOptions? options)? options,
     required TResult orElse(),
   }) {
     if (options != null) {
@@ -315,9 +315,9 @@ class _$Options implements Options {
 }
 
 abstract class Options implements AccountOptionsState {
-  const factory Options(AccountOptions options) = _$Options;
+  const factory Options(AccountOptions? options) = _$Options;
 
-  AccountOptions get options => throw _privateConstructorUsedError;
+  AccountOptions? get options => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $OptionsCopyWith<Options> get copyWith => throw _privateConstructorUsedError;
 }

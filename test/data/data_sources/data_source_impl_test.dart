@@ -101,7 +101,7 @@ void main() {
 
   test('previously added accounts persisted', () {
     when(prefs.getStringList(Keys.accounts.toString())).thenReturn(persistedAccountsFixture);
-    expect(dataSource.getAcounts(), accountsPersisted);
+    expect(dataSource.getAccounts(), accountsPersisted);
   });
 
   test('after adding account we can get it', () {
@@ -112,9 +112,9 @@ void main() {
       return true;
     });
 
-    expect(dataSource.getAcounts().contains(accountModelFixed), isFalse);
+    expect(dataSource.getAccounts().contains(accountModelFixed), isFalse);
     dataSource.addAcount(accountModelFixed);
-    expect(dataSource.getAcounts().contains(accountModelFixed), isTrue);
+    expect(dataSource.getAccounts().contains(accountModelFixed), isTrue);
   });
 
   test('previously added operations persisted', () {
@@ -149,13 +149,13 @@ void main() {
       return true;
     });
 
-    final before = dataSource.getAcounts();
+    final before = dataSource.getAccounts();
     expect(before.length, 1);
     expect(before.first, accountModelOriginal);
 
     dataSource.updateAcount(accountModelUpdated);
 
-    final after = dataSource.getAcounts();
+    final after = dataSource.getAccounts();
     expect(after.length, 1);
     expect(after.first, accountModelUpdated);
   });
@@ -180,9 +180,9 @@ void main() {
   test('after deleting account we can\'t get it', () {
     listOfAccountsJson = [accountModelJson];
 
-    expect(dataSource.getAcounts().first, accountModelFixed);
+    expect(dataSource.getAccounts().first, accountModelFixed);
     dataSource.deleteAcount(accountModelFixed);
-    expect(dataSource.getAcounts(), isEmpty);
+    expect(dataSource.getAccounts(), isEmpty);
   });
 
   test('after deleting account we delete operations with this account too', () {

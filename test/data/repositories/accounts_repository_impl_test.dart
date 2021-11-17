@@ -61,18 +61,18 @@ void main() {
   });
 
   test('data source has data and repository fetches it by type', () async {
-    when(mockDataSource.getAcounts()).thenReturn(allAccounts);
+    when(mockDataSource.getAccounts()).thenReturn(allAccounts);
     expect(repository.getAccountsOfType(type1), accountsType1);
     expect(repository.getAccountsOfType(type2), accountsType2);
   });
 
   test('data source has archived accounts and repository\'s "getAccounts" ignores them', () async {
-    when(mockDataSource.getAcounts()).thenReturn(accountsWithDeletedType1);
+    when(mockDataSource.getAccounts()).thenReturn(accountsWithDeletedType1);
     expect(repository.getAccountsOfType(type1), everyElement((Account it) => !it.isArchived));
   });
 
   test('data source has no data, then save, then it has data', () async {
-    when(mockDataSource.getAcounts()).thenReturn(initiallyEmptyAccounts);
+    when(mockDataSource.getAccounts()).thenReturn(initiallyEmptyAccounts);
     when(mockDataSource.addAcount(account)).thenAnswer((_) {
       initiallyEmptyAccounts.add(account);
       return account;
@@ -87,7 +87,7 @@ void main() {
     final account = accountModel(id, type);
 
     List<AccountModel> accountModels = [account];
-    when(mockDataSource.getAcounts()).thenReturn(accountModels);
+    when(mockDataSource.getAccounts()).thenReturn(accountModels);
     when(mockDataSource.updateAcount(any)).thenAnswer((realInvocation) {
       final account = realInvocation.positionalArguments.first;
       accountModels.clear();
@@ -109,7 +109,7 @@ void main() {
     expect(dataAfter.first.name, modifiedName);
   });
   test('save/update account calls notifies listeners', () {
-    when(mockDataSource.getAcounts()).thenAnswer((realInvocation) => initiallyEmptyAccounts);
+    when(mockDataSource.getAccounts()).thenAnswer((realInvocation) => initiallyEmptyAccounts);
     when(mockDataSource.addAcount(account)).thenAnswer((_) {
       initiallyEmptyAccounts.add(account);
       return account;

@@ -40,8 +40,15 @@ class MockAccountsRepository extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#getAccountsOfType, [type]),
           returnValue: <_i2.Account>[]) as List<_i2.Account>);
   @override
-  _i2.Account saveAccount(_i2.Account? accountTemplate) =>
-      (super.noSuchMethod(Invocation.method(#saveAccount, [accountTemplate]),
+  _i2.Account getAccountForSubject(_i2.Subject? subject) =>
+      (super.noSuchMethod(Invocation.method(#getAccountForSubject, [subject]),
+          returnValue: _FakeAccount_0()) as _i2.Account);
+  @override
+  _i2.Account saveAccount(_i2.Account? accountTemplate,
+          {_i2.Subject? subject}) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #saveAccount, [accountTemplate], {#subject: subject}),
           returnValue: _FakeAccount_0()) as _i2.Account);
   @override
   void addListener(_i4.VoidCallback? listener) =>
@@ -111,13 +118,13 @@ class MockOperationsRepository extends _i1.Mock
           returnValueForMissingStub: null);
   @override
   void addOperationDebtIncrease(
-          _i2.Account? account, _i2.Money? money, _i2.Subject? subject,
+          _i2.Account? account, _i2.Money? money, _i2.Account? debtAccount,
           {String? comment, String? categoriesStamp, String? subjectsStamp}) =>
       super.noSuchMethod(
           Invocation.method(#addOperationDebtIncrease, [
             account,
             money,
-            subject
+            debtAccount
           ], {
             #comment: comment,
             #categoriesStamp: categoriesStamp,
@@ -126,13 +133,13 @@ class MockOperationsRepository extends _i1.Mock
           returnValueForMissingStub: null);
   @override
   void addOperationDebtDecrease(
-          _i2.Account? account, _i2.Money? money, _i2.Subject? subject,
+          _i2.Account? account, _i2.Money? money, _i2.Account? debtAccount,
           {String? comment, String? categoriesStamp, String? subjectsStamp}) =>
       super.noSuchMethod(
           Invocation.method(#addOperationDebtDecrease, [
             account,
             money,
-            subject
+            debtAccount
           ], {
             #comment: comment,
             #categoriesStamp: categoriesStamp,
@@ -141,13 +148,13 @@ class MockOperationsRepository extends _i1.Mock
           returnValueForMissingStub: null);
   @override
   void addOperationLoanIncrease(
-          _i2.Account? account, _i2.Money? money, _i2.Subject? subject,
+          _i2.Account? account, _i2.Money? money, _i2.Account? debtAccount,
           {String? comment, String? categoriesStamp, String? subjectsStamp}) =>
       super.noSuchMethod(
           Invocation.method(#addOperationLoanIncrease, [
             account,
             money,
-            subject
+            debtAccount
           ], {
             #comment: comment,
             #categoriesStamp: categoriesStamp,
@@ -156,13 +163,13 @@ class MockOperationsRepository extends _i1.Mock
           returnValueForMissingStub: null);
   @override
   void addOperationLoanDecrease(
-          _i2.Account? account, _i2.Money? money, _i2.Subject? subject,
+          _i2.Account? account, _i2.Money? money, _i2.Account? debtAccount,
           {String? comment, String? categoriesStamp, String? subjectsStamp}) =>
       super.noSuchMethod(
           Invocation.method(#addOperationLoanDecrease, [
             account,
             money,
-            subject
+            debtAccount
           ], {
             #comment: comment,
             #categoriesStamp: categoriesStamp,

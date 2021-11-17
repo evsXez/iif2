@@ -1,10 +1,13 @@
 import 'package:iif/domain/entities/account.dart';
 import 'package:iif/domain/include.dart';
+import 'package:iif/domain/repositories/accounts_repository.dart';
 import 'package:iif/domain/repositories/operations_repository.dart';
 
 class LoanDecreaseUseCase {
+  final AccountsRepository accountsRepository;
   final OperationsRepository operationsRepository;
   LoanDecreaseUseCase({
+    required this.accountsRepository,
     required this.operationsRepository,
   });
 
@@ -19,7 +22,7 @@ class LoanDecreaseUseCase {
     operationsRepository.addOperationLoanDecrease(
       account,
       money,
-      subject,
+      accountsRepository.getAccountForSubject(subject),
       comment: comment,
       categoriesStamp: categoriesStamp,
       subjectsStamp: subjectsStamp,

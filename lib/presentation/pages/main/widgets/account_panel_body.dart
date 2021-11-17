@@ -67,7 +67,9 @@ class AccountPanelBody extends StatelessWidget {
                 ),
               );
             } else {
-              items.add(const ButtonAddAccount());
+              if (state.isButtonAddVisible) {
+                items.add(const ButtonAddAccount());
+              }
             }
 
             return Column(

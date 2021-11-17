@@ -11,13 +11,14 @@ class DataSourceImpl extends DataSource {
   DataSourceImpl(this._prefs);
 
   @override
-  Account addAcount(Account accountTemplate) {
+  Account addAcount(Account accountTemplate, Subject? subject) {
     final AccountModel account = AccountModel(
       id: _generateNextId(),
       name: accountTemplate.name,
       type: accountTemplate.type,
       currency: accountTemplate.currency,
       isArchived: accountTemplate.isArchived,
+      subjectId: subject?.id,
     );
 
     final List<String> list = _prefs.getStringList(Keys.accounts.toString()) ?? [];
@@ -27,7 +28,7 @@ class DataSourceImpl extends DataSource {
   }
 
   @override
-  List<AccountModel> getAcounts() {
+  List<AccountModel> getAccounts() {
     final List<String>? list = _prefs.getStringList(Keys.accounts.toString());
     final List<AccountModel> result = [];
     list?.forEach((it) {
@@ -86,13 +87,13 @@ class DataSourceImpl extends DataSource {
   }
 
   @override
-  void updateAcount(Account account) {
+  void updateAcount(Account account, Subject? subject) {
     final List<String>? list = _prefs.getStringList(Keys.accounts.toString());
     final List<String> result = [];
     list?.forEach((encoded) {
       final decoded = AccountModel.fromJson(json.decode(encoded));
       if (decoded.id == account.id) {
-        final updatedAccount = AccountModel.fromAccount(account);
+        final updatedAccount = AccountModel.fromAccount(account, subjectId: subject?.id);
         result.add(json.encode(updatedAccount.toJson()));
         _updateOperations(updatedAccount);
       } else {
@@ -222,5 +223,71 @@ class DataSourceImpl extends DataSource {
       '{"id": ${_generateNextId()}, "parentId": $debtsId, "type": 7, "name": "Я дал в долг"}',
       '{"id": ${_generateNextId()}, "parentId": $debtsId, "type": 8, "name": "Мне вернули долг"}',
     ];
+  }
+
+  //TODO: untested
+  @override
+  SubjectModel addSubject(Subject template, Subject parent) {
+    final SubjectModel subject = SubjectModel(
+      id: _generateNextId(),
+      parentId: parent.id,
+      name: template.name,
+      type: template.type,
+    );
+
+    final List<String> list = _prefs.getStringList(Keys.subjects.toString()) ?? [];
+    list.add(json.encode(subject.toJson()));
+    _prefs.setStringList(Keys.subjects.toString(), list);
+    return subject;
+  }
+
+  //TODO: untested
+  @override
+  List<SubjectModel> getSubjects() {
+    List<String>? list = _prefs.getStringList(Keys.subjects.toString());
+    if (list == null) {
+      _prefs.setStringList(Keys.subjects.toString(), _subjectsPredefined());
+      list = _prefs.getStringList(Keys.subjects.toString());
+    }
+    final List<SubjectModel> result = [];
+    list?.forEach((it) {
+      result.add(SubjectModel.fromJson(json.decode(it)));
+    });
+
+    return result;
+  }
+
+  List<String> _subjectsPredefined() {
+    final rootGeneralId = _generateNextId();
+    final rootDebtsId = _generateNextId();
+    final rootInvestmentsId = _generateNextId();
+    return [
+      '{"id": $rootGeneralId, "parentId": $rootGeneralId, "type": 0, "name": "rootGeneral"}',
+      '{"id": $rootDebtsId, "parentId": $rootDebtsId, "type": 1, "name": "rootDebts"}',
+      '{"id": $rootInvestmentsId, "parentId": $rootInvestmentsId, "type": 2, "name": "rootInvestments"}',
+    ];
+  }
+
+  //TODO: untested
+  @override
+  void updateSubject(Subject subject) {
+    final List<String>? list = _prefs.getStringList(Keys.subjects.toString());
+    final List<String> result = [];
+    list?.forEach((encoded) {
+      final decoded = SubjectModel.fromJson(json.decode(encoded));
+      if (decoded.id == subject.id) {
+        final updatedSubject = SubjectModel(
+          id: subject.id,
+          name: subject.name,
+          type: subject.type,
+          parentId: decoded.parentId,
+        );
+        result.add(json.encode(updatedSubject.toJson()));
+      } else {
+        result.add(encoded);
+      }
+    });
+
+    _prefs.setStringList(Keys.subjects.toString(), result);
   }
 }

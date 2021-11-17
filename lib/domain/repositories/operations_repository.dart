@@ -26,7 +26,7 @@ abstract class OperationsRepository extends ChangeNotifier {
   void addOperationDebtIncrease(
     Account account,
     Money money,
-    Subject subject, {
+    Account debtAccount, {
     String? comment,
     String? categoriesStamp,
     String? subjectsStamp,
@@ -34,7 +34,7 @@ abstract class OperationsRepository extends ChangeNotifier {
   void addOperationDebtDecrease(
     Account account,
     Money money,
-    Subject subject, {
+    Account debtAccount, {
     String? comment,
     String? categoriesStamp,
     String? subjectsStamp,
@@ -42,7 +42,7 @@ abstract class OperationsRepository extends ChangeNotifier {
   void addOperationLoanIncrease(
     Account account,
     Money money,
-    Subject subject, {
+    Account debtAccount, {
     String? comment,
     String? categoriesStamp,
     String? subjectsStamp,
@@ -50,7 +50,7 @@ abstract class OperationsRepository extends ChangeNotifier {
   void addOperationLoanDecrease(
     Account account,
     Money money,
-    Subject subject, {
+    Account debtAccount, {
     String? comment,
     String? categoriesStamp,
     String? subjectsStamp,

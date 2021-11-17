@@ -2,18 +2,24 @@ import 'package:equatable/equatable.dart';
 import 'package:iif/domain/include.dart';
 
 class Subject extends NodeValue with EquatableMixin {
-  final String name;
   final SubjectType type;
-  final Account account;
-  Subject(this.name, this.type, this.account);
+  // final Account account;
+  Subject(int id, String name, this.type) : super(id, name);
 
   @override
-  List<Object?> get props => [name, type, account];
+  List<Object?> get props => [name, type];
 
   Subject.undefined()
-      : name = "",
-        type = SubjectType.general,
-        account = Account.template(type: AccountType.money, name: "");
+      : type = SubjectType.general,
+        // account = Account.template(type: AccountType.money, name: ""),
+        super(-1, "");
+
+  Subject.template({
+    required this.type,
+    required String name,
+  }) :
+        // account = Account.template(type: AccountType.money, name: ""),
+        super(-1, name);
 
   @override
   String toString() => name;

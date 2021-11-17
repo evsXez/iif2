@@ -8,15 +8,19 @@ class GetAccountOptionsUseCase {
     required this.operationsRepository,
   });
 
-  Future<AccountOptions> execute(AccountBalance accountBalance) async {
+  Future<AccountOptions?> execute(AccountBalance accountBalance) async {
     final operations = await operationsRepository.getOperations(accountBalance.account);
     final accountHasNoOperationsExceptInitialInput = operations.every(
       (it) => it.type == LogicOperationType.initialInput,
     );
 
-    return AccountOptions(
-      isArchiveAvailable: accountBalance.money == Money.zero,
-      isDeleteAvailable: accountHasNoOperationsExceptInitialInput,
-    );
+    if (accountBalance.account.type == AccountType.money || accountBalance.account.type == AccountType.creditCards) {
+      return AccountOptions(
+        isArchiveAvailable: accountBalance.money == Money.zero,
+        isDeleteAvailable: accountHasNoOperationsExceptInitialInput,
+      );
+    } else {
+      return null;
+    }
   }
 }

@@ -40,7 +40,7 @@ class _AddOperationPageState extends State<AddOperationPage> {
     );
     _subjectSelector = NodeSelector(
       colorScheme: StyleNodeColorSheme.subjects(),
-      reference: Subject("", SubjectType.debts, Account.template(type: AccountType.debts, name: "")),
+      reference: Subject(-1, "", SubjectType.debts), // Account.template(type: AccountType.debts, name: "")),
       // valueBuilder: (text, parent) {
       //   final value = parent.value;
       //   return (value is Subject) ? Subject(text, value.type) : Subject(text, SubjectType.undefined);
