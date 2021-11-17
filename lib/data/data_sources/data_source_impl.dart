@@ -169,7 +169,15 @@ class DataSourceImpl extends DataSource {
 
   @override
   List<CategoryModel> getCategories() {
-    final List<String>? list = _prefs.getStringList(Keys.categories.toString());
+    // if (true) {
+    //   _prefs.remove(Keys.categories.toString());
+    // }
+
+    List<String>? list = _prefs.getStringList(Keys.categories.toString());
+    if (list == null) {
+      _prefs.setStringList(Keys.categories.toString(), _categoriesPredefined());
+      list = _prefs.getStringList(Keys.categories.toString());
+    }
     final List<CategoryModel> result = [];
     list?.forEach((it) {
       result.add(CategoryModel.fromJson(json.decode(it)));
@@ -198,5 +206,21 @@ class DataSourceImpl extends DataSource {
     });
 
     _prefs.setStringList(Keys.categories.toString(), result);
+  }
+
+  List<String> _categoriesPredefined() {
+    final rootId = _generateNextId();
+    final debtsId = _generateNextId();
+    return [
+      '{"id": $rootId, "parentId": $rootId, "type": 0, "name": "root"}',
+      '{"id": ${_generateNextId()}, "parentId": $rootId, "type": 1, "name": "Доход"}',
+      '{"id": ${_generateNextId()}, "parentId": $rootId, "type": 2, "name": "Расход"}',
+      '{"id": ${_generateNextId()}, "parentId": $rootId, "type": 3, "name": "Перемещение"}',
+      '{"id": $debtsId, "parentId": $rootId, "type": 4, "name": "Долги"}',
+      '{"id": ${_generateNextId()}, "parentId": $debtsId, "type": 5, "name": "Я взял в долг"}',
+      '{"id": ${_generateNextId()}, "parentId": $debtsId, "type": 6, "name": "Я вернул долг"}',
+      '{"id": ${_generateNextId()}, "parentId": $debtsId, "type": 7, "name": "Я дал в долг"}',
+      '{"id": ${_generateNextId()}, "parentId": $debtsId, "type": 8, "name": "Мне вернули долг"}',
+    ];
   }
 }

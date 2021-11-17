@@ -8,5 +8,9 @@ abstract class NodeSelectorState<T> with _$NodeSelectorState<T> {
 
 class NodeRef<T> {
   final Node<T> node;
-  NodeRef(this.node);
+  final Node<T> parent;
+  NodeRef({
+    required this.node,
+    required this.parent,
+  });
 }

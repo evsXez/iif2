@@ -6,6 +6,8 @@ class LogicOperation {
   final String comment;
   final List<AtomicOperation> atomics;
 
+  //Subject? subject; //general
+
   //TODO: ask is it a stamp really or it should be a link to Node and change when Node changes too?
   final String categoriesStamp;
   final String subjectsStamp;

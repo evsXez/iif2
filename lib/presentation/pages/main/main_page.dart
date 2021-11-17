@@ -53,7 +53,7 @@ class _MainPageState extends State<MainPage> {
                             ),
                           ],
                         ),
-                        SizedBox(height: MediaQuery.of(context).size.height - 565 + 100),
+                        SizedBox(height: MediaQuery.of(context).size.height - 565 + 100 + 50),
                         GestureDetector(
                           onTap: () {
                             operationsBottomSheet.show();

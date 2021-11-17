@@ -9,6 +9,8 @@ class GetRootNodeUseCase {
     switch (type) {
       case Category:
         return categoriesRepository.getCategories();
+      case Subject:
+        return Node<Subject>(value: Subject.undefined(), children: []);
     }
 
     throw UnimplementedError();

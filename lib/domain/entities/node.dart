@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:iif/domain/entities/enums/node_type.dart';
+import 'package:iif/domain/include.dart';
 
 class Node<T> with EquatableMixin {
   T? value;

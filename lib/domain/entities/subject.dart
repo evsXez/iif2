@@ -10,6 +10,15 @@ class Subject extends NodeValue with EquatableMixin {
   @override
   List<Object?> get props => [name, type, account];
 
+  Subject.undefined()
+      : name = "",
+        type = SubjectType.general,
+        account = Account.template(type: AccountType.money, name: "");
+
   @override
   String toString() => name;
 }
+
+// class DebtSubject extends Subject {
+//   final Account account;
+// }

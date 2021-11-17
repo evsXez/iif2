@@ -10,14 +10,13 @@ class CreateNodeValueUseCase {
     required this.categoriesRepository,
   });
 
-  T execute<T extends NodeValue>(String text, NodeValue? value, NodeValue reference) {
+  T execute<T extends NodeValue>(String text, NodeValue? value, NodeValue reference, {required NodeValue parent}) {
     switch (T) {
       case Category:
         final categoryTemplate =
             Category.template(name: text, type: value is Category ? value.type : (reference as Category).type);
 
-        throw UnimplementedError();
-      // return categoriesRepository.saveCategory(categoryTemplate, parent) as T;
+        return categoriesRepository.saveCategory(categoryTemplate, parent as Category) as T;
       // return Category(text, value is Category ? value.type : (reference as Category).type) as T;
       case Subject:
         final referenceSubject = reference as Subject;

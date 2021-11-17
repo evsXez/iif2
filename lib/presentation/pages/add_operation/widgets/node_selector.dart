@@ -42,17 +42,17 @@ class _NodeSelectorState<T extends NodeValue> extends State<NodeSelector> {
                         node: ref.node,
                         colorScheme: widget.colorScheme,
                         onTap: () {
-                          bloc.tap(ref.node);
+                          bloc.tap(ref);
                         },
                         onSave: (text) {
-                          bloc.save(ref.node, text, widget.reference);
+                          bloc.save(ref, text, widget.reference);
                           // bloc.save(ref.node, widget.valueBuilder, text);
                         },
                         onDelete: () {
-                          bloc.delete(ref.node);
+                          bloc.delete(ref);
                         },
                         onLongPress: () {
-                          bloc.edit(ref.node);
+                          bloc.edit(ref);
                         }),
                   ),
                 )

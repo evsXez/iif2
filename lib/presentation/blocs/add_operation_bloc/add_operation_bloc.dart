@@ -132,7 +132,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
           break;
         case CategoryType.income:
           addIncomeUseCase.of(_context).execute(
-                _fields.accountFrom!,
+                _fields.accountTo!,
                 _fields.money!,
                 comment: _fields.comment,
                 categoriesStamp: _fields.categoriesStamp,
@@ -150,7 +150,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
           break;
         case CategoryType.debtDecrease:
           debtDecreaseUseCase.of(_context).execute(
-                _fields.accountTo!,
+                _fields.accountFrom!,
                 _fields.money!,
                 comment: _fields.comment,
                 categoriesStamp: _fields.categoriesStamp,
@@ -160,7 +160,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
           break;
         case CategoryType.loanIncrease:
           loanIncreaseUseCase.of(_context).execute(
-                _fields.accountTo!,
+                _fields.accountFrom!,
                 _fields.money!,
                 comment: _fields.comment,
                 categoriesStamp: _fields.categoriesStamp,
@@ -206,10 +206,16 @@ class _SelectedFields {
     if (baseCategory == null) {
       throw _BaseCategoryNotSelectedException();
     }
-    if (baseCategory?.type == CategoryType.income && accountTo == null) {
+    if ((baseCategory?.type == CategoryType.income ||
+            baseCategory?.type == CategoryType.debtIncrease ||
+            baseCategory?.type == CategoryType.loanDecrease) &&
+        accountTo == null) {
       throw _AccountToNotSelectedException();
     }
-    if (baseCategory?.type == CategoryType.expense && accountFrom == null) {
+    if ((baseCategory?.type == CategoryType.expense ||
+            baseCategory?.type == CategoryType.debtDecrease ||
+            baseCategory?.type == CategoryType.loanIncrease) &&
+        accountFrom == null) {
       throw _AccountFromNotSelectedException();
     }
     if (baseCategory?.type == CategoryType.transfer && (accountFrom == accountTo)) {

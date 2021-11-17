@@ -14,7 +14,7 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
   final Node<T> _addNode = Node.composer();
 
   NodeSelectorBloc(this._context) : super(const _Loading()) {
-    _root = getRootNodeUseCase.of(_context).execute(T.runtimeType);
+    _root = getRootNodeUseCase.of(_context).execute(T);
     // _root = GetRootNodeUseCase<T>().execute();
 
     // Future.delayed(Duration(seconds: 1)).then((_) {
@@ -28,16 +28,22 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
     Node<NodeValue>? root = _root;
 
     while (root != null) {
-      view.add(NodeRef<T>(root as Node<T>));
+      view.add(NodeRef<T>(node: root as Node<T>, parent: root));
       try {
         root = root.children.firstWhere((it) => it.isSelected);
       } catch (e) {
         break;
       }
     }
-    view.addAll((root?.children ?? []).map((e) => NodeRef<T>(e as Node<T>)).toList());
-    if (root?.canHaveMoreChildren ?? false) {
-      view.add(NodeRef<T>(_addNode));
+    view.addAll((root?.children ?? []).map((e) => NodeRef<T>(node: e as Node<T>, parent: root as Node<T>)).toList());
+    bool canHaveMoreChildren = root?.canHaveMoreChildren ?? false;
+    final value = root?.value;
+    if (value is Category && value.type == CategoryType.debtsAndLoans) {
+      canHaveMoreChildren = false;
+    }
+
+    if (canHaveMoreChildren) {
+      view.add(NodeRef<T>(node: _addNode, parent: root as Node<T>));
     }
 
     view.removeAt(0); //hide root
@@ -45,46 +51,56 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
     emit(_Loaded(view));
   }
 
-  void tap(Node<T> node) {
-    if (node == _addNode) {
+  void tap(NodeRef<T> nodeRef) {
+    if (nodeRef.node == _addNode) {
       _addNode.isEditing = !_addNode.isEditing;
     } else {
-      if (node.isSelected) {
+      if (nodeRef.node.isSelected) {
         _addNode.isEditing = false;
       }
-      node.isSelected = !node.isSelected;
+      nodeRef.node.isSelected = !nodeRef.node.isSelected;
     }
     _showData();
   }
 
-  void save(Node<T> node, String text, NodeValue reference) {
-    if (node == _addNode) {
+  void save(NodeRef<T> nodeRef, String text, NodeValue reference) {
+    if (nodeRef.node == _addNode) {
       final Node<NodeValue> parent = _root.deepSelected();
       parent.children.add(
-        Node(
-          value: createNodeValueUseCase.of(_context).execute<T>(text, parent.value, reference),
+        Node<T>(
+          value: createNodeValueUseCase.of(_context).execute<T>(
+                text,
+                parent.value,
+                reference,
+                parent: nodeRef.parent.value as NodeValue,
+              ),
           children: [],
           isSelected: true,
         ),
       );
     } else {
-      node.value = createNodeValueUseCase.of(_context).execute<T>(text, node.value, reference);
+      nodeRef.node.value = createNodeValueUseCase.of(_context).execute<T>(
+            text,
+            nodeRef.node.value,
+            reference,
+            parent: nodeRef.parent.value as NodeValue,
+          );
     }
-    node.isEditing = false;
+    nodeRef.node.isEditing = false;
     _showData();
   }
 
-  void delete(Node<T> node) {
-    if (node == _addNode) {
+  void delete(NodeRef<T> nodeRef) {
+    if (nodeRef.node == _addNode) {
       _addNode.isEditing = false;
     } else {
-      _parentOf(_root, node)?.children.remove(node);
+      _parentOf(_root, nodeRef.node)?.children.remove(nodeRef.node);
     }
     _showData();
   }
 
-  void edit(Node<T> node) {
-    node.isEditing = true;
+  void edit(NodeRef<T> nodeRef) {
+    nodeRef.node.isEditing = true;
     _showData();
   }
 
