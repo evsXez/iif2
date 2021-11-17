@@ -15,11 +15,12 @@ class Subject extends NodeValue with EquatableMixin {
         super(-1, "");
 
   Subject.template({
+    int? id,
     required this.type,
     required String name,
   }) :
         // account = Account.template(type: AccountType.money, name: ""),
-        super(-1, name);
+        super(id ?? -1, name);
 
   @override
   String toString() => name;

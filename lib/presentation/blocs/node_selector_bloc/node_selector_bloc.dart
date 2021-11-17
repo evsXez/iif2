@@ -40,7 +40,14 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
     view.addAll((root?.children ?? []).map((e) => NodeRef<T>(node: e as Node<T>, parent: root as Node<T>)).toList());
     bool canHaveMoreChildren = root?.canHaveMoreChildren ?? false;
     final value = root?.value;
-    if (value is Category && value.type == CategoryType.debtsAndLoans) {
+    if (value is Category &&
+        [
+          CategoryType.debtsAndLoans,
+          CategoryType.debtIncrease,
+          CategoryType.debtDecrease,
+          CategoryType.loanIncrease,
+          CategoryType.loanDecrease,
+        ].contains(value.type)) {
       canHaveMoreChildren = false;
     }
 

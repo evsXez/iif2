@@ -1,7 +1,8 @@
 enum AccountType {
   money,
   creditCards,
-  debts,
-  // loans, use of debts only and count positive/negative balance to show on the main screen
+  debtsAndLoans, //use this to store debts and loans
+  debts, //use this to show debts (balance is negative)
+  loans, //use this to show loans (balance is positive)
   investments,
 }

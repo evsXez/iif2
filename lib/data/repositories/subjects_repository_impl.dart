@@ -42,8 +42,8 @@ class SubjectsRepositoryImpl extends SubjectsRepository {
   @override
   Subject saveSubject(Subject template, Subject parent) {
     if (template.id >= 0) {
-      final categories = _dataSource.getCategories();
-      if (categories.any((it) => it.id == template.id)) {
+      final subjects = _dataSource.getSubjects();
+      if (subjects.any((it) => it.id == template.id)) {
         _dataSource.updateSubject(template);
         return template;
       }

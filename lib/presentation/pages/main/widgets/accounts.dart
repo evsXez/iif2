@@ -21,13 +21,13 @@ class Accounts extends StatelessWidget {
           children: List.generate(
             state.data.length,
             (index) {
-              final type = AccountType.values[index];
+              final type = state.data[index].key;
               final Money? money = state.data[index].value;
               return ExpansionPanel(
                 isExpanded: state.expandedIndex == index,
                 canTapOnHeader: true,
                 headerBuilder: (context, isExpanded) => AccountPanelHeader(
-                  label: type.name(context),
+                  label: type.name(),
                   money: money,
                   onPressed: () => _expand(context, index),
                 ),

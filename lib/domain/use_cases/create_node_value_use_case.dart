@@ -36,12 +36,14 @@ class CreateNodeValueUseCase {
         //     currency: value.account.currency,
         //   );
         // }
-        final subject =
-            subjectsRepository.saveSubject(Subject.template(name: text, type: SubjectType.debts), parent as Subject);
+        final subject = subjectsRepository.saveSubject(
+          Subject.template(id: value?.id, name: text, type: SubjectType.debts),
+          parent as Subject,
+        );
         accountsRepository.saveAccount(
           Account(
             id: -1,
-            type: subject.type == SubjectType.debts ? AccountType.debts : AccountType.investments,
+            type: subject.type == SubjectType.debts ? AccountType.debtsAndLoans : AccountType.investments,
             name: subject.name,
             currency: Currency.debugDefault,
           ),

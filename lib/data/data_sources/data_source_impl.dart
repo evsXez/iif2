@@ -283,11 +283,27 @@ class DataSourceImpl extends DataSource {
           parentId: decoded.parentId,
         );
         result.add(json.encode(updatedSubject.toJson()));
+        _updateAcountForSubject(subject);
       } else {
         result.add(encoded);
       }
     });
 
     _prefs.setStringList(Keys.subjects.toString(), result);
+  }
+
+  void _updateAcountForSubject(Subject subject) {
+    try {
+      final account = getAccounts().firstWhere((it) => it.subjectId == subject.id);
+      updateAcount(
+        Account(
+          id: account.id,
+          name: subject.name,
+          type: account.type,
+          currency: account.currency,
+        ),
+        subject,
+      );
+    } catch (_) {}
   }
 }

@@ -87,7 +87,7 @@ void main() {
     ),
   ];
   late OperationsRepository repository;
-  final Subject subject = Subject("subject", SubjectType.debts, accountModel(333, AccountType.debts));
+  final Subject subject = Subject("subject", SubjectType.debts, accountModel(333, AccountType.debtsAndLoans));
   late List<LogicOperationModel> defaultAllOperations;
 
   setUp(() {

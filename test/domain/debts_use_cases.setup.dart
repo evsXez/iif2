@@ -15,7 +15,7 @@ late LoanIncreaseUseCase loanIncreaseUseCase;
 late LoanDecreaseUseCase loanDecreaseUseCase;
 late MockOperationsRepository mockOperationsRepository;
 final Account account = accountMoney;
-final Account subjectAccount = getAccount(5, AccountType.debts);
+final Account subjectAccount = getAccount(5, AccountType.debtsAndLoans);
 late List<LogicOperation> listOperations;
 final money = money100;
 const initialMoney = Money(coins: 1000);
@@ -77,8 +77,8 @@ Future testAfterAddingDebtOperationWeCanGetIt(VoidCallback useCase, MockOperatio
   expect(operations.last.type, LogicOperationType.debts);
   expect(operations.last.atomics.length, 2);
 
-  final atomicAccount = operations.last.atomics.firstWhere((it) => it.account.type != AccountType.debts);
-  final atomicSubject = operations.last.atomics.firstWhere((it) => it.account.type == AccountType.debts);
+  final atomicAccount = operations.last.atomics.firstWhere((it) => it.account.type != AccountType.debtsAndLoans);
+  final atomicSubject = operations.last.atomics.firstWhere((it) => it.account.type == AccountType.debtsAndLoans);
   expect(atomicAccount.account, account);
   expect(atomicAccount.money, money);
   expect(atomicSubject.account, subject.account);

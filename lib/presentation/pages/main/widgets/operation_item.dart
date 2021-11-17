@@ -94,7 +94,7 @@ class OperationItem extends StatelessWidget {
       case LogicOperationType.expense:
         return Style.grayColor;
       case LogicOperationType.debts:
-        final atomicForAccount = operation.atomics.firstWhere((it) => it.account.type != AccountType.debts);
+        final atomicForAccount = operation.atomics.firstWhere((it) => it.account.type != AccountType.debtsAndLoans);
         switch (atomicForAccount.type) {
           case AtomicOperationType.initialInput:
             return Style.lightGrayColor;

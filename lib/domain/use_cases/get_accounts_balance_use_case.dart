@@ -13,13 +13,23 @@ class GetAccountsBalanceUseCase {
 
   Future<List<AccountBalance>> execute(AccountType type) async {
     final List<AccountBalance> result = [];
-    await Future.forEach<Account>(accountsRepository.getAccountsOfType(type), (account) async {
+    final typeModified = type == AccountType.debts || type == AccountType.loans ? AccountType.debtsAndLoans : type;
+    await Future.forEach<Account>(accountsRepository.getAccountsOfType(typeModified), (account) async {
       if (!account.isArchived) {
         final money = await operationsRepository.calculateBalance(account);
-        result.add(AccountBalance(account, money));
+
+        if (type == AccountType.debts && money.coins < 0) {
+          result.add(AccountBalance(account, money));
+        }
+        if (type == AccountType.loans && money.coins > 0) {
+          result.add(AccountBalance(account, money));
+        }
+        if (type != AccountType.loans && type != AccountType.debts) {
+          result.add(AccountBalance(account, money));
+        }
       }
     });
-    if (type == AccountType.debts) {
+    if (type == AccountType.debts || type == AccountType.loans) {
       result.removeWhere((it) => it.money == Money.zero);
     }
     return result;

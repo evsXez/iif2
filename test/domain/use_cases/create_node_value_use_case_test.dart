@@ -7,7 +7,7 @@ import '../mocks.mocks.dart';
 
 void main() {
   late CreateNodeValueUseCase createNodeValueUseCase;
-  final accountType = AccountType.debts;
+  final accountType = AccountType.debtsAndLoans;
   final account = getAccount(12, accountType);
   late MockAccountsRepository accountsRepository;
   late MockCategoriesRepository categoriesRepository;

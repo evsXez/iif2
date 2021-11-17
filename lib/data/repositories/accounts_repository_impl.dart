@@ -46,7 +46,7 @@ class AccountsRepositoryImpl extends AccountsRepository {
       return saveAccount(
         Account(
           id: -1,
-          type: subject.type == SubjectType.debts ? AccountType.debts : AccountType.investments,
+          type: subject.type == SubjectType.debts ? AccountType.debtsAndLoans : AccountType.investments,
           name: subject.name,
           currency: Currency.debugDefault,
         ),
