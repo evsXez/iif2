@@ -66,6 +66,7 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
     } else {
       if (nodeRef.node.isSelected) {
         _addNode.isEditing = false;
+        _deselectAllChildren(nodeRef.node);
       }
       nodeRef.node.isSelected = !nodeRef.node.isSelected;
     }
@@ -124,5 +125,12 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
       }
     }
     return null;
+  }
+
+  void _deselectAllChildren(Node node) {
+    for (var it in node.children) {
+      it.isSelected = false;
+      _deselectAllChildren(it);
+    }
   }
 }

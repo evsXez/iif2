@@ -23,6 +23,7 @@ class AddOperationPage extends StatefulWidget {
 class _AddOperationPageState extends State<AddOperationPage> {
   late NodeSelector<Category> _categorySelector;
   late NodeSelector<Subject> _subjectSelector;
+  late OperationMoney _operationMoney;
 
   late NodeSelectorBloc<Category> _categorySelectorBloc;
   late NodeSelectorBloc<Subject> _subjectSelectorBloc;
@@ -53,6 +54,12 @@ class _AddOperationPageState extends State<AddOperationPage> {
       context,
       categorySelectorBloc: _categorySelectorBloc,
       subjectSelectorBloc: _subjectSelectorBloc,
+    );
+
+    _operationMoney = OperationMoney(
+      onMoneyChanged: (money) {
+        _addOperationBloc.moneyChanged(money);
+      },
     );
   }
 
@@ -195,11 +202,7 @@ class _AddOperationPageState extends State<AddOperationPage> {
                           Expanded(
                             flex: 5,
                             child: Frame(
-                              child: OperationMoney(
-                                onMoneyChanged: (money) {
-                                  _addOperationBloc.moneyChanged(money);
-                                },
-                              ),
+                              child: _operationMoney,
                             ),
                           ),
                           Expanded(
