@@ -3,8 +3,8 @@ import 'package:iif/domain/include.dart';
 
 abstract class DataSource {
   //accounts
-  Account addAcount(Account accountTemplate, Subject? subject);
-  void updateAcount(Account account, Subject? subject);
+  Account addAcount(Account accountTemplate, Subject? subject, Money? creditLimit);
+  void updateAcount(Account account, Subject? subject, Money? creditLimit);
   void deleteAcount(Account account);
   List<AccountModel> getAccounts();
 

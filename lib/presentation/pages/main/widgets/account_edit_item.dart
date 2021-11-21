@@ -2,7 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/presentation/blocs/accounts_panel_bloc/accounts_panel_bloc.dart';
 import 'package:iif/presentation/include.dart';
-import 'package:iif/presentation/pages/add_operation/widgets/node_selector.dart';
+import 'package:iif/presentation/pages/main/widgets/account_credit_edit_item.dart';
+import 'package:iif/presentation/pages/main/widgets/account_debt_edit_item.dart';
+import 'package:iif/presentation/pages/main/widgets/account_money_edit_item.dart';
 import 'package:iif/presentation/pages/main/widgets/small_button.dart';
 
 class AccountEditItem extends StatefulWidget {
@@ -21,67 +23,41 @@ class AccountEditItem extends StatefulWidget {
 
 class _AccountEditItemState extends State<AccountEditItem> {
   bool get isDebts => widget.accountType == AccountType.debts || widget.accountType == AccountType.loans;
-
-  late StringField nameField = StringField(
-    hint: Strings.label_title,
-    initialValue: widget.accountBalanceToEdit?.account.name ?? "",
-    onChanged: _onChanged,
-  );
-
-  late MoneyField moneyField = MoneyField(
-    initialValue: widget.accountBalanceToEdit?.money,
-    onChanged: _onChanged,
-  );
-
-  Subject? _selectedDebtSubject;
-  late final debtSubjectSelectorBloc = NodeSelectorBloc<Subject>(context);
-  late final debtSubjectSelector = BlocProvider<NodeSelectorBloc<Subject>>(
-    create: (context) => debtSubjectSelectorBloc,
-    child: Padding(
-      padding: const EdgeInsets.all(0.0),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: BlocListener<NodeSelectorBloc<Subject>, NodeSelectorState<Subject>>(
-          listener: (context, state) {
-            state.maybeMap(
-              loaded: (state) {
-                try {
-                  _selectedDebtSubject = state.refs.lastWhere((it) => it.node.isSelected).node.value;
-                } catch (_) {
-                  _selectedDebtSubject = null;
-                } finally {
-                  print("_selectedDebtSubject: $_selectedDebtSubject");
-                  _onChanged(null);
-                }
-              },
-              orElse: () {},
-            );
-          },
-          child: NodeSelector<Subject>(
-            colorScheme: StyleNodeColorSheme.subjectsHighlighted(),
-            reference: Subject(-1, "", SubjectType.debts),
-          ),
-        ),
-      ),
-    ),
-  );
+  bool get isCredit => widget.accountType == AccountType.creditCards;
 
   bool _isInputCompletedAndSmthChanged = false;
 
-  void _onChanged(_) {
-    bool nameEntered = nameField.isValueEntered;
-    bool nameChanged = nameField.value != widget.accountBalanceToEdit?.account.name;
+  late String _name = widget.accountBalanceToEdit?.account.name ?? "";
+  late String _money = widget.accountBalanceToEdit?.money.toStringAsPrice() ?? "";
+  late String _limit = widget.accountBalanceToEdit?.account.type == AccountType.creditCards
+      ? ((widget.accountBalanceToEdit?.account as CreditCardAccount?)?.limit.toStringAsPrice() ?? "")
+      : "";
+  Subject? _selectedDebtSubject;
 
-    bool moneyEntered = moneyField.isValueEntered;
-    bool moneyChanged = moneyField.value != widget.accountBalanceToEdit?.money;
+  void _somethingChanged() {
+    bool nameEntered = _name.isNotEmpty;
+    bool nameChanged = _name != widget.accountBalanceToEdit?.account.name;
+
+    bool moneyEntered = _money.isNotEmpty;
+    bool moneyChanged = _money != widget.accountBalanceToEdit?.money.toStringAsPrice();
+
+    bool limitEntered = _limit.isNotEmpty;
+    bool limitChanged = widget.accountBalanceToEdit?.account is CreditCardAccount
+        ? _limit != (widget.accountBalanceToEdit?.account as CreditCardAccount).limit.toStringAsPrice()
+        : false;
 
     bool subjectDebtEntered = _selectedDebtSubject != null;
     bool subjectDebtChanged = subjectDebtEntered; //no edit for now
 
     setState(() {
-      _isInputCompletedAndSmthChanged = isDebts
-          ? (subjectDebtEntered && moneyEntered && (subjectDebtChanged || moneyChanged))
-          : (nameEntered && moneyEntered && (nameChanged || moneyChanged));
+      if (isDebts) {
+        _isInputCompletedAndSmthChanged = (subjectDebtEntered && moneyEntered && (subjectDebtChanged || moneyChanged));
+      } else if (isCredit) {
+        _isInputCompletedAndSmthChanged =
+            (nameEntered && moneyEntered && limitEntered && (nameChanged || moneyChanged || limitChanged));
+      } else {
+        _isInputCompletedAndSmthChanged = (nameEntered && moneyEntered && (nameChanged || moneyChanged));
+      }
     });
   }
 
@@ -90,25 +66,24 @@ class _AccountEditItemState extends State<AccountEditItem> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Container(
-          height: isDebts ? null : 38,
-          color: Style.highlightColor,
-          child: Row(
-            children: <Widget>[
-              const SizedBox(width: 8),
-              Expanded(
-                flex: 2,
-                child: isDebts ? debtSubjectSelector : nameField,
-              ),
-              const SizedBox(width: 4),
-              Expanded(
-                child: moneyField,
-              ),
-              const SizedBox(width: 4),
-              // currencySelector,
-            ],
-          ),
-        ),
+        isDebts
+            ? AccountDebtEditItem(
+                accountBalanceToEdit: widget.accountBalanceToEdit,
+                onSubjectChanged: _subjectChanged,
+                onMoneyChanged: _moneyChanged,
+              )
+            : isCredit
+                ? AccountCreditEditItem(
+                    accountBalanceToEdit: widget.accountBalanceToEdit,
+                    onNameChanged: _nameChanged,
+                    onMoneyChanged: _moneyChanged,
+                    onLimitChanged: _limitChanged,
+                  )
+                : AccountMoneyEditItem(
+                    accountBalanceToEdit: widget.accountBalanceToEdit,
+                    onNameChanged: _nameChanged,
+                    onMoneyChanged: _moneyChanged,
+                  ),
         Padding(
           padding: const EdgeInsets.only(right: 12),
           child: _isInputCompletedAndSmthChanged
@@ -125,12 +100,33 @@ class _AccountEditItemState extends State<AccountEditItem> {
     );
   }
 
+  void _subjectChanged(Subject? value) {
+    _selectedDebtSubject = value;
+    _somethingChanged();
+  }
+
+  void _nameChanged(String value) {
+    _name = value;
+    _somethingChanged();
+  }
+
+  void _moneyChanged(String value) {
+    _money = value;
+    _somethingChanged();
+  }
+
+  void _limitChanged(String value) {
+    _limit = value;
+    _somethingChanged();
+  }
+
   void _onSave(BuildContext context) {
     BlocProvider.of<AccountsPanelBloc>(context).saveAccount(
       accountToEdit: widget.accountBalanceToEdit?.account,
-      name: nameField.value,
-      money: moneyField.value,
+      name: _name,
+      money: MoneyX.fromString(_money),
       debtSubject: _selectedDebtSubject,
+      creditLimit: _limit.isNotEmpty ? MoneyX.fromString(_limit) : null,
     );
   }
 

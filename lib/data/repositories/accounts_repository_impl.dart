@@ -10,11 +10,25 @@ class AccountsRepositoryImpl extends AccountsRepository {
   @override
   List<Account> getAccountsOfType(AccountType type) {
     final data = _dataSource.getAccounts();
-    return data.where((it) => it.type == type && !it.isArchived).toList();
+    return data
+        .where((it) => it.type == type && !it.isArchived)
+        .map((it) => it.type == AccountType.creditCards
+            ? CreditCardAccount(
+                id: it.id,
+                name: it.name,
+                currency: it.currency,
+                limit: it.creditLimitModel,
+              )
+            : it)
+        .toList();
   }
 
   @override
-  Account saveAccount(Account accountTemplate, {Subject? subject}) {
+  Account saveAccount(
+    Account accountTemplate, {
+    Subject? subject,
+    Money? creditLimit,
+  }) {
     try {
       if (accountTemplate.id >= 0) {
         if (accountTemplate.isDeleted) {
@@ -24,12 +38,12 @@ class AccountsRepositoryImpl extends AccountsRepository {
 
         final accounts = _dataSource.getAccounts();
         if (accounts.any((it) => it.id == accountTemplate.id)) {
-          _dataSource.updateAcount(accountTemplate, subject);
+          _dataSource.updateAcount(accountTemplate, subject, creditLimit);
           return accountTemplate;
         }
       }
 
-      return _dataSource.addAcount(accountTemplate, subject);
+      return _dataSource.addAcount(accountTemplate, subject, creditLimit);
     } finally {
       notifyListeners();
     }

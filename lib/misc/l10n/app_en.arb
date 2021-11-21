@@ -41,5 +41,7 @@
 	"message_dialog_delete_location_unavailable": "You can delete only accounts with no income/expense transactions. You can archive the account to hide it from the list and analytics.", "@message_dialog_delete_location_unavailable":{"description":"message_dialog_delete_location_unavailable"},
 	"swipe_to_reveal": " ▲ Swipe to reveal transactions ▲", "@swipe_to_reveal":{"description":"swipe_to_reveal"},
 	"hint_sum": "Sum", "@hint_sum":{"description":"hint_sum"},
-	"hint_comment": "Comment", "@hint_comment":{"description":"hint_comment"}
+	"hint_comment": "Comment", "@hint_comment":{"description":"hint_comment"},
+	"hint_credit_balance": "Balance", "@hint_credit_balance":{"description":"hint_credit_balance"},
+	"hint_credit_limit": "Limit", "@hint_credit_limit":{"description":"hint_credit_limit"}
 }

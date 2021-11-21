@@ -69,6 +69,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
     required String name,
     required Money money,
     Subject? debtSubject,
+    Money? creditLimit,
   }) async {
     final accountTemplate = Account(
       id: accountToEdit?.id ?? -1,
@@ -80,6 +81,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
           accountTemplate: accountTemplate,
           money: type == AccountType.debts ? Money(coins: -money.coins) : money,
           debtSubject: debtSubject,
+          creditLimit: creditLimit,
         );
     _isAddingNew = false;
     _updateData();

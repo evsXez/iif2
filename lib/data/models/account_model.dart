@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
+import 'package:iif/data/include.dart';
 import 'package:iif/domain/include.dart';
 
 class AccountModel extends Account with EquatableMixin {
   final int? subjectId;
+  final MoneyModel creditLimitModel;
 
   AccountModel({
     this.subjectId,
@@ -10,6 +12,7 @@ class AccountModel extends Account with EquatableMixin {
     required String name,
     required AccountType type,
     required Currency currency,
+    required this.creditLimitModel,
     bool isArchived = false,
     bool isDeleted = false,
   }) : super(
@@ -32,6 +35,7 @@ class AccountModel extends Account with EquatableMixin {
         ),
         isArchived: json['isArchived'],
         isDeleted: json['isDeleted'],
+        creditLimitModel: MoneyModel.fromJson(json['creditLimitModel']),
       );
 
   Map<String, dynamic> toJson() => {
@@ -45,12 +49,18 @@ class AccountModel extends Account with EquatableMixin {
         },
         'isArchived': isArchived,
         'isDeleted': isDeleted,
+        'creditLimitModel': creditLimitModel.toJson(),
       };
 
   @override
   List<Object?> get props => [id, subjectId, name, type, currency];
 
-  factory AccountModel.fromAccount(Account ref, {required int? subjectId}) => AccountModel(
+  factory AccountModel.fromAccount(
+    Account ref, {
+    required int? subjectId,
+    required Money? creditLimit,
+  }) =>
+      AccountModel(
         id: ref.id,
         name: ref.name,
         type: ref.type,
@@ -58,5 +68,6 @@ class AccountModel extends Account with EquatableMixin {
         isArchived: ref.isArchived,
         isDeleted: ref.isDeleted,
         subjectId: subjectId,
+        creditLimitModel: MoneyModel(coins: creditLimit?.coins ?? 0),
       );
 }

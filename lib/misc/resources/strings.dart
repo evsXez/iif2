@@ -45,6 +45,8 @@ class Strings {
   static String get swipe_to_reveal => _swipe_to_reveal;
   static String get hint_sum => _hint_sum;
   static String get hint_comment => _hint_comment;
+  static String get hint_credit_balance => _hint_credit_balance;
+  static String get hint_credit_limit => _hint_credit_limit;
 
   static late String _dialog_title_error_message;
   static late String _title_accounts;
@@ -89,6 +91,8 @@ class Strings {
   static late String _swipe_to_reveal;
   static late String _hint_sum;
   static late String _hint_comment;
+  static late String _hint_credit_balance;
+  static late String _hint_credit_limit;
 
   static void init(BuildContext context) {
     const notInitialized = "<notInitialied>";
@@ -139,5 +143,7 @@ class Strings {
     _swipe_to_reveal = AppLocalizations.of(context)?.swipe_to_reveal ?? notInitialized;
     _hint_sum = AppLocalizations.of(context)?.hint_sum ?? notInitialized;
     _hint_comment = AppLocalizations.of(context)?.hint_comment ?? notInitialized;
+    _hint_credit_balance = AppLocalizations.of(context)?.hint_credit_balance ?? notInitialized;
+    _hint_credit_limit = AppLocalizations.of(context)?.hint_credit_limit ?? notInitialized;
   }
 }

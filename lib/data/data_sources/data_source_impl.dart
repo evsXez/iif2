@@ -11,7 +11,7 @@ class DataSourceImpl extends DataSource {
   DataSourceImpl(this._prefs);
 
   @override
-  Account addAcount(Account accountTemplate, Subject? subject) {
+  Account addAcount(Account accountTemplate, Subject? subject, Money? creditLimit) {
     final AccountModel account = AccountModel(
       id: _generateNextId(),
       name: accountTemplate.name,
@@ -19,6 +19,7 @@ class DataSourceImpl extends DataSource {
       currency: accountTemplate.currency,
       isArchived: accountTemplate.isArchived,
       subjectId: subject?.id,
+      creditLimitModel: MoneyModel(coins: creditLimit?.coins ?? 0),
     );
 
     final List<String> list = _prefs.getStringList(Keys.accounts.toString()) ?? [];
@@ -75,6 +76,7 @@ class DataSourceImpl extends DataSource {
                 name: atomic.account.name,
                 type: atomic.account.type,
                 currency: atomic.account.currency,
+                creditLimitModel: MoneyModel(coins: 0),
               ),
             ),
           )
@@ -87,13 +89,13 @@ class DataSourceImpl extends DataSource {
   }
 
   @override
-  void updateAcount(Account account, Subject? subject) {
+  void updateAcount(Account account, Subject? subject, Money? creditLimit) {
     final List<String>? list = _prefs.getStringList(Keys.accounts.toString());
     final List<String> result = [];
     list?.forEach((encoded) {
       final decoded = AccountModel.fromJson(json.decode(encoded));
       if (decoded.id == account.id) {
-        final updatedAccount = AccountModel.fromAccount(account, subjectId: subject?.id);
+        final updatedAccount = AccountModel.fromAccount(account, subjectId: subject?.id, creditLimit: creditLimit);
         result.add(json.encode(updatedAccount.toJson()));
         _updateOperations(updatedAccount);
       } else {
@@ -303,6 +305,7 @@ class DataSourceImpl extends DataSource {
           currency: account.currency,
         ),
         subject,
+        account is CreditCardAccount ? account.creditLimitModel : null,
       );
     } catch (_) {}
   }

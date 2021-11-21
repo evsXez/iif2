@@ -41,5 +41,7 @@
 	"message_dialog_delete_location_unavailable": "Удалить можно только счет, по которому не было операций прихода или расхода. Вы можете архивировать счет, чтобы скрыть его из списка и статистики.",
 	"swipe_to_reveal": " ▲ Показать операции ▲",
 	"hint_sum": "Сумма",
-	"hint_comment": "Комментарий"
+	"hint_comment": "Комментарий",
+	"hint_credit_balance": "Остаток",
+	"hint_credit_limit": "Лимит"
 }

@@ -15,12 +15,13 @@ class SaveAccountUseCase {
     required Account accountTemplate,
     required Money money,
     required Subject? debtSubject,
+    required Money? creditLimit,
   }) {
     final Account account;
     if (debtSubject != null) {
       account = accountsRepository.getAccountForSubject(debtSubject);
     } else {
-      account = accountsRepository.saveAccount(accountTemplate);
+      account = accountsRepository.saveAccount(accountTemplate, creditLimit: creditLimit);
     }
     operationsRepository.addOperationInitialInput(account, money);
   }

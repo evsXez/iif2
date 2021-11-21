@@ -9,12 +9,14 @@ class MoneyField extends StatelessWidget {
   final Money? initialValue;
   final void Function(String) onChanged;
   final double fontSize;
+  final String? hintText;
   // final double? height;
   MoneyField({
     // this.height,
     required this.initialValue,
     required this.onChanged,
     key,
+    this.hintText,
     this.fontSize = 14,
   }) : super(key: key) {
     _controller.text = initialValue?.toStringAsPrice() ?? "";
@@ -37,7 +39,7 @@ class MoneyField extends StatelessWidget {
         ),
         textAlign: TextAlign.center,
         decoration: InputDecoration(
-          hintText: Strings.hint_sum,
+          hintText: hintText ?? Strings.hint_sum,
           contentPadding: const EdgeInsets.only(bottom: 12),
           border: InputBorder.none,
           hintStyle: TextStyle(
