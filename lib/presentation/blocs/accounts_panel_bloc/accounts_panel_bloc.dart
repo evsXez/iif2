@@ -15,8 +15,13 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
   final BuildContext _context;
   List<AccountBalance> _data = [];
   late StreamSubscription _uiNotifierSubscription;
+  bool _isAddingNew = false;
 
-  bool get _isButtonAddVisible => type == AccountType.money || type == AccountType.creditCards;
+  bool get _isButtonAddVisible =>
+      type == AccountType.money ||
+      type == AccountType.creditCards ||
+      type == AccountType.debts ||
+      type == AccountType.loans;
 
   AccountsPanelBloc(
     this._context, {
@@ -53,7 +58,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
       _LoadSuccess(
         _data,
         editing: null,
-        isAddingNew: false,
+        isAddingNew: _isAddingNew = false,
         isButtonAddVisible: _isButtonAddVisible,
       ),
     );
@@ -63,6 +68,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
     Account? accountToEdit,
     required String name,
     required Money money,
+    Subject? debtSubject,
   }) async {
     final accountTemplate = Account(
       id: accountToEdit?.id ?? -1,
@@ -70,7 +76,12 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
       type: type,
       currency: Currency.debugDefault,
     );
-    saveAccountUseCase.of(_context).execute(accountTemplate, money);
+    saveAccountUseCase.of(_context).execute(
+          accountTemplate: accountTemplate,
+          money: type == AccountType.debts ? Money(coins: -money.coins) : money,
+          debtSubject: debtSubject,
+        );
+    _isAddingNew = false;
     _updateData();
   }
 
@@ -79,7 +90,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
       _LoadSuccess(
         _data,
         editing: null,
-        isAddingNew: true,
+        isAddingNew: _isAddingNew = true,
         isButtonAddVisible: _isButtonAddVisible,
       ),
     );
@@ -91,7 +102,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
       _LoadSuccess(
         _data,
         editing: null,
-        isAddingNew: false,
+        isAddingNew: _isAddingNew,
         isButtonAddVisible: _isButtonAddVisible,
       ),
     );
@@ -102,7 +113,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
       _LoadSuccess(
         _data,
         editing: account,
-        isAddingNew: false,
+        isAddingNew: _isAddingNew = false,
         isButtonAddVisible: _isButtonAddVisible,
       ),
     );

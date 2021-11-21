@@ -1,4 +1,5 @@
 import 'package:iif/domain/include.dart';
+import 'package:iif/misc/resources/strings.dart';
 
 class LogicOperation {
   final LogicOperationType type;
@@ -24,8 +25,8 @@ class LogicOperation {
   factory LogicOperation.initialInput({
     required Account account,
     required Money money,
-    String? categoriesStamp,
-    String? subjectsStamp,
+    // String? categoriesStamp,
+    // String? subjectsStamp,
     DateTime? created,
     String? comment,
   }) =>
@@ -40,8 +41,10 @@ class LogicOperation {
             account: account,
           )
         ],
-        categoriesStamp: categoriesStamp ?? "",
-        subjectsStamp: subjectsStamp ?? "",
+        categoriesStamp: account.type == AccountType.debtsAndLoans
+            ? Strings.category_initial_input_debt
+            : Strings.category_initial_input,
+        subjectsStamp: "",
       );
 
   factory LogicOperation.expense(

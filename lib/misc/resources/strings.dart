@@ -13,6 +13,7 @@ class Strings {
   static String get category_expense => _category_expense;
   static String get category_income => _category_income;
   static String get category_initial_input => _category_initial_input;
+  static String get category_initial_input_debt => _category_initial_input_debt;
   static String get category_transfer => _category_transfer;
   static String get category_debts => _category_debts;
   static String get category_debts_new => _category_debts_new;
@@ -56,6 +57,7 @@ class Strings {
   static late String _category_expense;
   static late String _category_income;
   static late String _category_initial_input;
+  static late String _category_initial_input_debt;
   static late String _category_transfer;
   static late String _category_debts;
   static late String _category_debts_new;
@@ -102,6 +104,7 @@ class Strings {
     _category_expense = AppLocalizations.of(context)?.category_expense ?? notInitialized;
     _category_income = AppLocalizations.of(context)?.category_income ?? notInitialized;
     _category_initial_input = AppLocalizations.of(context)?.category_initial_input ?? notInitialized;
+    _category_initial_input_debt = AppLocalizations.of(context)?.category_initial_input_debt ?? notInitialized;
     _category_transfer = AppLocalizations.of(context)?.category_transfer ?? notInitialized;
     _category_debts = AppLocalizations.of(context)?.category_debts ?? notInitialized;
     _category_debts_new = AppLocalizations.of(context)?.category_debts_new ?? notInitialized;

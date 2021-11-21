@@ -9,7 +9,9 @@ class MoneyField extends StatelessWidget {
   final Money? initialValue;
   final void Function(String) onChanged;
   final double fontSize;
+  // final double? height;
   MoneyField({
+    // this.height,
     required this.initialValue,
     required this.onChanged,
     key,
@@ -24,17 +26,23 @@ class MoneyField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // height: height,
       padding: const EdgeInsets.fromLTRB(4, 0, 4, 8),
       child: TextField(
         textAlignVertical: TextAlignVertical.center,
         controller: _controller,
         onChanged: onChanged,
-        style: TextStyle(fontSize: fontSize),
+        style: TextStyle(
+          fontSize: fontSize,
+        ),
         textAlign: TextAlign.center,
         decoration: InputDecoration(
           hintText: Strings.hint_sum,
           contentPadding: const EdgeInsets.only(bottom: 12),
           border: InputBorder.none,
+          hintStyle: TextStyle(
+              // color: Colors.white,
+              ),
         ),
         keyboardType: TextInputType.number,
         inputFormatters: [MoneyFormatter()],

@@ -10,6 +10,7 @@
 	"category_expense": "Расход",
 	"category_income": "Доход",
 	"category_initial_input": "Ввод остатков",
+	"category_initial_input_debt": "Ввод долга",
 	"category_transfer": "Перемещение",
 	"category_debts": "Долги",
 	"category_debts_new": "Я взял в долг",

@@ -39,45 +39,60 @@ class _MainPageState extends State<MainPage> {
             return Scaffold(
               appBar: Header(),
               backgroundColor: Style.lightGrayColor,
-              body: CustomScrollView(
-                slivers: [
-                  SliverList(
-                    delegate: SliverChildListDelegate(
-                      [
-                        Column(
-                          children: [
-                            const SizedBox(height: 20),
-                            BlocProvider(
-                              create: (context) => AccountsBloc(context),
-                              child: Accounts(),
+              body: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  CustomScrollView(
+                    slivers: [
+                      SliverList(
+                        delegate: SliverChildListDelegate(
+                          [
+                            Column(
+                              children: [
+                                const SizedBox(height: 20),
+                                BlocProvider(
+                                  create: (context) => AccountsBloc(context),
+                                  child: Accounts(),
+                                ),
+                              ],
                             ),
+                            const SizedBox(height: 24),
                           ],
                         ),
-                        SizedBox(height: MediaQuery.of(context).size.height - 565 + 100 /*+ 50*/),
-                        GestureDetector(
-                          onTap: () {
-                            operationsBottomSheet.show();
-                          },
-                          child: Container(
-                            color: Style.lightGrayColor,
-                            padding: const EdgeInsets.all(16),
-                            child: Center(
-                                child: Text(
-                              Strings.swipe_to_reveal,
-                              style: const TextStyle(
-                                color: Style.grayColor,
-                                fontSize: 12,
-                              ),
-                            )),
+                      )
+                    ],
+                  ),
+                  Visibility(
+                    visible: fabState.map(
+                      hidden: (_) => false,
+                      shown: (_) => true,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 24),
+                      child: TextButton(
+                        onPressed: () {
+                          operationsBottomSheet.show();
+                        },
+                        child: Text(
+                          Strings.swipe_to_reveal,
+                          style: const TextStyle(
+                            color: Style.grayColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w300,
                           ),
                         ),
-                        const SizedBox(height: 24),
-                      ],
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
-              bottomSheet: operationsBottomSheet,
+              bottomSheet: Visibility(
+                visible: fabState.map(
+                  hidden: (_) => false,
+                  shown: (_) => true,
+                ),
+                child: operationsBottomSheet,
+              ),
               floatingActionButton: fabState.map(
                 hidden: (_) => null,
                 shown: (_) => !isBottomSheetOpened

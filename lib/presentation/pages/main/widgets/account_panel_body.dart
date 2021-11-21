@@ -62,6 +62,7 @@ class AccountPanelBody extends StatelessWidget {
             if (state.isAddingNew) {
               items.add(
                 AccountEditItem(
+                  accountType: type,
                   accountBalanceToEdit: null,
                   key: ObjectKey(state.data),
                 ),

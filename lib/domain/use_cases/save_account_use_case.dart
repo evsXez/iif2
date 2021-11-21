@@ -11,8 +11,17 @@ class SaveAccountUseCase {
     required this.operationsRepository,
   });
 
-  void execute(Account accountTemplate, Money money) {
-    final account = accountsRepository.saveAccount(accountTemplate);
+  void execute({
+    required Account accountTemplate,
+    required Money money,
+    required Subject? debtSubject,
+  }) {
+    final Account account;
+    if (debtSubject != null) {
+      account = accountsRepository.getAccountForSubject(debtSubject);
+    } else {
+      account = accountsRepository.saveAccount(accountTemplate);
+    }
     operationsRepository.addOperationInitialInput(account, money);
   }
 }

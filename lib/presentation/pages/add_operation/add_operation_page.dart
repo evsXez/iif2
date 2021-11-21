@@ -34,18 +34,10 @@ class _AddOperationPageState extends State<AddOperationPage> {
     _categorySelector = NodeSelector(
       colorScheme: StyleNodeColorSheme.categories(),
       reference: Category.undefined(),
-      // valueBuilder: (text, parent) {
-      //   final value = parent.value;
-      //   return (value is Category) ? Category(text, value.type) : Category(text, CategoryType.undefined);
-      // },
     );
     _subjectSelector = NodeSelector(
       colorScheme: StyleNodeColorSheme.subjects(),
-      reference: Subject(-1, "", SubjectType.debts), // Account.template(type: AccountType.debts, name: "")),
-      // valueBuilder: (text, parent) {
-      //   final value = parent.value;
-      //   return (value is Subject) ? Subject(text, value.type) : Subject(text, SubjectType.undefined);
-      // },
+      reference: Subject(-1, "", SubjectType.debts),
     );
 
     _categorySelectorBloc = NodeSelectorBloc(context);

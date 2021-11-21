@@ -45,6 +45,7 @@ class _AccountItemState extends State<AccountItem> {
           },
           child: widget.isEditing
               ? AccountEditItem(
+                  accountType: widget.accountBalance.account.type,
                   accountBalanceToEdit: widget.accountBalance,
                   key: ObjectKey(widget.accountBalance.account),
                 )

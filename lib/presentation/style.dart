@@ -46,4 +46,13 @@ class StyleNodeColorSheme {
         textColor: Style.blackColor,
         editBackgroundColor: Style.whiteColor,
       );
+
+  factory StyleNodeColorSheme.subjectsHighlighted() => StyleNodeColorSheme(
+        selectedBackgroundColor: Style.accentColor,
+        selectedTextColor: Style.whiteColor,
+        editTextColor: Style.blackColor,
+        backgroundColor: Style.whiteColor,
+        textColor: Style.blackColor,
+        editBackgroundColor: Style.whiteColor,
+      );
 }

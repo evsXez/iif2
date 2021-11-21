@@ -10,6 +10,7 @@
 	"category_expense": "Expense", "@category_expense":{"description":"category_expense"},
 	"category_income": "Income", "@category_income":{"description":"category_income"},
 	"category_initial_input": "Initial input", "@category_initial_input":{"description":"category_initial_input"},
+	"category_initial_input_debt": "Debt input", "@category_initial_input_debt":{"description":"category_initial_input_debt"},
 	"category_transfer": "Transfer", "@category_transfer":{"description":"category_transfer"},
 	"category_debts": "Debts", "@category_debts":{"description":"category_debts"},
 	"category_debts_new": "I borrowed", "@category_debts_new":{"description":"category_debts_new"},

@@ -128,6 +128,16 @@ class MockOperationsRepository extends _i1.Mock
               {#comment: comment, #categoriesStamp: categoriesStamp}),
           returnValueForMissingStub: null);
   @override
+  void addOperationTransfer(
+          _i2.Account? accountFrom, _i2.Account? accountTo, _i2.Money? money,
+          {String? comment, String? categoriesStamp}) =>
+      super.noSuchMethod(
+          Invocation.method(
+              #addOperationTransfer,
+              [accountFrom, accountTo, money],
+              {#comment: comment, #categoriesStamp: categoriesStamp}),
+          returnValueForMissingStub: null);
+  @override
   void addOperationDebtIncrease(
           _i2.Account? account, _i2.Money? money, _i2.Account? debtAccount,
           {String? comment, String? categoriesStamp, String? subjectsStamp}) =>
