@@ -104,6 +104,29 @@ class OperationsRepositoryImpl extends OperationsRepository {
   }
 
   @override
+  void addOperationTransfer(
+    Account accountFrom,
+    Account accountTo,
+    Money money, {
+    String? comment,
+    String? categoriesStamp,
+  }) {
+    try {
+      _dataSource.addOperation(
+        LogicOperation.transfer(
+          accountFrom,
+          accountTo,
+          money,
+          comment: comment,
+          categoriesStamp: categoriesStamp,
+        ),
+      );
+    } finally {
+      notifyListeners();
+    }
+  }
+
+  @override
   void addOperationDebtIncrease(
     Account account,
     Money money,

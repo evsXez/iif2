@@ -138,6 +138,15 @@ class AddOperationBloc extends Cubit<AddOperationState> {
                 categoriesStamp: _fields.categoriesStamp,
               );
           break;
+        case CategoryType.transfer:
+          addTransferUseCase.of(_context).execute(
+                _fields.accountFrom!,
+                _fields.accountTo!,
+                _fields.money!,
+                comment: _fields.comment,
+                categoriesStamp: _fields.categoriesStamp,
+              );
+          break;
         case CategoryType.debtIncrease:
           debtIncreaseUseCase.of(_context).execute(
                 _fields.accountTo!,

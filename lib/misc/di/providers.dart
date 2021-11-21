@@ -53,6 +53,9 @@ final addExpenseUseCase = Provider((ref) => AddExpenseUseCase(
 final addIncomeUseCase = Provider((ref) => AddIncomeUseCase(
       operationsRepository: ref.read(operationsRepository),
     ));
+final addTransferUseCase = Provider((ref) => AddTransferUseCase(
+      operationsRepository: ref.read(operationsRepository),
+    ));
 final debtIncreaseUseCase = Provider((ref) => DebtIncreaseUseCase(
       accountsRepository: ref.read(accountsRepository),
       operationsRepository: ref.read(operationsRepository),

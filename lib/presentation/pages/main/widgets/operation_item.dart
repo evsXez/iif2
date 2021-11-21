@@ -87,6 +87,7 @@ class OperationItem extends StatelessWidget {
   Color moneyBackColor() {
     switch (operation.type) {
       case LogicOperationType.transfer:
+        return Style.whiteColor;
       case LogicOperationType.initialInput:
         return Style.lightGrayColor;
       case LogicOperationType.income:
@@ -109,6 +110,9 @@ class OperationItem extends StatelessWidget {
   }
 
   Color moneyFrontColor() {
+    if (operation.type == LogicOperationType.transfer) {
+      return Style.blackColor;
+    }
     if (account2 == null && operation.atomics.first.type == AtomicOperationType.initialInput) {
       return Style.grayColor;
     }
@@ -187,11 +191,12 @@ class _MoneyAndAccounts extends StatelessWidget {
           ),
         ),
         Visibility(
-            visible: isTransfer,
-            child: const SizedBox(
-              width: 4,
-            )),
-        Visibility(visible: isTransfer, child: TransferArrow(right: true, isSmall: true)),
+          visible: isTransfer,
+          child: const SizedBox(
+            width: 4,
+          ),
+        ),
+        Visibility(visible: isTransfer, child: const TransferArrow(isSmall: true)),
         Visibility(visible: isTransfer, child: const SizedBox(width: 4)),
         Visibility(
           visible: isTransfer,

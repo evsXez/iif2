@@ -155,7 +155,6 @@ class _AddOperationPageState extends State<AddOperationPage> {
                                   height: double.infinity,
                                   color: transferBackgroundColor,
                                   child: TransferArrow(
-                                    right: true,
                                     isSmall: false,
                                     color: transferArrowColor,
                                   ),
@@ -180,7 +179,6 @@ class _AddOperationPageState extends State<AddOperationPage> {
                                 height: double.infinity,
                                 color: transferBackgroundColor,
                                 child: TransferArrow(
-                                  right: true,
                                   isSmall: false,
                                   color: transferArrowColor,
                                 ),

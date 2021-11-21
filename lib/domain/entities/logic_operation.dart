@@ -90,6 +90,35 @@ class LogicOperation {
         subjectsStamp: subjectsStamp ?? "",
       );
 
+  factory LogicOperation.transfer(
+    Account accountFrom,
+    Account accountTo,
+    Money money, {
+    String? categoriesStamp,
+    String? subjectsStamp,
+    DateTime? created,
+    String? comment,
+  }) =>
+      LogicOperation(
+        type: LogicOperationType.transfer,
+        created: created ?? DateTime.now(),
+        comment: comment ?? "",
+        atomics: [
+          AtomicOperation(
+            money: money,
+            type: AtomicOperationType.expense,
+            account: accountFrom,
+          ),
+          AtomicOperation(
+            money: money,
+            type: AtomicOperationType.income,
+            account: accountTo,
+          ),
+        ],
+        categoriesStamp: categoriesStamp ?? "",
+        subjectsStamp: subjectsStamp ?? "",
+      );
+
   factory LogicOperation.debtIncrease(
     Account account,
     Money money,
