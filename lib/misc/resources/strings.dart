@@ -40,6 +40,8 @@ class Strings {
   static String get title_dialog_archive_location => _title_dialog_archive_location;
   static String get message_dialog_archive_location_available => _message_dialog_archive_location_available;
   static String get message_dialog_archive_location_unavailable => _message_dialog_archive_location_unavailable;
+  static String get message_dialog_archive_location_unavailable_credit =>
+      _message_dialog_archive_location_unavailable_credit;
   static String get title_dialog_delete_location => _title_dialog_delete_location;
   static String get message_dialog_delete_location_unavailable => _message_dialog_delete_location_unavailable;
   static String get swipe_to_reveal => _swipe_to_reveal;
@@ -86,6 +88,7 @@ class Strings {
   static late String _title_dialog_archive_location;
   static late String _message_dialog_archive_location_available;
   static late String _message_dialog_archive_location_unavailable;
+  static late String _message_dialog_archive_location_unavailable_credit;
   static late String _title_dialog_delete_location;
   static late String _message_dialog_delete_location_unavailable;
   static late String _swipe_to_reveal;
@@ -137,6 +140,8 @@ class Strings {
         AppLocalizations.of(context)?.message_dialog_archive_location_available ?? notInitialized;
     _message_dialog_archive_location_unavailable =
         AppLocalizations.of(context)?.message_dialog_archive_location_unavailable ?? notInitialized;
+    _message_dialog_archive_location_unavailable_credit =
+        AppLocalizations.of(context)?.message_dialog_archive_location_unavailable_credit ?? notInitialized;
     _title_dialog_delete_location = AppLocalizations.of(context)?.title_dialog_delete_location ?? notInitialized;
     _message_dialog_delete_location_unavailable =
         AppLocalizations.of(context)?.message_dialog_delete_location_unavailable ?? notInitialized;

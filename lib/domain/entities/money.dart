@@ -12,4 +12,10 @@ class Money with EquatableMixin {
 
   @override
   List<Object?> get props => [coins];
+
+  @override
+  operator ==(other) => other is Money && other.coins == coins;
+
+  @override
+  int get hashCode => coins.hashCode;
 }

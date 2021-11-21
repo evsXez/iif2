@@ -14,13 +14,20 @@ class GetAccountOptionsUseCase {
       (it) => it.type == LogicOperationType.initialInput,
     );
 
-    if (accountBalance.account.type == AccountType.money || accountBalance.account.type == AccountType.creditCards) {
-      return AccountOptions(
-        isArchiveAvailable: accountBalance.money == Money.zero,
-        isDeleteAvailable: accountHasNoOperationsExceptInitialInput,
-      );
-    } else {
-      return null;
+    switch (accountBalance.account.type) {
+      case AccountType.money:
+        return AccountOptions(
+          isArchiveAvailable: accountBalance.money == Money.zero,
+          isDeleteAvailable: accountHasNoOperationsExceptInitialInput,
+        );
+      case AccountType.creditCards:
+        final creditCardAccount = accountBalance.account as CreditCardAccount;
+        return AccountOptions(
+          isArchiveAvailable: accountBalance.money == creditCardAccount.limit,
+          isDeleteAvailable: accountHasNoOperationsExceptInitialInput,
+        );
+      default:
+        return null;
     }
   }
 }

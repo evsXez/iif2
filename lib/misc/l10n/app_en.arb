@@ -37,6 +37,7 @@
 	"title_dialog_archive_location": "Archive <name>?", "@title_dialog_archive_location":{"description":"title_dialog_archive_location"},
 	"message_dialog_archive_location_available": "The account will be hidden from the list and transactions, but you can restore it in settings.", "@message_dialog_archive_location_available":{"description":"message_dialog_archive_location_available"},
 	"message_dialog_archive_location_unavailable": "You can archive only accounts with zero balance. Please move all accounts to another account and try again.", "@message_dialog_archive_location_unavailable":{"description":"message_dialog_archive_location_unavailable"},
+	"message_dialog_archive_location_unavailable_credit": "You can archive a credit card only when its balance is equal to its limit. Please add funds and try again.",
 	"title_dialog_delete_location": "Delete <name>?", "@title_dialog_delete_location":{"description":"title_dialog_delete_location"},
 	"message_dialog_delete_location_unavailable": "You can delete only accounts with no income/expense transactions. You can archive the account to hide it from the list and analytics.", "@message_dialog_delete_location_unavailable":{"description":"message_dialog_delete_location_unavailable"},
 	"swipe_to_reveal": " ▲ Swipe to reveal transactions ▲", "@swipe_to_reveal":{"description":"swipe_to_reveal"},

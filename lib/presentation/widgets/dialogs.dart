@@ -6,8 +6,12 @@ class Dialogs {
   final BuildContext context;
   Dialogs(this.context);
 
-  void showArchiveLocationDialog(
-      {required String accountName, required bool isArchiveAvailable, required VoidCallback onArchivePressed}) {
+  void showArchiveLocationDialog({
+    required String accountName,
+    required bool isArchiveAvailable,
+    required VoidCallback onArchivePressed,
+    required AccountType accountType,
+  }) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -26,7 +30,9 @@ class Dialogs {
             Text(
               isArchiveAvailable
                   ? Strings.message_dialog_archive_location_available
-                  : Strings.message_dialog_archive_location_unavailable,
+                  : (accountType == AccountType.creditCards
+                      ? Strings.message_dialog_archive_location_unavailable_credit
+                      : Strings.message_dialog_archive_location_unavailable),
               style: const TextStyle(
                 fontWeight: FontWeight.w300,
               ),

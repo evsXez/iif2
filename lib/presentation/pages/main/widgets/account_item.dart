@@ -66,6 +66,7 @@ class _AccountItemState extends State<AccountItem> {
       }),
       MenuItem(Strings.option_archive, () {
         Dialogs(context).showArchiveLocationDialog(
+          accountType: widget.accountBalance.account.type,
           accountName: widget.accountBalance.account.name,
           isArchiveAvailable: options.isArchiveAvailable,
           onArchivePressed: () {
