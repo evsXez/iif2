@@ -1,16 +1,14 @@
-# iif
+# Intelligent Individual Finance (IIF v2)
 
-A new Flutter project.
+Hello everyone, that's my pet-project made in cooperation with my friend (not a programmer) - Victor N. who is an economist by vocation and of education.
 
-## Getting Started
+The main goal of this app - is to provide convenient way to deal with personal budget (internal use only, no plans to sell it).
 
-This project is a starting point for a Flutter application.
+Currently the work is in progress, we meet some time, share our ideas and try to implement them to make us (and our personal budgets) happy:)
 
-A few resources to get you started if this is your first Flutter project:
+# Some screens of the app
+![Screenshots](screenshots/sc.png)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+# Other programmer's stuff
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+//tbd
