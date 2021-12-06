@@ -11,4 +11,10 @@ Currently the work is in progress, we meet some time, share our ideas and try to
 
 # Some (not)boring programmer stuff
 
-//tbd
+The app is build with layered architecture pattern in mind [Reso Coder's TDD + Clean](https://resocoder.com/2019/08/27/flutter-tdd-clean-architecture-course-1-explanation-project-structure).
+
+**Domain** and **data** layers are written using TDD technique.
+
+**Presentation** layer is build on BLoCs, thanks to the [flutter_bloc package](https://pub.dev/packages/flutter_bloc)
+
+Data is now stored in simple json. It is hard to keep consistent and this part will be refactored further to the **sqlite**. To be true, this is done  for simplifying things on the first stage and for changing this on next stages..
