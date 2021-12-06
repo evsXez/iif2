@@ -9,6 +9,6 @@ Currently the work is in progress, we meet some time, share our ideas and try to
 # Some screens of the app
 ![Screenshots](screenshots/sc.png)
 
-# Other programmer's stuff
+# Some (not)boring programmer stuff
 
 //tbd
