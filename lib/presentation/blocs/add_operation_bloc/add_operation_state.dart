@@ -1,8 +1,11 @@
-part of 'add_operation_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:iif/domain/include.dart';
+
+part 'add_operation_state.freezed.dart';
 
 @freezed
 abstract class AddOperationState with _$AddOperationState {
-  const factory AddOperationState.idle() = _Idle;
+  const factory AddOperationState.idle() = Idle;
   const factory AddOperationState.visibility({
     required bool subject,
     required bool locationFrom,
@@ -11,6 +14,6 @@ abstract class AddOperationState with _$AddOperationState {
     required bool comment,
     required List<AccountBalance> accountsBalance,
     String? errorMessage,
-  }) = _Visibility;
-  const factory AddOperationState.saved() = _Saved;
+  }) = VisibilityState;
+  const factory AddOperationState.saved() = Saved;
 }

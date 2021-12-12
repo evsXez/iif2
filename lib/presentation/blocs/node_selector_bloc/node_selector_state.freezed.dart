@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'node_selector_bloc.dart';
+part of 'node_selector_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -17,12 +17,12 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$NodeSelectorStateTearOff {
   const _$NodeSelectorStateTearOff();
 
-  _Loading<T> loading<T>() {
-    return _Loading<T>();
+  Loading<T> loading<T>() {
+    return Loading<T>();
   }
 
-  _Loaded<T> loaded<T>(List<NodeRef<T>> refs) {
-    return _Loaded<T>(
+  Loaded<T> loaded<T>(List<NodeRef<T>> refs) {
+    return Loaded<T>(
       refs,
     );
   }
@@ -54,20 +54,20 @@ mixin _$NodeSelectorState<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Loading<T> value) loading,
-    required TResult Function(_Loaded<T> value) loaded,
+    required TResult Function(Loading<T> value) loading,
+    required TResult Function(Loaded<T> value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Loaded<T> value)? loaded,
+    TResult Function(Loading<T> value)? loading,
+    TResult Function(Loaded<T> value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Loaded<T> value)? loaded,
+    TResult Function(Loading<T> value)? loading,
+    TResult Function(Loaded<T> value)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -91,27 +91,26 @@ class _$NodeSelectorStateCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
-abstract class _$LoadingCopyWith<T, $Res> {
-  factory _$LoadingCopyWith(
-          _Loading<T> value, $Res Function(_Loading<T>) then) =
-      __$LoadingCopyWithImpl<T, $Res>;
+abstract class $LoadingCopyWith<T, $Res> {
+  factory $LoadingCopyWith(Loading<T> value, $Res Function(Loading<T>) then) =
+      _$LoadingCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$LoadingCopyWithImpl<T, $Res>
+class _$LoadingCopyWithImpl<T, $Res>
     extends _$NodeSelectorStateCopyWithImpl<T, $Res>
-    implements _$LoadingCopyWith<T, $Res> {
-  __$LoadingCopyWithImpl(_Loading<T> _value, $Res Function(_Loading<T>) _then)
-      : super(_value, (v) => _then(v as _Loading<T>));
+    implements $LoadingCopyWith<T, $Res> {
+  _$LoadingCopyWithImpl(Loading<T> _value, $Res Function(Loading<T>) _then)
+      : super(_value, (v) => _then(v as Loading<T>));
 
   @override
-  _Loading<T> get _value => super._value as _Loading<T>;
+  Loading<T> get _value => super._value as Loading<T>;
 }
 
 /// @nodoc
 
-class _$_Loading<T> implements _Loading<T> {
-  const _$_Loading();
+class _$Loading<T> implements Loading<T> {
+  const _$Loading();
 
   @override
   String toString() {
@@ -120,7 +119,7 @@ class _$_Loading<T> implements _Loading<T> {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Loading<T>);
+    return identical(this, other) || (other is Loading<T>);
   }
 
   @override
@@ -160,8 +159,8 @@ class _$_Loading<T> implements _Loading<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Loading<T> value) loading,
-    required TResult Function(_Loaded<T> value) loaded,
+    required TResult Function(Loading<T> value) loading,
+    required TResult Function(Loaded<T> value) loaded,
   }) {
     return loading(this);
   }
@@ -169,8 +168,8 @@ class _$_Loading<T> implements _Loading<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Loaded<T> value)? loaded,
+    TResult Function(Loading<T> value)? loading,
+    TResult Function(Loaded<T> value)? loaded,
   }) {
     return loading?.call(this);
   }
@@ -178,8 +177,8 @@ class _$_Loading<T> implements _Loading<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Loaded<T> value)? loaded,
+    TResult Function(Loading<T> value)? loading,
+    TResult Function(Loaded<T> value)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -189,32 +188,32 @@ class _$_Loading<T> implements _Loading<T> {
   }
 }
 
-abstract class _Loading<T> implements NodeSelectorState<T> {
-  const factory _Loading() = _$_Loading<T>;
+abstract class Loading<T> implements NodeSelectorState<T> {
+  const factory Loading() = _$Loading<T>;
 }
 
 /// @nodoc
-abstract class _$LoadedCopyWith<T, $Res> {
-  factory _$LoadedCopyWith(_Loaded<T> value, $Res Function(_Loaded<T>) then) =
-      __$LoadedCopyWithImpl<T, $Res>;
+abstract class $LoadedCopyWith<T, $Res> {
+  factory $LoadedCopyWith(Loaded<T> value, $Res Function(Loaded<T>) then) =
+      _$LoadedCopyWithImpl<T, $Res>;
   $Res call({List<NodeRef<T>> refs});
 }
 
 /// @nodoc
-class __$LoadedCopyWithImpl<T, $Res>
+class _$LoadedCopyWithImpl<T, $Res>
     extends _$NodeSelectorStateCopyWithImpl<T, $Res>
-    implements _$LoadedCopyWith<T, $Res> {
-  __$LoadedCopyWithImpl(_Loaded<T> _value, $Res Function(_Loaded<T>) _then)
-      : super(_value, (v) => _then(v as _Loaded<T>));
+    implements $LoadedCopyWith<T, $Res> {
+  _$LoadedCopyWithImpl(Loaded<T> _value, $Res Function(Loaded<T>) _then)
+      : super(_value, (v) => _then(v as Loaded<T>));
 
   @override
-  _Loaded<T> get _value => super._value as _Loaded<T>;
+  Loaded<T> get _value => super._value as Loaded<T>;
 
   @override
   $Res call({
     Object? refs = freezed,
   }) {
-    return _then(_Loaded<T>(
+    return _then(Loaded<T>(
       refs == freezed
           ? _value.refs
           : refs // ignore: cast_nullable_to_non_nullable
@@ -225,8 +224,8 @@ class __$LoadedCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$_Loaded<T> implements _Loaded<T> {
-  const _$_Loaded(this.refs);
+class _$Loaded<T> implements Loaded<T> {
+  const _$Loaded(this.refs);
 
   @override
   final List<NodeRef<T>> refs;
@@ -239,7 +238,7 @@ class _$_Loaded<T> implements _Loaded<T> {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Loaded<T> &&
+        (other is Loaded<T> &&
             (identical(other.refs, refs) ||
                 const DeepCollectionEquality().equals(other.refs, refs)));
   }
@@ -250,8 +249,8 @@ class _$_Loaded<T> implements _Loaded<T> {
 
   @JsonKey(ignore: true)
   @override
-  _$LoadedCopyWith<T, _Loaded<T>> get copyWith =>
-      __$LoadedCopyWithImpl<T, _Loaded<T>>(this, _$identity);
+  $LoadedCopyWith<T, Loaded<T>> get copyWith =>
+      _$LoadedCopyWithImpl<T, Loaded<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -287,8 +286,8 @@ class _$_Loaded<T> implements _Loaded<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Loading<T> value) loading,
-    required TResult Function(_Loaded<T> value) loaded,
+    required TResult Function(Loading<T> value) loading,
+    required TResult Function(Loaded<T> value) loaded,
   }) {
     return loaded(this);
   }
@@ -296,8 +295,8 @@ class _$_Loaded<T> implements _Loaded<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Loaded<T> value)? loaded,
+    TResult Function(Loading<T> value)? loading,
+    TResult Function(Loaded<T> value)? loaded,
   }) {
     return loaded?.call(this);
   }
@@ -305,8 +304,8 @@ class _$_Loaded<T> implements _Loaded<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Loaded<T> value)? loaded,
+    TResult Function(Loading<T> value)? loading,
+    TResult Function(Loaded<T> value)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -316,11 +315,11 @@ class _$_Loaded<T> implements _Loaded<T> {
   }
 }
 
-abstract class _Loaded<T> implements NodeSelectorState<T> {
-  const factory _Loaded(List<NodeRef<T>> refs) = _$_Loaded<T>;
+abstract class Loaded<T> implements NodeSelectorState<T> {
+  const factory Loaded(List<NodeRef<T>> refs) = _$Loaded<T>;
 
   List<NodeRef<T>> get refs => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$LoadedCopyWith<T, _Loaded<T>> get copyWith =>
+  $LoadedCopyWith<T, Loaded<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

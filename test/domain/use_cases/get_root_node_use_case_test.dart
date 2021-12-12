@@ -7,9 +7,16 @@ import '../mocks.mocks.dart';
 void main() {
   late GetRootNodeUseCase getRootNodeUseCase;
   late MockCategoriesRepository mockCategoriesRepository;
+  late MockSubjectsRepository mockSubjectsRepository;
+
   setUp(() {
     mockCategoriesRepository = MockCategoriesRepository();
-    getRootNodeUseCase = GetRootNodeUseCase(categoriesRepository: mockCategoriesRepository);
+    mockSubjectsRepository = MockSubjectsRepository();
+
+    getRootNodeUseCase = GetRootNodeUseCase(
+      categoriesRepository: mockCategoriesRepository,
+      subjectsRepository: mockSubjectsRepository,
+    );
 
     when(mockCategoriesRepository.getCategories()).thenReturn(Node.root(canHaveMoreChildren: false)
       ..children.addAll([

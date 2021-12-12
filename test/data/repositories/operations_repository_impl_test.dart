@@ -15,17 +15,15 @@ import 'accounts_repository_impl_test.mocks.dart';
 void main() {
   final money = money100;
   late MockDataSource dataSource;
-  final AccountModel accountModel1 = AccountModel(
-    id: 244,
+  final AccountModel accountModel1 = accountModel(
+    244,
+    AccountType.investments,
     name: "account#244",
-    type: AccountType.investments,
-    currency: Currency.debugDefault,
   );
-  final AccountModel accountModel2 = AccountModel(
-    id: 245,
+  final AccountModel accountModel2 = accountModel(
+    245,
+    AccountType.investments,
     name: "account#245",
-    type: AccountType.investments,
-    currency: Currency.debugDefault,
   );
   const Money moneyForAccount = Money(coins: 1001);
   final List<LogicOperationModel> allLogicOperations = [
@@ -87,7 +85,7 @@ void main() {
     ),
   ];
   late OperationsRepository repository;
-  final Subject subject = Subject("subject", SubjectType.debts, accountModel(333, AccountType.debtsAndLoans));
+  final AccountModel debtAccount = accountModel(1001, AccountType.debts);
   late List<LogicOperationModel> defaultAllOperations;
 
   setUp(() {
@@ -258,19 +256,19 @@ void main() {
   });
 
   test('adds operation debt increase', () async {
-    repository.addOperationDebtIncrease(accountModel1, money, subject);
+    repository.addOperationDebtIncrease(accountModel1, money, debtAccount);
     await testOperationDebtsAdded();
   });
   test('adds operation debt decrease', () async {
-    repository.addOperationDebtDecrease(accountModel1, money, subject);
+    repository.addOperationDebtDecrease(accountModel1, money, debtAccount);
     await testOperationDebtsAdded();
   });
   test('adds operation loan increase', () async {
-    repository.addOperationLoanIncrease(accountModel1, money, subject);
+    repository.addOperationLoanIncrease(accountModel1, money, debtAccount);
     await testOperationDebtsAdded();
   });
   test('adds operation loan decrease', () async {
-    repository.addOperationLoanDecrease(accountModel1, money, subject);
+    repository.addOperationLoanDecrease(accountModel1, money, debtAccount);
     await testOperationDebtsAdded();
   });
 }

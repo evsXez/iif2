@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'add_operation_bloc.dart';
+part of 'add_operation_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -17,11 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$AddOperationStateTearOff {
   const _$AddOperationStateTearOff();
 
-  _Idle idle() {
-    return const _Idle();
+  Idle idle() {
+    return const Idle();
   }
 
-  _Visibility visibility(
+  VisibilityState visibility(
       {required bool subject,
       required bool locationFrom,
       required bool locationTo,
@@ -29,7 +29,7 @@ class _$AddOperationStateTearOff {
       required bool comment,
       required List<AccountBalance> accountsBalance,
       String? errorMessage}) {
-    return _Visibility(
+    return VisibilityState(
       subject: subject,
       locationFrom: locationFrom,
       locationTo: locationTo,
@@ -40,8 +40,8 @@ class _$AddOperationStateTearOff {
     );
   }
 
-  _Saved saved() {
-    return const _Saved();
+  Saved saved() {
+    return const Saved();
   }
 }
 
@@ -98,23 +98,23 @@ mixin _$AddOperationState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Idle value) idle,
-    required TResult Function(_Visibility value) visibility,
-    required TResult Function(_Saved value) saved,
+    required TResult Function(Idle value) idle,
+    required TResult Function(VisibilityState value) visibility,
+    required TResult Function(Saved value) saved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Idle value)? idle,
-    TResult Function(_Visibility value)? visibility,
-    TResult Function(_Saved value)? saved,
+    TResult Function(Idle value)? idle,
+    TResult Function(VisibilityState value)? visibility,
+    TResult Function(Saved value)? saved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Idle value)? idle,
-    TResult Function(_Visibility value)? visibility,
-    TResult Function(_Saved value)? saved,
+    TResult Function(Idle value)? idle,
+    TResult Function(VisibilityState value)? visibility,
+    TResult Function(Saved value)? saved,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -138,25 +138,25 @@ class _$AddOperationStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$IdleCopyWith<$Res> {
-  factory _$IdleCopyWith(_Idle value, $Res Function(_Idle) then) =
-      __$IdleCopyWithImpl<$Res>;
+abstract class $IdleCopyWith<$Res> {
+  factory $IdleCopyWith(Idle value, $Res Function(Idle) then) =
+      _$IdleCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$IdleCopyWithImpl<$Res> extends _$AddOperationStateCopyWithImpl<$Res>
-    implements _$IdleCopyWith<$Res> {
-  __$IdleCopyWithImpl(_Idle _value, $Res Function(_Idle) _then)
-      : super(_value, (v) => _then(v as _Idle));
+class _$IdleCopyWithImpl<$Res> extends _$AddOperationStateCopyWithImpl<$Res>
+    implements $IdleCopyWith<$Res> {
+  _$IdleCopyWithImpl(Idle _value, $Res Function(Idle) _then)
+      : super(_value, (v) => _then(v as Idle));
 
   @override
-  _Idle get _value => super._value as _Idle;
+  Idle get _value => super._value as Idle;
 }
 
 /// @nodoc
 
-class _$_Idle implements _Idle {
-  const _$_Idle();
+class _$Idle implements Idle {
+  const _$Idle();
 
   @override
   String toString() {
@@ -165,7 +165,7 @@ class _$_Idle implements _Idle {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Idle);
+    return identical(this, other) || (other is Idle);
   }
 
   @override
@@ -232,9 +232,9 @@ class _$_Idle implements _Idle {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Idle value) idle,
-    required TResult Function(_Visibility value) visibility,
-    required TResult Function(_Saved value) saved,
+    required TResult Function(Idle value) idle,
+    required TResult Function(VisibilityState value) visibility,
+    required TResult Function(Saved value) saved,
   }) {
     return idle(this);
   }
@@ -242,9 +242,9 @@ class _$_Idle implements _Idle {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Idle value)? idle,
-    TResult Function(_Visibility value)? visibility,
-    TResult Function(_Saved value)? saved,
+    TResult Function(Idle value)? idle,
+    TResult Function(VisibilityState value)? visibility,
+    TResult Function(Saved value)? saved,
   }) {
     return idle?.call(this);
   }
@@ -252,9 +252,9 @@ class _$_Idle implements _Idle {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Idle value)? idle,
-    TResult Function(_Visibility value)? visibility,
-    TResult Function(_Saved value)? saved,
+    TResult Function(Idle value)? idle,
+    TResult Function(VisibilityState value)? visibility,
+    TResult Function(Saved value)? saved,
     required TResult orElse(),
   }) {
     if (idle != null) {
@@ -264,15 +264,15 @@ class _$_Idle implements _Idle {
   }
 }
 
-abstract class _Idle implements AddOperationState {
-  const factory _Idle() = _$_Idle;
+abstract class Idle implements AddOperationState {
+  const factory Idle() = _$Idle;
 }
 
 /// @nodoc
-abstract class _$VisibilityCopyWith<$Res> {
-  factory _$VisibilityCopyWith(
-          _Visibility value, $Res Function(_Visibility) then) =
-      __$VisibilityCopyWithImpl<$Res>;
+abstract class $VisibilityStateCopyWith<$Res> {
+  factory $VisibilityStateCopyWith(
+          VisibilityState value, $Res Function(VisibilityState) then) =
+      _$VisibilityStateCopyWithImpl<$Res>;
   $Res call(
       {bool subject,
       bool locationFrom,
@@ -284,15 +284,15 @@ abstract class _$VisibilityCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$VisibilityCopyWithImpl<$Res>
+class _$VisibilityStateCopyWithImpl<$Res>
     extends _$AddOperationStateCopyWithImpl<$Res>
-    implements _$VisibilityCopyWith<$Res> {
-  __$VisibilityCopyWithImpl(
-      _Visibility _value, $Res Function(_Visibility) _then)
-      : super(_value, (v) => _then(v as _Visibility));
+    implements $VisibilityStateCopyWith<$Res> {
+  _$VisibilityStateCopyWithImpl(
+      VisibilityState _value, $Res Function(VisibilityState) _then)
+      : super(_value, (v) => _then(v as VisibilityState));
 
   @override
-  _Visibility get _value => super._value as _Visibility;
+  VisibilityState get _value => super._value as VisibilityState;
 
   @override
   $Res call({
@@ -304,7 +304,7 @@ class __$VisibilityCopyWithImpl<$Res>
     Object? accountsBalance = freezed,
     Object? errorMessage = freezed,
   }) {
-    return _then(_Visibility(
+    return _then(VisibilityState(
       subject: subject == freezed
           ? _value.subject
           : subject // ignore: cast_nullable_to_non_nullable
@@ -339,8 +339,8 @@ class __$VisibilityCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Visibility implements _Visibility {
-  const _$_Visibility(
+class _$VisibilityState implements VisibilityState {
+  const _$VisibilityState(
       {required this.subject,
       required this.locationFrom,
       required this.locationTo,
@@ -372,7 +372,7 @@ class _$_Visibility implements _Visibility {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Visibility &&
+        (other is VisibilityState &&
             (identical(other.subject, subject) ||
                 const DeepCollectionEquality()
                     .equals(other.subject, subject)) &&
@@ -408,8 +408,8 @@ class _$_Visibility implements _Visibility {
 
   @JsonKey(ignore: true)
   @override
-  _$VisibilityCopyWith<_Visibility> get copyWith =>
-      __$VisibilityCopyWithImpl<_Visibility>(this, _$identity);
+  $VisibilityStateCopyWith<VisibilityState> get copyWith =>
+      _$VisibilityStateCopyWithImpl<VisibilityState>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -475,9 +475,9 @@ class _$_Visibility implements _Visibility {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Idle value) idle,
-    required TResult Function(_Visibility value) visibility,
-    required TResult Function(_Saved value) saved,
+    required TResult Function(Idle value) idle,
+    required TResult Function(VisibilityState value) visibility,
+    required TResult Function(Saved value) saved,
   }) {
     return visibility(this);
   }
@@ -485,9 +485,9 @@ class _$_Visibility implements _Visibility {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Idle value)? idle,
-    TResult Function(_Visibility value)? visibility,
-    TResult Function(_Saved value)? saved,
+    TResult Function(Idle value)? idle,
+    TResult Function(VisibilityState value)? visibility,
+    TResult Function(Saved value)? saved,
   }) {
     return visibility?.call(this);
   }
@@ -495,9 +495,9 @@ class _$_Visibility implements _Visibility {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Idle value)? idle,
-    TResult Function(_Visibility value)? visibility,
-    TResult Function(_Saved value)? saved,
+    TResult Function(Idle value)? idle,
+    TResult Function(VisibilityState value)? visibility,
+    TResult Function(Saved value)? saved,
     required TResult orElse(),
   }) {
     if (visibility != null) {
@@ -507,15 +507,15 @@ class _$_Visibility implements _Visibility {
   }
 }
 
-abstract class _Visibility implements AddOperationState {
-  const factory _Visibility(
+abstract class VisibilityState implements AddOperationState {
+  const factory VisibilityState(
       {required bool subject,
       required bool locationFrom,
       required bool locationTo,
       required bool money,
       required bool comment,
       required List<AccountBalance> accountsBalance,
-      String? errorMessage}) = _$_Visibility;
+      String? errorMessage}) = _$VisibilityState;
 
   bool get subject => throw _privateConstructorUsedError;
   bool get locationFrom => throw _privateConstructorUsedError;
@@ -526,30 +526,30 @@ abstract class _Visibility implements AddOperationState {
       throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$VisibilityCopyWith<_Visibility> get copyWith =>
+  $VisibilityStateCopyWith<VisibilityState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$SavedCopyWith<$Res> {
-  factory _$SavedCopyWith(_Saved value, $Res Function(_Saved) then) =
-      __$SavedCopyWithImpl<$Res>;
+abstract class $SavedCopyWith<$Res> {
+  factory $SavedCopyWith(Saved value, $Res Function(Saved) then) =
+      _$SavedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$SavedCopyWithImpl<$Res> extends _$AddOperationStateCopyWithImpl<$Res>
-    implements _$SavedCopyWith<$Res> {
-  __$SavedCopyWithImpl(_Saved _value, $Res Function(_Saved) _then)
-      : super(_value, (v) => _then(v as _Saved));
+class _$SavedCopyWithImpl<$Res> extends _$AddOperationStateCopyWithImpl<$Res>
+    implements $SavedCopyWith<$Res> {
+  _$SavedCopyWithImpl(Saved _value, $Res Function(Saved) _then)
+      : super(_value, (v) => _then(v as Saved));
 
   @override
-  _Saved get _value => super._value as _Saved;
+  Saved get _value => super._value as Saved;
 }
 
 /// @nodoc
 
-class _$_Saved implements _Saved {
-  const _$_Saved();
+class _$Saved implements Saved {
+  const _$Saved();
 
   @override
   String toString() {
@@ -558,7 +558,7 @@ class _$_Saved implements _Saved {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Saved);
+    return identical(this, other) || (other is Saved);
   }
 
   @override
@@ -625,9 +625,9 @@ class _$_Saved implements _Saved {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Idle value) idle,
-    required TResult Function(_Visibility value) visibility,
-    required TResult Function(_Saved value) saved,
+    required TResult Function(Idle value) idle,
+    required TResult Function(VisibilityState value) visibility,
+    required TResult Function(Saved value) saved,
   }) {
     return saved(this);
   }
@@ -635,9 +635,9 @@ class _$_Saved implements _Saved {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Idle value)? idle,
-    TResult Function(_Visibility value)? visibility,
-    TResult Function(_Saved value)? saved,
+    TResult Function(Idle value)? idle,
+    TResult Function(VisibilityState value)? visibility,
+    TResult Function(Saved value)? saved,
   }) {
     return saved?.call(this);
   }
@@ -645,9 +645,9 @@ class _$_Saved implements _Saved {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Idle value)? idle,
-    TResult Function(_Visibility value)? visibility,
-    TResult Function(_Saved value)? saved,
+    TResult Function(Idle value)? idle,
+    TResult Function(VisibilityState value)? visibility,
+    TResult Function(Saved value)? saved,
     required TResult orElse(),
   }) {
     if (saved != null) {
@@ -657,6 +657,6 @@ class _$_Saved implements _Saved {
   }
 }
 
-abstract class _Saved implements AddOperationState {
-  const factory _Saved() = _$_Saved;
+abstract class Saved implements AddOperationState {
+  const factory Saved() = _$Saved;
 }

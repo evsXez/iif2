@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:iif/domain/entities/enums/account_type.dart';
 import 'package:iif/misc/resources/strings.dart';
 

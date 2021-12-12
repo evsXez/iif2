@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'main_page_fab_bloc.dart';
+part of 'main_page_fab_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -17,12 +17,12 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$MainPageFabStateTearOff {
   const _$MainPageFabStateTearOff();
 
-  _Hidden hidden() {
-    return const _Hidden();
+  Hidden hidden() {
+    return const Hidden();
   }
 
-  _Shown shown() {
-    return const _Shown();
+  Shown shown() {
+    return const Shown();
   }
 }
 
@@ -52,20 +52,20 @@ mixin _$MainPageFabState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Hidden value) hidden,
-    required TResult Function(_Shown value) shown,
+    required TResult Function(Hidden value) hidden,
+    required TResult Function(Shown value) shown,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Hidden value)? hidden,
-    TResult Function(_Shown value)? shown,
+    TResult Function(Hidden value)? hidden,
+    TResult Function(Shown value)? shown,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Hidden value)? hidden,
-    TResult Function(_Shown value)? shown,
+    TResult Function(Hidden value)? hidden,
+    TResult Function(Shown value)? shown,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -89,25 +89,25 @@ class _$MainPageFabStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$HiddenCopyWith<$Res> {
-  factory _$HiddenCopyWith(_Hidden value, $Res Function(_Hidden) then) =
-      __$HiddenCopyWithImpl<$Res>;
+abstract class $HiddenCopyWith<$Res> {
+  factory $HiddenCopyWith(Hidden value, $Res Function(Hidden) then) =
+      _$HiddenCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$HiddenCopyWithImpl<$Res> extends _$MainPageFabStateCopyWithImpl<$Res>
-    implements _$HiddenCopyWith<$Res> {
-  __$HiddenCopyWithImpl(_Hidden _value, $Res Function(_Hidden) _then)
-      : super(_value, (v) => _then(v as _Hidden));
+class _$HiddenCopyWithImpl<$Res> extends _$MainPageFabStateCopyWithImpl<$Res>
+    implements $HiddenCopyWith<$Res> {
+  _$HiddenCopyWithImpl(Hidden _value, $Res Function(Hidden) _then)
+      : super(_value, (v) => _then(v as Hidden));
 
   @override
-  _Hidden get _value => super._value as _Hidden;
+  Hidden get _value => super._value as Hidden;
 }
 
 /// @nodoc
 
-class _$_Hidden implements _Hidden {
-  const _$_Hidden();
+class _$Hidden implements Hidden {
+  const _$Hidden();
 
   @override
   String toString() {
@@ -116,7 +116,7 @@ class _$_Hidden implements _Hidden {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Hidden);
+    return identical(this, other) || (other is Hidden);
   }
 
   @override
@@ -156,8 +156,8 @@ class _$_Hidden implements _Hidden {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Hidden value) hidden,
-    required TResult Function(_Shown value) shown,
+    required TResult Function(Hidden value) hidden,
+    required TResult Function(Shown value) shown,
   }) {
     return hidden(this);
   }
@@ -165,8 +165,8 @@ class _$_Hidden implements _Hidden {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Hidden value)? hidden,
-    TResult Function(_Shown value)? shown,
+    TResult Function(Hidden value)? hidden,
+    TResult Function(Shown value)? shown,
   }) {
     return hidden?.call(this);
   }
@@ -174,8 +174,8 @@ class _$_Hidden implements _Hidden {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Hidden value)? hidden,
-    TResult Function(_Shown value)? shown,
+    TResult Function(Hidden value)? hidden,
+    TResult Function(Shown value)? shown,
     required TResult orElse(),
   }) {
     if (hidden != null) {
@@ -185,30 +185,30 @@ class _$_Hidden implements _Hidden {
   }
 }
 
-abstract class _Hidden implements MainPageFabState {
-  const factory _Hidden() = _$_Hidden;
+abstract class Hidden implements MainPageFabState {
+  const factory Hidden() = _$Hidden;
 }
 
 /// @nodoc
-abstract class _$ShownCopyWith<$Res> {
-  factory _$ShownCopyWith(_Shown value, $Res Function(_Shown) then) =
-      __$ShownCopyWithImpl<$Res>;
+abstract class $ShownCopyWith<$Res> {
+  factory $ShownCopyWith(Shown value, $Res Function(Shown) then) =
+      _$ShownCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$ShownCopyWithImpl<$Res> extends _$MainPageFabStateCopyWithImpl<$Res>
-    implements _$ShownCopyWith<$Res> {
-  __$ShownCopyWithImpl(_Shown _value, $Res Function(_Shown) _then)
-      : super(_value, (v) => _then(v as _Shown));
+class _$ShownCopyWithImpl<$Res> extends _$MainPageFabStateCopyWithImpl<$Res>
+    implements $ShownCopyWith<$Res> {
+  _$ShownCopyWithImpl(Shown _value, $Res Function(Shown) _then)
+      : super(_value, (v) => _then(v as Shown));
 
   @override
-  _Shown get _value => super._value as _Shown;
+  Shown get _value => super._value as Shown;
 }
 
 /// @nodoc
 
-class _$_Shown implements _Shown {
-  const _$_Shown();
+class _$Shown implements Shown {
+  const _$Shown();
 
   @override
   String toString() {
@@ -217,7 +217,7 @@ class _$_Shown implements _Shown {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Shown);
+    return identical(this, other) || (other is Shown);
   }
 
   @override
@@ -257,8 +257,8 @@ class _$_Shown implements _Shown {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Hidden value) hidden,
-    required TResult Function(_Shown value) shown,
+    required TResult Function(Hidden value) hidden,
+    required TResult Function(Shown value) shown,
   }) {
     return shown(this);
   }
@@ -266,8 +266,8 @@ class _$_Shown implements _Shown {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Hidden value)? hidden,
-    TResult Function(_Shown value)? shown,
+    TResult Function(Hidden value)? hidden,
+    TResult Function(Shown value)? shown,
   }) {
     return shown?.call(this);
   }
@@ -275,8 +275,8 @@ class _$_Shown implements _Shown {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Hidden value)? hidden,
-    TResult Function(_Shown value)? shown,
+    TResult Function(Hidden value)? hidden,
+    TResult Function(Shown value)? shown,
     required TResult orElse(),
   }) {
     if (shown != null) {
@@ -286,6 +286,6 @@ class _$_Shown implements _Shown {
   }
 }
 
-abstract class _Shown implements MainPageFabState {
-  const factory _Shown() = _$_Shown;
+abstract class Shown implements MainPageFabState {
+  const factory Shown() = _$Shown;
 }

@@ -5,6 +5,7 @@ import 'package:iif/domain/include.dart';
 import 'package:iif/domain/use_cases/debt_increase_use_case.dart';
 import 'package:mockito/mockito.dart';
 
+import '../data/account_model_fixtures.dart';
 import 'account_fixtures.dart';
 import 'mocks.mocks.dart';
 import 'operation_fixtures.dart';
@@ -14,36 +15,42 @@ late DebtDecreaseUseCase debtDecreaseUseCase;
 late LoanIncreaseUseCase loanIncreaseUseCase;
 late LoanDecreaseUseCase loanDecreaseUseCase;
 late MockOperationsRepository mockOperationsRepository;
+late MockAccountsRepository mockAccountsRepository;
 final Account account = accountMoney;
-final Account subjectAccount = getAccount(5, AccountType.debtsAndLoans);
 late List<LogicOperation> listOperations;
 final money = money100;
 const initialMoney = Money(coins: 1000);
-final subject = Subject("John K.", SubjectType.debts, subjectAccount);
+final debtAccount = accountModel(1001, AccountType.debts, name: "John K.");
+final subject = Subject(1002, "subject name", SubjectType.debts);
 
 void debtsSetUp() {
   mockOperationsRepository = MockOperationsRepository();
+  mockAccountsRepository = MockAccountsRepository();
 
-  debtIncreaseUseCase = DebtIncreaseUseCase(operationsRepository: mockOperationsRepository);
-  debtDecreaseUseCase = DebtDecreaseUseCase(operationsRepository: mockOperationsRepository);
-  loanIncreaseUseCase = LoanIncreaseUseCase(operationsRepository: mockOperationsRepository);
-  loanDecreaseUseCase = LoanDecreaseUseCase(operationsRepository: mockOperationsRepository);
+  debtIncreaseUseCase =
+      DebtIncreaseUseCase(operationsRepository: mockOperationsRepository, accountsRepository: mockAccountsRepository);
+  debtDecreaseUseCase =
+      DebtDecreaseUseCase(operationsRepository: mockOperationsRepository, accountsRepository: mockAccountsRepository);
+  loanIncreaseUseCase =
+      LoanIncreaseUseCase(operationsRepository: mockOperationsRepository, accountsRepository: mockAccountsRepository);
+  loanDecreaseUseCase =
+      LoanDecreaseUseCase(operationsRepository: mockOperationsRepository, accountsRepository: mockAccountsRepository);
   listOperations = [
     getLogicOperationInitialInput(account, initialMoney),
   ];
 
   when(mockOperationsRepository.getOperations(account)).thenAnswer((_) async => listOperations);
-  when(mockOperationsRepository.addOperationDebtIncrease(account, money, subject)).thenAnswer((_) {
-    listOperations.add(LogicOperation.debtIncrease(account, money, subject));
+  when(mockOperationsRepository.addOperationDebtIncrease(account, money, debtAccount)).thenAnswer((_) {
+    listOperations.add(LogicOperation.debtIncrease(account, money, debtAccount));
   });
-  when(mockOperationsRepository.addOperationDebtDecrease(account, money, subject)).thenAnswer((_) {
-    listOperations.add(LogicOperation.debtDecrease(account, money, subject));
+  when(mockOperationsRepository.addOperationDebtDecrease(account, money, debtAccount)).thenAnswer((_) {
+    listOperations.add(LogicOperation.debtDecrease(account, money, debtAccount));
   });
-  when(mockOperationsRepository.addOperationLoanIncrease(account, money, subject)).thenAnswer((_) {
-    listOperations.add(LogicOperation.loanIncrease(account, money, subject));
+  when(mockOperationsRepository.addOperationLoanIncrease(account, money, debtAccount)).thenAnswer((_) {
+    listOperations.add(LogicOperation.loanIncrease(account, money, debtAccount));
   });
-  when(mockOperationsRepository.addOperationLoanDecrease(account, money, subject)).thenAnswer((_) {
-    listOperations.add(LogicOperation.loanDecrease(account, money, subject));
+  when(mockOperationsRepository.addOperationLoanDecrease(account, money, debtAccount)).thenAnswer((_) {
+    listOperations.add(LogicOperation.loanDecrease(account, money, debtAccount));
   });
   when(mockOperationsRepository.calculateBalance(any)).thenAnswer((realInvocation) async {
     final argument = realInvocation.positionalArguments.first as Account;
@@ -81,7 +88,7 @@ Future testAfterAddingDebtOperationWeCanGetIt(VoidCallback useCase, MockOperatio
   final atomicSubject = operations.last.atomics.firstWhere((it) => it.account.type == AccountType.debtsAndLoans);
   expect(atomicAccount.account, account);
   expect(atomicAccount.money, money);
-  expect(atomicSubject.account, subject.account);
+  expect(atomicSubject.account, debtAccount);
   expect(atomicSubject.money, money);
 }
 
@@ -96,7 +103,7 @@ Future testAfterAddingDebtOperationTheBalanceChangesRight(
   final Money balanceBefore = await mockOperationsRepository.calculateBalance(account);
   useCase();
   final Money balanceAccountAfter = await mockOperationsRepository.calculateBalance(account);
-  final Money balanceSubjectAfter = await mockOperationsRepository.calculateBalance(subject.account);
+  final Money balanceSubjectAfter = await mockOperationsRepository.calculateBalance(debtAccount);
   expect(balanceAccountAfter, accountBalanceShouldIncrease ? balanceBefore.add(money) : balanceBefore.substract(money));
   expect(balanceSubjectAfter, accountBalanceShouldIncrease ? Money.zero.substract(money) : Money.zero.add(money));
 }

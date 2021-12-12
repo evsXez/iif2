@@ -1,13 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/misc/di/providers.dart';
 import 'package:iif/presentation/include.dart';
 
-part 'accounts_panel_state.dart';
-part 'accounts_panel_bloc.freezed.dart';
+import 'accounts_panel_state.dart';
 
 class AccountsPanelBloc extends Cubit<AccountsPanelState> {
   final AccountType type;
@@ -26,7 +24,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
   AccountsPanelBloc(
     this._context, {
     required this.type,
-  }) : super(const _LoadInProgress()) {
+  }) : super(const LoadInProgress()) {
     accountsRepository.of(_context).addListener(_updateData);
     operationsRepository.of(_context).addListener(_updateData); //add operations
     _updateData();
@@ -55,7 +53,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
 
   void cancelEdit() {
     emit(
-      _LoadSuccess(
+      LoadSuccess(
         _data,
         editing: null,
         isAddingNew: _isAddingNew = false,
@@ -89,7 +87,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
 
   void addAccountClicked() {
     emit(
-      _LoadSuccess(
+      LoadSuccess(
         _data,
         editing: null,
         isAddingNew: _isAddingNew = true,
@@ -101,7 +99,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
   void _updateData() async {
     _data = await getAccountsBalanceUseCase.of(_context).execute(type);
     emit(
-      _LoadSuccess(
+      LoadSuccess(
         _data,
         editing: null,
         isAddingNew: _isAddingNew,
@@ -112,7 +110,7 @@ class AccountsPanelBloc extends Cubit<AccountsPanelState> {
 
   void editAccount(Account account) {
     emit(
-      _LoadSuccess(
+      LoadSuccess(
         _data,
         editing: account,
         isAddingNew: _isAddingNew = false,

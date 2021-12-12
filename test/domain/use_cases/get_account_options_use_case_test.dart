@@ -92,15 +92,15 @@ void main() {
   });
 
   test('we can archive accounts without money', () async {
-    expect((await getAccountOptionsUseCase.execute(noMoney)).isArchiveAvailable, true);
+    expect((await getAccountOptionsUseCase.execute(noMoney))?.isArchiveAvailable, true);
   });
   test('we can\'t archive accounts with money', () async {
-    expect((await getAccountOptionsUseCase.execute(hasMoney)).isArchiveAvailable, false);
+    expect((await getAccountOptionsUseCase.execute(hasMoney))?.isArchiveAvailable, false);
   });
   test('we can delete accounts with only initial input operations', () async {
-    expect((await getAccountOptionsUseCase.execute(onlyInitial)).isDeleteAvailable, true);
+    expect((await getAccountOptionsUseCase.execute(onlyInitial))?.isDeleteAvailable, true);
   });
   test('we can\'t delete accounts with operations other than initial input', () async {
-    expect((await getAccountOptionsUseCase.execute(notOnlyInitial)).isDeleteAvailable, false);
+    expect((await getAccountOptionsUseCase.execute(notOnlyInitial))?.isDeleteAvailable, false);
   });
 }

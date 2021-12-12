@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iif/presentation/blocs/accounts_bloc/accounts_bloc.dart';
+import 'package:iif/presentation/blocs/main_page_fab_bloc/main_page_fab_state.dart';
 import 'package:iif/presentation/include.dart';
 import 'package:iif/presentation/pages/add_operation/add_operation_page.dart';
 import 'package:iif/presentation/pages/main/widgets/accounts.dart';
@@ -98,10 +99,10 @@ class _MainPageState extends State<MainPage> {
                 shown: (_) => !isBottomSheetOpened
                     ? FloatingActionButton(
                         onPressed: () {
-                          Navigation.push(AddOperationPage());
+                          Navigation.push(const AddOperationPage());
                         },
                         backgroundColor: Style.whiteColor,
-                        child: Icon(Icons.add, color: Style.accentColor),
+                        child: const Icon(Icons.add, color: Style.accentColor),
                       )
                     : null,
               ),
@@ -131,21 +132,4 @@ class _MainPageState extends State<MainPage> {
     }
     return Future.value(true);
   }
-
-  Widget get swipeToRevealHint => GestureDetector(
-        onTap: () {
-          operationsBottomSheet.show();
-        },
-        child: Container(
-            color: Style.lightGrayColor,
-            padding: const EdgeInsets.all(16),
-            child: Center(
-                child: Text(
-              Strings.swipe_to_reveal,
-              style: const TextStyle(
-                color: Style.grayColor,
-                fontSize: 12,
-              ),
-            ))),
-      );
 }

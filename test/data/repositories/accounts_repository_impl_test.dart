@@ -16,18 +16,13 @@ void main() {
   late MockDataSource mockDataSource;
   const AccountType type1 = AccountType.money;
   const AccountType type2 = AccountType.creditCards;
-  final AccountModel account1Type1 =
-      AccountModel(id: 1, currency: Currency.debugDefault, name: 'account1', type: type1);
-  final AccountModel account2Type1 =
-      AccountModel(id: 2, currency: Currency.debugDefault, name: 'account2', type: type1);
-  final AccountModel account3Type1 =
-      AccountModel(id: 3, currency: Currency.debugDefault, name: 'account3', type: type1);
-  final AccountModel account1Type2 =
-      AccountModel(id: 4, currency: Currency.debugDefault, name: 'account1', type: type2);
-  final AccountModel account2Type2 =
-      AccountModel(id: 5, currency: Currency.debugDefault, name: 'account2', type: type2);
-  final AccountModel accountDeletedType1 =
-      AccountModel(id: 6, currency: Currency.debugDefault, name: 'account2', type: type1, isDeleted: true);
+  final AccountModel account1Type1 = accountModel(1, type1, name: 'account1');
+  final AccountModel account2Type1 = accountModel(2, type1, name: 'account2');
+  final AccountModel account3Type1 = accountModel(3, type1, name: 'account3');
+  final AccountModel account1Type2 = accountModel(4, type2, name: 'account1');
+  final AccountModel account2Type2 = accountModel(5, type2, name: 'account2');
+  final AccountModel accountDeletedType1 = accountModel(6, type1, name: 'account2', isDeleted: true);
+
   final List<AccountModel> accountsType1 = [
     account1Type1,
     account2Type1,
@@ -42,8 +37,7 @@ void main() {
     ...accountsType1,
   ];
   final List<AccountModel> initiallyEmptyAccounts = [];
-  final account =
-      AccountModel(id: 101, currency: Currency.debugDefault, name: 'account to save', type: AccountType.debtsAndLoans);
+  final account = accountModel(101, AccountType.debtsAndLoans, name: 'account to save');
 
   final List<AccountModel> accountsWithDeletedType1 = [
     account1Type1,
@@ -52,7 +46,7 @@ void main() {
     account3Type1,
   ];
 
-  final type = AccountType.investments;
+  const type = AccountType.investments;
 
   setUp(() {
     mockDataSource = MockDataSource();
@@ -73,7 +67,7 @@ void main() {
 
   test('data source has no data, then save, then it has data', () async {
     when(mockDataSource.getAccounts()).thenReturn(initiallyEmptyAccounts);
-    when(mockDataSource.addAcount(account)).thenAnswer((_) {
+    when(mockDataSource.addAcount(account, null, null)).thenAnswer((_) {
       initiallyEmptyAccounts.add(account);
       return account;
     });
@@ -88,7 +82,7 @@ void main() {
 
     List<AccountModel> accountModels = [account];
     when(mockDataSource.getAccounts()).thenReturn(accountModels);
-    when(mockDataSource.updateAcount(any)).thenAnswer((realInvocation) {
+    when(mockDataSource.updateAcount(any, null, null)).thenAnswer((realInvocation) {
       final account = realInvocation.positionalArguments.first;
       accountModels.clear();
       accountModels.add(account);
@@ -100,8 +94,8 @@ void main() {
 
     final modifiedAccount = accountModel(id, type, name: modifiedName);
     repository.saveAccount(modifiedAccount);
-    verify(mockDataSource.updateAcount(modifiedAccount));
-    verifyNever(mockDataSource.addAcount(any));
+    verify(mockDataSource.updateAcount(modifiedAccount, null, null));
+    verifyNever(mockDataSource.addAcount(any, null, null));
 
     final dataAfter = repository.getAccountsOfType(type);
     expect(dataAfter.length, 1);
@@ -110,7 +104,7 @@ void main() {
   });
   test('save/update account calls notifies listeners', () {
     when(mockDataSource.getAccounts()).thenAnswer((realInvocation) => initiallyEmptyAccounts);
-    when(mockDataSource.addAcount(account)).thenAnswer((_) {
+    when(mockDataSource.addAcount(account, null, null)).thenAnswer((_) {
       initiallyEmptyAccounts.add(account);
       return account;
     });

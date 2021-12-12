@@ -3,6 +3,7 @@ import 'package:iif/domain/entities/enums/category_type.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/domain/predefined.dart';
 import 'package:iif/presentation/blocs/add_operation_bloc/add_operation_bloc.dart';
+import 'package:iif/presentation/blocs/add_operation_bloc/add_operation_state.dart';
 import 'package:iif/presentation/include.dart';
 import 'package:iif/presentation/pages/add_operation/widgets/account_selector.dart';
 import 'package:iif/presentation/pages/add_operation/widgets/node_selector.dart';
@@ -197,9 +198,9 @@ class _AddOperationPageState extends State<AddOperationPage> {
                               child: _operationMoney,
                             ),
                           ),
-                          Expanded(
+                          const Expanded(
                             flex: 4,
-                            child: Frame(child: dates),
+                            child: Frame(child: _Dates()),
                           ),
                         ],
                       ),
@@ -237,33 +238,40 @@ class _AddOperationPageState extends State<AddOperationPage> {
     );
   }
 
-  Widget get dates => Column(
-        children: [
-          DateSelector(
-            initialDate: DateTime.now(),
-            onDateChanged: (_) {},
-          ),
-          Expanded(
-              child: Row(
-            children: [
-              Expanded(
-                child: MonthSelector(
-                  initialMonth: DateTime.now().month,
-                  onMonthChanged: (_) {},
-                ),
-              ),
-              Expanded(
-                child: YearSelector(
-                  initialYear: DateTime.now().year,
-                  onYearChanged: (_) {},
-                ),
-              )
-            ],
-          ))
-        ],
-      );
-
   void save() {
     _addOperationBloc.trySave();
+  }
+}
+
+class _Dates extends StatelessWidget {
+  const _Dates({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        DateSelector(
+          initialDate: DateTime.now(),
+          onDateChanged: (_) {},
+        ),
+        Expanded(
+            child: Row(
+          children: [
+            Expanded(
+              child: MonthSelector(
+                initialMonth: DateTime.now().month,
+                onMonthChanged: (_) {},
+              ),
+            ),
+            Expanded(
+              child: YearSelector(
+                initialYear: DateTime.now().year,
+                onYearChanged: (_) {},
+              ),
+            )
+          ],
+        ))
+      ],
+    );
   }
 }

@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'operations_list_bloc.dart';
+part of 'operations_list_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -17,12 +17,12 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$OperationsListStateTearOff {
   const _$OperationsListStateTearOff();
 
-  _Loading loading() {
-    return const _Loading();
+  Loading loading() {
+    return const Loading();
   }
 
-  _Loaded loaded(List<LogicOperation> data) {
-    return _Loaded(
+  Loaded loaded(List<LogicOperation> data) {
+    return Loaded(
       data,
     );
   }
@@ -54,20 +54,20 @@ mixin _$OperationsListState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -91,26 +91,26 @@ class _$OperationsListStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$LoadingCopyWith<$Res> {
-  factory _$LoadingCopyWith(_Loading value, $Res Function(_Loading) then) =
-      __$LoadingCopyWithImpl<$Res>;
+abstract class $LoadingCopyWith<$Res> {
+  factory $LoadingCopyWith(Loading value, $Res Function(Loading) then) =
+      _$LoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$LoadingCopyWithImpl<$Res>
+class _$LoadingCopyWithImpl<$Res>
     extends _$OperationsListStateCopyWithImpl<$Res>
-    implements _$LoadingCopyWith<$Res> {
-  __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
-      : super(_value, (v) => _then(v as _Loading));
+    implements $LoadingCopyWith<$Res> {
+  _$LoadingCopyWithImpl(Loading _value, $Res Function(Loading) _then)
+      : super(_value, (v) => _then(v as Loading));
 
   @override
-  _Loading get _value => super._value as _Loading;
+  Loading get _value => super._value as Loading;
 }
 
 /// @nodoc
 
-class _$_Loading implements _Loading {
-  const _$_Loading();
+class _$Loading implements Loading {
+  const _$Loading();
 
   @override
   String toString() {
@@ -119,7 +119,7 @@ class _$_Loading implements _Loading {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Loading);
+    return identical(this, other) || (other is Loading);
   }
 
   @override
@@ -159,8 +159,8 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
   }) {
     return loading(this);
   }
@@ -168,8 +168,8 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
   }) {
     return loading?.call(this);
   }
@@ -177,8 +177,8 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -188,32 +188,31 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements OperationsListState {
-  const factory _Loading() = _$_Loading;
+abstract class Loading implements OperationsListState {
+  const factory Loading() = _$Loading;
 }
 
 /// @nodoc
-abstract class _$LoadedCopyWith<$Res> {
-  factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
-      __$LoadedCopyWithImpl<$Res>;
+abstract class $LoadedCopyWith<$Res> {
+  factory $LoadedCopyWith(Loaded value, $Res Function(Loaded) then) =
+      _$LoadedCopyWithImpl<$Res>;
   $Res call({List<LogicOperation> data});
 }
 
 /// @nodoc
-class __$LoadedCopyWithImpl<$Res>
-    extends _$OperationsListStateCopyWithImpl<$Res>
-    implements _$LoadedCopyWith<$Res> {
-  __$LoadedCopyWithImpl(_Loaded _value, $Res Function(_Loaded) _then)
-      : super(_value, (v) => _then(v as _Loaded));
+class _$LoadedCopyWithImpl<$Res> extends _$OperationsListStateCopyWithImpl<$Res>
+    implements $LoadedCopyWith<$Res> {
+  _$LoadedCopyWithImpl(Loaded _value, $Res Function(Loaded) _then)
+      : super(_value, (v) => _then(v as Loaded));
 
   @override
-  _Loaded get _value => super._value as _Loaded;
+  Loaded get _value => super._value as Loaded;
 
   @override
   $Res call({
     Object? data = freezed,
   }) {
-    return _then(_Loaded(
+    return _then(Loaded(
       data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -224,8 +223,8 @@ class __$LoadedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Loaded implements _Loaded {
-  const _$_Loaded(this.data);
+class _$Loaded implements Loaded {
+  const _$Loaded(this.data);
 
   @override
   final List<LogicOperation> data;
@@ -238,7 +237,7 @@ class _$_Loaded implements _Loaded {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Loaded &&
+        (other is Loaded &&
             (identical(other.data, data) ||
                 const DeepCollectionEquality().equals(other.data, data)));
   }
@@ -249,8 +248,8 @@ class _$_Loaded implements _Loaded {
 
   @JsonKey(ignore: true)
   @override
-  _$LoadedCopyWith<_Loaded> get copyWith =>
-      __$LoadedCopyWithImpl<_Loaded>(this, _$identity);
+  $LoadedCopyWith<Loaded> get copyWith =>
+      _$LoadedCopyWithImpl<Loaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -286,8 +285,8 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
   }) {
     return loaded(this);
   }
@@ -295,8 +294,8 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
   }) {
     return loaded?.call(this);
   }
@@ -304,8 +303,8 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -315,10 +314,10 @@ class _$_Loaded implements _Loaded {
   }
 }
 
-abstract class _Loaded implements OperationsListState {
-  const factory _Loaded(List<LogicOperation> data) = _$_Loaded;
+abstract class Loaded implements OperationsListState {
+  const factory Loaded(List<LogicOperation> data) = _$Loaded;
 
   List<LogicOperation> get data => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
+  $LoadedCopyWith<Loaded> get copyWith => throw _privateConstructorUsedError;
 }

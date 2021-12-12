@@ -9,6 +9,7 @@ import 'package:iif/domain/include.dart' as _i2;
 import 'package:iif/domain/repositories/accounts_repository.dart' as _i3;
 import 'package:iif/domain/repositories/categories_repository.dart' as _i7;
 import 'package:iif/domain/repositories/operations_repository.dart' as _i4;
+import 'package:iif/domain/repositories/subjects_repository.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -27,10 +28,12 @@ class _FakeNode_2<T> extends _i1.Fake implements _i2.Node<T> {}
 
 class _FakeCategory_3 extends _i1.Fake implements _i2.Category {}
 
-class _FakeAccountsRepository_4 extends _i1.Fake
+class _FakeSubject_4 extends _i1.Fake implements _i2.Subject {}
+
+class _FakeAccountsRepository_5 extends _i1.Fake
     implements _i3.AccountsRepository {}
 
-class _FakeOperationsRepository_5 extends _i1.Fake
+class _FakeOperationsRepository_6 extends _i1.Fake
     implements _i4.OperationsRepository {}
 
 /// A class which mocks [AccountsRepository].
@@ -56,10 +59,10 @@ class MockAccountsRepository extends _i1.Mock
           returnValue: _FakeAccount_0()) as _i2.Account);
   @override
   _i2.Account saveAccount(_i2.Account? accountTemplate,
-          {_i2.Subject? subject}) =>
+          {_i2.Subject? subject, _i2.Money? creditLimit}) =>
       (super.noSuchMethod(
-          Invocation.method(
-              #saveAccount, [accountTemplate], {#subject: subject}),
+          Invocation.method(#saveAccount, [accountTemplate],
+              {#subject: subject, #creditLimit: creditLimit}),
           returnValue: _FakeAccount_0()) as _i2.Account);
   @override
   void addListener(_i5.VoidCallback? listener) =>
@@ -239,6 +242,28 @@ class MockCategoriesRepository extends _i1.Mock
   String toString() => super.toString();
 }
 
+/// A class which mocks [SubjectsRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSubjectsRepository extends _i1.Mock
+    implements _i8.SubjectsRepository {
+  MockSubjectsRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.Node<_i2.Subject> getSubjects(_i2.SubjectType? type) =>
+      (super.noSuchMethod(Invocation.method(#getSubjects, [type]),
+          returnValue: _FakeNode_2<_i2.Subject>()) as _i2.Node<_i2.Subject>);
+  @override
+  _i2.Subject saveSubject(_i2.Subject? subjectTemplate, _i2.Subject? parent) =>
+      (super.noSuchMethod(
+          Invocation.method(#saveSubject, [subjectTemplate, parent]),
+          returnValue: _FakeSubject_4()) as _i2.Subject);
+  @override
+  String toString() => super.toString();
+}
+
 /// A class which mocks [GetAccountsBalanceUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -251,11 +276,11 @@ class MockGetAccountsBalanceUseCase extends _i1.Mock
   @override
   _i3.AccountsRepository get accountsRepository =>
       (super.noSuchMethod(Invocation.getter(#accountsRepository),
-          returnValue: _FakeAccountsRepository_4()) as _i3.AccountsRepository);
+          returnValue: _FakeAccountsRepository_5()) as _i3.AccountsRepository);
   @override
   _i4.OperationsRepository get operationsRepository => (super.noSuchMethod(
       Invocation.getter(#operationsRepository),
-      returnValue: _FakeOperationsRepository_5()) as _i4.OperationsRepository);
+      returnValue: _FakeOperationsRepository_6()) as _i4.OperationsRepository);
   @override
   _i6.Future<List<_i2.AccountBalance>> execute(_i2.AccountType? type) =>
       (super.noSuchMethod(Invocation.method(#execute, [type]),

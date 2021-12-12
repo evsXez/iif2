@@ -22,7 +22,6 @@ export 'package:iif/presentation/widgets/transfer_arrow.dart';
 
 //blocs
 export 'package:iif/presentation/blocs/account_options_bloc/account_options_bloc.dart';
-export 'package:iif/presentation/blocs/account_options_bloc/account_options_state.dart';
 export 'package:iif/presentation/blocs/accounts_panel_bloc/accounts_panel_bloc.dart';
 export 'package:iif/presentation/blocs/main_page_fab_bloc/main_page_fab_bloc.dart';
 export 'package:iif/presentation/blocs/node_selector_bloc/node_selector_bloc.dart';

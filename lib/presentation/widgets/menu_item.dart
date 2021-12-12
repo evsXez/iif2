@@ -6,7 +6,7 @@ class MenuItem extends PopupMenuEntry<String> {
   final H = 48.0;
   final Color color;
 
-  MenuItem(this.title, this.onPressed, {this.color = Style.blackColor});
+  const MenuItem(this.title, this.onPressed, {this.color = Style.blackColor, key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _MenuItemState();
@@ -22,14 +22,11 @@ class _MenuItemState extends State<MenuItem> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () {
-          Navigator.pop(context);
-          widget.onPressed();
-        },
-        child: option);
-  }
-
-  Widget get option => Container(
+      onTap: () {
+        Navigator.pop(context);
+        widget.onPressed();
+      },
+      child: Container(
         height: widget.H,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Align(
@@ -42,5 +39,7 @@ class _MenuItemState extends State<MenuItem> {
             ),
           ),
         ),
-      );
+      ),
+    );
+  }
 }

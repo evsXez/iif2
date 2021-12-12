@@ -10,9 +10,7 @@ class MoneyField extends StatelessWidget {
   final void Function(String) onChanged;
   final double fontSize;
   final String? hintText;
-  // final double? height;
   MoneyField({
-    // this.height,
     required this.initialValue,
     required this.onChanged,
     key,
@@ -28,7 +26,6 @@ class MoneyField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: height,
       padding: const EdgeInsets.fromLTRB(4, 0, 4, 8),
       child: TextField(
         textAlignVertical: TextAlignVertical.center,
@@ -42,9 +39,6 @@ class MoneyField extends StatelessWidget {
           hintText: hintText ?? Strings.hint_sum,
           contentPadding: const EdgeInsets.only(bottom: 12),
           border: InputBorder.none,
-          hintStyle: TextStyle(
-              // color: Colors.white,
-              ),
         ),
         keyboardType: TextInputType.number,
         inputFormatters: [MoneyFormatter()],
@@ -56,23 +50,10 @@ class MoneyField extends StatelessWidget {
 class MoneyFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    // debugPrint("old: ${oldValue.text}");
-    // debugPrint("new: ${newValue.text}");
-
     String newValueText = newValue.text.replaceAll(",", ".");
     if (newValueText.length >= "100 000 000 0000.00".length) return oldValue;
 
     if (newValueText.characters.where((it) => it == ".").length > 1) return oldValue;
-
-    // if (oldValue.text.length - oldValue.selection.baseOffset == 2 &&
-    //     oldValue.text.contains(".") &&
-    //     newValueText.contains(".")) {
-    //   //just rewrite first digit after separator
-    //   final digitEntered = newValueText.substring(newValueText.length - 3, newValueText.length - 2);
-    //   newValueText = oldValue.text;
-    //   newValueText = newValueText.replaceRange(newValueText.length - 2, newValueText.length - 1, digitEntered);
-    //   print("DIGIT REPLACEMENT!!!");
-    // }
 
     final Money money;
     try {
@@ -86,9 +67,8 @@ class MoneyFormatter extends TextInputFormatter {
 
     return newValue.copyWith(
       text: newText,
-      // selection: TextSelection.collapsed(offset: newText.length - selectionShift),
       selection: (newText == "0.00" && !(oldValue.selection.baseOffset == 2 && newValue.selection.baseOffset == 3))
-          ? TextSelection.collapsed(offset: 2)
+          ? const TextSelection.collapsed(offset: 2)
           : TextSelection.collapsed(offset: min(newText.length, max(0, newValue.selection.baseOffset + spacesAdded))),
     );
   }

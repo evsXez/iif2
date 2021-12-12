@@ -1,10 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iif/domain/include.dart';
-import 'package:iif/data/repositories/accounts_repository_impl.dart';
-import 'package:iif/data/repositories/operations_repository_impl.dart';
-import 'package:iif/presentation/blocs/account_options_bloc/account_options_bloc.dart';
-import 'package:iif/presentation/blocs/accounts_bloc/accounts_bloc.dart';
 import 'package:iif/presentation/blocs/accounts_panel_bloc/accounts_panel_bloc.dart';
+import 'package:iif/presentation/blocs/accounts_panel_bloc/accounts_panel_state.dart';
 import 'package:iif/presentation/include.dart';
 import 'package:iif/presentation/pages/main/widgets/button_add_account.dart';
 import 'package:iif/presentation/pages/main/widgets/account_edit_item.dart';
@@ -14,7 +11,7 @@ import 'package:iif/presentation/pages/main/widgets/top_divider.dart';
 class AccountPanelBody extends StatelessWidget {
   final AccountType type;
 
-  AccountPanelBody({
+  const AccountPanelBody({
     required this.type,
     Key? key,
   }) : super(key: key);

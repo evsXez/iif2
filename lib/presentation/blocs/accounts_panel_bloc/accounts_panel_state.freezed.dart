@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'accounts_panel_bloc.dart';
+part of 'accounts_panel_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -17,15 +17,15 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$AccountsPanelStateTearOff {
   const _$AccountsPanelStateTearOff();
 
-  _LoadInProgress loadInProgress() {
-    return const _LoadInProgress();
+  LoadInProgress loadInProgress() {
+    return const LoadInProgress();
   }
 
-  _LoadSuccess loadSuccess(List<AccountBalance> data,
+  LoadSuccess loadSuccess(List<AccountBalance> data,
       {required Account? editing,
       required bool isAddingNew,
       required bool isButtonAddVisible}) {
-    return _LoadSuccess(
+    return LoadSuccess(
       data,
       editing: editing,
       isAddingNew: isAddingNew,
@@ -66,20 +66,20 @@ mixin _$AccountsPanelState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(LoadInProgress value) loadInProgress,
+    required TResult Function(LoadSuccess value) loadSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(LoadInProgress value)? loadInProgress,
+    TResult Function(LoadSuccess value)? loadSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(LoadInProgress value)? loadInProgress,
+    TResult Function(LoadSuccess value)? loadSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -103,28 +103,28 @@ class _$AccountsPanelStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$LoadInProgressCopyWith<$Res> {
-  factory _$LoadInProgressCopyWith(
-          _LoadInProgress value, $Res Function(_LoadInProgress) then) =
-      __$LoadInProgressCopyWithImpl<$Res>;
+abstract class $LoadInProgressCopyWith<$Res> {
+  factory $LoadInProgressCopyWith(
+          LoadInProgress value, $Res Function(LoadInProgress) then) =
+      _$LoadInProgressCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$LoadInProgressCopyWithImpl<$Res>
+class _$LoadInProgressCopyWithImpl<$Res>
     extends _$AccountsPanelStateCopyWithImpl<$Res>
-    implements _$LoadInProgressCopyWith<$Res> {
-  __$LoadInProgressCopyWithImpl(
-      _LoadInProgress _value, $Res Function(_LoadInProgress) _then)
-      : super(_value, (v) => _then(v as _LoadInProgress));
+    implements $LoadInProgressCopyWith<$Res> {
+  _$LoadInProgressCopyWithImpl(
+      LoadInProgress _value, $Res Function(LoadInProgress) _then)
+      : super(_value, (v) => _then(v as LoadInProgress));
 
   @override
-  _LoadInProgress get _value => super._value as _LoadInProgress;
+  LoadInProgress get _value => super._value as LoadInProgress;
 }
 
 /// @nodoc
 
-class _$_LoadInProgress implements _LoadInProgress {
-  const _$_LoadInProgress();
+class _$LoadInProgress implements LoadInProgress {
+  const _$LoadInProgress();
 
   @override
   String toString() {
@@ -133,7 +133,7 @@ class _$_LoadInProgress implements _LoadInProgress {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _LoadInProgress);
+    return identical(this, other) || (other is LoadInProgress);
   }
 
   @override
@@ -179,8 +179,8 @@ class _$_LoadInProgress implements _LoadInProgress {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(LoadInProgress value) loadInProgress,
+    required TResult Function(LoadSuccess value) loadSuccess,
   }) {
     return loadInProgress(this);
   }
@@ -188,8 +188,8 @@ class _$_LoadInProgress implements _LoadInProgress {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(LoadInProgress value)? loadInProgress,
+    TResult Function(LoadSuccess value)? loadSuccess,
   }) {
     return loadInProgress?.call(this);
   }
@@ -197,8 +197,8 @@ class _$_LoadInProgress implements _LoadInProgress {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(LoadInProgress value)? loadInProgress,
+    TResult Function(LoadSuccess value)? loadSuccess,
     required TResult orElse(),
   }) {
     if (loadInProgress != null) {
@@ -208,15 +208,15 @@ class _$_LoadInProgress implements _LoadInProgress {
   }
 }
 
-abstract class _LoadInProgress implements AccountsPanelState {
-  const factory _LoadInProgress() = _$_LoadInProgress;
+abstract class LoadInProgress implements AccountsPanelState {
+  const factory LoadInProgress() = _$LoadInProgress;
 }
 
 /// @nodoc
-abstract class _$LoadSuccessCopyWith<$Res> {
-  factory _$LoadSuccessCopyWith(
-          _LoadSuccess value, $Res Function(_LoadSuccess) then) =
-      __$LoadSuccessCopyWithImpl<$Res>;
+abstract class $LoadSuccessCopyWith<$Res> {
+  factory $LoadSuccessCopyWith(
+          LoadSuccess value, $Res Function(LoadSuccess) then) =
+      _$LoadSuccessCopyWithImpl<$Res>;
   $Res call(
       {List<AccountBalance> data,
       Account? editing,
@@ -225,15 +225,15 @@ abstract class _$LoadSuccessCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$LoadSuccessCopyWithImpl<$Res>
+class _$LoadSuccessCopyWithImpl<$Res>
     extends _$AccountsPanelStateCopyWithImpl<$Res>
-    implements _$LoadSuccessCopyWith<$Res> {
-  __$LoadSuccessCopyWithImpl(
-      _LoadSuccess _value, $Res Function(_LoadSuccess) _then)
-      : super(_value, (v) => _then(v as _LoadSuccess));
+    implements $LoadSuccessCopyWith<$Res> {
+  _$LoadSuccessCopyWithImpl(
+      LoadSuccess _value, $Res Function(LoadSuccess) _then)
+      : super(_value, (v) => _then(v as LoadSuccess));
 
   @override
-  _LoadSuccess get _value => super._value as _LoadSuccess;
+  LoadSuccess get _value => super._value as LoadSuccess;
 
   @override
   $Res call({
@@ -242,7 +242,7 @@ class __$LoadSuccessCopyWithImpl<$Res>
     Object? isAddingNew = freezed,
     Object? isButtonAddVisible = freezed,
   }) {
-    return _then(_LoadSuccess(
+    return _then(LoadSuccess(
       data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -265,8 +265,8 @@ class __$LoadSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoadSuccess implements _LoadSuccess {
-  const _$_LoadSuccess(this.data,
+class _$LoadSuccess implements LoadSuccess {
+  const _$LoadSuccess(this.data,
       {required this.editing,
       required this.isAddingNew,
       required this.isButtonAddVisible});
@@ -288,7 +288,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _LoadSuccess &&
+        (other is LoadSuccess &&
             (identical(other.data, data) ||
                 const DeepCollectionEquality().equals(other.data, data)) &&
             (identical(other.editing, editing) ||
@@ -312,8 +312,8 @@ class _$_LoadSuccess implements _LoadSuccess {
 
   @JsonKey(ignore: true)
   @override
-  _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
-      __$LoadSuccessCopyWithImpl<_LoadSuccess>(this, _$identity);
+  $LoadSuccessCopyWith<LoadSuccess> get copyWith =>
+      _$LoadSuccessCopyWithImpl<LoadSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -355,8 +355,8 @@ class _$_LoadSuccess implements _LoadSuccess {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoadInProgress value) loadInProgress,
-    required TResult Function(_LoadSuccess value) loadSuccess,
+    required TResult Function(LoadInProgress value) loadInProgress,
+    required TResult Function(LoadSuccess value) loadSuccess,
   }) {
     return loadSuccess(this);
   }
@@ -364,8 +364,8 @@ class _$_LoadSuccess implements _LoadSuccess {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(LoadInProgress value)? loadInProgress,
+    TResult Function(LoadSuccess value)? loadSuccess,
   }) {
     return loadSuccess?.call(this);
   }
@@ -373,8 +373,8 @@ class _$_LoadSuccess implements _LoadSuccess {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadInProgress value)? loadInProgress,
-    TResult Function(_LoadSuccess value)? loadSuccess,
+    TResult Function(LoadInProgress value)? loadInProgress,
+    TResult Function(LoadSuccess value)? loadSuccess,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
@@ -384,17 +384,17 @@ class _$_LoadSuccess implements _LoadSuccess {
   }
 }
 
-abstract class _LoadSuccess implements AccountsPanelState {
-  const factory _LoadSuccess(List<AccountBalance> data,
+abstract class LoadSuccess implements AccountsPanelState {
+  const factory LoadSuccess(List<AccountBalance> data,
       {required Account? editing,
       required bool isAddingNew,
-      required bool isButtonAddVisible}) = _$_LoadSuccess;
+      required bool isButtonAddVisible}) = _$LoadSuccess;
 
   List<AccountBalance> get data => throw _privateConstructorUsedError;
   Account? get editing => throw _privateConstructorUsedError;
   bool get isAddingNew => throw _privateConstructorUsedError;
   bool get isButtonAddVisible => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
+  $LoadSuccessCopyWith<LoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/presentation/include.dart';
 
@@ -88,25 +87,6 @@ class Dialogs {
               ),
             ));
   }
-
-  // Widget get _buttonCancel => ;
-  // Widget _buttonDelete(Location location) => FlatButton(
-  //   onPressed: () { _deleteAccount(location); },
-  //   child: StyleText(Strings.option_delete, fontSize: 16, fontWeight: FontWeight.w300,),
-  // );
-
-  // void _deleteAccount(Location location) async {
-  //   await location.delete();
-  //   LocalCache.update();
-  //   context.navigationPop();
-  // }
-
-  // void _archiveAccount(Location location) async {
-  //   await location.archive();
-  //   LocalCache.update();
-  //   context.navigationPop();
-  // }
-
 }
 
 class _ButtonsOkCancel extends StatelessWidget {

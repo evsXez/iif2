@@ -7,23 +7,25 @@ import '../mocks.mocks.dart';
 
 void main() {
   late CreateNodeValueUseCase createNodeValueUseCase;
-  final accountType = AccountType.debtsAndLoans;
+  const accountType = AccountType.debtsAndLoans;
   final account = getAccount(12, accountType);
   late MockAccountsRepository accountsRepository;
   late MockCategoriesRepository categoriesRepository;
+  late MockSubjectsRepository subjectsRepository;
   late List<Account> accountsData;
   const name = "node value name";
   final categoryNodeValue = Category(-1, "category", CategoryType.debtDecrease);
   final categoryReference = categoryNodeValue;
-  final subjectNodeValue = Subject("subject", SubjectType.debts, account);
-  final subjectReference = subjectNodeValue;
 
   setUp(() {
     accountsRepository = MockAccountsRepository();
     categoriesRepository = MockCategoriesRepository();
+    subjectsRepository = MockSubjectsRepository();
+
     createNodeValueUseCase = CreateNodeValueUseCase(
       accountsRepository: accountsRepository,
       categoriesRepository: categoriesRepository,
+      subjectsRepository: subjectsRepository,
     );
 
     accountsData = [];
@@ -54,24 +56,4 @@ void main() {
       expect(category.type, categoryNodeValue.type);
     });
   });
-
-  // group('creates Subject', () {
-  //   test('can create Subject undefined', () {
-  //     final subject = createNodeValueUseCase.execute<Subject>(name, null, subjectReference);
-  //     expect(subject.name, name);
-  //     expect(subject.type, subjectReference.type);
-  //     expect(subject.account.name, name);
-  //     expect(subject.account.type, subjectReference.account.type);
-  //     expect(accountsRepository.getAccountsOfType(subjectReference.account.type), contains(subject.account));
-  //   });
-  // test('can create Subject from node', () {
-  //   assert(name != subjectNodeValue.name);
-  //   final subject = createNodeValueUseCase.execute<Subject>(name, subjectNodeValue, subjectReference);
-  //   expect(subject.name, name);
-  //   expect(subject.type, subjectNodeValue.type);
-  //   expect(subject.account.id, subjectNodeValue.account.id);
-  //   expect(subject.account.name, name);
-  //   expect(subject.account.type, subjectNodeValue.account.type);
-  //   expect(accountsRepository.getAccountsOfType(subjectNodeValue.account.type), contains(subject.account));
-  // });
 }

@@ -1,15 +1,13 @@
 import 'package:bloc/bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:iif/misc/di/providers.dart';
 import 'package:iif/presentation/include.dart';
 
-part 'main_page_fab_state.dart';
-part 'main_page_fab_bloc.freezed.dart';
+import 'main_page_fab_state.dart';
 
 class MainPageFabBloc extends Cubit<MainPageFabState> {
   final BuildContext _context;
 
-  MainPageFabBloc(this._context) : super(const _Hidden()) {
+  MainPageFabBloc(this._context) : super(const Hidden()) {
     accountsRepository.of(_context).addListener(_updateData);
     uiNotifierAccountEditorOpened.addListener(_updateData);
     _updateData();
@@ -25,6 +23,6 @@ class MainPageFabBloc extends Cubit<MainPageFabState> {
   void _updateData() async {
     final hasAtLeastOneAccount = getAccountsCountUseCase.of(_context).execute() > 0;
     final isAccountEditorOpened = uiNotifierAccountEditorOpened.isAccountEditorOpened;
-    emit(hasAtLeastOneAccount && !isAccountEditorOpened ? const _Shown() : const _Hidden());
+    emit(hasAtLeastOneAccount && !isAccountEditorOpened ? const Shown() : const Hidden());
   }
 }

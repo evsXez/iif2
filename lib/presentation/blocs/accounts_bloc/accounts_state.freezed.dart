@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'accounts_bloc.dart';
+part of 'accounts_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -17,8 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$AccountsStateTearOff {
   const _$AccountsStateTearOff();
 
-  _Loaded loaded(int? expandedIndex, List<MapEntry<AccountType, Money?>> data) {
-    return _Loaded(
+  Loaded loaded(int? expandedIndex, List<MapEntry<AccountType, Money?>> data) {
+    return Loaded(
       expandedIndex,
       data,
     );
@@ -58,17 +58,17 @@ mixin _$AccountsState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Loaded value) loaded,
+    required TResult Function(Loaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Loaded value)? loaded,
+    TResult Function(Loaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loaded value)? loaded,
+    TResult Function(Loaded value)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,28 +114,28 @@ class _$AccountsStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$LoadedCopyWith<$Res> implements $AccountsStateCopyWith<$Res> {
-  factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
-      __$LoadedCopyWithImpl<$Res>;
+abstract class $LoadedCopyWith<$Res> implements $AccountsStateCopyWith<$Res> {
+  factory $LoadedCopyWith(Loaded value, $Res Function(Loaded) then) =
+      _$LoadedCopyWithImpl<$Res>;
   @override
   $Res call({int? expandedIndex, List<MapEntry<AccountType, Money?>> data});
 }
 
 /// @nodoc
-class __$LoadedCopyWithImpl<$Res> extends _$AccountsStateCopyWithImpl<$Res>
-    implements _$LoadedCopyWith<$Res> {
-  __$LoadedCopyWithImpl(_Loaded _value, $Res Function(_Loaded) _then)
-      : super(_value, (v) => _then(v as _Loaded));
+class _$LoadedCopyWithImpl<$Res> extends _$AccountsStateCopyWithImpl<$Res>
+    implements $LoadedCopyWith<$Res> {
+  _$LoadedCopyWithImpl(Loaded _value, $Res Function(Loaded) _then)
+      : super(_value, (v) => _then(v as Loaded));
 
   @override
-  _Loaded get _value => super._value as _Loaded;
+  Loaded get _value => super._value as Loaded;
 
   @override
   $Res call({
     Object? expandedIndex = freezed,
     Object? data = freezed,
   }) {
-    return _then(_Loaded(
+    return _then(Loaded(
       expandedIndex == freezed
           ? _value.expandedIndex
           : expandedIndex // ignore: cast_nullable_to_non_nullable
@@ -150,8 +150,8 @@ class __$LoadedCopyWithImpl<$Res> extends _$AccountsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Loaded implements _Loaded {
-  const _$_Loaded(this.expandedIndex, this.data);
+class _$Loaded implements Loaded {
+  const _$Loaded(this.expandedIndex, this.data);
 
   @override
   final int? expandedIndex;
@@ -166,7 +166,7 @@ class _$_Loaded implements _Loaded {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Loaded &&
+        (other is Loaded &&
             (identical(other.expandedIndex, expandedIndex) ||
                 const DeepCollectionEquality()
                     .equals(other.expandedIndex, expandedIndex)) &&
@@ -182,8 +182,8 @@ class _$_Loaded implements _Loaded {
 
   @JsonKey(ignore: true)
   @override
-  _$LoadedCopyWith<_Loaded> get copyWith =>
-      __$LoadedCopyWithImpl<_Loaded>(this, _$identity);
+  $LoadedCopyWith<Loaded> get copyWith =>
+      _$LoadedCopyWithImpl<Loaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -222,7 +222,7 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Loaded value) loaded,
+    required TResult Function(Loaded value) loaded,
   }) {
     return loaded(this);
   }
@@ -230,7 +230,7 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Loaded value)? loaded,
+    TResult Function(Loaded value)? loaded,
   }) {
     return loaded?.call(this);
   }
@@ -238,7 +238,7 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loaded value)? loaded,
+    TResult Function(Loaded value)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -248,9 +248,9 @@ class _$_Loaded implements _Loaded {
   }
 }
 
-abstract class _Loaded implements AccountsState {
-  const factory _Loaded(
-      int? expandedIndex, List<MapEntry<AccountType, Money?>> data) = _$_Loaded;
+abstract class Loaded implements AccountsState {
+  const factory Loaded(
+      int? expandedIndex, List<MapEntry<AccountType, Money?>> data) = _$Loaded;
 
   @override
   int? get expandedIndex => throw _privateConstructorUsedError;
@@ -259,5 +259,5 @@ abstract class _Loaded implements AccountsState {
       throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
+  $LoadedCopyWith<Loaded> get copyWith => throw _privateConstructorUsedError;
 }

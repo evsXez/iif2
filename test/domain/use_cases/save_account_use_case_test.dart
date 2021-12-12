@@ -45,13 +45,13 @@ void main() {
 
   test('after saving account we can get it', () {
     expect(mockAccountsRepository.getAccountsOfType(account.type).contains(account), false);
-    saveAccountUseCase.execute(account, money);
+    saveAccountUseCase.execute(accountTemplate: account, money: money, debtSubject: null, creditLimit: null);
     expect(mockAccountsRepository.getAccountsOfType(account.type).contains(account), true);
   });
 
   test('after saving account the initial input operation saved too', () async {
     expect((await mockOperationsRepository.getOperations(account)), isEmpty);
-    saveAccountUseCase.execute(account, money);
+    saveAccountUseCase.execute(accountTemplate: account, money: money, debtSubject: null, creditLimit: null);
     expect((await mockOperationsRepository.getOperations(account)).length == 1, true);
     expect((await mockOperationsRepository.getOperations(account)).first.type, LogicOperationType.initialInput);
   });

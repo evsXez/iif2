@@ -1,11 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/misc/di/providers.dart';
 import 'package:iif/presentation/include.dart';
 
-part 'node_selector_state.dart';
-part 'node_selector_bloc.freezed.dart';
+import 'node_selector_state.dart';
 
 class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> {
   final BuildContext _context;
@@ -13,13 +11,9 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
   late final Node<NodeValue> _root;
   final Node<T> _addNode = Node.composer();
 
-  NodeSelectorBloc(this._context) : super(const _Loading()) {
+  NodeSelectorBloc(this._context) : super(const Loading()) {
     _root = getRootNodeUseCase.of(_context).execute(T);
-    // _root = GetRootNodeUseCase<T>().execute();
-
-    // Future.delayed(Duration(seconds: 1)).then((_) {
     _showData();
-    // });
   }
 
   void _showData() {
@@ -41,7 +35,7 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
     bool canHaveMoreChildren = root?.canHaveMoreChildren ?? false;
     final value = root?.value;
     if (value is Category &&
-        [
+        const [
           CategoryType.debtsAndLoans,
           CategoryType.debtIncrease,
           CategoryType.debtDecrease,
@@ -57,7 +51,7 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
 
     view.removeAt(0); //hide root
 
-    emit(_Loaded(view));
+    emit(Loaded(view));
   }
 
   void tap(NodeRef<T> nodeRef) {

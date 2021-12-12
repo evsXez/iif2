@@ -18,11 +18,10 @@ import 'fixtures.dart';
 @GenerateMocks([SharedPreferences])
 void main() {
   late DataSource dataSource;
-  final AccountModel accountModelFixed = AccountModel(
-    id: 15,
+  final AccountModel accountModelFixed = accountModel(
+    15,
+    AccountType.creditCards,
     name: "Account Name",
-    type: AccountType.creditCards,
-    currency: const Currency(code: "RUB", symbol: "₽"),
   );
   final LogicOperationModel logicOperationModel1 = LogicOperationModel(
     id: 112,
@@ -113,7 +112,7 @@ void main() {
     });
 
     expect(dataSource.getAccounts().contains(accountModelFixed), isFalse);
-    dataSource.addAcount(accountModelFixed);
+    dataSource.addAcount(accountModelFixed, null, null);
     expect(dataSource.getAccounts().contains(accountModelFixed), isTrue);
   });
 
@@ -153,7 +152,7 @@ void main() {
     expect(before.length, 1);
     expect(before.first, accountModelOriginal);
 
-    dataSource.updateAcount(accountModelUpdated);
+    dataSource.updateAcount(accountModelUpdated, null, null);
 
     final after = dataSource.getAccounts();
     expect(after.length, 1);
@@ -166,12 +165,12 @@ void main() {
 
     final accountTemplate = getAccount(-1, AccountType.money, name: nameOriginal);
 
-    final accountOriginal = dataSource.addAcount(accountTemplate);
+    final accountOriginal = dataSource.addAcount(accountTemplate, null, null);
     dataSource.addOperation(getLogicOperationInitialInput(accountOriginal, money999));
 
     final accountUpdated = Account(
         id: accountOriginal.id, name: nameUpdated, type: accountOriginal.type, currency: accountOriginal.currency);
-    dataSource.updateAcount(accountUpdated);
+    dataSource.updateAcount(accountUpdated, null, null);
 
     final accountFromOperation = dataSource.getOperations().first.atomics.first.account;
     expect(accountFromOperation.name, nameUpdated);

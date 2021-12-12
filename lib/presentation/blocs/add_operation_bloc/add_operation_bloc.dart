@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:collection/src/iterable_extensions.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/misc/di/providers.dart';
 import 'package:iif/presentation/blocs/node_selector_bloc/node_selector_bloc.dart';
+import 'package:iif/presentation/blocs/node_selector_bloc/node_selector_state.dart';
 import 'package:iif/presentation/include.dart';
 
-part 'add_operation_state.dart';
-part 'add_operation_bloc.freezed.dart';
+import 'add_operation_state.dart';
 
 class AddOperationBloc extends Cubit<AddOperationState> {
   final BuildContext _context;
@@ -24,7 +24,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
     this._context, {
     required this.categorySelectorBloc,
     required this.subjectSelectorBloc,
-  }) : super(const _Idle()) {
+  }) : super(const Idle()) {
     _obs.add(categorySelectorBloc.stream.listen(_onCategoriesChanged));
     _obs.add(subjectSelectorBloc.stream.listen(_onSubjectsChanged));
 
@@ -90,7 +90,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
     final isLoanDecrease = _fields.baseCategory?.type == CategoryType.loanDecrease;
     final isDebts = isDebtIncrease || isDebtDecrease || isLoanIncrease || isLoanDecrease;
     emit(
-      _Visibility(
+      VisibilityState(
         subject: isDebts,
         locationFrom: isExpense || isTransfer || isDebtDecrease || isLoanIncrease,
         locationTo: isIncome || isTransfer || isDebtIncrease || isLoanDecrease,
@@ -190,7 +190,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
         default:
           throw _UndefinedOperationException();
       }
-      emit(const _Saved());
+      emit(const Saved());
       // } on _BaseCategoryNotSelectedException catch (e) {
       //   //TODO: emit validation error
       //   print(e);

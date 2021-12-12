@@ -45,10 +45,10 @@ class MockAccountsRepository extends _i1.Mock
           returnValue: _FakeAccount_0()) as _i2.Account);
   @override
   _i2.Account saveAccount(_i2.Account? accountTemplate,
-          {_i2.Subject? subject}) =>
+          {_i2.Subject? subject, _i2.Money? creditLimit}) =>
       (super.noSuchMethod(
-          Invocation.method(
-              #saveAccount, [accountTemplate], {#subject: subject}),
+          Invocation.method(#saveAccount, [accountTemplate],
+              {#subject: subject, #creditLimit: creditLimit}),
           returnValue: _FakeAccount_0()) as _i2.Account);
   @override
   void addListener(_i4.VoidCallback? listener) =>
