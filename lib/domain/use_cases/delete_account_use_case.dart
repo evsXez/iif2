@@ -7,7 +7,6 @@ class DeleteAccountUseCase {
   DeleteAccountUseCase({required this.accountsRepository});
 
   void execute(Account account) {
-    //TODO: generate 'copyWith'
     final Account accountToDelete = Account(
       id: account.id,
       name: account.name,

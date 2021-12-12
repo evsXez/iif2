@@ -3,7 +3,6 @@ export 'package:iif/domain/entities/currency.dart';
 export 'package:iif/domain/entities/money.dart';
 export 'package:iif/domain/entities/account.dart';
 export 'package:iif/domain/entities/credit_card_account.dart';
-export 'package:iif/domain/entities/subject_account.dart';
 export 'package:iif/domain/entities/logic_operation.dart';
 export 'package:iif/domain/entities/account_balance.dart';
 export 'package:iif/domain/entities/atomic_operation.dart';

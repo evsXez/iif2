@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iif/domain/entities/enums/category_type.dart';
 import 'package:iif/domain/include.dart';
-import 'package:iif/domain/predefined.dart';
 import 'package:iif/presentation/blocs/add_operation_bloc/add_operation_bloc.dart';
 import 'package:iif/presentation/blocs/add_operation_bloc/add_operation_state.dart';
 import 'package:iif/presentation/include.dart';

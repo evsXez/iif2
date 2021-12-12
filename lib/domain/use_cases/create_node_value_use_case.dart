@@ -21,21 +21,7 @@ class CreateNodeValueUseCase {
             id: value?.id, name: text, type: value is Category ? value.type : (reference as Category).type);
 
         return categoriesRepository.saveCategory(categoryTemplate, parent as Category) as T;
-      // return Category(text, value is Category ? value.type : (reference as Category).type) as T;
       case Subject: //TODO: now it is only for debts
-        // final referenceSubject = reference as Subject;
-        // Account accountTemplate = Account.template(
-        //   type: AccountType.debts,
-        //   name: text,
-        // );
-        // if (value is Subject) {
-        //   accountTemplate = Account(
-        //     id: value.account.id,
-        //     name: text,
-        //     type: value.account.type,
-        //     currency: value.account.currency,
-        //   );
-        // }
         final subject = subjectsRepository.saveSubject(
           Subject.template(id: value?.id, name: text, type: SubjectType.debts),
           parent as Subject,
@@ -51,8 +37,6 @@ class CreateNodeValueUseCase {
         );
 
         return subject as T;
-
-      // return Subject(text, value is Subject ? value.type : referenceSubject.type, account) as T;
     }
 
     throw UnimplementedError();
