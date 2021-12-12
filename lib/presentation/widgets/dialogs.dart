@@ -105,7 +105,7 @@ class _ButtonsOkCancel extends StatelessWidget {
     final buttons = [
       _Button(
         label: Strings.cancel,
-        onPressed: Navigation.pop,
+        onPressed: Navigator.of(context).pop,
       ),
     ];
     if (isButtonOkVisible) {
@@ -113,7 +113,7 @@ class _ButtonsOkCancel extends StatelessWidget {
         _Button(
           label: buttonOkText,
           onPressed: () {
-            Navigation.pop();
+            Navigator.of(context).pop();
             buttonOkOnPressed();
           },
         ),

@@ -1,8 +1,10 @@
 import 'package:iif/presentation/include.dart';
 
 class Header extends AppBar {
-  Header({Key? key})
-      : super(
+  Header({
+    required VoidCallback onPressed,
+    Key? key,
+  }) : super(
           key: key,
           backgroundColor: Style.whiteColor,
           title: Text(
@@ -15,9 +17,7 @@ class Header extends AppBar {
             IconButton(
               icon: const Icon(Icons.settings),
               color: Colors.black,
-              onPressed: () {
-                Navigation.push(const SettingsPage());
-              },
+              onPressed: onPressed,
             ),
           ],
         );

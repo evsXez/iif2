@@ -38,7 +38,9 @@ class _MainPageState extends State<MainPage> {
         child: BlocBuilder<MainPageFabBloc, MainPageFabState>(
           builder: (context, fabState) {
             return Scaffold(
-              appBar: Header(),
+              appBar: Header(
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const SettingsPage())),
+              ),
               backgroundColor: Style.lightGrayColor,
               body: Stack(
                 alignment: Alignment.bottomCenter,
@@ -99,7 +101,7 @@ class _MainPageState extends State<MainPage> {
                 shown: (_) => !isBottomSheetOpened
                     ? FloatingActionButton(
                         onPressed: () {
-                          Navigation.push(const AddOperationPage());
+                          Navigator.of(context).push(MaterialPageRoute(builder: (_) => const AddOperationPage()));
                         },
                         backgroundColor: Style.whiteColor,
                         child: const Icon(Icons.add, color: Style.accentColor),

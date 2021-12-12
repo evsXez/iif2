@@ -95,7 +95,7 @@ class _AddOperationPageState extends State<AddOperationPage> {
                 }
               },
               saved: (_) {
-                Navigation.pop();
+                Navigator.of(context).pop();
               },
               orElse: () {},
             );
