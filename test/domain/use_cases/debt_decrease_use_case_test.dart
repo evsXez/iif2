@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
 import '../debts_use_cases.setup.dart';
-import '../mocks.mocks.dart';
 
 void main() {
   setUp(() {

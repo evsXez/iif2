@@ -2,13 +2,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:iif/domain/include.dart';
 import 'package:mockito/mockito.dart';
 
-import '../account_fixtures.dart';
 import '../mocks.mocks.dart';
 
 void main() {
   late CreateNodeValueUseCase createNodeValueUseCase;
   const accountType = AccountType.debtsAndLoans;
-  final account = getAccount(12, accountType);
   late MockAccountsRepository accountsRepository;
   late MockCategoriesRepository categoriesRepository;
   late MockSubjectsRepository subjectsRepository;

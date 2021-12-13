@@ -14,7 +14,7 @@ void main() {
   late Account account;
   late List<Account> listAccounts;
   late List<LogicOperation> listOperations;
-  final money = Money(coins: 100);
+  const money = Money(coins: 100);
 
   setUp(() {
     mockAccountsRepository = MockAccountsRepository();

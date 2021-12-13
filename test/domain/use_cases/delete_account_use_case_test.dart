@@ -1,8 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:iif/domain/include.dart';
-import 'package:iif/domain/repositories/accounts_repository.dart';
 import 'package:iif/domain/use_cases/delete_account_use_case.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../account_fixtures.dart';
@@ -12,7 +10,7 @@ void main() {
   late DeleteAccountUseCase deleteAccountUseCase;
   late MockAccountsRepository mockAccountsRepository;
 
-  final type = AccountType.money;
+  const type = AccountType.money;
   final accountToDelete = getAccount(0, type);
 
   setUp(() {

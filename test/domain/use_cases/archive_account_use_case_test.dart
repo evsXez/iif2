@@ -11,7 +11,7 @@ void main() {
   late Account account;
   late MockAccountsRepository accountsRepository;
   late MockGetAccountsBalanceUseCase getAccountsBalanceUseCase;
-  final type = AccountType.money;
+  const type = AccountType.money;
   late List<Account> accountsData;
 
   setUp(() {

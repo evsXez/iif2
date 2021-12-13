@@ -1,10 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:iif/domain/include.dart';
-import 'package:iif/presentation/include.dart';
-import 'package:mockito/mockito.dart';
 
 import '../debts_use_cases.setup.dart';
-import '../mocks.mocks.dart';
 
 void main() {
   setUp(() {

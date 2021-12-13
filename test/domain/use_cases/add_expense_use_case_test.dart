@@ -1,15 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:iif/domain/include.dart';
-import 'package:iif/domain/repositories/accounts_repository.dart';
 import 'package:iif/domain/repositories/operations_repository.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../account_fixtures.dart';
 import '../mocks.mocks.dart';
 import '../operation_fixtures.dart';
 
-@GenerateMocks([AccountsRepository, OperationsRepository])
 void main() {
   late AddExpenseUseCase addExpenseUseCase;
   late OperationsRepository mockOperationsRepository;
