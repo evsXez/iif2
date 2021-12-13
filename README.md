@@ -1,16 +1,20 @@
-# iif
+# Intelligent Individual Finance (IIF v2)
 
-A new Flutter project.
+Hello everyone, that's my pet-project made in cooperation with my friend (not a programmer) - Victor N. who is an economist by vocation and of education.
 
-## Getting Started
+The main goal of this app - is to provide convenient way to deal with personal budget (internal use only, no plans to sell it).
 
-This project is a starting point for a Flutter application.
+Currently the work is in progress, we meet some time, share our ideas and try to implement them to make us (and our personal budgets) happy:)
 
-A few resources to get you started if this is your first Flutter project:
+# Some screens of the app
+![Screenshots](screenshots/sc.png)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+# Some (not)boring programmer stuff
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The app is build with layered architecture pattern in mind [Reso Coder's TDD + Clean](https://resocoder.com/2019/08/27/flutter-tdd-clean-architecture-course-1-explanation-project-structure).
+
+**Domain** and **data** layers are written using TDD technique.
+
+**Presentation** layer is build on BLoCs, thanks to the [flutter_bloc package](https://pub.dev/packages/flutter_bloc)
+
+Data is now stored in simple json. It is hard to keep consistent and this part will be refactored further to the **sqlite**. To be true, this is done  for simplifying things on the first stage and for changing this on next stages..
