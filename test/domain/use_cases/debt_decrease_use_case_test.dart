@@ -7,7 +7,7 @@ void main() {
     debtsSetUp();
   });
 
-  test('after adding debt increase operation we can get it', () async {
+  test('after adding debt decrease operation we can get it', () async {
     await testAfterAddingDebtOperationWeCanGetIt(
       () {
         debtDecreaseUseCase.execute(account, money, subject: subject);

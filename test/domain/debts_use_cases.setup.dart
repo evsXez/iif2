@@ -20,7 +20,7 @@ final Account account = accountMoney;
 late List<LogicOperation> listOperations;
 final money = money100;
 const initialMoney = Money(coins: 1000);
-final debtAccount = accountModel(1001, AccountType.debts, name: "John K.");
+final debtAccount = accountModel(1001, AccountType.debtsAndLoans, name: "John K.");
 final subject = Subject(1002, "subject name", SubjectType.debts);
 
 void debtsSetUp() {
@@ -38,6 +38,11 @@ void debtsSetUp() {
   listOperations = [
     getLogicOperationInitialInput(account, initialMoney),
   ];
+
+  when(mockAccountsRepository.getAccountForSubject(any)).thenAnswer((realInvocation) {
+    final Subject? subject = realInvocation.positionalArguments.first;
+    return debtAccount;
+  });
 
   when(mockOperationsRepository.getOperations(account)).thenAnswer((_) async => listOperations);
   when(mockOperationsRepository.addOperationDebtIncrease(account, money, debtAccount)).thenAnswer((_) {

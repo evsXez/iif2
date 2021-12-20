@@ -12,7 +12,7 @@ void main() {
     Account(
       id: -1,
       name: "no money",
-      type: AccountType.investments,
+      type: AccountType.money,
       currency: Currency.debugDefault,
     ),
     Money.zero,
@@ -22,28 +22,47 @@ void main() {
     Account(
       id: -1,
       name: "has money",
-      type: AccountType.investments,
+      type: AccountType.money,
       currency: Currency.debugDefault,
     ),
     const Money(coins: 1),
   );
 
-  final onlyInitial = AccountBalance(
+  final onlyInitialCredit = AccountBalance(
+    CreditCardAccount(
+      id: -1,
+      name: "only initial",
+      // type: AccountType.creditCards,
+      currency: Currency.debugDefault,
+      limit: Money.zero,
+    ),
+    const Money(coins: 10),
+  );
+  final onlyInitialMoney = AccountBalance(
     Account(
       id: -1,
       name: "only initial",
-      type: AccountType.creditCards,
+      type: AccountType.money,
       currency: Currency.debugDefault,
     ),
     const Money(coins: 10),
   );
 
-  final notOnlyInitial = AccountBalance(
+  final notOnlyInitialMoney = AccountBalance(
     Account(
       id: -1,
       name: "not only initial",
-      type: AccountType.creditCards,
+      type: AccountType.money,
       currency: Currency.debugDefault,
+    ),
+    const Money(coins: 10),
+  );
+  final notOnlyInitialCredit = AccountBalance(
+    CreditCardAccount(
+      id: -1,
+      name: "not only initial",
+      currency: Currency.debugDefault,
+      limit: Money.zero,
     ),
     const Money(coins: 10),
   );
@@ -85,10 +104,14 @@ void main() {
         .thenAnswer((_) async => [initialInput(noMoney.account, 0)]);
     when(operationsRepository.getOperations(hasMoney.account))
         .thenAnswer((_) async => [initialInput(hasMoney.account, 101)]);
-    when(operationsRepository.getOperations(onlyInitial.account))
-        .thenAnswer((_) async => [initialInput(onlyInitial.account, 10000), initialInput(onlyInitial.account, 10)]);
-    when(operationsRepository.getOperations(notOnlyInitial.account))
-        .thenAnswer((_) async => [initialInput(notOnlyInitial.account, 10000), expense(notOnlyInitial.account, 999)]);
+    when(operationsRepository.getOperations(onlyInitialMoney.account)).thenAnswer(
+        (_) async => [initialInput(onlyInitialMoney.account, 10000), initialInput(onlyInitialMoney.account, 10)]);
+    when(operationsRepository.getOperations(onlyInitialCredit.account)).thenAnswer(
+        (_) async => [initialInput(onlyInitialCredit.account, 10000), initialInput(onlyInitialCredit.account, 10)]);
+    when(operationsRepository.getOperations(notOnlyInitialMoney.account)).thenAnswer(
+        (_) async => [initialInput(notOnlyInitialMoney.account, 10000), expense(notOnlyInitialMoney.account, 999)]);
+    when(operationsRepository.getOperations(notOnlyInitialCredit.account)).thenAnswer(
+        (_) async => [initialInput(notOnlyInitialCredit.account, 10000), expense(notOnlyInitialCredit.account, 999)]);
   });
 
   test('we can archive accounts without money', () async {
@@ -98,9 +121,15 @@ void main() {
     expect((await getAccountOptionsUseCase.execute(hasMoney))?.isArchiveAvailable, false);
   });
   test('we can delete accounts with only initial input operations', () async {
-    expect((await getAccountOptionsUseCase.execute(onlyInitial))?.isDeleteAvailable, true);
+    expect((await getAccountOptionsUseCase.execute(onlyInitialMoney))?.isDeleteAvailable, true);
+  });
+  test('we can delete accounts with only initial input operations (credit)', () async {
+    expect((await getAccountOptionsUseCase.execute(onlyInitialCredit))?.isDeleteAvailable, true);
   });
   test('we can\'t delete accounts with operations other than initial input', () async {
-    expect((await getAccountOptionsUseCase.execute(notOnlyInitial))?.isDeleteAvailable, false);
+    expect((await getAccountOptionsUseCase.execute(notOnlyInitialMoney))?.isDeleteAvailable, false);
+  });
+  test('we can\'t delete accounts with operations other than initial input (credit)', () async {
+    expect((await getAccountOptionsUseCase.execute(notOnlyInitialCredit))?.isDeleteAvailable, false);
   });
 }

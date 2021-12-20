@@ -9,7 +9,10 @@ final List<String> persistedAccountsFixture = [
 		"symbol": "₽"
 	},
 	"isArchived": false,
-	"isDeleted": false
+	"isDeleted": false,
+  "creditLimitModel": {
+    "coins": 1234
+  }
 }
 """
 ];
@@ -39,7 +42,10 @@ final List<String> persistedOperationsFixture = [
 					"symbol": "₽"
 				},
 				"isArchived": false,
-      	"isDeleted": false
+      	"isDeleted": false,
+        "creditLimitModel": {
+          "coins": 1234
+        }
 			}
 		}
 	]

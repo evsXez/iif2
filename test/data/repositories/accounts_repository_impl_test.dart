@@ -15,26 +15,33 @@ void main() {
   late AccountsRepository repository;
   late MockDataSource mockDataSource;
   const AccountType type1 = AccountType.money;
-  const AccountType type2 = AccountType.creditCards;
+  const AccountType type2 = AccountType.debts;
+  const AccountType typeCredit = AccountType.creditCards;
   final AccountModel account1Type1 = accountModel(1, type1, name: 'account1');
   final AccountModel account2Type1 = accountModel(2, type1, name: 'account2');
   final AccountModel account3Type1 = accountModel(3, type1, name: 'account3');
   final AccountModel account1Type2 = accountModel(4, type2, name: 'account1');
   final AccountModel account2Type2 = accountModel(5, type2, name: 'account2');
   final AccountModel accountDeletedType1 = accountModel(6, type1, name: 'account2', isDeleted: true);
+  final CreditCardAccount account1TypeCredit =
+      CreditCardAccount(id: 1, name: 'account1', currency: Currency.debugDefault, limit: const Money(coins: 10));
 
-  final List<AccountModel> accountsType1 = [
+  final List<Account> accountsType1 = [
     account1Type1,
     account2Type1,
     account3Type1,
   ];
-  final List<AccountModel> accountsType2 = [
+  final List<Account> accountsType2 = [
     account1Type2,
     account2Type2,
   ];
-  final List<AccountModel> allAccounts = [
+  final List<Account> accountsTypeCredit = [
+    account1TypeCredit,
+  ];
+  final List<Account> allAccounts = [
     ...accountsType2,
     ...accountsType1,
+    ...accountsTypeCredit,
   ];
   final List<AccountModel> initiallyEmptyAccounts = [];
   final account = accountModel(101, AccountType.debtsAndLoans, name: 'account to save');
@@ -55,9 +62,24 @@ void main() {
   });
 
   test('data source has data and repository fetches it by type', () async {
-    when(mockDataSource.getAccounts()).thenReturn(allAccounts);
+    when(mockDataSource.getAccounts()).thenReturn(
+      allAccounts
+          .map((it) => AccountModel.fromAccount(it,
+              subjectId: null, creditLimit: it is CreditCardAccount ? it.limit : Money.zero))
+          .toList(),
+    );
     expect(repository.getAccountsOfType(type1), accountsType1);
     expect(repository.getAccountsOfType(type2), accountsType2);
+  });
+
+  test('data source has credit accounts and repository fetches it', () async {
+    when(mockDataSource.getAccounts()).thenReturn(
+      allAccounts
+          .map((it) => AccountModel.fromAccount(it,
+              subjectId: null, creditLimit: it is CreditCardAccount ? it.limit : Money.zero))
+          .toList(),
+    );
+    expect(repository.getAccountsOfType(typeCredit), accountsTypeCredit);
   });
 
   test('data source has archived accounts and repository\'s "getAccounts" ignores them', () async {

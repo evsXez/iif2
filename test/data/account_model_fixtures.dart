@@ -9,6 +9,7 @@ AccountModel accountModel(
   String? name,
   bool isArchived = false,
   bool isDeleted = false,
+  MoneyModel? creditLimitModel,
 }) =>
     AccountModel(
       id: id,
@@ -17,7 +18,7 @@ AccountModel accountModel(
       currency: Currency.debugDefault,
       isArchived: isArchived,
       isDeleted: isDeleted,
-      creditLimitModel: moneyModel(Money.zero),
+      creditLimitModel: creditLimitModel ?? moneyModel(Money.zero),
     );
 
 AtomicOperationModel atomicOperationModel(int id, AtomicOperationType type, Money money, AccountModel accountModel) =>

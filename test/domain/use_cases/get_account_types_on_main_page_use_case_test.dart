@@ -9,7 +9,13 @@ void main() {
     useCase = GetAccountTypesOnMainPageUseCase();
   });
 
-  test('show all account types on main page', () {
-    expect(useCase.execute(), AccountType.values);
+  test('specific account types on main page', () {
+    expect(useCase.execute(), [
+      AccountType.money,
+      AccountType.creditCards,
+      AccountType.debts,
+      AccountType.loans,
+      AccountType.investments,
+    ]);
   });
 }
