@@ -41,7 +41,7 @@ class LogicOperation {
             account: account,
           )
         ],
-        categoriesStamp: account.type == AccountType.debtsAndLoans
+        categoriesStamp: account.type == AccountType.debts || account.type == AccountType.loans
             ? Strings.category_initial_input_debt
             : Strings.category_initial_input,
         subjectsStamp: "",

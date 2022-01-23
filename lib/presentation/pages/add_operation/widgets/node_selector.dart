@@ -9,12 +9,14 @@ class NodeSelector<T extends NodeValue> extends StatefulWidget {
   // final dynamic Function(String text, Node<NodeValue> parent) valueBuilder;
   final StyleNodeColorSheme colorScheme;
   final T reference;
+  final AccountType? debtsType;
 
   const NodeSelector({
     Key? key,
     // required this.valueBuilder,
     required this.reference,
     required this.colorScheme,
+    required this.debtsType,
   }) : super(key: key);
 
   @override
@@ -46,7 +48,7 @@ class _NodeSelectorState<T extends NodeValue> extends State<NodeSelector> {
                           bloc.tap(ref);
                         },
                         onSave: (text) {
-                          bloc.save(ref, text, widget.reference);
+                          bloc.save(ref, text, widget.reference, widget.debtsType);
                           // bloc.save(ref.node, widget.valueBuilder, text);
                         },
                         onDelete: () {

@@ -14,7 +14,13 @@ class CreateNodeValueUseCase {
     required this.subjectsRepository,
   });
 
-  T execute<T extends NodeValue>(String text, NodeValue? value, NodeValue reference, {required NodeValue parent}) {
+  T execute<T extends NodeValue>(
+    String text,
+    NodeValue? value,
+    NodeValue reference, {
+    required NodeValue parent,
+    required AccountType? debtsType,
+  }) {
     switch (T) {
       case Category:
         final categoryTemplate = Category.template(
@@ -26,15 +32,15 @@ class CreateNodeValueUseCase {
           Subject.template(id: value?.id, name: text, type: SubjectType.debts),
           parent as Subject,
         );
-        accountsRepository.saveAccount(
-          Account(
-            id: -1,
-            type: subject.type == SubjectType.debts ? AccountType.debtsAndLoans : AccountType.investments,
-            name: subject.name,
-            currency: Currency.debugDefault,
-          ),
-          subject: subject,
-        );
+        // accountsRepository.saveAccount(
+        //   Account(
+        //     id: -1,
+        //     type: subject.type == SubjectType.debts ? debtsType! : AccountType.investments,
+        //     name: subject.name,
+        //     currency: Currency.debugDefault,
+        //   ),
+        //   subject: subject,
+        // );
 
         return subject as T;
     }

@@ -12,11 +12,13 @@ class AccountDebtEditItem extends StatefulWidget {
   final AccountBalance? accountBalanceToEdit;
   final Function(Subject?) onSubjectChanged;
   final Function(String) onMoneyChanged;
+  final AccountType debtType;
   const AccountDebtEditItem({
     Key? key,
     required this.accountBalanceToEdit,
     required this.onSubjectChanged,
     required this.onMoneyChanged,
+    required this.debtType,
   }) : super(key: key);
 
   @override
@@ -48,6 +50,7 @@ class _AccountDebtEditItemState extends State<AccountDebtEditItem> {
           child: NodeSelector<Subject>(
             colorScheme: StyleNodeColorSheme.subjectsHighlighted(),
             reference: Subject(-1, "", SubjectType.debts),
+            debtsType: widget.debtType,
           ),
         ),
       ),

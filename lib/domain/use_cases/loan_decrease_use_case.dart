@@ -18,11 +18,12 @@ class LoanDecreaseUseCase {
     String? categoriesStamp,
     String? subjectsStamp,
     required Subject subject,
+    required AccountType debtType,
   }) {
     operationsRepository.addOperationLoanDecrease(
       account,
       money,
-      accountsRepository.getAccountForSubject(subject),
+      accountsRepository.getAccountForSubjectAndType(subject, debtType),
       comment: comment,
       categoriesStamp: categoriesStamp,
       subjectsStamp: subjectsStamp,

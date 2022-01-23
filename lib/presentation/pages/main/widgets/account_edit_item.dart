@@ -24,10 +24,7 @@ class AccountEditItem extends StatefulWidget {
 }
 
 class _AccountEditItemState extends State<AccountEditItem> {
-  bool get isDebts =>
-      widget.accountType == AccountType.debts ||
-      widget.accountType == AccountType.loans ||
-      widget.accountType == AccountType.debtsAndLoans;
+  bool get isDebts => widget.accountType == AccountType.debts || widget.accountType == AccountType.loans;
   bool get isCredit => widget.accountType == AccountType.creditCards;
 
   bool _isInputCompletedAndSmthChanged = false;
@@ -89,6 +86,7 @@ class _AccountEditItemState extends State<AccountEditItem> {
                 accountBalanceToEdit: widget.accountBalanceToEdit,
                 onSubjectChanged: _subjectChanged,
                 onMoneyChanged: _moneyChanged,
+                debtType: widget.accountType,
               )
             : isCredit
                 ? AccountCreditEditItem(

@@ -34,10 +34,12 @@ class _AddOperationPageState extends State<AddOperationPage> {
     _categorySelector = NodeSelector(
       colorScheme: StyleNodeColorSheme.categories(),
       reference: Category.undefined(),
+      debtsType: null,
     );
     _subjectSelector = NodeSelector(
       colorScheme: StyleNodeColorSheme.subjects(),
       reference: Subject(-1, "", SubjectType.debts),
+      debtsType: AccountType.debts, //TODO
     );
 
     _categorySelectorBloc = NodeSelectorBloc(context);

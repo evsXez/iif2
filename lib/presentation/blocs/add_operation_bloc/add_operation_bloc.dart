@@ -155,6 +155,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
                 categoriesStamp: _fields.categoriesStamp,
                 subjectsStamp: _fields.subjectsStamp,
                 subject: _fields.subject!,
+                debtType: AccountType.debts,
               );
           break;
         case CategoryType.debtDecrease:
@@ -165,6 +166,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
                 categoriesStamp: _fields.categoriesStamp,
                 subjectsStamp: _fields.subjectsStamp,
                 subject: _fields.subject!,
+                debtType: AccountType.debts,
               );
           break;
         case CategoryType.loanIncrease:
@@ -175,6 +177,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
                 categoriesStamp: _fields.categoriesStamp,
                 subjectsStamp: _fields.subjectsStamp,
                 subject: _fields.subject!,
+                debtType: AccountType.loans,
               );
           break;
         case CategoryType.loanDecrease:
@@ -185,6 +188,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
                 categoriesStamp: _fields.categoriesStamp,
                 subjectsStamp: _fields.subjectsStamp,
                 subject: _fields.subject!,
+                debtType: AccountType.loans,
               );
           break;
         default:

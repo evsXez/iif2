@@ -13,8 +13,7 @@ class GetAccountsBalanceUseCase {
 
   Future<List<AccountBalance>> execute(AccountType type) async {
     final List<AccountBalance> result = [];
-    final typeModified = type == AccountType.debts || type == AccountType.loans ? AccountType.debtsAndLoans : type;
-    await Future.forEach<Account>(accountsRepository.getAccountsOfType(typeModified), (account) async {
+    await Future.forEach<Account>(accountsRepository.getAccountsOfType(type), (account) async {
       if (!account.isArchived) {
         final money = await operationsRepository.calculateBalance(account);
 

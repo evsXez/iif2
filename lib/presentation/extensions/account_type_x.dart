@@ -8,7 +8,6 @@ extension AccountTypeX on AccountType {
         return Strings.type_all_money;
       case AccountType.creditCards:
         return Strings.type_credit_cards;
-      case AccountType.debtsAndLoans:
       case AccountType.debts:
         return Strings.type_my_debts;
       case AccountType.loans:

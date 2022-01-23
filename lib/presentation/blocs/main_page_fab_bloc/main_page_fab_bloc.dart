@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:iif/domain/include.dart';
 import 'package:iif/misc/di/providers.dart';
 import 'package:iif/presentation/include.dart';
 
@@ -21,8 +22,9 @@ class MainPageFabBloc extends Cubit<MainPageFabState> {
   }
 
   void _updateData() async {
-    final hasAtLeastOneAccount = getAccountsCountUseCase.of(_context).execute() > 0;
+    final hasAtLeastOneProperAccount =
+        getAccountsCountUseCase.of(_context).execute([AccountType.money, AccountType.creditCards]) > 0;
     final isAccountEditorOpened = uiNotifierAccountEditorOpened.isAccountEditorOpened;
-    emit(hasAtLeastOneAccount && !isAccountEditorOpened ? const Shown() : const Hidden());
+    emit(hasAtLeastOneProperAccount && !isAccountEditorOpened ? const Shown() : const Hidden());
   }
 }

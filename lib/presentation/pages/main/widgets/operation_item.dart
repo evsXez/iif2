@@ -37,7 +37,7 @@ class OperationItem extends StatelessWidget {
                             borderRadius: const BorderRadius.all(Radius.circular(4)),
                           ),
                           child: MoneyText(
-                            money: operation.atomics.first.money,
+                            money: operation.atomics.first.money.abs(),
                             color: moneyFrontColor(),
                             fontWeight: FontWeight.w500,
                             fontSize: 18,
@@ -95,7 +95,8 @@ class OperationItem extends StatelessWidget {
       case LogicOperationType.expense:
         return Style.grayColor;
       case LogicOperationType.debts:
-        final atomicForAccount = operation.atomics.firstWhere((it) => it.account.type != AccountType.debtsAndLoans);
+        final atomicForAccount = operation.atomics
+            .firstWhere((it) => it.account.type != AccountType.debts && it.account.type != AccountType.loans);
         switch (atomicForAccount.type) {
           case AtomicOperationType.initialInput:
             return Style.lightGrayColor;

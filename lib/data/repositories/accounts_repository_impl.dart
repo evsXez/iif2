@@ -51,16 +51,16 @@ class AccountsRepositoryImpl extends AccountsRepository {
 
   //TODO: untested
   @override
-  Account getAccountForSubject(Subject subject) {
+  Account getAccountForSubjectAndType(Subject subject, AccountType type) {
     final data = _dataSource.getAccounts();
     try {
-      final result = data.firstWhere((it) => it.subjectId == subject.id);
+      final result = data.firstWhere((it) => it.subjectId == subject.id && it.type == type);
       return result;
     } catch (e) {
       return saveAccount(
         Account(
           id: -1,
-          type: subject.type == SubjectType.debts ? AccountType.debtsAndLoans : AccountType.investments,
+          type: type,
           name: subject.name,
           currency: Currency.debugDefault,
         ),

@@ -19,7 +19,7 @@ class SaveAccountUseCase {
   }) {
     final Account account;
     if (debtSubject != null) {
-      account = accountsRepository.getAccountForSubject(debtSubject);
+      account = accountsRepository.getAccountForSubjectAndType(debtSubject, accountTemplate.type);
     } else {
       account = accountsRepository.saveAccount(accountTemplate, creditLimit: creditLimit);
     }

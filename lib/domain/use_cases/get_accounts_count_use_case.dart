@@ -5,9 +5,9 @@ class GetAccountsCountUseCase {
   final AccountsRepository accountsRepository;
   GetAccountsCountUseCase({required this.accountsRepository});
 
-  int execute() {
+  int execute(List<AccountType> types) {
     int counter = 0;
-    for (var type in AccountType.values) {
+    for (var type in types) {
       counter += accountsRepository.getAccountsOfType(type).length;
     }
     return counter;

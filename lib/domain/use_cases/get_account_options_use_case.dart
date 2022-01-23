@@ -26,7 +26,8 @@ class GetAccountOptionsUseCase {
           isArchiveAvailable: accountBalance.money == creditCardAccount.limit,
           isDeleteAvailable: accountHasNoOperationsExceptInitialInput,
         );
-      case AccountType.debtsAndLoans:
+      case AccountType.debts:
+      case AccountType.loans:
         return AccountOptions(
           isDeleteVisible: false,
           isArchiveVisible: false,

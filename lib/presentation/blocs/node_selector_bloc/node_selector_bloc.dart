@@ -67,7 +67,7 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
     _showData();
   }
 
-  void save(NodeRef<T> nodeRef, String text, NodeValue reference) {
+  void save(NodeRef<T> nodeRef, String text, NodeValue reference, AccountType? debtsType) {
     if (nodeRef.node == _addNode) {
       final Node<NodeValue> parent = _root.deepSelected();
       parent.children.add(
@@ -77,6 +77,7 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
                 null,
                 reference,
                 parent: nodeRef.parent.value as NodeValue,
+                debtsType: debtsType,
               ),
           children: [],
           isSelected: true,
@@ -88,6 +89,7 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
             nodeRef.node.value,
             reference,
             parent: nodeRef.parent.value as NodeValue,
+            debtsType: debtsType,
           );
     }
     nodeRef.node.isEditing = false;

@@ -17,6 +17,6 @@ void main() {
 
   test('accounts count', () {
     when(mockAccountsRepository.getAccountsOfType(any)).thenReturn([accountMoney]);
-    expect(getAccountsCountUseCase.execute(), AccountType.values.length);
+    expect(getAccountsCountUseCase.execute(AccountType.values), AccountType.values.length);
   });
 }
