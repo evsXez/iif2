@@ -42,6 +42,8 @@ extension MoneyX on Money {
 
     return Money(coins: (value * 100).round());
   }
+
+  Money abs() => coins > 0 ? this : Money(coins: -coins);
 }
 
 class ExceptionMoneyNotParsed {}

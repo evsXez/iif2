@@ -27,7 +27,7 @@ class AccountPlainItem extends StatelessWidget {
               ),
             ),
             MoneyText(
-              money: money,
+              money: money.abs(),
               currency: account.currency,
               fontSize: 16,
               fontWeight: FontWeight.w300,

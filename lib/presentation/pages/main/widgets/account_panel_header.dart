@@ -30,7 +30,7 @@ class AccountPanelHeader extends StatelessWidget {
             money == null
                 ? const SizedBox.shrink()
                 : MoneyText(
-                    money: money!,
+                    money: money!.abs(),
                     fontWeight: FontWeight.w400,
                     fontSize: 18,
                   ),

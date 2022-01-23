@@ -55,7 +55,7 @@ class _AccountDebtEditItemState extends State<AccountDebtEditItem> {
   );
 
   late MoneyField moneyField = MoneyField(
-    initialValue: widget.accountBalanceToEdit?.money,
+    initialValue: widget.accountBalanceToEdit?.money.abs(),
     onChanged: widget.onMoneyChanged,
   );
 
