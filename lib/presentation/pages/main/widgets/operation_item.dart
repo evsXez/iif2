@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iif/domain/include.dart';
 import 'package:iif/presentation/include.dart';
+import 'package:intl/intl.dart';
 
 class OperationItem extends StatelessWidget {
   final LogicOperation operation;
@@ -56,32 +57,43 @@ class OperationItem extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(child: _OperationInfo(operation)),
               const SizedBox(width: 4),
-              // Column(
-              //   // mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //   // mainAxisSize: MainAxisSize.max,
-              //   crossAxisAlignment: CrossAxisAlignment.end,
-              //   children: [
-              //     Text(
-              //       statDateDayMonth(),
-              //       style: const TextStyle(
-              //         color: Colors.grey,
-              //         fontSize: 12,
-              //       ),
-              //     ),
-              //     Text(
-              //       statDateYear(),
-              //       style: const TextStyle(
-              //         color: Colors.grey,
-              //         fontSize: 12,
-              //       ),
-              //     ),
-              //   ],
-              // ),
+              Column(
+                // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                // mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    _statDateDayMonth(),
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
+                    ),
+                  ),
+                  Text(
+                    _statDateYear(),
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  String _statDateDayMonth() {
+    final dt = DateTime.fromMillisecondsSinceEpoch(operation.stats.statsTs);
+    final month = DateFormat.MMM().format(dt);
+    return "${dt.day} $month";
+  }
+
+  String _statDateYear() {
+    final dt = DateTime.fromMillisecondsSinceEpoch(operation.stats.statsTs);
+    return "${dt.year}";
   }
 
   Color moneyBackColor() {

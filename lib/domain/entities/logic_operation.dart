@@ -6,6 +6,7 @@ class LogicOperation {
   final DateTime created;
   final String comment;
   final List<AtomicOperation> atomics;
+  late final LogicOperationTime stats;
 
   //Subject? subject; //general
 
@@ -20,7 +21,10 @@ class LogicOperation {
     required this.atomics,
     required this.categoriesStamp,
     required this.subjectsStamp,
-  });
+    LogicOperationTime? stats,
+  }) {
+    this.stats = stats ?? LogicOperationTime.fromNow();
+  }
 
   factory LogicOperation.initialInput({
     required Account account,
