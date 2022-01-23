@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iif/data/models/account_model.dart';
 import 'package:iif/domain/include.dart';
+import 'package:iif/misc/di/providers.dart';
 import 'package:iif/presentation/blocs/accounts_panel_bloc/accounts_panel_bloc.dart';
 import 'package:iif/presentation/include.dart';
 import 'package:iif/presentation/pages/main/widgets/account_credit_edit_item.dart';
@@ -22,7 +24,10 @@ class AccountEditItem extends StatefulWidget {
 }
 
 class _AccountEditItemState extends State<AccountEditItem> {
-  bool get isDebts => widget.accountType == AccountType.debts || widget.accountType == AccountType.loans;
+  bool get isDebts =>
+      widget.accountType == AccountType.debts ||
+      widget.accountType == AccountType.loans ||
+      widget.accountType == AccountType.debtsAndLoans;
   bool get isCredit => widget.accountType == AccountType.creditCards;
 
   bool _isInputCompletedAndSmthChanged = false;
@@ -33,6 +38,7 @@ class _AccountEditItemState extends State<AccountEditItem> {
       ? ((widget.accountBalanceToEdit?.account as CreditCardAccount?)?.limit.toStringAsPrice() ?? "")
       : "";
   Subject? _selectedDebtSubject;
+  Subject? _initialDebtSubject;
 
   void _somethingChanged() {
     bool nameEntered = _name.isNotEmpty;
@@ -47,7 +53,8 @@ class _AccountEditItemState extends State<AccountEditItem> {
         : false;
 
     bool subjectDebtEntered = _selectedDebtSubject != null;
-    bool subjectDebtChanged = subjectDebtEntered; //no edit for now
+    bool subjectDebtChanged =
+        _initialDebtSubject != null ? (_initialDebtSubject != _selectedDebtSubject) : subjectDebtEntered;
 
     setState(() {
       if (isDebts) {
@@ -59,6 +66,17 @@ class _AccountEditItemState extends State<AccountEditItem> {
         _isInputCompletedAndSmthChanged = (nameEntered && moneyEntered && (nameChanged || moneyChanged));
       }
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    final account = widget.accountBalanceToEdit?.account;
+    if (account is AccountModel && account.subjectId != null) {
+      final subject = subjectsRepository.of(context).getSubjectForId(account.subjectId);
+      _initialDebtSubject = subject;
+    }
   }
 
   @override

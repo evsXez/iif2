@@ -40,6 +40,16 @@ class SubjectsRepositoryImpl extends SubjectsRepository {
   }
 
   @override
+  Subject? getSubjectForId(int? id) {
+    try {
+      final result = _dataSource.getSubjects().where((it) => it.id == id).first;
+      return result;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
   Subject saveSubject(Subject template, Subject parent) {
     if (template.id >= 0) {
       final subjects = _dataSource.getSubjects();
