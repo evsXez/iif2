@@ -26,7 +26,7 @@ class AccountDebtEditItem extends StatefulWidget {
 }
 
 class _AccountDebtEditItemState extends State<AccountDebtEditItem> {
-  late final debtSubjectSelectorBloc = NodeSelectorBloc<Subject>(context);
+  late final debtSubjectSelectorBloc = NodeSelectorBloc<Subject>(context, filter: (_) => true);
   late final debtSubjectSelector = BlocProvider<NodeSelectorBloc<Subject>>(
     create: (context) => debtSubjectSelectorBloc,
     child: Padding(
@@ -50,7 +50,7 @@ class _AccountDebtEditItemState extends State<AccountDebtEditItem> {
           child: NodeSelector<Subject>(
             colorScheme: StyleNodeColorSheme.subjectsHighlighted(),
             reference: Subject(-1, "", SubjectType.debts),
-            debtsType: widget.debtType,
+            bloc: debtSubjectSelectorBloc,
           ),
         ),
       ),

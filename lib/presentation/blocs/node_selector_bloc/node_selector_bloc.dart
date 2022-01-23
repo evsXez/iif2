@@ -7,12 +7,18 @@ import 'node_selector_state.dart';
 
 class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> {
   final BuildContext _context;
+  final bool Function(NodeValue?) filter;
+  final SubjectType? subjectType;
 
   late final Node<NodeValue> _root;
   final Node<T> _addNode = Node.composer();
 
-  NodeSelectorBloc(this._context) : super(const Loading()) {
-    _root = getRootNodeUseCase.of(_context).execute(T);
+  NodeSelectorBloc(
+    this._context, {
+    required this.filter,
+    this.subjectType,
+  }) : super(const Loading()) {
+    _root = getRootNodeUseCase.of(_context).execute(T, subjectType);
     _showData();
   }
 
@@ -31,7 +37,11 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
         break;
       }
     }
-    view.addAll((root?.children ?? []).map((e) => NodeRef<T>(node: e as Node<T>, parent: root as Node<T>)).toList());
+    print("sa");
+    view.addAll((root?.children ?? [])
+        .where((it) => filter(it.value))
+        .map((e) => NodeRef<T>(node: e as Node<T>, parent: root as Node<T>))
+        .toList());
     bool canHaveMoreChildren = root?.canHaveMoreChildren ?? false;
     final value = root?.value;
     if (value is Category &&
@@ -67,7 +77,7 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
     _showData();
   }
 
-  void save(NodeRef<T> nodeRef, String text, NodeValue reference, AccountType? debtsType) {
+  void save(NodeRef<T> nodeRef, String text, NodeValue reference) {
     if (nodeRef.node == _addNode) {
       final Node<NodeValue> parent = _root.deepSelected();
       parent.children.add(
@@ -77,7 +87,6 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
                 null,
                 reference,
                 parent: nodeRef.parent.value as NodeValue,
-                debtsType: debtsType,
               ),
           children: [],
           isSelected: true,
@@ -89,7 +98,6 @@ class NodeSelectorBloc<T extends NodeValue> extends Cubit<NodeSelectorState<T>> 
             nodeRef.node.value,
             reference,
             parent: nodeRef.parent.value as NodeValue,
-            debtsType: debtsType,
           );
     }
     nodeRef.node.isEditing = false;

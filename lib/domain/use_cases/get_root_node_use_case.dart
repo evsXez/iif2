@@ -10,12 +10,12 @@ class GetRootNodeUseCase {
     required this.subjectsRepository,
   });
 
-  Node<NodeValue> execute(Type type) {
+  Node<NodeValue> execute(Type type, SubjectType? subjectType) {
     switch (type) {
       case Category:
         return categoriesRepository.getCategories();
       case Subject:
-        return subjectsRepository.getSubjects(SubjectType.debts);
+        return subjectsRepository.getSubjects(subjectType!);
     }
 
     throw UnimplementedError();

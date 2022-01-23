@@ -9,14 +9,14 @@ class NodeSelector<T extends NodeValue> extends StatefulWidget {
   // final dynamic Function(String text, Node<NodeValue> parent) valueBuilder;
   final StyleNodeColorSheme colorScheme;
   final T reference;
-  final AccountType? debtsType;
+  final NodeSelectorBloc<T> bloc;
 
   const NodeSelector({
     Key? key,
     // required this.valueBuilder,
     required this.reference,
     required this.colorScheme,
-    required this.debtsType,
+    required this.bloc,
   }) : super(key: key);
 
   @override
@@ -25,15 +25,11 @@ class NodeSelector<T extends NodeValue> extends StatefulWidget {
 
 class _NodeSelectorState<T extends NodeValue> extends State<NodeSelector> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocBuilder<NodeSelectorBloc<T>, NodeSelectorState<T>>(
+      bloc: widget.bloc as NodeSelectorBloc<T>,
       builder: (context, state) {
-        final bloc = BlocProvider.of<NodeSelectorBloc<T>>(context);
+        // final bloc = BlocProvider.of<NodeSelectorBloc<T>>(context);
         return state.map(
           loading: (_) => const Center(child: CircularProgressIndicator()),
           loaded: (state) => Wrap(
@@ -45,17 +41,17 @@ class _NodeSelectorState<T extends NodeValue> extends State<NodeSelector> {
                         node: ref.node,
                         colorScheme: widget.colorScheme,
                         onTap: () {
-                          bloc.tap(ref);
+                          widget.bloc.tap(ref);
                         },
                         onSave: (text) {
-                          bloc.save(ref, text, widget.reference, widget.debtsType);
+                          widget.bloc.save(ref, text, widget.reference);
                           // bloc.save(ref.node, widget.valueBuilder, text);
                         },
                         onDelete: () {
-                          bloc.delete(ref);
+                          widget.bloc.delete(ref);
                         },
                         onLongPress: () {
-                          bloc.edit(ref);
+                          widget.bloc.edit(ref);
                         }),
                   ),
                 )

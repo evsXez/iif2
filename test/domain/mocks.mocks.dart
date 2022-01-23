@@ -54,8 +54,10 @@ class MockAccountsRepository extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#getAccountsOfType, [type]),
           returnValue: <_i2.Account>[]) as List<_i2.Account>);
   @override
-  _i2.Account getAccountForSubject(_i2.Subject? subject) =>
-      (super.noSuchMethod(Invocation.method(#getAccountForSubject, [subject]),
+  _i2.Account getAccountForSubjectAndType(
+          _i2.Subject? subject, _i2.AccountType? type) =>
+      (super.noSuchMethod(
+          Invocation.method(#getAccountForSubjectAndType, [subject, type]),
           returnValue: _FakeAccount_0()) as _i2.Account);
   @override
   _i2.Account saveAccount(_i2.Account? accountTemplate,

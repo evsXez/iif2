@@ -22,32 +22,50 @@ class AddOperationPage extends StatefulWidget {
 
 class _AddOperationPageState extends State<AddOperationPage> {
   late NodeSelector<Category> _categorySelector;
-  late NodeSelector<Subject> _subjectSelector;
+  late NodeSelector<Subject> _debtSubjectSelector;
+  late NodeSelector<Subject> _generalSubjectSelector;
   late OperationMoney _operationMoney;
 
   late NodeSelectorBloc<Category> _categorySelectorBloc;
-  late NodeSelectorBloc<Subject> _subjectSelectorBloc;
+  late NodeSelectorBloc<Subject> _debtSubjectSelectorBloc;
+  late NodeSelectorBloc<Subject> _generalSubjectSelectorBloc;
   late AddOperationBloc _addOperationBloc;
 
   void initState() {
     super.initState();
+    _categorySelectorBloc = NodeSelectorBloc(context, filter: (_) => true);
+    _debtSubjectSelectorBloc = NodeSelectorBloc(
+      context,
+      filter: (it) => (it as Subject).type == SubjectType.debts,
+      subjectType: SubjectType.debts,
+    );
+    _generalSubjectSelectorBloc = NodeSelectorBloc(
+      context,
+      filter: (it) => (it as Subject).type == SubjectType.general,
+      subjectType: SubjectType.general,
+    );
+
     _categorySelector = NodeSelector(
       colorScheme: StyleNodeColorSheme.categories(),
       reference: Category.undefined(),
-      debtsType: null,
+      bloc: _categorySelectorBloc,
     );
-    _subjectSelector = NodeSelector(
+    _debtSubjectSelector = NodeSelector(
       colorScheme: StyleNodeColorSheme.subjects(),
       reference: Subject(-1, "", SubjectType.debts),
-      debtsType: AccountType.debts, //TODO
+      bloc: _debtSubjectSelectorBloc,
+    );
+    _generalSubjectSelector = NodeSelector(
+      colorScheme: StyleNodeColorSheme.subjects(),
+      reference: Subject(-1, "", SubjectType.general),
+      bloc: _generalSubjectSelectorBloc,
     );
 
-    _categorySelectorBloc = NodeSelectorBloc(context);
-    _subjectSelectorBloc = NodeSelectorBloc(context);
     _addOperationBloc = AddOperationBloc(
       context,
       categorySelectorBloc: _categorySelectorBloc,
-      subjectSelectorBloc: _subjectSelectorBloc,
+      debtSubjectSelectorBloc: _debtSubjectSelectorBloc,
+      generalSubjectSelectorBloc: _generalSubjectSelectorBloc,
     );
 
     _operationMoney = OperationMoney(
@@ -81,101 +99,76 @@ class _AddOperationPageState extends State<AddOperationPage> {
           )
         ],
       ),
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider<NodeSelectorBloc<Category>>(create: (_) => _categorySelectorBloc),
-          BlocProvider<NodeSelectorBloc<Subject>>(create: (_) => _subjectSelectorBloc),
-        ],
-        child: BlocConsumer<AddOperationBloc, AddOperationState>(
-          bloc: _addOperationBloc,
-          listener: (context, state) {
-            state.maybeMap(
-              visibility: (state) {
-                if (state.errorMessage != null) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.errorMessage!)));
-                }
-              },
-              saved: (_) {
-                Navigator.of(context).pop();
-              },
-              orElse: () {},
-            );
-          },
-          builder: (context, state) {
-            return state.map(
-              idle: (_) => Container(
-                // color: Style.accentColor,
-                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-                child: _categorySelector,
-                // child: _subjectSelector,
-              ),
-              visibility: (visibility) {
-                final transferBackgroundColor = visibility.subject
-                    ? StyleNodeColorSheme.subjects().selectedBackgroundColor
-                    : StyleNodeColorSheme.categories().selectedBackgroundColor;
-                final transferArrowColor = Style.whiteColor;
-                // visibility.subject
-                //     ? StyleNodeColorSheme.subjects().selectedTextColor
-                //     : StyleNodeColorSheme.categories().selectedTextColor;
+      body: BlocConsumer<AddOperationBloc, AddOperationState>(
+        bloc: _addOperationBloc,
+        listener: (context, state) {
+          state.maybeMap(
+            visibility: (state) {
+              if (state.errorMessage != null) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.errorMessage!)));
+              }
+            },
+            saved: (_) {
+              Navigator.of(context).pop();
+            },
+            orElse: () {},
+          );
+        },
+        builder: (context, state) {
+          return state.map(
+            idle: (_) => Container(
+              // color: Style.accentColor,
+              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+              child: _categorySelector,
+              // child: _subjectSelector,
+            ),
+            visibility: (visibility) {
+              final transferBackgroundColor = visibility.debtSubject || visibility.generalSubject
+                  ? StyleNodeColorSheme.subjects().selectedBackgroundColor
+                  : StyleNodeColorSheme.categories().selectedBackgroundColor;
+              final transferArrowColor = Style.whiteColor;
+              // visibility.subject
+              //     ? StyleNodeColorSheme.subjects().selectedTextColor
+              //     : StyleNodeColorSheme.categories().selectedTextColor;
 
-                return ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  children: [
-                    const SizedBox(height: 8),
-                    _categorySelector,
-                    Visibility(
-                      visible: visibility.subject,
-                      child: _subjectSelector,
-                    ),
-                    const SizedBox(height: 16),
-                    Visibility(
-                      visible: visibility.locationFrom || visibility.locationTo,
-                      child: Frame(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            // SizedBox(width: 24),
-                            Visibility(
-                              visible: visibility.locationFrom,
-                              child: Expanded(
-                                child: AccountSelector(
-                                  alignment: visibility.locationFrom && visibility.locationTo
-                                      ? Alignment.centerRight
-                                      : Alignment.centerLeft,
-                                  initialAccount: visibility.accountsBalance.first.account,
-                                  onAccountChanged: (account) {
-                                    _addOperationBloc.accountFromChanged(account);
-                                  },
-                                  accountsBalance: visibility.accountsBalance,
-                                ),
+              return ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                children: [
+                  const SizedBox(height: 8),
+                  _categorySelector,
+                  Visibility(
+                    visible: visibility.debtSubject,
+                    child: _debtSubjectSelector,
+                  ),
+                  Visibility(
+                    visible: visibility.generalSubject,
+                    child: _generalSubjectSelector,
+                  ),
+                  const SizedBox(height: 16),
+                  Visibility(
+                    visible: visibility.locationFrom || visibility.locationTo,
+                    child: Frame(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          // SizedBox(width: 24),
+                          Visibility(
+                            visible: visibility.locationFrom,
+                            child: Expanded(
+                              child: AccountSelector(
+                                alignment: visibility.locationFrom && visibility.locationTo
+                                    ? Alignment.centerRight
+                                    : Alignment.centerLeft,
+                                initialAccount: visibility.accountsBalance.first.account,
+                                onAccountChanged: (account) {
+                                  _addOperationBloc.accountFromChanged(account);
+                                },
+                                accountsBalance: visibility.accountsBalance,
                               ),
                             ),
-                            Visibility(
-                                visible: visibility.locationTo,
-                                child: Container(
-                                  height: double.infinity,
-                                  color: transferBackgroundColor,
-                                  child: TransferArrow(
-                                    isSmall: false,
-                                    color: transferArrowColor,
-                                  ),
-                                )),
-                            Visibility(
+                          ),
+                          Visibility(
                               visible: visibility.locationTo,
-                              child: Expanded(
-                                child: AccountSelector(
-                                  alignment: Alignment.centerLeft,
-                                  initialAccount: visibility.accountsBalance.first.account,
-                                  onAccountChanged: (account) {
-                                    _addOperationBloc.accountToChanged(account);
-                                  },
-                                  accountsBalance: visibility.accountsBalance,
-                                ),
-                              ),
-                            ),
-                            // selectedCategory == OperationCategory.transfer ? SizedBox.shrink() : Expanded(flex: 1, child: SizedBox.shrink()),
-                            Visibility(
-                              visible: visibility.locationFrom && !visibility.locationTo,
                               child: Container(
                                 height: double.infinity,
                                 color: transferBackgroundColor,
@@ -183,51 +176,74 @@ class _AddOperationPageState extends State<AddOperationPage> {
                                   isSmall: false,
                                   color: transferArrowColor,
                                 ),
+                              )),
+                          Visibility(
+                            visible: visibility.locationTo,
+                            child: Expanded(
+                              child: AccountSelector(
+                                alignment: Alignment.centerLeft,
+                                initialAccount: visibility.accountsBalance.first.account,
+                                onAccountChanged: (account) {
+                                  _addOperationBloc.accountToChanged(account);
+                                },
+                                accountsBalance: visibility.accountsBalance,
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Visibility(
-                      visible: visibility.money,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 5,
-                            child: Frame(
-                              child: _operationMoney,
-                            ),
                           ),
-                          const Expanded(
-                            flex: 4,
-                            child: Frame(child: _Dates()),
+                          // selectedCategory == OperationCategory.transfer ? SizedBox.shrink() : Expanded(flex: 1, child: SizedBox.shrink()),
+                          Visibility(
+                            visible: visibility.locationFrom && !visibility.locationTo,
+                            child: Container(
+                              height: double.infinity,
+                              color: transferBackgroundColor,
+                              child: TransferArrow(
+                                isSmall: false,
+                                color: transferArrowColor,
+                              ),
+                            ),
                           ),
                         ],
                       ),
                     ),
-                    Visibility(
-                      visible: visibility.comment,
-                      child: Frame(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: StringField(
-                            hint: Strings.hint_comment,
-                            initialValue: "",
-                            onChanged: (text) {
-                              _addOperationBloc.commentChanged(text);
-                            },
+                  ),
+                  Visibility(
+                    visible: visibility.money,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: Frame(
+                            child: _operationMoney,
                           ),
+                        ),
+                        const Expanded(
+                          flex: 4,
+                          child: Frame(child: _Dates()),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Visibility(
+                    visible: visibility.comment,
+                    child: Frame(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: StringField(
+                          hint: Strings.hint_comment,
+                          initialValue: "",
+                          onChanged: (text) {
+                            _addOperationBloc.commentChanged(text);
+                          },
                         ),
                       ),
                     ),
-                  ],
-                );
-              },
-              saved: (_) => const SizedBox.shrink(),
-            );
-          },
-        ),
+                  ),
+                ],
+              );
+            },
+            saved: (_) => const SizedBox.shrink(),
+          );
+        },
       ),
     );
   }

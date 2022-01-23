@@ -19,7 +19,6 @@ class CreateNodeValueUseCase {
     NodeValue? value,
     NodeValue reference, {
     required NodeValue parent,
-    required AccountType? debtsType,
   }) {
     switch (T) {
       case Category:
@@ -27,9 +26,9 @@ class CreateNodeValueUseCase {
             id: value?.id, name: text, type: value is Category ? value.type : (reference as Category).type);
 
         return categoriesRepository.saveCategory(categoryTemplate, parent as Category) as T;
-      case Subject: //TODO: now it is only for debts
+      case Subject:
         final subject = subjectsRepository.saveSubject(
-          Subject.template(id: value?.id, name: text, type: SubjectType.debts),
+          Subject.template(id: value?.id, name: text, type: (reference as Subject).type),
           parent as Subject,
         );
         // accountsRepository.saveAccount(

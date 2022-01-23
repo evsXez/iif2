@@ -13,12 +13,14 @@ class AddIncomeUseCase {
     Money money, {
     String? comment,
     String? categoriesStamp,
+    String? subjectsStamp,
   }) {
     operationsRepository.addOperationIncome(
       account,
       money,
       comment: comment,
       categoriesStamp: categoriesStamp,
+      subjectsStamp: subjectsStamp,
     );
   }
 }

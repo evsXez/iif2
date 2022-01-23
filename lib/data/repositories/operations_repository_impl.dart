@@ -67,6 +67,7 @@ class OperationsRepositoryImpl extends OperationsRepository {
     Money money, {
     String? comment,
     String? categoriesStamp,
+    String? subjectsStamp,
   }) {
     try {
       _dataSource.addOperation(
@@ -75,6 +76,7 @@ class OperationsRepositoryImpl extends OperationsRepository {
           money,
           comment: comment,
           categoriesStamp: categoriesStamp,
+          subjectsStamp: subjectsStamp,
         ),
       );
     } finally {
@@ -88,6 +90,7 @@ class OperationsRepositoryImpl extends OperationsRepository {
     Money money, {
     String? comment,
     String? categoriesStamp,
+    String? subjectsStamp,
   }) {
     try {
       _dataSource.addOperation(
@@ -96,6 +99,7 @@ class OperationsRepositoryImpl extends OperationsRepository {
           money,
           comment: comment,
           categoriesStamp: categoriesStamp,
+          subjectsStamp: subjectsStamp,
         ),
       );
     } finally {

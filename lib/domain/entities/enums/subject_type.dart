@@ -1,5 +1,5 @@
 enum SubjectType {
-  general, //must have
+  general,
   debts,
   investments,
 }

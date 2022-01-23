@@ -13,7 +13,8 @@ import 'add_operation_state.dart';
 class AddOperationBloc extends Cubit<AddOperationState> {
   final BuildContext _context;
   final NodeSelectorBloc<Category> categorySelectorBloc;
-  final NodeSelectorBloc<Subject> subjectSelectorBloc;
+  final NodeSelectorBloc<Subject> debtSubjectSelectorBloc;
+  final NodeSelectorBloc<Subject> generalSubjectSelectorBloc;
 
   List<StreamSubscription> _obs = [];
   List<AccountBalance> _accountsBalance = [];
@@ -23,10 +24,12 @@ class AddOperationBloc extends Cubit<AddOperationState> {
   AddOperationBloc(
     this._context, {
     required this.categorySelectorBloc,
-    required this.subjectSelectorBloc,
+    required this.debtSubjectSelectorBloc,
+    required this.generalSubjectSelectorBloc,
   }) : super(const Idle()) {
     _obs.add(categorySelectorBloc.stream.listen(_onCategoriesChanged));
-    _obs.add(subjectSelectorBloc.stream.listen(_onSubjectsChanged));
+    _obs.add(debtSubjectSelectorBloc.stream.listen(_onSubjectsChanged));
+    _obs.add(generalSubjectSelectorBloc.stream.listen(_onSubjectsChanged));
 
     _getAccounts();
   }
@@ -91,7 +94,8 @@ class AddOperationBloc extends Cubit<AddOperationState> {
     final isDebts = isDebtIncrease || isDebtDecrease || isLoanIncrease || isLoanDecrease;
     emit(
       VisibilityState(
-        subject: isDebts,
+        debtSubject: isDebts,
+        generalSubject: isIncome || isExpense,
         locationFrom: isExpense || isTransfer || isDebtDecrease || isLoanIncrease,
         locationTo: isIncome || isTransfer || isDebtIncrease || isLoanDecrease,
         money: isIncome || isExpense || isTransfer || isDebts,
@@ -128,6 +132,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
                 _fields.money!,
                 comment: _fields.comment,
                 categoriesStamp: _fields.categoriesStamp,
+                subjectsStamp: _fields.subjectsStamp,
               );
           break;
         case CategoryType.income:
@@ -136,6 +141,7 @@ class AddOperationBloc extends Cubit<AddOperationState> {
                 _fields.money!,
                 comment: _fields.comment,
                 categoriesStamp: _fields.categoriesStamp,
+                subjectsStamp: _fields.subjectsStamp,
               );
           break;
         case CategoryType.transfer:

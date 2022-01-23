@@ -22,7 +22,8 @@ class _$AddOperationStateTearOff {
   }
 
   VisibilityState visibility(
-      {required bool subject,
+      {required bool debtSubject,
+      required bool generalSubject,
       required bool locationFrom,
       required bool locationTo,
       required bool money,
@@ -30,7 +31,8 @@ class _$AddOperationStateTearOff {
       required List<AccountBalance> accountsBalance,
       String? errorMessage}) {
     return VisibilityState(
-      subject: subject,
+      debtSubject: debtSubject,
+      generalSubject: generalSubject,
       locationFrom: locationFrom,
       locationTo: locationTo,
       money: money,
@@ -54,7 +56,8 @@ mixin _$AddOperationState {
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
     required TResult Function(
-            bool subject,
+            bool debtSubject,
+            bool generalSubject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -69,7 +72,8 @@ mixin _$AddOperationState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
     TResult Function(
-            bool subject,
+            bool debtSubject,
+            bool generalSubject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -84,7 +88,8 @@ mixin _$AddOperationState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
     TResult Function(
-            bool subject,
+            bool debtSubject,
+            bool generalSubject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -176,7 +181,8 @@ class _$Idle implements Idle {
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
     required TResult Function(
-            bool subject,
+            bool debtSubject,
+            bool generalSubject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -194,7 +200,8 @@ class _$Idle implements Idle {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
     TResult Function(
-            bool subject,
+            bool debtSubject,
+            bool generalSubject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -212,7 +219,8 @@ class _$Idle implements Idle {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
     TResult Function(
-            bool subject,
+            bool debtSubject,
+            bool generalSubject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -274,7 +282,8 @@ abstract class $VisibilityStateCopyWith<$Res> {
           VisibilityState value, $Res Function(VisibilityState) then) =
       _$VisibilityStateCopyWithImpl<$Res>;
   $Res call(
-      {bool subject,
+      {bool debtSubject,
+      bool generalSubject,
       bool locationFrom,
       bool locationTo,
       bool money,
@@ -296,7 +305,8 @@ class _$VisibilityStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? subject = freezed,
+    Object? debtSubject = freezed,
+    Object? generalSubject = freezed,
     Object? locationFrom = freezed,
     Object? locationTo = freezed,
     Object? money = freezed,
@@ -305,9 +315,13 @@ class _$VisibilityStateCopyWithImpl<$Res>
     Object? errorMessage = freezed,
   }) {
     return _then(VisibilityState(
-      subject: subject == freezed
-          ? _value.subject
-          : subject // ignore: cast_nullable_to_non_nullable
+      debtSubject: debtSubject == freezed
+          ? _value.debtSubject
+          : debtSubject // ignore: cast_nullable_to_non_nullable
+              as bool,
+      generalSubject: generalSubject == freezed
+          ? _value.generalSubject
+          : generalSubject // ignore: cast_nullable_to_non_nullable
               as bool,
       locationFrom: locationFrom == freezed
           ? _value.locationFrom
@@ -341,7 +355,8 @@ class _$VisibilityStateCopyWithImpl<$Res>
 
 class _$VisibilityState implements VisibilityState {
   const _$VisibilityState(
-      {required this.subject,
+      {required this.debtSubject,
+      required this.generalSubject,
       required this.locationFrom,
       required this.locationTo,
       required this.money,
@@ -350,7 +365,9 @@ class _$VisibilityState implements VisibilityState {
       this.errorMessage});
 
   @override
-  final bool subject;
+  final bool debtSubject;
+  @override
+  final bool generalSubject;
   @override
   final bool locationFrom;
   @override
@@ -366,16 +383,19 @@ class _$VisibilityState implements VisibilityState {
 
   @override
   String toString() {
-    return 'AddOperationState.visibility(subject: $subject, locationFrom: $locationFrom, locationTo: $locationTo, money: $money, comment: $comment, accountsBalance: $accountsBalance, errorMessage: $errorMessage)';
+    return 'AddOperationState.visibility(debtSubject: $debtSubject, generalSubject: $generalSubject, locationFrom: $locationFrom, locationTo: $locationTo, money: $money, comment: $comment, accountsBalance: $accountsBalance, errorMessage: $errorMessage)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is VisibilityState &&
-            (identical(other.subject, subject) ||
+            (identical(other.debtSubject, debtSubject) ||
                 const DeepCollectionEquality()
-                    .equals(other.subject, subject)) &&
+                    .equals(other.debtSubject, debtSubject)) &&
+            (identical(other.generalSubject, generalSubject) ||
+                const DeepCollectionEquality()
+                    .equals(other.generalSubject, generalSubject)) &&
             (identical(other.locationFrom, locationFrom) ||
                 const DeepCollectionEquality()
                     .equals(other.locationFrom, locationFrom)) &&
@@ -398,7 +418,8 @@ class _$VisibilityState implements VisibilityState {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(subject) ^
+      const DeepCollectionEquality().hash(debtSubject) ^
+      const DeepCollectionEquality().hash(generalSubject) ^
       const DeepCollectionEquality().hash(locationFrom) ^
       const DeepCollectionEquality().hash(locationTo) ^
       const DeepCollectionEquality().hash(money) ^
@@ -416,7 +437,8 @@ class _$VisibilityState implements VisibilityState {
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
     required TResult Function(
-            bool subject,
+            bool debtSubject,
+            bool generalSubject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -426,8 +448,8 @@ class _$VisibilityState implements VisibilityState {
         visibility,
     required TResult Function() saved,
   }) {
-    return visibility(subject, locationFrom, locationTo, money, comment,
-        accountsBalance, errorMessage);
+    return visibility(debtSubject, generalSubject, locationFrom, locationTo,
+        money, comment, accountsBalance, errorMessage);
   }
 
   @override
@@ -435,7 +457,8 @@ class _$VisibilityState implements VisibilityState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
     TResult Function(
-            bool subject,
+            bool debtSubject,
+            bool generalSubject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -445,8 +468,8 @@ class _$VisibilityState implements VisibilityState {
         visibility,
     TResult Function()? saved,
   }) {
-    return visibility?.call(subject, locationFrom, locationTo, money, comment,
-        accountsBalance, errorMessage);
+    return visibility?.call(debtSubject, generalSubject, locationFrom,
+        locationTo, money, comment, accountsBalance, errorMessage);
   }
 
   @override
@@ -454,7 +477,8 @@ class _$VisibilityState implements VisibilityState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
     TResult Function(
-            bool subject,
+            bool debtSubject,
+            bool generalSubject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -466,8 +490,8 @@ class _$VisibilityState implements VisibilityState {
     required TResult orElse(),
   }) {
     if (visibility != null) {
-      return visibility(subject, locationFrom, locationTo, money, comment,
-          accountsBalance, errorMessage);
+      return visibility(debtSubject, generalSubject, locationFrom, locationTo,
+          money, comment, accountsBalance, errorMessage);
     }
     return orElse();
   }
@@ -509,7 +533,8 @@ class _$VisibilityState implements VisibilityState {
 
 abstract class VisibilityState implements AddOperationState {
   const factory VisibilityState(
-      {required bool subject,
+      {required bool debtSubject,
+      required bool generalSubject,
       required bool locationFrom,
       required bool locationTo,
       required bool money,
@@ -517,7 +542,8 @@ abstract class VisibilityState implements AddOperationState {
       required List<AccountBalance> accountsBalance,
       String? errorMessage}) = _$VisibilityState;
 
-  bool get subject => throw _privateConstructorUsedError;
+  bool get debtSubject => throw _privateConstructorUsedError;
+  bool get generalSubject => throw _privateConstructorUsedError;
   bool get locationFrom => throw _privateConstructorUsedError;
   bool get locationTo => throw _privateConstructorUsedError;
   bool get money => throw _privateConstructorUsedError;
@@ -569,7 +595,8 @@ class _$Saved implements Saved {
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
     required TResult Function(
-            bool subject,
+            bool debtSubject,
+            bool generalSubject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -587,7 +614,8 @@ class _$Saved implements Saved {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
     TResult Function(
-            bool subject,
+            bool debtSubject,
+            bool generalSubject,
             bool locationFrom,
             bool locationTo,
             bool money,
@@ -605,7 +633,8 @@ class _$Saved implements Saved {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
     TResult Function(
-            bool subject,
+            bool debtSubject,
+            bool generalSubject,
             bool locationFrom,
             bool locationTo,
             bool money,

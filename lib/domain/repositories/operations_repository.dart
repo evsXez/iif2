@@ -16,12 +16,14 @@ abstract class OperationsRepository extends ChangeNotifier {
     Money money, {
     String? comment,
     String? categoriesStamp,
+    String? subjectsStamp,
   });
   void addOperationIncome(
     Account account,
     Money money, {
     String? comment,
     String? categoriesStamp,
+    String? subjectsStamp,
   });
   void addOperationTransfer(
     Account accountFrom,
