@@ -62,29 +62,37 @@ class _AccountItemState extends State<AccountItem> {
 
   void _showContextMenu(BuildContext context, AccountOptions options, double x, double y) async {
     final List<PopupMenuEntry> items = [
-      MenuItem(Strings.option_edit, () {
-        BlocProvider.of<AccountsPanelBloc>(context).editAccount(widget.accountBalance.account);
-      }),
-      MenuItem(Strings.option_archive, () {
-        Dialogs(context).showArchiveLocationDialog(
-          accountType: widget.accountBalance.account.type,
-          accountName: widget.accountBalance.account.name,
-          isArchiveAvailable: options.isArchiveAvailable,
-          onArchivePressed: () {
-            BlocProvider.of<AccountOptionsBloc>(context).archive(widget.accountBalance.account);
-          },
-        );
-      }, color: _colorOption(options.isArchiveAvailable)),
-      MenuItem(Strings.option_delete, () {
-        Dialogs(context).showDeleteLocationDialog(
-          account: widget.accountBalance.account,
-          isDeleteAvailable: options.isDeleteAvailable,
-          onDeletePressed: () {
-            BlocProvider.of<AccountOptionsBloc>(context).delete(widget.accountBalance.account);
-          },
-        );
-      }, color: _colorOption(options.isDeleteAvailable)),
+      if (options.isEditVisible)
+        MenuItem(Strings.option_edit, () {
+          BlocProvider.of<AccountsPanelBloc>(context).editAccount(widget.accountBalance.account);
+        }),
+      if (options.isArchiveVisible)
+        MenuItem(Strings.option_archive, () {
+          Dialogs(context).showArchiveLocationDialog(
+            accountType: widget.accountBalance.account.type,
+            accountName: widget.accountBalance.account.name,
+            isArchiveAvailable: options.isArchiveAvailable,
+            onArchivePressed: () {
+              BlocProvider.of<AccountOptionsBloc>(context).archive(widget.accountBalance.account);
+            },
+          );
+        }, color: _colorOption(options.isArchiveAvailable)),
+      if (options.isDeleteVisible)
+        MenuItem(Strings.option_delete, () {
+          Dialogs(context).showDeleteLocationDialog(
+            account: widget.accountBalance.account,
+            isDeleteAvailable: options.isDeleteAvailable,
+            onDeletePressed: () {
+              BlocProvider.of<AccountOptionsBloc>(context).delete(widget.accountBalance.account);
+            },
+          );
+        }, color: _colorOption(options.isDeleteAvailable)),
     ];
+
+    if (items.isEmpty) {
+      return;
+    }
+
     showMenu(context: context, position: RelativeRect.fromLTRB(x, y, x, y), items: items).then((value) {
       setState(() {
         isHighlighted = false;
